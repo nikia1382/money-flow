@@ -1,0 +1,160 @@
+
+
+
+
+.dashboard {
+  width: 100%;
+}
+
+.dashboard__heading {
+  margin-bottom: 24px;
+
+  h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: #64748b;
+  }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #e8ecf2;
+  border-radius: 16px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+}
+
+.summary-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-card__icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.summary-card__trend {
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &.positive {
+    color: #15803d;
+    background: #f0fdf4;
+  }
+
+  &.negative {
+    color: #b91c1c;
+    background: #fef2f2;
+  }
+}
+
+.summary-card__title {
+  margin: 20px 0 8px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.summary-card__amount {
+  margin: 0;
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 700;
+
+  small {
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+  }
+}
+
+.summary-card__comparison {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.dashboard__chart {
+  margin-top: 24px;
+}
+.dashboard__analytics {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2fr)
+    minmax(280px, 0.8fr);
+
+  gap: 16px;
+
+  margin-top: 18px;
+
+  align-items: stretch;
+}
+
+
+.dashboard__chart {
+  min-width: 0;
+}
+
+
+.dashboard__budget {
+  min-width: 0;
+}
+
+
+.dashboard__transactions {
+  margin-top: 16px;
+}
+
+
+/* Tablet */
+@media (max-width: 1100px) {
+
+  .dashboard__analytics {
+    grid-template-columns: 1fr;
+  }
+
+}

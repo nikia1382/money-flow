@@ -1,0 +1,174 @@
+<header class="top-header">
+
+  <div class="top-header__main">
+
+    <!-- Search -->
+    <div class="search-box">
+
+      <lucide-icon
+        [img]="Search"
+        [size]="17"
+      />
+
+      <input
+        type="text"
+        placeholder="Search transactions, accounts, categories..."
+        aria-label="Search"
+      />
+
+      <span class="search-shortcut">
+        /
+      </span>
+
+    </div>
+
+
+    <!-- Add Transaction -->
+    <button
+      type="button"
+      class="add-transaction-btn"
+    >
+
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      <span>
+        Add Transaction
+      </span>
+
+      <span
+        class="add-transaction-btn__divider"
+      ></span>
+
+      <lucide-icon
+        [img]="ChevronDown"
+        [size]="15"
+      />
+
+    </button>
+
+
+    <!-- Notifications -->
+    <button
+      type="button"
+      class="icon-btn notification-btn"
+      aria-label="Notifications"
+      title="Notifications"
+    >
+
+      <lucide-icon
+        [img]="Bell"
+        [size]="18"
+      />
+
+      <span class="notification-badge">
+        3
+      </span>
+
+    </button>
+
+
+    <!-- Dark Mode -->
+    <button
+      type="button"
+      class="icon-btn"
+      (click)="toggleDarkMode()"
+      [attr.aria-label]="
+        isDarkMode()
+          ? 'Switch to light mode'
+          : 'Switch to dark mode'
+      "
+      [attr.title]="
+        isDarkMode()
+          ? 'Light mode'
+          : 'Dark mode'
+      "
+    >
+
+      @if (isDarkMode()) {
+
+        <lucide-icon
+          [img]="Sun"
+          [size]="18"
+        />
+
+      } @else {
+
+        <lucide-icon
+          [img]="Moon"
+          [size]="18"
+        />
+
+      }
+
+    </button>
+
+
+    <!-- Language -->
+    <button
+      type="button"
+      class="language-btn"
+      (click)="changeLanguage()"
+      aria-label="Change language"
+      title="Change language"
+    >
+
+      {{ currentLang === 'en'
+        ? 'FA'
+        : 'EN'
+      }}
+
+    </button>
+
+
+    <!-- Profile -->
+    <button
+      type="button"
+      class="profile-btn"
+      aria-label="Open profile menu"
+      title="Profile"
+    >
+
+      <div class="profile-avatar">
+        N
+      </div>
+
+      <lucide-icon
+        [img]="ChevronDown"
+        [size]="15"
+      />
+
+    </button>
+
+  </div>
+
+
+  <!-- Date -->
+  <div class="top-header__date-row">
+
+    <button
+      type="button"
+      class="date-range-btn"
+    >
+
+      <lucide-icon
+        [img]="CalendarDays"
+        [size]="16"
+      />
+
+      <span>
+        August 1 - August 31, 2026
+      </span>
+
+      <lucide-icon
+        [img]="ChevronDown"
+        [size]="15"
+      />
+
+    </button>
+
+  </div>
+
+</header>

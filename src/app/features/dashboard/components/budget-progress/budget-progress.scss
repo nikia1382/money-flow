@@ -1,0 +1,244 @@
+.budget-overview {
+  width: 100%;
+  height: 100%;
+
+  padding: 18px;
+
+  background: var(--bg-surface);
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.budget-overview__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+
+  h3 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+
+.view-all-btn {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #4f46e5;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+/* =========================
+   List
+========================= */
+
+.budget-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+
+/* =========================
+   Item
+========================= */
+
+.budget-item {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.budget-item__icon {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+
+  &.food {
+    background: #ecfdf3;
+    color: #22c55e;
+  }
+
+
+  &.housing {
+    background: #eff6ff;
+    color: #3b82f6;
+  }
+
+
+  &.transportation {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+
+  &.shopping {
+    background: #fff7ed;
+    color: #f59e0b;
+  }
+
+
+  &.entertainment {
+    background: #f5f3ff;
+    color: #8b5cf6;
+  }
+}
+
+
+/* =========================
+   Content
+========================= */
+
+.budget-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+
+.budget-item__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 7px;
+}
+
+
+.budget-item__info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.budget-item__name {
+  color: var(--text-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+.budget-item__amount {
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 500;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================
+   Percentage
+========================= */
+
+.budget-item__percentage {
+  color: #16a34a;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+
+  &.warning {
+    color: #f59e0b;
+  }
+
+
+  &.danger {
+    color: #ef4444;
+  }
+}
+
+
+/* =========================
+   Progress
+========================= */
+
+.budget-progress {
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #eef2f7;
+}
+
+
+.budget-progress__bar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #22c55e;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+
+
+  &.warning {
+    background: #f59e0b;
+  }
+
+
+  &.danger {
+    background: #ef4444;
+  }
+}
+
+
+/* RTL progress starts from right */
+:host-context([dir='rtl']) {
+  .budget-progress__bar {
+    margin-inline-start: auto;
+  }
+}

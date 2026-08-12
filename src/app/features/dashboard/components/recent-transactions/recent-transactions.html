@@ -1,0 +1,100 @@
+<section class="transactions-card">
+
+  <div class="transactions-card__header">
+    <div>
+      <h3>
+        {{ 'dashboard.transactions.title' | translate }}
+      </h3>
+
+      <p>
+        {{ 'dashboard.transactions.subtitle' | translate }}
+      </p>
+    </div>
+
+    <button type="button" class="view-all-btn">
+      {{ 'dashboard.transactions.viewAll' | translate }}
+    </button>
+  </div>
+
+
+  <div class="transactions-list">
+
+    @for (transaction of transactions; track transaction.id) {
+
+      <div class="transaction-row">
+
+        <div
+          class="transaction-icon"
+          [class.income]="transaction.type === 'income'"
+          [class.expense]="transaction.type === 'expense'"
+          [class.transfer]="transaction.type === 'transfer'"
+        >
+
+          @if (transaction.type === 'income') {
+            <lucide-icon
+              [img]="ArrowDownLeft"
+              [size]="18">
+            </lucide-icon>
+          }
+
+          @if (transaction.type === 'expense') {
+            <lucide-icon
+              [img]="ArrowUpRight"
+              [size]="18">
+            </lucide-icon>
+          }
+
+          @if (transaction.type === 'transfer') {
+            <lucide-icon
+              [img]="ArrowLeftRight"
+              [size]="18">
+            </lucide-icon>
+          }
+
+        </div>
+
+
+        <div class="transaction-info">
+
+          <strong>
+            {{ transaction.title }}
+          </strong>
+
+          <span>
+            {{ transaction.category }}
+            •
+            {{ transaction.date }}
+          </span>
+
+        </div>
+
+
+        <div
+          class="transaction-amount"
+          [class.income]="transaction.type === 'income'"
+          [class.expense]="transaction.type === 'expense'"
+        >
+
+          @if (transaction.type === 'income') {
+            +
+          }
+
+          @if (transaction.type === 'expense') {
+            -
+          }
+
+          {{ transaction.amount.toLocaleString() }}
+
+          <small>
+            {{ 'dashboard.chart.currency' | translate }}
+          </small>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

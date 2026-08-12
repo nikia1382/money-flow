@@ -1,1 +1,85 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+
+/* Fonts */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/vazirmatn';
+
+
+/* English */
+html[lang='en'] {
+  font-family: 'Inter Variable', sans-serif;
+}
+
+
+/* Persian */
+html[lang='fa'] {
+  font-family: 'Vazirmatn Variable', sans-serif;
+}
+
+
+html,
+body {
+  min-height: 100%;
+}
+
+
+body {
+  margin: 0;
+  font-family: inherit;
+  background: #f6f7fb;
+}
+
+
+/* Form elements inherit current language font */
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+/* Financial numbers */
+.summary-card__amount {
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* Better sizing behavior */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+:root {
+  --bg-page: #f6f7fb;
+  --bg-surface: #ffffff;
+
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+
+  --border-color: #e5e7eb;
+}
+
+html.dark {
+  --bg-page: #0b1120;
+  --bg-surface: #111827;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --border-color: #1f2937;
+}
+
+body {
+  margin: 0;
+
+  background: var(--bg-page);
+  color: var(--text-primary);
+
+  font-family: inherit;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}

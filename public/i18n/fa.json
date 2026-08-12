@@ -1,0 +1,55 @@
+{
+  "sidebar": {
+    "dashboard": "داشبورد",
+    "accounts": "حساب‌ها",
+    "transactions": "تراکنش‌ها",
+    "budgets": "بودجه‌ها",
+    "recurringPayments": "پرداخت‌های دوره‌ای",
+    "debts": "بدهی‌ها و وام‌ها",
+    "goals": "اهداف مالی",
+    "reports": "گزارش‌ها",
+    "settings": "تنظیمات"
+  },
+
+  "header": {
+    "dashboard": "داشبورد",
+    "overview": "نمای کلی وضعیت مالی شما"
+  },
+
+  "dashboard": {
+    "welcome": "خوش اومدی نیکیا",
+    "subtitle": "این ماه ۱۲٪ کمتر از ماه قبل خرج کردی.",
+
+    "totalBalance": "موجودی کل",
+    "monthlyIncome": "درآمد ماهانه",
+    "monthlyExpenses": "هزینه ماهانه",
+    "monthlySavings": "پس‌انداز ماهانه",
+    "comparedToLastMonth": "نسبت به ماه قبل",
+
+    "chart": {
+      "title": "درآمد و هزینه",
+      "subtitle": "جریان مالی شما در ۶ ماه اخیر",
+      "income": "درآمد",
+      "expenses": "هزینه",
+      "last6Months": "۶ ماه اخیر",
+      "currency": "تومان",
+      "threeMonths": "۳ ماه",
+"sixMonths": "۶ ماه",
+"oneYear": "۱ سال"
+    }
+,
+      "transactions": {
+  "title": "آخرین تراکنش‌ها",
+  "subtitle": "آخرین فعالیت‌های مالی شما",
+  "viewAll": "مشاهده همه"
+},
+"budget": {
+  "title": "وضعیت بودجه",
+  "subtitle": "میزان مصرف بودجه ماهانه‌ات را دنبال کن",
+  "food": "خوراک",
+  "transportation": "حمل‌ونقل",
+  "entertainment": "تفریح",
+  "used": "مصرف شده"
+}
+  }
+}

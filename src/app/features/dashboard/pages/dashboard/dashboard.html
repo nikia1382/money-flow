@@ -1,0 +1,159 @@
+<section class="dashboard">
+
+  <div class="dashboard__heading">
+    <h2>
+      {{ 'dashboard.welcome' | translate }}
+    </h2>
+
+    <p>
+      {{ 'dashboard.subtitle' | translate }}
+    </p>
+  </div>
+
+
+  <div class="summary-grid">
+
+    <!-- Total Balance -->
+    <article class="summary-card">
+
+      <div class="summary-card__top">
+        <div class="summary-card__icon">
+          <lucide-icon
+            [img]="Wallet"
+            [size]="22">
+          </lucide-icon>
+        </div>
+
+        <span class="summary-card__trend positive">
+          +8.2%
+        </span>
+      </div>
+
+      <p class="summary-card__title">
+        {{ 'dashboard.totalBalance' | translate }}
+      </p>
+
+      <h3 class="summary-card__amount">
+        86,500,000
+        <small>تومان</small>
+      </h3>
+
+      <p class="summary-card__comparison">
+        {{ 'dashboard.comparedToLastMonth' | translate }}
+      </p>
+
+    </article>
+
+
+    <!-- Income -->
+    <article class="summary-card">
+
+      <div class="summary-card__top">
+        <div class="summary-card__icon">
+          <lucide-icon
+            [img]="TrendingUp"
+            [size]="22">
+          </lucide-icon>
+        </div>
+
+        <span class="summary-card__trend positive">
+          +12.5%
+        </span>
+      </div>
+
+      <p class="summary-card__title">
+        {{ 'dashboard.monthlyIncome' | translate }}
+      </p>
+
+      <h3 class="summary-card__amount">
+        35,000,000
+        <small>تومان</small>
+      </h3>
+
+      <p class="summary-card__comparison">
+        {{ 'dashboard.comparedToLastMonth' | translate }}
+      </p>
+
+    </article>
+
+
+    <!-- Expenses -->
+    <article class="summary-card">
+
+      <div class="summary-card__top">
+        <div class="summary-card__icon">
+          <lucide-icon
+            [img]="TrendingDown"
+            [size]="22">
+          </lucide-icon>
+        </div>
+
+        <span class="summary-card__trend negative">
+          -4.3%
+        </span>
+      </div>
+
+      <p class="summary-card__title">
+        {{ 'dashboard.monthlyExpenses' | translate }}
+      </p>
+
+      <h3 class="summary-card__amount">
+        21,300,000
+        <small>تومان</small>
+      </h3>
+
+      <p class="summary-card__comparison">
+        {{ 'dashboard.comparedToLastMonth' | translate }}
+      </p>
+
+    </article>
+
+
+    <!-- Savings -->
+    <article class="summary-card">
+
+      <div class="summary-card__top">
+        <div class="summary-card__icon">
+          <lucide-icon
+            [img]="PiggyBank"
+            [size]="22">
+          </lucide-icon>
+        </div>
+
+        <span class="summary-card__trend positive">
+          +18.7%
+        </span>
+      </div>
+
+      <p class="summary-card__title">
+        {{ 'dashboard.monthlySavings' | translate }}
+      </p>
+
+      <h3 class="summary-card__amount">
+        13,700,000
+        <small>تومان</small>
+      </h3>
+
+      <p class="summary-card__comparison">
+        {{ 'dashboard.comparedToLastMonth' | translate }}
+      </p>
+
+    </article>
+
+  </div>
+
+</section>
+<!-- <div class="dashboard__chart">
+  <app-income-expense-chart></app-income-expense-chart>
+</div> -->
+<div class="dashboard__chart">
+  <app-income-expense-chart></app-income-expense-chart>
+</div>
+
+<div class="dashboard__transactions">
+  <app-recent-transactions></app-recent-transactions>
+</div>
+
+<div class="dashboard__budget">
+  <app-budget-progress></app-budget-progress>
+</div>

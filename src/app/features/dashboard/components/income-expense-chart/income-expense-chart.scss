@@ -1,0 +1,47 @@
+.chart-card {
+  padding: 20px;
+
+  background: #ffffff;
+  border: 1px solid #e8ecf2;
+  border-radius: 16px;
+}
+
+.chart-card__header {
+  margin-bottom: 20px;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: #64748b;
+  }
+}
+
+.chart-card__body {
+  height: 320px;
+}
+.chart-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chart-card__period {
+  padding: 8px 12px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  color: #475569;
+  background: #ffffff;
+
+  font-size: 13px;
+  font-weight: 500;
+}

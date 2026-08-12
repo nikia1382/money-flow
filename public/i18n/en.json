@@ -1,0 +1,55 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "recurringPayments": "Recurring Payments",
+    "debts": "Debts & Loans",
+    "goals": "Financial Goals",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+
+  "header": {
+    "dashboard": "Dashboard",
+    "overview": "Your financial overview"
+  },
+
+  "dashboard": {
+    "welcome": "Welcome back, Nikia",
+    "subtitle": "You've spent 12% less than last month.",
+
+    "totalBalance": "Total Balance",
+    "monthlyIncome": "Monthly Income",
+    "monthlyExpenses": "Monthly Expenses",
+    "monthlySavings": "Monthly Savings",
+    "comparedToLastMonth": "vs last month",
+
+    "chart": {
+      "title": "Income vs Expenses",
+      "subtitle": "Your cash flow over the last 6 months",
+      "income": "Income",
+      "expenses": "Expenses",
+      "last6Months": "Last 6 months",
+      "currency": "Toman",
+      "threeMonths": "3 Months",
+      "sixMonths": "6 Months",
+      "oneYear": "1 Year"
+    },
+    
+  "transactions": {
+  "title": "Recent Transactions",
+  "subtitle": "Your latest financial activity",
+  "viewAll": "View all"
+},
+"budget": {
+  "title": "Budget Progress",
+  "subtitle": "Track how much of your monthly budget you've used",
+  "food": "Food",
+  "transportation": "Transportation",
+  "entertainment": "Entertainment",
+  "used": "used"
+}
+  }
+}

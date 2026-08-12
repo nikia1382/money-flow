@@ -1,0 +1,153 @@
+<aside class="sidebar">
+
+  <!-- Logo -->
+  <div class="sidebar__brand">
+    <div class="sidebar__logo">M</div>
+    <span>MoneyFlow</span>
+  </div>
+
+
+  <!-- Main Navigation -->
+  <nav class="sidebar__nav">
+
+    <!-- Dashboard -->
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="LayoutDashboard"
+        [size]="20">
+      </lucide-icon>
+
+      <span>{{ 'sidebar.dashboard' | translate }}</span>
+    </a>
+
+
+    <!-- Accounts -->
+    <a
+      routerLink="/accounts"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="WalletCards"
+        [size]="20">
+      </lucide-icon>
+
+     <span>{{ 'sidebar.accounts' | translate }}</span>
+    </a>
+
+
+    <!-- Transactions -->
+    <a
+      routerLink="/transactions"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="ArrowLeftRight"
+        [size]="20">
+      </lucide-icon>
+
+      <span>{{ 'sidebar.transactions' | translate }}</span>
+    </a>
+
+
+    <!-- Budgets -->
+    <a
+      routerLink="/budgets"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="ChartPie"
+        [size]="20">
+      </lucide-icon>
+
+      <span>{{ 'sidebar.budgets' | translate }}</span>
+    </a>
+
+
+    <!-- Recurring Payments -->
+    <a
+      routerLink="/recurring-payments"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="CalendarClock"
+        [size]="20">
+      </lucide-icon>
+
+<span>{{ 'sidebar.recurringPayments' | translate }}</span>    </a>
+
+
+    <!-- Debts & Loans -->
+    <a
+      routerLink="/debts"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="HandCoins"
+        [size]="20">
+      </lucide-icon>
+
+      <span>{{ 'sidebar.debts' | translate }}</span>
+    </a>
+
+
+    <!-- Goals -->
+    <a
+      routerLink="/goals"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="Target"
+        [size]="20">
+      </lucide-icon>
+
+      <span>{{ 'sidebar.goals' | translate }}</span>
+    </a>
+
+
+    <!-- Reports -->
+    <a
+      routerLink="/reports"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="ChartNoAxesCombined"
+        [size]="20">
+      </lucide-icon>
+
+     <span>{{ 'sidebar.reports' | translate }}</span>
+    </a>
+
+  </nav>
+
+
+  <!-- Bottom Navigation -->
+  <div class="sidebar__bottom">
+
+    <!-- Settings -->
+    <a
+      routerLink="/settings"
+      routerLinkActive="active"
+      class="sidebar__item"
+    >
+      <lucide-icon
+        [img]="Settings"
+        [size]="20">
+      </lucide-icon>
+
+     <span>{{ 'sidebar.settings' | translate }}</span>
+    </a>
+
+  </div>
+
+</aside>
