@@ -1,0 +1,56 @@
+<section class="goals-card">
+  <div class="goals-card__header">
+    <div>
+      <h3>
+        {{ 'dashboard.goals.title' | translate }}
+      </h3>
+
+      <p>
+        {{ 'dashboard.goals.subtitle' | translate }}
+      </p>
+    </div>
+
+    <button type="button" class="view-all-btn">
+      {{ 'dashboard.goals.viewAll' | translate }}
+    </button>
+  </div>
+
+  <div class="goals-list">
+    @for (goal of goals; track goal.id) {
+      <div class="goal-item">
+        <div class="goal-item__icon" [class]="goal.iconClass">
+          <lucide-icon [img]="goal.icon" [size]="17" />
+        </div>
+
+        <div class="goal-item__content">
+          <div class="goal-item__top">
+            <div class="goal-item__info">
+              <strong>
+                {{ goal.titleKey | translate }}
+              </strong>
+
+              <span>
+                {{ goal.current.toLocaleString() }}
+                /
+                {{ goal.target.toLocaleString() }}
+
+                {{ 'dashboard.chart.currency' | translate }}
+              </span>
+            </div>
+
+            <span class="goal-item__percentage">
+              {{ getPercentage(goal.current, goal.target) }}%
+            </span>
+          </div>
+
+          <div class="goal-progress">
+            <div
+              class="goal-progress__bar"
+              [style.width.%]="getPercentage(goal.current, goal.target)"
+            ></div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

@@ -1,3 +1,8 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .budget-overview {
   width: 100%;
   height: 100%;
@@ -5,11 +10,10 @@
   padding: 18px;
 
   background: var(--bg-surface);
-
+  box-sizing: border-box;
   border: 1px solid var(--border-color);
   border-radius: 16px;
 }
-
 
 /* =========================
    Header
@@ -32,7 +36,6 @@
   }
 }
 
-
 .view-all-btn {
   padding: 0;
 
@@ -52,7 +55,6 @@
   }
 }
 
-
 /* =========================
    List
 ========================= */
@@ -64,7 +66,6 @@
   gap: 15px;
 }
 
-
 /* =========================
    Item
 ========================= */
@@ -75,7 +76,6 @@
 
   gap: 11px;
 }
-
 
 /* =========================
    Icon
@@ -92,37 +92,31 @@
 
   border-radius: 10px;
 
-
   &.food {
     background: #ecfdf3;
     color: #22c55e;
   }
-
 
   &.housing {
     background: #eff6ff;
     color: #3b82f6;
   }
 
-
   &.transportation {
     background: #f1f5f9;
-    color: #64748b;
+    color: var(--text-secondary);
   }
-
 
   &.shopping {
     background: #fff7ed;
     color: #f59e0b;
   }
 
-
   &.entertainment {
     background: #f5f3ff;
     color: #8b5cf6;
   }
 }
-
 
 /* =========================
    Content
@@ -132,7 +126,6 @@
   flex: 1;
   min-width: 0;
 }
-
 
 .budget-item__top {
   display: flex;
@@ -144,7 +137,6 @@
   margin-bottom: 7px;
 }
 
-
 .budget-item__info {
   min-width: 0;
 
@@ -154,14 +146,12 @@
   gap: 3px;
 }
 
-
 .budget-item__name {
   color: var(--text-primary);
 
   font-size: 12px;
   font-weight: 600;
 }
-
 
 .budget-item__amount {
   color: var(--text-secondary);
@@ -171,7 +161,6 @@
 
   font-variant-numeric: tabular-nums;
 }
-
 
 /* =========================
    Percentage
@@ -185,17 +174,14 @@
 
   white-space: nowrap;
 
-
   &.warning {
     color: #f59e0b;
   }
-
 
   &.danger {
     color: #ef4444;
   }
 }
-
 
 /* =========================
    Progress
@@ -212,7 +198,6 @@
   background: #eef2f7;
 }
 
-
 .budget-progress__bar {
   height: 100%;
 
@@ -224,21 +209,74 @@
     width 0.3s ease,
     background 0.3s ease;
 
-
   &.warning {
     background: #f59e0b;
   }
-
 
   &.danger {
     background: #ef4444;
   }
 }
 
-
 /* RTL progress starts from right */
 :host-context([dir='rtl']) {
   .budget-progress__bar {
     margin-inline-start: auto;
+  }
+}
+@media (max-width: 700px) {
+  .budget-overview {
+    padding: 14px;
+
+    border-radius: 14px;
+  }
+
+  .budget-overview__header {
+    margin-bottom: 14px;
+
+    h3 {
+      font-size: 14px;
+    }
+  }
+
+  .view-all-btn {
+    font-size: 10px;
+  }
+
+  .budget-list {
+    gap: 13px;
+  }
+
+  .budget-item {
+    gap: 9px;
+  }
+
+  .budget-item__icon {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 9px;
+  }
+
+  .budget-item__top {
+    gap: 8px;
+
+    margin-bottom: 6px;
+  }
+
+  .budget-item__name {
+    font-size: 11px;
+  }
+
+  .budget-item__amount {
+    font-size: 9px;
+  }
+
+  .budget-item__percentage {
+    font-size: 9px;
+  }
+
+  .budget-progress {
+    height: 4px;
   }
 }

@@ -1,8 +1,9 @@
 <section class="chart-card">
-
+  <!-- =========================
+       Header
+  ========================== -->
   <div class="chart-card__header">
-
-    <div>
+    <div class="chart-card__title">
       <h3>
         {{ 'dashboard.chart.title' | translate }}
       </h3>
@@ -12,45 +13,26 @@
       </p>
     </div>
 
- <div class="chart-card__period">
+    <!-- Period Filter -->
+    <div class="chart-card__period">
+      <button type="button" [class.active]="selectedPeriod === '3m'" (click)="changePeriod('3m')">
+        {{ 'dashboard.chart.threeMonths' | translate }}
+      </button>
 
-  <button
-    type="button"
-    [class.active]="selectedPeriod === '3m'"
-    (click)="changePeriod('3m')"
-  >
-    {{ 'dashboard.chart.threeMonths' | translate }}
-  </button>
+      <button type="button" [class.active]="selectedPeriod === '6m'" (click)="changePeriod('6m')">
+        {{ 'dashboard.chart.sixMonths' | translate }}
+      </button>
 
-  <button
-    type="button"
-    [class.active]="selectedPeriod === '6m'"
-    (click)="changePeriod('6m')"
-  >
-    {{ 'dashboard.chart.sixMonths' | translate }}
-  </button>
-
-  <button
-    type="button"
-    [class.active]="selectedPeriod === '1y'"
-    (click)="changePeriod('1y')"
-  >
-    {{ 'dashboard.chart.oneYear' | translate }}
-  </button>
-
-</div>
-
+      <button type="button" [class.active]="selectedPeriod === '1y'" (click)="changePeriod('1y')">
+        {{ 'dashboard.chart.oneYear' | translate }}
+      </button>
+    </div>
   </div>
 
+  <!-- =========================
+       Chart Body
+  ========================== -->
   <div class="chart-card__body">
-
-    <canvas
-      baseChart
-      [data]="lineChartData"
-      [options]="lineChartOptions"
-      [type]="'line'">
-    </canvas>
-
+    <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="'line'"> </canvas>
   </div>
-
 </section>

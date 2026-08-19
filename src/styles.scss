@@ -4,31 +4,26 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/vazirmatn';
 
-
 /* English */
 html[lang='en'] {
   font-family: 'Inter Variable', sans-serif;
 }
-
 
 /* Persian */
 html[lang='fa'] {
   font-family: 'Vazirmatn Variable', sans-serif;
 }
 
-
 html,
 body {
   min-height: 100%;
 }
-
 
 body {
   margin: 0;
   font-family: inherit;
   background: #f6f7fb;
 }
-
 
 /* Form elements inherit current language font */
 button,
@@ -38,12 +33,10 @@ select {
   font: inherit;
 }
 
-
 /* Financial numbers */
 .summary-card__amount {
   font-variant-numeric: tabular-nums;
 }
-
 
 /* Better sizing behavior */
 *,
@@ -54,32 +47,50 @@ select {
 :root {
   --bg-page: #f6f7fb;
   --bg-surface: #ffffff;
+  --bg-soft: #f8fafc;
+  --bg-muted: #f1f5f9;
 
   --text-primary: #0f172a;
   --text-secondary: #64748b;
+  --text-muted: #94a3b8;
 
   --border-color: #e5e7eb;
+
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+
+  --shadow-card: 0 4px 14px rgba(15, 23, 42, 0.04);
 }
+
+/* Dark Mode */
 
 html.dark {
-  --bg-page: #0b1120;
-  --bg-surface: #111827;
+  /* Backgrounds */
+  --bg-page: #0b1220;
+  --bg-surface: #151e2e;
+  --bg-soft: #1b2638;
+  --bg-muted: #243044;
 
+  /* Text */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #b6c2d2;
+  --text-muted: #8b9aaf;
 
-  --border-color: #1f2937;
-}
+  /* Borders */
+  --border-color: #2b374a;
 
-body {
-  margin: 0;
+  /* Brand */
+  --primary: #7168f5;
+  --primary-hover: #857df7;
 
-  background: var(--bg-page);
-  color: var(--text-primary);
+  /* Status */
+  --success: #4ade80;
+  --danger: #fb7185;
+  --warning: #fbbf24;
 
-  font-family: inherit;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.22);
 }

@@ -5,20 +5,14 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { MainLayout } from './main-layout';
 
 describe('MainLayout', () => {
-
   let component: MainLayout;
   let fixture: ComponentFixture<MainLayout>;
 
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       imports: [MainLayout],
 
-      providers: [
-        provideRouter([]),
-        provideTranslateService()
-      ]
-
+      providers: [provideRouter([]), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayout);
@@ -27,11 +21,7 @@ describe('MainLayout', () => {
     fixture.detectChanges();
   });
 
-
   it('should create', () => {
-
     expect(component).toBeTruthy();
-
   });
-
 });

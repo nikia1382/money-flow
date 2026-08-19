@@ -1,5 +1,5 @@
 <section class="transactions-card">
-
+  <!-- Header -->
   <div class="transactions-card__header">
     <div>
       <h3>
@@ -16,46 +16,32 @@
     </button>
   </div>
 
-
+  <!-- Transactions List -->
   <div class="transactions-list">
-
     @for (transaction of transactions; track transaction.id) {
-
       <div class="transaction-row">
-
+        <!-- Transaction Icon -->
         <div
           class="transaction-icon"
           [class.income]="transaction.type === 'income'"
           [class.expense]="transaction.type === 'expense'"
           [class.transfer]="transaction.type === 'transfer'"
         >
-
           @if (transaction.type === 'income') {
-            <lucide-icon
-              [img]="ArrowDownLeft"
-              [size]="18">
-            </lucide-icon>
+            <lucide-icon [img]="ArrowDownLeft" [size]="18" />
           }
 
           @if (transaction.type === 'expense') {
-            <lucide-icon
-              [img]="ArrowUpRight"
-              [size]="18">
-            </lucide-icon>
+            <lucide-icon [img]="ArrowUpRight" [size]="18" />
           }
 
           @if (transaction.type === 'transfer') {
-            <lucide-icon
-              [img]="ArrowLeftRight"
-              [size]="18">
-            </lucide-icon>
+            <lucide-icon [img]="ArrowLeftRight" [size]="18" />
           }
-
         </div>
 
-
+        <!-- Transaction Information -->
         <div class="transaction-info">
-
           <strong>
             {{ transaction.title }}
           </strong>
@@ -65,16 +51,14 @@
             •
             {{ transaction.date }}
           </span>
-
         </div>
 
-
+        <!-- Amount -->
         <div
           class="transaction-amount"
           [class.income]="transaction.type === 'income'"
           [class.expense]="transaction.type === 'expense'"
         >
-
           @if (transaction.type === 'income') {
             +
           }
@@ -88,13 +72,8 @@
           <small>
             {{ 'dashboard.chart.currency' | translate }}
           </small>
-
         </div>
-
       </div>
-
     }
-
   </div>
-
 </section>

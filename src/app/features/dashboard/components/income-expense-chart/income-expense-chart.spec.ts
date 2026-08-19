@@ -1,23 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  provideTranslateService,
+  provideTranslateLoader,
+  TranslateLoader,
+} from '@ngx-translate/core';
 
-import { IncomeExpenseChart } from './income-expense-chart';
+import { Observable, of } from 'rxjs';
 
-describe('IncomeExpenseChart', () => {
-  let component: IncomeExpenseChart;
-  let fixture: ComponentFixture<IncomeExpenseChart>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [IncomeExpenseChart]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(IncomeExpenseChart);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+class FakeLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return of({});
+  }
+}

@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
-import {
-  LucideAngularModule,
-  Utensils,
-  House,
-  Car,
-  ShoppingBag,
-  Gamepad2
-} from 'lucide-angular';
+import { LucideAngularModule, Utensils, House, Car, ShoppingBag, Gamepad2 } from 'lucide-angular';
 
 interface BudgetItem {
   id: number;
@@ -21,15 +14,11 @@ interface BudgetItem {
 
 @Component({
   selector: 'app-budget-progress',
-  imports: [
-    TranslatePipe,
-    LucideAngularModule
-  ],
+  imports: [TranslatePipe, LucideAngularModule],
   templateUrl: './budget-progress.html',
-  styleUrl: './budget-progress.scss'
+  styleUrl: './budget-progress.scss',
 })
 export class BudgetProgress {
-
   readonly budgets: BudgetItem[] = [
     {
       id: 1,
@@ -37,7 +26,7 @@ export class BudgetProgress {
       spent: 4_200_000,
       limit: 6_000_000,
       icon: Utensils,
-      iconClass: 'food'
+      iconClass: 'food',
     },
     {
       id: 2,
@@ -45,7 +34,7 @@ export class BudgetProgress {
       spent: 5_200_000,
       limit: 7_000_000,
       icon: House,
-      iconClass: 'housing'
+      iconClass: 'housing',
     },
     {
       id: 3,
@@ -53,7 +42,7 @@ export class BudgetProgress {
       spent: 2_100_000,
       limit: 3_000_000,
       icon: Car,
-      iconClass: 'transportation'
+      iconClass: 'transportation',
     },
     {
       id: 4,
@@ -61,7 +50,7 @@ export class BudgetProgress {
       spent: 1_850_000,
       limit: 2_500_000,
       icon: ShoppingBag,
-      iconClass: 'shopping'
+      iconClass: 'shopping',
     },
     {
       id: 5,
@@ -69,25 +58,19 @@ export class BudgetProgress {
       spent: 1_300_000,
       limit: 1_500_000,
       icon: Gamepad2,
-      iconClass: 'entertainment'
-    }
+      iconClass: 'entertainment',
+    },
   ];
-
 
   getPercentage(spent: number, limit: number): number {
     if (limit <= 0) {
       return 0;
     }
 
-    return Math.min(
-      Math.round((spent / limit) * 100),
-      100
-    );
+    return Math.min(Math.round((spent / limit) * 100), 100);
   }
 
-
   getProgressStatus(percentage: number): string {
-
     if (percentage >= 90) {
       return 'danger';
     }

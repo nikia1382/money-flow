@@ -1,15 +1,20 @@
-<div class="app-layout">
+<div class="main-layout">
+  <app-sidebar [class.sidebar-open]="isSidebarOpen()" (closeSidebar)="closeSidebar()" />
 
-  <app-sidebar></app-sidebar>
+  @if (isSidebarOpen()) {
+    <button
+      type="button"
+      class="sidebar-backdrop"
+      aria-label="Close sidebar"
+      (click)="closeSidebar()"
+    ></button>
+  }
 
-  <div class="main-section">
+  <div class="main-layout__content">
+    <app-header (menuClick)="toggleSidebar()" />
 
-    <app-header></app-header>
-
-    <main class="content">
-      <router-outlet></router-outlet>
+    <main class="main-layout__page">
+      <router-outlet />
     </main>
-
   </div>
-
 </div>

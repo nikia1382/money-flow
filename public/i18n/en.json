@@ -8,7 +8,11 @@
     "debts": "Debts & Loans",
     "goals": "Financial Goals",
     "reports": "Reports",
-    "settings": "Settings"
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "help": "Help & Support",
+    "premiumText": "Unlock more features and advanced reports.",
+    "upgrade": "Upgrade Now"
   },
 
   "header": {
@@ -37,19 +41,54 @@
       "sixMonths": "6 Months",
       "oneYear": "1 Year"
     },
-    
-  "transactions": {
-  "title": "Recent Transactions",
-  "subtitle": "Your latest financial activity",
-  "viewAll": "View all"
-},
-"budget": {
-  "title": "Budget Progress",
-  "subtitle": "Track how much of your monthly budget you've used",
-  "food": "Food",
-  "transportation": "Transportation",
-  "entertainment": "Entertainment",
-  "used": "used"
-}
+
+    "transactions": {
+      "title": "Recent Transactions",
+      "subtitle": "Your latest financial activity",
+      "viewAll": "View all"
+    },
+    "budget": {
+      "title": "وضعیت بودجه",
+      "viewAll": "مشاهده همه",
+      "food": "خوراک",
+      "housing": "مسکن",
+      "transportation": "حمل‌ونقل",
+      "shopping": "خرید",
+      "entertainment": "تفریح"
+    },
+    "spending": {
+      "title": "Spending Breakdown",
+      "subtitle": "Where your money went this month",
+      "total": "Total spent",
+      "food": "Food",
+      "housing": "Housing",
+      "transport": "Transport",
+      "shopping": "Shopping",
+      "other": "Other"
+    },
+    "upcomingPayments": {
+      "title": "Upcoming Payments",
+      "subtitle": "Payments due soon",
+      "viewAll": "View all",
+
+      "rent": "Monthly Rent",
+      "internet": "Internet Bill",
+      "mobile": "Mobile Bill",
+      "creditCard": "Credit Card",
+
+      "tomorrow": "Due tomorrow",
+      "inThreeDays": "Due in 3 days",
+      "inFiveDays": "Due in 5 days",
+      "nextWeek": "Due next week"
+    },
+    "goals": {
+      "title": "Financial Goals",
+      "subtitle": "Track your progress toward your goals",
+      "viewAll": "View all",
+
+      "emergencyFund": "Emergency Fund",
+      "travel": "Travel",
+      "car": "New Car"
+    }
   }
 }

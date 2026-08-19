@@ -5,20 +5,14 @@ import { provideTranslateService } from '@ngx-translate/core';
 import { Sidebar } from './sidebar';
 
 describe('Sidebar', () => {
-
   let component: Sidebar;
   let fixture: ComponentFixture<Sidebar>;
 
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       imports: [Sidebar],
 
-      providers: [
-        provideRouter([]),
-        provideTranslateService()
-      ]
-
+      providers: [provideRouter([]), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Sidebar);
@@ -27,11 +21,7 @@ describe('Sidebar', () => {
     fixture.detectChanges();
   });
 
-
   it('should create', () => {
-
     expect(component).toBeTruthy();
-
   });
-
 });

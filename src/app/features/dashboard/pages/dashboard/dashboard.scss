@@ -1,46 +1,69 @@
-
-
-
-
 .dashboard {
   width: 100%;
+  padding-bottom: 20px;
 }
 
+/* =========================
+   Heading
+========================= */
+
 .dashboard__heading {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 
   h2 {
     margin: 0;
-    font-size: 26px;
+
+    color: var(--text-primary);
+
+    font-size: 24px;
     font-weight: 700;
-    color: #0f172a;
   }
 
   p {
-    margin: 6px 0 0;
-    font-size: 14px;
-    color: #64748b;
+    margin: 5px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
   }
 }
 
+/* =========================
+   Summary Cards
+========================= */
+
 .summary-grid {
   display: grid;
+
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+
+  gap: 14px;
 }
 
 .summary-card {
-  padding: 20px;
-  background: #ffffff;
-  border: 1px solid #e8ecf2;
+  min-width: 0;
+  min-height: 150px;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-surface);
+
+  border: 1px solid var(--border-color);
   border-radius: 16px;
+
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
 
   transition:
     transform 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
+
     box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   }
 }
@@ -49,25 +72,34 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 12px;
 }
 
 .summary-card__icon {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
 
   display: grid;
   place-items: center;
 
-  border-radius: 12px;
-  background: #f1f5f9;
-  color: #475569;
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: var(--bg-muted);
+  color: var(--text-secondary);
 }
 
 .summary-card__trend {
-  padding: 5px 8px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 4px 7px;
+
+  border-radius: 7px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
 
   &.positive {
     color: #15803d;
@@ -81,80 +113,221 @@
 }
 
 .summary-card__title {
-  margin: 20px 0 8px;
-  color: #64748b;
-  font-size: 13px;
+  margin: 16px 0 7px;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
   font-weight: 500;
 }
 
 .summary-card__amount {
   margin: 0;
-  color: #0f172a;
-  font-size: 24px;
+
+  color: var(--text-primary);
+
+  font-size: 22px;
   font-weight: 700;
 
+  font-variant-numeric: tabular-nums;
+
+  overflow-wrap: anywhere;
+
   small {
-    font-size: 12px;
+    margin-inline-start: 3px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
     font-weight: 500;
-    color: #64748b;
   }
 }
 
 .summary-card__comparison {
-  margin: 8px 0 0;
-  color: #94a3b8;
-  font-size: 12px;
+  margin: 7px 0 0;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
 }
 
-@media (max-width: 1200px) {
-  .summary-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* =========================
+   Shared Dashboard Grids
+========================= */
 
-@media (max-width: 700px) {
-  .summary-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.dashboard__chart {
-  margin-top: 24px;
-}
-.dashboard__analytics {
+.dashboard__analytics,
+.dashboard__bottom-grid {
   display: grid;
 
   grid-template-columns:
     minmax(0, 2fr)
-    minmax(280px, 0.8fr);
+    minmax(250px, 1fr)
+    minmax(250px, 1fr);
 
-  gap: 16px;
+  gap: 14px;
 
-  margin-top: 18px;
+  margin-top: 14px;
 
   align-items: stretch;
 }
 
+/* =========================
+   Analytics Row
+========================= */
 
-.dashboard__chart {
-  min-width: 0;
-}
-
-
+.dashboard__chart,
+.dashboard__spending,
 .dashboard__budget {
   min-width: 0;
+
+  display: flex;
 }
 
-
-.dashboard__transactions {
-  margin-top: 16px;
+.dashboard__chart > *,
+.dashboard__spending > *,
+.dashboard__budget > * {
+  width: 100%;
 }
 
+/* Chart عمداً height:100% نمی‌گیرد */
+.dashboard__spending > *,
+.dashboard__budget > * {
+  height: 100%;
+}
 
-/* Tablet */
-@media (max-width: 1100px) {
+/* =========================
+   Bottom Row
+========================= */
 
-  .dashboard__analytics {
+.dashboard__transactions,
+.dashboard__upcoming-payments,
+.dashboard__financial-goals {
+  min-width: 0;
+
+  display: flex;
+}
+
+.dashboard__transactions > *,
+.dashboard__upcoming-payments > *,
+.dashboard__financial-goals > * {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   Desktop / Small Laptop
+========================= */
+
+@media (max-width: 1300px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard__analytics,
+  .dashboard__bottom-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard__chart,
+  .dashboard__transactions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 800px) {
+  .summary-grid,
+  .dashboard__analytics,
+  .dashboard__bottom-grid {
     grid-template-columns: 1fr;
   }
 
+  .dashboard__chart,
+  .dashboard__transactions {
+    grid-column: auto;
+  }
+
+  .dashboard__analytics,
+  .dashboard__bottom-grid {
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 700px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .summary-card {
+    min-width: 0;
+    min-height: 132px;
+
+    padding: 12px;
+  }
+
+  .summary-card__icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .summary-card__trend {
+    padding: 3px 5px;
+
+    font-size: 9px;
+  }
+
+  .summary-card__title {
+    margin: 12px 0 5px;
+
+    font-size: 10px;
+  }
+
+  .summary-card__amount {
+    font-size: 17px;
+
+    line-height: 1.2;
+
+    small {
+      display: block;
+
+      margin: 3px 0 0;
+
+      font-size: 8px;
+    }
+  }
+
+  .summary-card__comparison {
+    margin-top: 5px;
+
+    font-size: 8px;
+  }
+}
+@media (max-width: 360px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card {
+    min-height: auto;
+  }
+
+  .summary-card__amount {
+    font-size: 19px;
+
+    small {
+      display: inline;
+
+      margin-inline-start: 3px;
+    }
+  }
 }

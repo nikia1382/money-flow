@@ -1,48 +1,28 @@
 <section class="budget-overview">
-
   <!-- Header -->
   <div class="budget-overview__header">
-
     <h3>
       {{ 'dashboard.budget.title' | translate }}
     </h3>
 
-    <button
-      type="button"
-      class="view-all-btn"
-    >
+    <button type="button" class="view-all-btn">
       {{ 'dashboard.budget.viewAll' | translate }}
     </button>
-
   </div>
-
 
   <!-- Items -->
   <div class="budget-list">
-
     @for (budget of budgets; track budget.id) {
-
       <div class="budget-item">
-
         <!-- Icon -->
-        <div
-          class="budget-item__icon"
-          [class]="budget.iconClass"
-        >
-          <lucide-icon
-            [img]="budget.icon"
-            [size]="17"
-          />
+        <div class="budget-item__icon" [class]="budget.iconClass">
+          <lucide-icon [img]="budget.icon" [size]="17" />
         </div>
-
 
         <!-- Content -->
         <div class="budget-item__content">
-
           <div class="budget-item__top">
-
             <div class="budget-item__info">
-
               <span class="budget-item__name">
                 {{ budget.nameKey | translate }}
               </span>
@@ -52,61 +32,36 @@
                 /
                 {{ budget.limit.toLocaleString() }}
               </span>
-
             </div>
-
 
             <span
               class="budget-item__percentage"
               [class.warning]="
-                getProgressStatus(
-                  getPercentage(budget.spent, budget.limit)
-                ) === 'warning'
+                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'warning'
               "
               [class.danger]="
-                getProgressStatus(
-                  getPercentage(budget.spent, budget.limit)
-                ) === 'danger'
+                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'danger'
               "
             >
               {{ getPercentage(budget.spent, budget.limit) }}%
             </span>
-
           </div>
-
 
           <!-- Progress -->
           <div class="budget-progress">
-
             <div
               class="budget-progress__bar"
-              [style.width.%]="
-                getPercentage(
-                  budget.spent,
-                  budget.limit
-                )
-              "
+              [style.width.%]="getPercentage(budget.spent, budget.limit)"
               [class.warning]="
-                getProgressStatus(
-                  getPercentage(budget.spent, budget.limit)
-                ) === 'warning'
+                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'warning'
               "
               [class.danger]="
-                getProgressStatus(
-                  getPercentage(budget.spent, budget.limit)
-                ) === 'danger'
+                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'danger'
               "
-            >
-            </div>
-
+            ></div>
           </div>
-
         </div>
-
       </div>
-
     }
-
   </div>
-
 </section>

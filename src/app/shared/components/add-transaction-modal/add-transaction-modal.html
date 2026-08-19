@@ -1,0 +1,129 @@
+<div class="modal-backdrop" (click)="close()">
+  <section class="transaction-modal" (click)="$event.stopPropagation()">
+    <div class="transaction-modal__header">
+      <div>
+        <h2>Add Transaction</h2>
+
+        <p>Add a new financial transaction</p>
+      </div>
+
+      <button
+        type="button"
+        class="close-btn"
+        aria-label="Close modal"
+        title="Close"
+        (click)="close()"
+      >
+        <lucide-icon [img]="X" [size]="18" />
+      </button>
+    </div>
+
+    <form class="transaction-form" (ngSubmit)="save()">
+      <!-- Type -->
+      <div class="form-group">
+        <label> Type </label>
+
+        <div class="transaction-types">
+          <button
+            type="button"
+            [class.active]="form.type === 'expense'"
+            (click)="form.type = 'expense'"
+          >
+            Expense
+          </button>
+
+          <button
+            type="button"
+            [class.active]="form.type === 'income'"
+            (click)="form.type = 'income'"
+          >
+            Income
+          </button>
+
+          <button
+            type="button"
+            [class.active]="form.type === 'transfer'"
+            (click)="form.type = 'transfer'"
+          >
+            Transfer
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label for="amount"> Amount </label>
+
+        <input
+          id="amount"
+          type="number"
+          name="amount"
+          [(ngModel)]="form.amount"
+          placeholder="Enter amount"
+          required
+        />
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label for="category"> Category </label>
+
+        <select id="category" name="category" [(ngModel)]="form.category">
+          <option value="">Select category</option>
+
+          <option value="food">Food</option>
+
+          <option value="transport">Transportation</option>
+
+          <option value="shopping">Shopping</option>
+
+          <option value="bills">Bills</option>
+
+          <option value="salary">Salary</option>
+        </select>
+      </div>
+
+      <!-- Account -->
+      <div class="form-group">
+        <label for="account"> Account </label>
+
+        <select id="account" name="account" [(ngModel)]="form.account">
+          <option value="">Select account</option>
+
+          <option value="bank">Bank Account</option>
+
+          <option value="cash">Cash Wallet</option>
+
+          <option value="savings">Savings Account</option>
+        </select>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date"> Date </label>
+
+        <input id="date" type="date" name="date" [(ngModel)]="form.date" />
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description"> Description </label>
+
+        <textarea
+          id="description"
+          name="description"
+          rows="3"
+          [(ngModel)]="form.description"
+          placeholder="Optional description"
+        >
+        </textarea>
+      </div>
+
+      <div class="transaction-modal__actions">
+        <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
+
+        <button type="submit" class="save-btn">Save Transaction</button>
+      </div>
+    </form>
+  </section>
+</div>

@@ -1,16 +1,141 @@
-.app-layout {
-  display: flex;
+:host {
+  display: block;
+  width: 100%;
   min-height: 100vh;
-  background: #f6f7fb;
 }
 
-.main-section {
+.main-layout {
+  display: flex;
+
+  width: 100%;
+  min-height: 100vh;
+
+  background: var(--bg-page);
+
+  overflow-x: hidden;
+}
+
+/* Desktop Sidebar */
+app-sidebar {
+  display: block;
+
+  flex: 0 0 250px;
+
+  width: 250px;
+  min-width: 250px;
+}
+
+/* Content */
+.main-layout__content {
   flex: 1;
+  min-width: 0;
+
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  min-height: 100vh;
 }
 
-.content {
+.main-layout__page {
   flex: 1;
-  padding: 24px;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background: var(--bg-page);
+
+  overflow-x: hidden;
+}
+
+/* Desktop */
+.sidebar-backdrop {
+  display: none;
+}
+
+/* =========================
+   MOBILE DRAWER
+========================= */
+
+@media (max-width: 700px) {
+  .main-layout {
+    display: block;
+  }
+
+  app-sidebar {
+    position: fixed;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 1001;
+
+    width: 260px;
+    min-width: 260px;
+
+    flex: none;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.25s ease;
+  }
+
+  app-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .main-layout__content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .main-layout__page {
+    width: 100%;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: block;
+
+    width: 100vw;
+    height: 100vh;
+
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    cursor: pointer;
+  }
+}
+
+/* RTL Mobile */
+
+@media (max-width: 700px) {
+  :host-context([dir='rtl']) app-sidebar {
+    left: auto;
+    right: 0;
+
+    transform: translateX(100%);
+  }
+
+  :host-context([dir='rtl']) app-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
 }

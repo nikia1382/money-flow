@@ -1,110 +1,187 @@
 <header class="top-header">
+  <!-- Welcome -->
+  <div class="top-header__left">
+    <h1>
+      {{ 'dashboard.welcome' | translate }}
+    </h1>
 
-  <div class="top-header__main">
+    <p>
+      {{ 'dashboard.subtitle' | translate }}
+    </p>
+  </div>
+
+  <!-- Actions -->
+  <div class="top-header__right">
+    <!-- Mobile Menu -->
+    <button
+      type="button"
+      class="mobile-menu-btn"
+      aria-label="Open navigation menu"
+      title="Menu"
+      (click)="openMenu()"
+    >
+      <lucide-icon [img]="Menu" [size]="19" />
+    </button>
 
     <!-- Search -->
     <div class="search-box">
-
-      <lucide-icon
-        [img]="Search"
-        [size]="17"
-      />
+      <lucide-icon [img]="Search" [size]="17" />
 
       <input
-        type="text"
+        type="search"
         placeholder="Search transactions, accounts, categories..."
         aria-label="Search"
+        [value]="searchTerm()"
+        (input)="onSearch($event)"
       />
 
-      <span class="search-shortcut">
-        /
-      </span>
+      <span class="search-shortcut"> / </span>
+    </div>
+
+    <!-- Date -->
+    <!-- <div class="date-filter">
+
+  <button
+    type="button"
+    class="date-range-btn"
+    (click)="toggleDateMenu()"
+    aria-label="Select date range"
+  >
+
+    <lucide-icon
+      [img]="CalendarDays"
+      [size]="16"
+    />
+
+<span class="date-range-btn__text">
+  {{ getDateRangeLabel() }}
+</span>
+
+    <lucide-icon
+      class="date-range-btn__arrow"
+      [img]="ChevronDown"
+      [size]="14"
+    />
+
+  </button>
+
+
+  @if (isDateMenuOpen()) {
+
+    <div class="date-filter__menu">
+
+<button
+  type="button"
+  (click)="selectDateRange('thisMonth')"
+>
+  This Month
+</button>
+
+<button
+  type="button"
+  (click)="selectDateRange('lastMonth')"
+>
+  Last Month
+</button>
+
+<button
+  type="button"
+  (click)="selectDateRange('last3Months')"
+>
+  Last 3 Months
+</button>
+
+<button
+  type="button"
+  (click)="selectDateRange('thisYear')"
+>
+  This Year
+</button>
 
     </div>
 
+  }
+
+</div> -->
 
     <!-- Add Transaction -->
-    <button
-      type="button"
-      class="add-transaction-btn"
-    >
+    <button type="button" class="add-transaction-btn" (click)="openTransactionModal()">
+      <lucide-icon [img]="Plus" [size]="17" />
 
-      <lucide-icon
-        [img]="Plus"
-        [size]="17"
-      />
+      <span class="add-transaction-btn__text"> Add Transaction </span>
 
-      <span>
-        Add Transaction
-      </span>
-
-      <span
-        class="add-transaction-btn__divider"
-      ></span>
-
-      <lucide-icon
-        [img]="ChevronDown"
-        [size]="15"
-      />
-
+      <lucide-icon class="add-transaction-btn__arrow" [img]="ChevronDown" [size]="14" />
     </button>
-
 
     <!-- Notifications -->
-    <button
-      type="button"
-      class="icon-btn notification-btn"
-      aria-label="Notifications"
-      title="Notifications"
-    >
+    <div class="notification-wrapper">
+      <button
+        type="button"
+        class="icon-btn notification-btn"
+        aria-label="Notifications"
+        title="Notifications"
+        (click)="$event.stopPropagation(); toggleNotifications()"
+      >
+        <lucide-icon [img]="Bell" [size]="18" />
 
-      <lucide-icon
-        [img]="Bell"
-        [size]="18"
-      />
+        <span class="notification-badge"> 3 </span>
+      </button>
 
-      <span class="notification-badge">
-        3
-      </span>
+      @if (isNotificationOpen()) {
+        <div class="notification-menu">
+          <div class="notification-menu__header">
+            <strong> Notifications </strong>
 
-    </button>
+            <button type="button">Mark all as read</button>
+          </div>
 
+          <div class="notification-item">
+            <div class="notification-dot"></div>
 
-    <!-- Dark Mode -->
+            <div>
+              <strong> Food budget reached 85% </strong>
+
+              <span> 10 minutes ago </span>
+            </div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-dot"></div>
+
+            <div>
+              <strong> Internet bill is due soon </strong>
+
+              <span> Tomorrow </span>
+            </div>
+          </div>
+
+          <div class="notification-item">
+            <div class="notification-dot"></div>
+
+            <div>
+              <strong> Emergency Fund reached 60% </strong>
+
+              <span> Today </span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Theme -->
     <button
       type="button"
       class="icon-btn"
       (click)="toggleDarkMode()"
-      [attr.aria-label]="
-        isDarkMode()
-          ? 'Switch to light mode'
-          : 'Switch to dark mode'
-      "
-      [attr.title]="
-        isDarkMode()
-          ? 'Light mode'
-          : 'Dark mode'
-      "
+      [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
+      [attr.title]="isDarkMode() ? 'Light mode' : 'Dark mode'"
     >
-
       @if (isDarkMode()) {
-
-        <lucide-icon
-          [img]="Sun"
-          [size]="18"
-        />
-
+        <lucide-icon [img]="Sun" [size]="18" />
       } @else {
-
-        <lucide-icon
-          [img]="Moon"
-          [size]="18"
-        />
-
+        <lucide-icon [img]="Moon" [size]="18" />
       }
-
     </button>
-
 
     <!-- Language -->
     <button
@@ -114,61 +191,53 @@
       aria-label="Change language"
       title="Change language"
     >
-
-      {{ currentLang === 'en'
-        ? 'FA'
-        : 'EN'
-      }}
-
+      {{ currentLang === 'en' ? 'FA' : 'EN' }}
     </button>
-
 
     <!-- Profile -->
-    <button
-      type="button"
-      class="profile-btn"
-      aria-label="Open profile menu"
-      title="Profile"
-    >
+    <div class="profile-wrapper">
+      <button
+        type="button"
+        class="profile-btn"
+        aria-label="Open profile menu"
+        title="Profile"
+        (click)="$event.stopPropagation(); toggleProfileMenu()"
+      >
+        <div class="profile-avatar">N</div>
 
-      <div class="profile-avatar">
-        N
-      </div>
+        <lucide-icon [img]="ChevronDown" [size]="14" />
+      </button>
 
-      <lucide-icon
-        [img]="ChevronDown"
-        [size]="15"
-      />
+      @if (isProfileOpen()) {
+        <div class="profile-menu">
+          <div class="profile-menu__user">
+            <div class="profile-menu__avatar">N</div>
 
-    </button>
+            <div>
+              <strong>Nikia</strong>
+              <span>nikia@example.com</span>
+            </div>
+          </div>
 
+          <div class="profile-menu__divider"></div>
+
+          <button type="button">My Profile</button>
+
+          <button type="button">Settings</button>
+
+          <button type="button">Subscription</button>
+
+          <div class="profile-menu__divider"></div>
+
+          <button type="button" class="logout-btn">Sign Out</button>
+        </div>
+      }
+    </div>
   </div>
-
-
-  <!-- Date -->
-  <div class="top-header__date-row">
-
-    <button
-      type="button"
-      class="date-range-btn"
-    >
-
-      <lucide-icon
-        [img]="CalendarDays"
-        [size]="16"
-      />
-
-      <span>
-        August 1 - August 31, 2026
-      </span>
-
-      <lucide-icon
-        [img]="ChevronDown"
-        [size]="15"
-      />
-
-    </button>
-
-  </div>
-
 </header>
+@if (isTransactionModalOpen()) {
+  <app-add-transaction-modal
+    (closeModal)="closeTransactionModal()"
+    (saveTransaction)="onTransactionSaved($event)"
+  />
+}
