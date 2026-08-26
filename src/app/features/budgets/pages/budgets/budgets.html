@@ -1,0 +1,304 @@
+<section class="budgets-page">
+
+  <!-- =========================
+       Header
+  ========================== -->
+
+  <div class="budgets-page__header">
+
+    <div class="budgets-page__title">
+
+      <h1>
+        {{ 'budgets.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'budgets.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-budget-btn"
+      (click)="openAddBudget()"
+    >
+
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      <span>
+        {{ 'budgets.addBudget' | translate }}
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       Summary
+  ========================== -->
+
+  <div class="budgets-summary">
+
+    <!-- Total Budget -->
+
+    <article class="budgets-summary__card">
+
+      <div class="budgets-summary__icon total">
+        ₮
+      </div>
+
+      <div class="budgets-summary__content">
+
+        <span>
+          {{ 'budgets.summary.totalBudget' | translate }}
+        </span>
+
+        <strong>
+          {{ totalBudget.toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- Total Spent -->
+
+    <article class="budgets-summary__card">
+
+      <div class="budgets-summary__icon spent">
+        ↓
+      </div>
+
+      <div class="budgets-summary__content">
+
+        <span>
+          {{ 'budgets.summary.totalSpent' | translate }}
+        </span>
+
+        <strong class="spent-value">
+          {{ totalSpent.toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- Remaining -->
+
+    <article class="budgets-summary__card">
+
+      <div class="budgets-summary__icon remaining">
+        ✓
+      </div>
+
+      <div class="budgets-summary__content">
+
+        <span>
+          {{ 'budgets.summary.remaining' | translate }}
+        </span>
+
+        <strong
+          class="remaining-value"
+          [class.negative]="totalRemaining < 0"
+        >
+          {{ totalRemaining.toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <!-- Over Budget -->
+
+    <article class="budgets-summary__card">
+
+      <div class="budgets-summary__icon danger">
+        !
+      </div>
+
+      <div class="budgets-summary__content">
+
+        <span>
+          {{ 'budgets.summary.overBudget' | translate }}
+        </span>
+
+        <strong class="danger-value">
+          {{ overBudgetCount }}
+        </strong>
+
+        <small>
+          {{ 'budgets.summary.categories' | translate }}
+        </small>
+
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- =========================
+       Toolbar
+  ========================== -->
+
+<div class="budgets-toolbar">
+
+  <app-month-selector
+    [value]="selectedMonth"
+    [months]="months"
+    (valueChange)="selectedMonth = $event"
+  />
+
+
+  <div class="status-filter">
+
+    <button
+      type="button"
+      [class.active]="selectedStatus === 'all'"
+      (click)="selectedStatus = 'all'"
+    >
+      {{ 'budgets.filters.all' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      [class.active]="selectedStatus === 'active'"
+      (click)="selectedStatus = 'active'"
+    >
+      {{ 'budgets.filters.active' | translate }}
+    </button>
+
+
+    <button
+      type="button"
+      [class.active]="selectedStatus === 'over'"
+      (click)="selectedStatus = 'over'"
+    >
+      {{ 'budgets.filters.overBudget' | translate }}
+    </button>
+
+  </div>
+
+</div>
+
+
+  <!-- =========================
+       Budget Cards
+  ========================== -->
+
+  <div class="budgets-grid">
+
+    @for (
+      budget of filteredBudgets;
+      track budget.id
+    ) {
+
+<app-budget-card
+  [budget]="budget"
+  (editBudget)="openEditBudget($event)"
+  (deleteBudget)="openDeleteBudget($event)"
+/>
+
+    } @empty {
+
+      <div class="budgets-empty">
+
+        <div class="budgets-empty__icon">
+
+          <lucide-icon
+            [img]="SlidersHorizontal"
+            [size]="22"
+          />
+
+        </div>
+
+
+        <strong>
+          {{ 'budgets.empty.title' | translate }}
+        </strong>
+
+
+        <span>
+          {{ 'budgets.empty.subtitle' | translate }}
+        </span>
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- =========================
+       Add Budget Modal
+  ========================== -->
+
+@if (isAddBudgetOpen()) {
+
+  <app-add-budget-modal
+    (closeModal)="closeAddBudget()"
+    (saveBudget)="addBudget($event)"
+  />
+
+}
+
+
+@if (editingBudget()) {
+
+  <app-add-budget-modal
+    [budgetToEdit]="editingBudget()"
+    (closeModal)="closeEditBudget()"
+    (saveBudget)="updateBudget($event)"
+  />
+
+}
+@if (budgetPendingDelete(); as budget) {
+
+  <app-confirm-dialog
+    [title]="
+      'budgets.deleteDialog.title'
+        | translate
+    "
+    [message]="
+      'budgets.deleteDialog.message'
+        | translate: {
+            category: budget.category
+          }
+    "
+    [confirmText]="
+      'budgets.deleteDialog.confirm'
+        | translate
+    "
+    [cancelText]="
+      'budgets.deleteDialog.cancel'
+        | translate
+    "
+    variant="danger"
+    (confirm)="confirmDeleteBudget()"
+    (cancel)="cancelDeleteBudget()"
+  />
+
+}
+</section>

@@ -1,11 +1,31 @@
-<div class="modal-backdrop" (click)="close()">
-  <section class="transaction-modal" (click)="$event.stopPropagation()">
-    <div class="transaction-modal__header">
-      <div>
-        <h2>Add Transaction</h2>
+<div
+  class="modal-backdrop"
+  (click)="close()"
+>
 
-        <p>Add a new financial transaction</p>
+  <section
+    class="transaction-modal"
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- =========================
+         Header
+    ========================== -->
+
+    <div class="transaction-modal__header">
+
+      <div>
+
+        <h2>
+          Add Transaction
+        </h2>
+
+        <p>
+          Add a new financial transaction
+        </p>
+
       </div>
+
 
       <button
         type="button"
@@ -14,16 +34,38 @@
         title="Close"
         (click)="close()"
       >
-        <lucide-icon [img]="X" [size]="18" />
+
+        <lucide-icon
+          [img]="X"
+          [size]="18"
+        />
+
       </button>
+
     </div>
 
-    <form class="transaction-form" (ngSubmit)="save()">
-      <!-- Type -->
+
+    <!-- =========================
+         Form
+    ========================== -->
+
+    <form
+      class="transaction-form"
+      (ngSubmit)="save()"
+    >
+
+
+      <!-- Transaction Type -->
+
       <div class="form-group">
-        <label> Type </label>
+
+        <label>
+          Type
+        </label>
+
 
         <div class="transaction-types">
+
           <button
             type="button"
             [class.active]="form.type === 'expense'"
@@ -31,6 +73,7 @@
           >
             Expense
           </button>
+
 
           <button
             type="button"
@@ -40,6 +83,7 @@
             Income
           </button>
 
+
           <button
             type="button"
             [class.active]="form.type === 'transfer'"
@@ -47,83 +91,193 @@
           >
             Transfer
           </button>
+
         </div>
+
       </div>
 
-      <!-- Amount -->
+
+      <!-- Title -->
+
       <div class="form-group">
-        <label for="amount"> Amount </label>
+
+        <label for="transaction-title">
+          Title
+        </label>
 
         <input
-          id="amount"
+          id="transaction-title"
+          type="text"
+          name="title"
+          [(ngModel)]="form.title"
+          placeholder="Grocery Shopping"
+          required
+        />
+
+      </div>
+
+
+      <!-- Amount -->
+
+      <div class="form-group">
+
+        <label for="transaction-amount">
+          Amount
+        </label>
+
+        <input
+          id="transaction-amount"
           type="number"
           name="amount"
           [(ngModel)]="form.amount"
-          placeholder="Enter amount"
+          placeholder="0"
+          min="1"
           required
         />
+
       </div>
+
 
       <!-- Category -->
+
       <div class="form-group">
-        <label for="category"> Category </label>
 
-        <select id="category" name="category" [(ngModel)]="form.category">
-          <option value="">Select category</option>
+        <label for="transaction-category">
+          Category
+        </label>
 
-          <option value="food">Food</option>
+        <select
+          id="transaction-category"
+          name="category"
+          [(ngModel)]="form.category"
+          required
+        >
 
-          <option value="transport">Transportation</option>
+          <option value="">
+            Select category
+          </option>
 
-          <option value="shopping">Shopping</option>
 
-          <option value="bills">Bills</option>
+          @for (
+            category of categories;
+            track category
+          ) {
 
-          <option value="salary">Salary</option>
+            <option
+              [value]="category"
+            >
+              {{ category }}
+            </option>
+
+          }
+
         </select>
+
       </div>
+
 
       <!-- Account -->
+
       <div class="form-group">
-        <label for="account"> Account </label>
 
-        <select id="account" name="account" [(ngModel)]="form.account">
-          <option value="">Select account</option>
+        <label for="transaction-account">
+          Account
+        </label>
 
-          <option value="bank">Bank Account</option>
+        <select
+          id="transaction-account"
+          name="account"
+          [(ngModel)]="form.account"
+          required
+        >
 
-          <option value="cash">Cash Wallet</option>
+          <option value="">
+            Select account
+          </option>
 
-          <option value="savings">Savings Account</option>
+
+          @for (
+            account of accounts();
+            track account.id
+          ) {
+
+            <option
+              [value]="account.name"
+            >
+              {{ account.name }}
+            </option>
+
+          }
+
         </select>
+
       </div>
+
 
       <!-- Date -->
-      <div class="form-group">
-        <label for="date"> Date </label>
 
-        <input id="date" type="date" name="date" [(ngModel)]="form.date" />
+      <div class="form-group">
+
+        <label for="transaction-date">
+          Date
+        </label>
+
+        <input
+          id="transaction-date"
+          type="date"
+          name="date"
+          [(ngModel)]="form.date"
+          required
+        />
+
       </div>
 
+
       <!-- Description -->
+
       <div class="form-group">
-        <label for="description"> Description </label>
+
+        <label for="transaction-description">
+          Description
+        </label>
 
         <textarea
-          id="description"
+          id="transaction-description"
           name="description"
           rows="3"
           [(ngModel)]="form.description"
           placeholder="Optional description"
-        >
-        </textarea>
+        ></textarea>
+
       </div>
+
+
+      <!-- =========================
+           Actions
+      ========================== -->
 
       <div class="transaction-modal__actions">
-        <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
 
-        <button type="submit" class="save-btn">Save Transaction</button>
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="close()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="submit"
+          class="save-btn"
+        >
+          Save Transaction
+        </button>
+
       </div>
+
     </form>
+
   </section>
+
 </div>

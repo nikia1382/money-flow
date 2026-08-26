@@ -1,0 +1,194 @@
+<section class="recurring-page">
+
+  <!-- Header -->
+
+  <div class="recurring-page__header">
+
+    <div class="recurring-page__title">
+
+      <h1>
+        {{ 'recurringPayments.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'recurringPayments.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="add-payment-btn"
+    >
+
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      <span>
+        {{ 'recurringPayments.addPayment' | translate }}
+      </span>
+
+    </button>
+
+  </div>
+
+
+  <!-- Summary -->
+
+  <div class="recurring-summary">
+
+    <article class="recurring-summary__card">
+
+      <div class="summary-icon primary">
+
+        <lucide-icon
+          [img]="CircleDollarSign"
+          [size]="19"
+        />
+
+      </div>
+
+
+      <div class="summary-content">
+
+        <span>
+          {{
+            'recurringPayments.summary.monthlyTotal'
+              | translate
+          }}
+        </span>
+
+        <strong>
+          {{ monthlyTotal.toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article class="recurring-summary__card">
+
+      <div class="summary-icon active">
+
+        <lucide-icon
+          [img]="CalendarClock"
+          [size]="19"
+        />
+
+      </div>
+
+
+      <div class="summary-content">
+
+        <span>
+          {{
+            'recurringPayments.summary.active'
+              | translate
+          }}
+        </span>
+
+        <strong>
+          {{ activeCount }}
+        </strong>
+
+        <small>
+          {{
+            'recurringPayments.summary.payments'
+              | translate
+          }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article class="recurring-summary__card">
+
+      <div class="summary-icon warning">
+
+        <lucide-icon
+          [img]="Clock3"
+          [size]="19"
+        />
+
+      </div>
+
+
+      <div class="summary-content">
+
+        <span>
+          {{
+            'recurringPayments.summary.dueSoon'
+              | translate
+          }}
+        </span>
+
+        <strong class="warning-value">
+          {{ dueSoonCount }}
+        </strong>
+
+        <small>
+          {{
+            'recurringPayments.summary.payments'
+              | translate
+          }}
+        </small>
+
+      </div>
+
+    </article>
+
+
+    <article class="recurring-summary__card">
+
+      <div class="summary-icon danger">
+
+        <lucide-icon
+          [img]="TriangleAlert"
+          [size]="19"
+        />
+
+      </div>
+
+
+      <div class="summary-content">
+
+        <span>
+          {{
+            'recurringPayments.summary.overdue'
+              | translate
+          }}
+        </span>
+
+        <strong class="danger-value">
+          {{ overdueCount }}
+        </strong>
+
+        <small>
+          {{
+            'recurringPayments.summary.payments'
+              | translate
+          }}
+        </small>
+
+      </div>
+
+    </article>
+
+  </div>
+<app-data-table
+  [columns]="paymentColumns"
+  [rows]="payments"
+  emptyTitleKey="recurringPayments.empty.title"
+  emptySubtitleKey="recurringPayments.empty.subtitle"
+/>
+</section>

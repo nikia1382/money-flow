@@ -1,0 +1,176 @@
+<div class="data-table">
+
+  <!-- Header -->
+
+  <div
+    class="data-table__header"
+    [style.grid-template-columns]="
+      gridTemplateColumns
+    "
+  >
+
+    @for (
+      column of columns;
+      track column.labelKey
+    ) {
+
+      <span
+        [class.align-center]="
+          column.align === 'center'
+        "
+        [class.align-end]="
+          column.align === 'end'
+        "
+      >
+        {{ column.labelKey | translate }}
+      </span>
+
+    }
+
+  </div>
+
+
+  <!-- Rows -->
+
+  <div class="data-table__body">
+
+    @for (
+      row of rows;
+      track $index
+    ) {
+
+      <div
+        class="data-table__row"
+        [style.grid-template-columns]="
+          gridTemplateColumns
+        "
+      >
+
+        @for (
+          column of columns;
+          track column.labelKey
+        ) {
+
+          @let value =
+            getCellValue(
+              row,
+              column
+            );
+
+
+          <div
+            class="data-table__cell"
+            [class.align-center]="
+              column.align === 'center'
+            "
+            [class.align-end]="
+              column.align === 'end'
+            "
+          >
+
+            @switch (column.type) {
+
+              @case ('currency') {
+
+                @if (isNumber(value)) {
+
+                  <strong>
+                    {{ value.toLocaleString() }}
+                  </strong>
+
+                  <small>
+                    {{ 'common.currency' | translate }}
+                  </small>
+
+                }
+
+              }
+
+
+@case ('badge') {
+
+  @if (isString(value)) {
+
+    <span
+      class="data-table__badge"
+      [class.success]="
+        value === 'active'
+      "
+      [class.warning]="
+        value === 'dueSoon'
+      "
+      [class.danger]="
+        value === 'overdue'
+      "
+    >
+
+      @if (column.valueKeyPrefix) {
+
+        {{
+          getTranslatedValueKey(
+            column,
+            value
+          ) | translate
+        }}
+
+      } @else {
+
+        {{ value }}
+
+      }
+
+    </span>
+
+  }
+
+}
+
+
+              @case ('date') {
+
+                @if (isString(value)) {
+
+                  <span>
+                    {{ value }}
+                  </span>
+
+                }
+
+              }
+
+
+              @default {
+
+                <span>
+                  {{ value }}
+                </span>
+
+              }
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+    } @empty {
+
+      <div class="data-table__empty">
+
+        <strong>
+          {{ emptyTitleKey | translate }}
+        </strong>
+
+        <span>
+          {{ emptySubtitleKey | translate }}
+        </span>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

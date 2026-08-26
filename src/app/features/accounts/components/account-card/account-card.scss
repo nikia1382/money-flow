@@ -1,0 +1,182 @@
+:host {
+  display: block;
+}
+
+.account-card {
+  height: 100%;
+
+  padding: 18px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+
+  background: var(--bg-surface);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+}
+
+.account-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-card__icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  &.bank {
+    background: #eef2ff;
+    color: #4f46e5;
+  }
+
+  &.cash {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+  &.savings {
+    background: #faf5ff;
+    color: #9333ea;
+  }
+}
+
+.account-card__menu {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  &:hover {
+    background: var(--bg-soft);
+  }
+}
+
+.account-card__info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 20px;
+
+  span {
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  small {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+  }
+}
+
+.account-card__balance {
+  margin-top: 18px;
+
+  strong {
+    color: var(--text-primary);
+
+    font-size: 21px;
+    font-weight: 700;
+
+    font-variant-numeric: tabular-nums;
+  }
+
+  span {
+    margin-inline-start: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+  }
+}
+.account-card__menu-wrapper {
+  position: relative;
+}
+
+.account-card__dropdown {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  inset-inline-end: 0;
+
+  z-index: 50;
+
+  width: 130px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 6px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.12);
+
+  button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 10px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    &:hover {
+      background: var(--bg-soft);
+    }
+  }
+
+  .delete-action {
+    color: #dc2626;
+  }
+}

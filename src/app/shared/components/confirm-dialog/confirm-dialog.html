@@ -1,0 +1,58 @@
+<div
+  class="confirm-backdrop"
+  (click)="cancelAction()"
+>
+
+  <section
+    class="confirm-dialog"
+    role="alertdialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'confirm-dialog-title'"
+    [attr.aria-describedby]="'confirm-dialog-message'"
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- Content -->
+
+    <div class="confirm-dialog__content">
+
+      <h2 id="confirm-dialog-title">
+        {{ title }}
+      </h2>
+
+      <p id="confirm-dialog-message">
+        {{ message }}
+      </p>
+
+    </div>
+
+
+    <!-- Actions -->
+
+    <div class="confirm-dialog__actions">
+
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="cancelAction()"
+      >
+        {{ cancelText }}
+      </button>
+
+
+      <button
+        type="button"
+        class="confirm-btn"
+        [class.danger]="variant === 'danger'"
+        [class.warning]="variant === 'warning'"
+        [class.primary]="variant === 'primary'"
+        (click)="confirmAction()"
+      >
+        {{ confirmText }}
+      </button>
+
+    </div>
+
+  </section>
+
+</div>

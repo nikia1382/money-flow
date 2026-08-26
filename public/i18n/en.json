@@ -90,5 +90,179 @@
       "travel": "Travel",
       "car": "New Car"
     }
-  }
+  },
+  "accounts": {
+  "title": "Accounts",
+  "subtitle": "Manage your bank accounts, wallets and savings.",
+
+  "totalBalance": "Total Balance",
+  "acrossAccounts": "Across {{count}} accounts",
+  "currency": "Toman",
+
+  "addAccount": "Add Account",
+
+  "types": {
+    "bank": "Bank",
+    "cash": "Cash",
+    "savings": "Savings"
+  },
+
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "form": {
+    "addTitle": "Add Account",
+    "addSubtitle": "Add a new account to MoneyFlow.",
+
+    "editTitle": "Edit Account",
+    "editSubtitle": "Update your account information.",
+
+    "name": "Account Name",
+    "namePlaceholder": "Main Bank Account",
+
+    "type": "Account Type",
+
+    "balance": "Initial Balance",
+    "balancePlaceholder": "0",
+
+    "number": "Account Number",
+    "numberPlaceholder": "**** 4821",
+
+    "cancel": "Cancel",
+    "add": "Add Account",
+    "save": "Save Changes"
+  },
+
+  "deleteDialog": {
+    "title": "Delete Account",
+    "message": "Are you sure you want to delete {{name}}?",
+    "cancel": "Cancel",
+    "confirm": "Delete"
+  },
+
+"common": {
+  "currency": "Toman"
+}
+},
+  "budgets": {
+  "title": "Budgets",
+  "subtitle": "Plan and track your monthly spending.",
+  "addBudget": "Add Budget",
+  "summary": {
+    "totalBudget": "Total Budget",
+    "totalSpent": "Total Spent",
+    "remaining": "Remaining",
+    "overBudget": "Over Budget"
+  },
+  "empty": {
+  "title": "No budgets found",
+  "subtitle": "Try changing the month or filter, or create a new budget."
+},
+"deleteDialog": {
+  "title": "Delete Budget",
+  "message": "Are you sure you want to delete the {{category}} budget? This action cannot be undone.",
+  "confirm": "Delete",
+  "cancel": "Cancel"
+},
+  "form": {
+  "title": "Add Budget",
+  "subtitle": "Set a monthly spending limit for a category.",
+  "category": "Category",
+  "selectCategory": "Select category",
+  "limit": "Budget Limit",
+  "month": "Month",
+  "cancel": "Cancel",
+  "save": "Save Budget",
+  "limitError": "Budget amount must be greater than zero.",
+  "editTitle": "Edit Budget",
+"editSubtitle": "Update the selected budget details.",
+"saveChanges": "Save Changes"
+},
+"card": {
+  "spent": "Spent",
+  "budget": "Budget",
+  "remaining": "{{amount}} Toman remaining",
+  "overBudget": "{{amount}} Toman over budget"
+},
+"actions": {
+  "options": "Budget options",
+  "edit": "Edit",
+  "delete": "Delete"
+},
+"status": {
+  "normal": "On Track",
+  "warning": "Near Limit",
+  "danger": "High Spending"
+},
+"filters": {
+  "all": "All",
+  "active": "Active",
+  "overBudget": "Over Budget"
+},
+"months": {
+  "august2026": "August 2026",
+  "july2026": "July 2026",
+  "june2026": "June 2026"
+},
+"categories": {
+  "Food": "Food",
+  "Transportation": "Transportation",
+  "Shopping": "Shopping",
+  "Bills": "Bills",
+  "Entertainment": "Entertainment",
+  "Health": "Health",
+  "Education": "Education",
+  "Other": "Other"
+}
+},
+"recurringPayments": {
+  "title": "Recurring Payments",
+  "subtitle": "Manage subscriptions, bills and repeating payments.",
+  "addPayment": "Add Recurring Payment",
+
+  "summary": {
+    "monthlyTotal": "Monthly Recurring",
+    "active": "Active Payments",
+    "dueSoon": "Due Soon",
+    "overdue": "Overdue",
+    "payments": "Payments"
+  },
+  "status": {
+  "active": "Active",
+  "dueSoon": "Due Soon",
+  "overdue": "Overdue"
+},
+"frequency": {
+  "weekly": "Weekly",
+  "monthly": "Monthly",
+  "yearly": "Yearly"
+},
+"card": {
+  "account": "Account",
+  "frequency": "Frequency"
+},
+"table": {
+  "payment": "Payment",
+  "amount": "Amount",
+  "account": "Account",
+  "frequency": "Frequency",
+  "nextPayment": "Next Payment",
+    "status": "وضعیت"
+
+}
+},
+"table": {
+  "payment": "Payment",
+  "amount": "Amount",
+  "account": "Account",
+  "frequency": "Frequency",
+  "nextPayment": "Next Payment",
+  "status": "Status"
+},
+"empty": {
+  "title": "No recurring payments",
+  "subtitle": "Add your first recurring payment to get started."
+}
 }

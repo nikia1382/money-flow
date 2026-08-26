@@ -1,0 +1,459 @@
+:host {
+  display: block;
+}
+
+
+/* =========================
+   Row
+========================= */
+
+.transaction-row {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(230px, 2fr)
+    minmax(150px, 1fr)
+    minmax(120px, 0.8fr)
+    minmax(160px, 1fr)
+    40px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 76px;
+
+  padding: 12px 18px;
+
+  box-sizing: border-box;
+
+  border-bottom:
+    1px solid var(--border-color);
+
+  transition:
+    background-color 0.15s ease;
+
+  &:hover {
+    background: var(--bg-soft);
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+/* =========================
+   Main
+========================= */
+
+.transaction-main {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* =========================
+   Icon
+========================= */
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  &.income {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+  &.expense {
+    background: #fef2f2;
+    color: #dc2626;
+  }
+
+  &.transfer {
+    background: #eef2ff;
+    color: #4f46e5;
+  }
+}
+
+
+/* =========================
+   Information
+========================= */
+
+.transaction-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 5px;
+
+  strong {
+    max-width: 100%;
+
+    overflow: hidden;
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 650;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+/* =========================
+   Category Badge
+========================= */
+
+.transaction-type {
+  display: inline-flex;
+
+  width: fit-content;
+
+  padding:
+    3px
+    7px;
+
+  border-radius: 999px;
+
+  background: var(--bg-soft);
+
+  color: var(--text-secondary);
+
+  font-size: 9px;
+  font-weight: 600;
+
+  &.income {
+    background: #ecfdf5;
+    color: #047857;
+  }
+
+  &.expense {
+    background: #fef2f2;
+    color: #b91c1c;
+  }
+
+  &.transfer {
+    background: #eef2ff;
+    color: #4338ca;
+  }
+}
+
+
+/* =========================
+   Account / Date
+========================= */
+
+.transaction-account,
+.transaction-date {
+  min-width: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+
+  span:last-child {
+    display: block;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+/* =========================
+   Amount
+========================= */
+
+.transaction-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+
+  gap: 4px;
+
+  color: var(--text-primary);
+
+  font-variant-numeric:
+    tabular-nums;
+
+  white-space: nowrap;
+
+  &.income {
+    color: #059669;
+  }
+
+  &.expense {
+    color: #dc2626;
+  }
+
+  &.transfer {
+    color: var(--text-primary);
+  }
+}
+
+.transaction-amount__value {
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.transaction-amount small {
+  color: var(--text-secondary);
+
+  font-size: 8px;
+  font-weight: 500;
+}
+
+
+/* =========================
+   Menu
+========================= */
+
+.transaction-menu-wrapper {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  z-index: 100;
+}
+
+.transaction-menu {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--bg-muted);
+
+    color: var(--text-primary);
+  }
+}
+
+
+/* =========================
+   Dropdown
+========================= */
+
+.transaction-menu-dropdown {
+  position: absolute;
+
+  top: 40px;
+  inset-inline-end: 0;
+
+  z-index: 9999;
+
+  width: 140px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 6px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid var(--border-color);
+
+  border-radius: 10px;
+
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 12px 30px
+    rgba(15, 23, 42, 0.16);
+
+  button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 10px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--text-primary);
+
+    text-align: start;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    &:hover {
+      background: var(--bg-soft);
+    }
+  }
+
+  .delete-action {
+    color: #dc2626;
+  }
+}
+
+
+/* =========================
+   Mobile labels
+========================= */
+
+.mobile-label {
+  display: none;
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1000px) {
+
+  .transaction-row {
+    grid-template-columns:
+      minmax(200px, 1.7fr)
+      minmax(130px, 1fr)
+      minmax(110px, 0.8fr)
+      minmax(140px, 1fr)
+      36px;
+
+    gap: 10px;
+
+    padding-inline: 14px;
+  }
+
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 800px) {
+
+  .transaction-row {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto;
+
+    gap:
+      12px
+      16px;
+
+    padding: 16px;
+  }
+
+
+  .transaction-main {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+
+  .transaction-menu-wrapper {
+    grid-column: 2;
+    grid-row: 1;
+
+    align-self: start;
+  }
+
+
+  .transaction-account,
+  .transaction-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    grid-column: 1 / -1;
+
+    gap: 12px;
+
+    padding-top: 10px;
+
+    border-top:
+      1px solid var(--border-color);
+  }
+
+
+  .transaction-account {
+    grid-row: 2;
+  }
+
+
+  .transaction-date {
+    grid-row: 3;
+  }
+
+
+  .transaction-amount {
+    grid-column: 1 / -1;
+    grid-row: 4;
+
+    justify-content: flex-end;
+
+    padding-top: 4px;
+  }
+
+
+  .mobile-label {
+    display: inline;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+
+  .transaction-amount__value {
+    font-size: 15px;
+  }
+
+}

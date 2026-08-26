@@ -1,0 +1,30 @@
+<div class="month-selector">
+
+  <lucide-icon
+    [img]="CalendarDays"
+    [size]="16"
+  />
+
+  <select
+    [ngModel]="value"
+    (ngModelChange)="onMonthChange($event)"
+    aria-label="Select month"
+    title="Select month"
+  >
+
+    @for (
+      month of months;
+      track month.value
+    ) {
+
+      <option
+        [value]="month.value"
+      >
+        {{ month.labelKey | translate }}
+      </option>
+
+    }
+
+  </select>
+
+</div>

@@ -1,0 +1,219 @@
+:host {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+}
+
+
+/* =========================
+   Backdrop
+========================= */
+
+.confirm-backdrop {
+  position: fixed;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background:
+    rgba(15, 23, 42, 0.45);
+
+  backdrop-filter:
+    blur(3px);
+}
+
+
+/* =========================
+   Dialog
+========================= */
+
+.confirm-dialog {
+  width: min(
+    100%,
+    400px
+  );
+
+  padding: 22px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    var(--border-color);
+
+  border-radius: 16px;
+
+  background:
+    var(--bg-surface);
+
+  box-shadow:
+    0 24px 60px
+    rgba(15, 23, 42, 0.18);
+}
+
+
+/* =========================
+   Content
+========================= */
+
+.confirm-dialog__content {
+
+  h2 {
+    margin:
+      0 0 8px;
+
+    color:
+      var(--text-primary);
+
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+
+  p {
+    margin: 0;
+
+    color:
+      var(--text-secondary);
+
+    font-size: 11px;
+    line-height: 1.7;
+  }
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.confirm-dialog__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  margin-top: 22px;
+
+
+  button {
+    min-width: 82px;
+    height: 38px;
+
+    padding-inline: 14px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      transform 0.15s ease;
+
+
+    &:active {
+      transform:
+        scale(0.98);
+    }
+  }
+}
+
+
+/* =========================
+   Cancel
+========================= */
+
+.cancel-btn {
+  border:
+    1px solid
+    var(--border-color);
+
+  background:
+    var(--bg-surface);
+
+  color:
+    var(--text-primary);
+
+
+  &:hover {
+    background:
+      var(--bg-soft);
+  }
+}
+
+
+/* =========================
+   Confirm
+========================= */
+
+.confirm-btn {
+  border: 0;
+
+  color: #ffffff;
+
+
+  &.danger {
+    background: #dc2626;
+
+    &:hover {
+      background: #b91c1c;
+    }
+  }
+
+
+  &.warning {
+    background: #d97706;
+
+    &:hover {
+      background: #b45309;
+    }
+  }
+
+
+  &.primary {
+    background:
+      var(--primary);
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 500px) {
+
+  .confirm-dialog {
+    padding: 18px;
+  }
+
+
+  .confirm-dialog__actions {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+
+    button {
+      width: 100%;
+    }
+  }
+
+}

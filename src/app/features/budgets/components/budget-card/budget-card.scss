@@ -1,0 +1,450 @@
+:host {
+  display: block;
+  min-width: 0;
+  height: 100%;
+}
+
+/* =========================
+   Card
+========================= */
+
+.budget-card {
+  height: 100%;
+  min-height: 190px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 4px 14px
+    rgba(15, 23, 42, 0.04);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 8px 22px
+      rgba(15, 23, 42, 0.07);
+  }
+
+  &.over-budget {
+    border-color:
+      rgba(220, 38, 38, 0.35);
+  }
+}
+
+/* =========================
+   Header
+========================= */
+
+.budget-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.budget-card__title {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  h3 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+  }
+}
+
+.budget-card__icon {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(79, 70, 229, 0.08);
+
+  color: var(--primary);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  &.danger {
+    background:
+      rgba(220, 38, 38, 0.08);
+
+    color: #dc2626;
+  }
+}
+
+.budget-card__percentage {
+  min-width: 44px;
+
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  background: var(--bg-soft);
+
+  color: var(--text-primary);
+
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  &.danger {
+    background:
+      rgba(220, 38, 38, 0.08);
+
+    color: #dc2626;
+  }
+}
+
+/* =========================
+   Progress
+========================= */
+
+.budget-card__progress {
+  width: 100%;
+  height: 6px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: var(--bg-soft);
+}
+
+.budget-card__progress-value {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: var(--primary);
+
+  transition:
+    width 0.25s ease;
+
+  &.danger {
+    background: #dc2626;
+  }
+}
+
+/* =========================
+   Stats
+========================= */
+
+.budget-card__stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.budget-stat {
+  min-width: 0;
+
+  padding: 9px 10px;
+
+  border-radius: 10px;
+
+  background: var(--bg-soft);
+
+  span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--text-secondary);
+
+    font-size: 8px;
+    font-weight: 600;
+  }
+
+  strong {
+    color: var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    font-variant-numeric:
+      tabular-nums;
+  }
+
+  small {
+    margin-inline-start: 3px;
+
+    color: var(--text-secondary);
+
+    font-size: 8px;
+  }
+}
+
+/* =========================
+   Footer
+========================= */
+
+.budget-card__footer {
+  margin-top: auto;
+
+  padding-top: 10px;
+
+  border-top:
+    1px solid var(--border-color);
+}
+
+.budget-status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #059669;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  &.danger {
+    color: #dc2626;
+  }
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 500px) {
+
+  .budget-card {
+    min-height: 180px;
+
+    padding: 14px;
+  }
+
+  .budget-card__stats {
+    gap: 8px;
+  }
+}
+/* =========================
+   Budget Health
+========================= */
+
+.budget-card__progress-value {
+
+  &.warning {
+    background: #f59e0b;
+  }
+
+  &.danger {
+    background: #dc2626;
+  }
+
+}
+
+
+.budget-card.warning {
+  border-color:
+    rgba(245, 158, 11, 0.28);
+}
+
+
+.budget-card.danger {
+  border-color:
+    rgba(220, 38, 38, 0.32);
+}
+
+
+.budget-card__status-row {
+  display: flex;
+  align-items: center;
+}
+
+
+.budget-health {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 24px;
+
+  padding-inline: 8px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(5, 150, 105, 0.08);
+
+  color: #059669;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  &.warning {
+    background:
+      rgba(245, 158, 11, 0.1);
+
+    color: #d97706;
+  }
+
+  &.danger {
+    background:
+      rgba(220, 38, 38, 0.09);
+
+    color: #dc2626;
+  }
+}
+/* =========================
+   Actions
+========================= */
+
+.budget-card__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+.budget-menu-wrapper {
+  position: relative;
+}
+
+
+.budget-menu-btn {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: var(--bg-soft);
+
+    color: var(--text-primary);
+  }
+}
+
+
+.budget-menu {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  inset-inline-end: 0;
+
+  z-index: 50;
+
+  width: 130px;
+
+  padding: 5px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 12px 30px
+    rgba(15, 23, 42, 0.14);
+
+
+  button {
+    width: 100%;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding-inline: 9px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: transparent;
+    color: var(--text-primary);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    &:hover {
+      background: var(--bg-soft);
+    }
+
+    &.danger {
+      color: #dc2626;
+    }
+  }
+}

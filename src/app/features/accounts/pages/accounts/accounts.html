@@ -1,0 +1,109 @@
+<section class="accounts-page">
+
+  <!-- Header -->
+  <div class="accounts-page__header">
+
+    <div>
+      <h1>
+        Accounts
+      </h1>
+
+      <p>
+        Manage your bank accounts, wallets and savings.
+      </p>
+    </div>
+
+
+    <button
+      type="button"
+      class="add-account-btn"
+      (click)="openAddAccount()"
+    >
+      + Add Account
+    </button>
+
+  </div>
+
+
+  <!-- Balance -->
+  <section class="balance-summary">
+
+    <span>
+      Total Balance
+    </span>
+
+    <strong>
+      {{ totalBalance.toLocaleString() }}
+
+      <small>
+        Toman
+      </small>
+    </strong>
+
+    <p>
+      Across {{ accounts().length }} accounts
+    </p>
+
+  </section>
+
+
+  <!-- Accounts -->
+  <div class="accounts-grid">
+
+    @for (
+      account of accounts();
+      track account.id
+    ) {
+
+<app-account-card
+  [account]="account"
+  (deleteAccount)="requestDeleteAccount($event)"
+  (editAccount)="openEditAccount($event)"
+/>
+
+    }
+
+  </div>
+
+</section>
+
+
+<!-- Add Account Modal -->
+
+@if (isAddAccountOpen()) {
+
+  <app-add-account-modal
+    (closeModal)="closeAddAccount()"
+    (saveAccount)="addAccount($event)"
+  />
+
+}
+@if (editingAccount()) {
+  <app-add-account-modal
+    [accountToEdit]="editingAccount()"
+    (closeModal)="closeEditAccount()"
+    (saveAccount)="
+      updateAccount({
+        id: editingAccount()!.id,
+        name: $event.name,
+        type: $event.type,
+        balance: $event.balance ?? 0,
+        number: $event.number || undefined
+      })
+    "
+  />
+}
+@if (accountPendingDelete()) {
+
+  <app-confirm-dialog
+    title="Delete Account"
+    [message]="
+      'Are you sure you want to delete ' +
+      accountPendingDelete()!.name +
+      '?'
+    "
+    (cancel)="cancelDeleteAccount()"
+    (confirm)="confirmDeleteAccount()"
+  />
+
+}

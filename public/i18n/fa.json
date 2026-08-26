@@ -89,5 +89,178 @@
   "travel": "سفر",
   "car": "خرید خودرو"
 }
+  },
+  "accounts": {
+  "title": "حساب‌ها",
+  "subtitle": "حساب‌های بانکی، کیف پول و پس‌اندازهای خود را مدیریت کنید.",
+
+  "totalBalance": "موجودی کل",
+  "acrossAccounts": "در مجموع {{count}} حساب",
+  "currency": "تومان",
+
+  "addAccount": "افزودن حساب",
+
+  "types": {
+    "bank": "حساب بانکی",
+    "cash": "نقدی",
+    "savings": "پس‌انداز"
+  },
+
+  "actions": {
+    "edit": "ویرایش",
+    "delete": "حذف"
+  },
+
+  "form": {
+    "addTitle": "افزودن حساب",
+    "addSubtitle": "یک حساب جدید به MoneyFlow اضافه کنید.",
+
+    "editTitle": "ویرایش حساب",
+    "editSubtitle": "اطلاعات حساب خود را ویرایش کنید.",
+
+    "name": "نام حساب",
+    "namePlaceholder": "حساب بانکی اصلی",
+
+    "type": "نوع حساب",
+
+    "balance": "موجودی اولیه",
+    "balancePlaceholder": "۰",
+
+    "number": "شماره حساب",
+    "numberPlaceholder": "**** ۴۸۲۱",
+
+    "cancel": "انصراف",
+    "add": "افزودن حساب",
+    "save": "ذخیره تغییرات"
+  },
+
+  "deleteDialog": {
+    "title": "حذف حساب",
+    "message": "آیا مطمئن هستید که می‌خواهید حساب {{name}} را حذف کنید؟",
+    "cancel": "انصراف",
+    "confirm": "حذف"
   }
+
+},
+"budgets": {
+  "title": "بودجه‌ها",
+  "subtitle": "هزینه‌های ماهانه خود را برنامه‌ریزی و مدیریت کنید.",
+  "addBudget": "افزودن بودجه",
+  "summary": {
+    "totalBudget": "کل بودجه",
+    "totalSpent": "کل هزینه‌شده",
+    "remaining": "باقی‌مانده",
+    "overBudget": "بیش از بودجه",
+    "categories": {
+  "Food": "خوراک",
+  "Transportation": "حمل‌ونقل",
+  "Shopping": "خرید",
+  "Bills": "قبوض",
+  "Entertainment": "تفریح",
+  "Health": "سلامت",
+  "Education": "آموزش",
+  "Other": "سایر"
+}
+  },
+  "deleteDialog": {
+  "title": "حذف بودجه",
+  "message": "آیا مطمئن هستید که می‌خواهید بودجه {{category}} را حذف کنید؟ این عملیات قابل بازگشت نیست.",
+  "confirm": "حذف",
+  "cancel": "انصراف"
+},
+  "form": {
+  "title": "افزودن بودجه",
+  "subtitle": "برای یکی از دسته‌بندی‌ها بودجه ماهانه تعیین کنید.",
+  "category": "دسته‌بندی",
+  "selectCategory": "انتخاب دسته‌بندی",
+  "limit": "سقف بودجه",
+  "month": "ماه",
+  "cancel": "انصراف",
+  "save": "ذخیره بودجه",
+  "limitError": "مبلغ بودجه باید بیشتر از صفر باشد.",
+  "editTitle": "ویرایش بودجه",
+"editSubtitle": "اطلاعات بودجه انتخاب‌شده را ویرایش کنید.",
+"saveChanges": "ذخیره تغییرات"
+},
+"card": {
+  "spent": "هزینه‌شده",
+  "budget": "بودجه",
+  "remaining": "{{amount}} تومان باقی‌مانده",
+  "overBudget": "{{amount}} تومان بیش از بودجه"
+},
+"actions": {
+  "options": "گزینه‌های بودجه",
+  "edit": "ویرایش",
+  "delete": "حذف"
+},
+"empty": {
+  "title": "بودجه‌ای پیدا نشد",
+  "subtitle": "ماه یا فیلتر را تغییر دهید، یا یک بودجه جدید ایجاد کنید."
+},
+"status": {
+  "normal": "وضعیت مناسب",
+  "warning": "نزدیک به سقف",
+  "danger": "مصرف بالا"
+},
+"months": {
+  "august2026": "مرداد ۱۴۰۵",
+  "july2026": "تیر ۱۴۰۵",
+  "june2026": "خرداد ۱۴۰۵"
+},
+"filters": {
+  "all": "همه",
+  "active": "در محدوده بودجه",
+  "overBudget": "بیش از بودجه"
+}
+},
+"common": {
+  "currency": "تومان"
+},
+"recurringPayments": {
+  "title": "پرداخت‌های دوره‌ای",
+  "subtitle": "اشتراک‌ها، قبوض و پرداخت‌های تکرارشونده خود را مدیریت کنید.",
+  "addPayment": "افزودن پرداخت دوره‌ای",
+
+  "summary": {
+    "monthlyTotal": "پرداخت ماهانه",
+    "active": "پرداخت‌های فعال",
+    "dueSoon": "نزدیک به سررسید",
+    "overdue": "معوق",
+    "payments": "پرداخت"
+  },
+  "status": {
+  "active": "فعال",
+  "dueSoon": "نزدیک سررسید",
+  "overdue": "معوق"
+},
+"frequency": {
+  "weekly": "هفتگی",
+  "monthly": "ماهانه",
+  "yearly": "سالانه"
+},
+"card": {
+  "account": "حساب",
+  "frequency": "دوره"
+},
+"table": {
+  "payment": "پرداخت",
+  "amount": "مبلغ",
+  "account": "حساب",
+  "frequency": "دوره",
+  "nextPayment": "سررسید بعدی",
+  "status": "وضعیت"
+}
+},
+"table": {
+  "payment": "پرداخت",
+  "amount": "مبلغ",
+  "account": "حساب",
+  "frequency": "دوره",
+  "nextPayment": "سررسید بعدی",
+  "status": "وضعیت"
+},
+"empty": {
+  "title": "پرداخت دوره‌ای وجود ندارد",
+  "subtitle": "اولین پرداخت دوره‌ای خود را اضافه کنید."
+}
 }

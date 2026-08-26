@@ -1,0 +1,183 @@
+<div class="transaction-row">
+
+  <!-- Transaction -->
+  <div class="transaction-main">
+
+    <div
+      class="transaction-icon"
+      [class.income]="transaction.type === 'income'"
+      [class.expense]="transaction.type === 'expense'"
+      [class.transfer]="transaction.type === 'transfer'"
+    >
+
+      @if (transaction.type === 'income') {
+
+        <lucide-icon
+          [img]="ArrowDownLeft"
+          [size]="18"
+        />
+
+      }
+
+      @if (transaction.type === 'expense') {
+
+        <lucide-icon
+          [img]="ArrowUpRight"
+          [size]="18"
+        />
+
+      }
+
+      @if (transaction.type === 'transfer') {
+
+        <lucide-icon
+          [img]="ArrowLeftRight"
+          [size]="18"
+        />
+
+      }
+
+    </div>
+
+
+    <div class="transaction-info">
+
+      <strong>
+        {{ transaction.title }}
+      </strong>
+
+      <span
+        class="transaction-type"
+        [class.income]="transaction.type === 'income'"
+        [class.expense]="transaction.type === 'expense'"
+        [class.transfer]="transaction.type === 'transfer'"
+      >
+        {{ transaction.category }}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- Account -->
+  <div class="transaction-account">
+
+    <span class="mobile-label">
+      Account
+    </span>
+
+    <span>
+      {{ transaction.account }}
+    </span>
+
+  </div>
+
+
+  <!-- Date -->
+  <div class="transaction-date">
+
+    <span class="mobile-label">
+      Date
+    </span>
+
+    <span>
+      {{ transaction.date }}
+    </span>
+
+  </div>
+
+
+  <!-- Amount -->
+  <div
+    class="transaction-amount"
+    [class.income]="transaction.type === 'income'"
+    [class.expense]="transaction.type === 'expense'"
+    [class.transfer]="transaction.type === 'transfer'"
+  >
+
+    <span class="transaction-amount__value">
+
+      @if (transaction.type === 'income') {
+        +
+      }
+
+      @if (transaction.type === 'expense') {
+        -
+      }
+
+      {{ transaction.amount.toLocaleString() }}
+
+    </span>
+
+    <small>
+      Toman
+    </small>
+
+  </div>
+
+
+  <!-- Menu -->
+  <div class="transaction-menu-wrapper">
+
+    <button
+      type="button"
+      class="transaction-menu"
+      aria-label="Transaction options"
+      title="Transaction options"
+      (click)="toggleMenu()"
+    >
+
+      <lucide-icon
+        [img]="MoreHorizontal"
+        [size]="18"
+      />
+
+    </button>
+
+
+    @if (isMenuOpen()) {
+
+      <div class="transaction-menu-dropdown">
+
+        <button
+          type="button"
+          (click)="edit()"
+        >
+
+          <lucide-icon
+            [img]="Pencil"
+            [size]="15"
+          />
+
+          <span>
+            Edit
+          </span>
+
+        </button>
+
+
+        <button
+          type="button"
+          class="delete-action"
+          (click)="delete()"
+        >
+
+          <lucide-icon
+            [img]="Trash2"
+            [size]="15"
+          />
+
+          <span>
+            Delete
+          </span>
+
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

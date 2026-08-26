@@ -1,0 +1,330 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+.payment-card {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 2fr)
+    minmax(130px, 1fr)
+    minmax(140px, 1fr)
+    minmax(120px, 0.8fr)
+    minmax(140px, 1fr)
+    36px;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-height: 72px;
+
+  padding: 12px 16px;
+
+  box-sizing: border-box;
+
+  border-bottom:
+    1px solid var(--border-color);
+
+  background:
+    var(--bg-surface);
+
+  transition:
+    background-color 0.15s ease;
+
+
+  &:hover {
+    background:
+      var(--bg-soft);
+  }
+
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+/* =========================
+   Main
+========================= */
+
+.payment-card__main {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.payment-card__icon {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(79, 70, 229, 0.08);
+
+  color:
+    var(--primary);
+}
+
+
+.payment-card__info {
+  min-width: 0;
+}
+
+
+.payment-card__title-row {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  h3 {
+    margin: 0;
+
+    overflow: hidden;
+
+    color:
+      var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+.payment-category {
+  display: block;
+
+  margin-top: 3px;
+
+  color:
+    var(--text-secondary);
+
+  font-size: 9px;
+}
+
+
+/* =========================
+   Status
+========================= */
+
+.payment-status {
+  flex-shrink: 0;
+
+  padding:
+    4px 7px;
+
+  border-radius:
+    999px;
+
+  font-size: 8px;
+  font-weight: 700;
+
+
+  &.active {
+    background:
+      rgba(5, 150, 105, 0.08);
+
+    color:
+      #059669;
+  }
+
+
+  &.warning {
+    background:
+      rgba(245, 158, 11, 0.1);
+
+    color:
+      #d97706;
+  }
+
+
+  &.danger {
+    background:
+      rgba(220, 38, 38, 0.08);
+
+    color:
+      #dc2626;
+  }
+}
+
+
+/* =========================
+   Amount
+========================= */
+
+.payment-card__amount {
+
+  strong {
+    display: block;
+
+    color:
+      var(--text-primary);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    font-variant-numeric:
+      tabular-nums;
+  }
+
+
+  small {
+    display: block;
+
+    margin-top: 2px;
+
+    color:
+      var(--text-secondary);
+
+    font-size: 8px;
+  }
+}
+
+
+/* =========================
+   Meta
+========================= */
+
+.payment-card__meta {
+
+  span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+      var(--text-secondary);
+
+    font-size: 8px;
+  }
+
+
+  strong {
+    display: block;
+
+    overflow: hidden;
+
+    color:
+      var(--text-primary);
+
+    font-size: 10px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+
+/* =========================
+   Date
+========================= */
+
+.payment-card__date {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color:
+    var(--text-secondary);
+
+  font-size: 9px;
+}
+
+
+/* =========================
+   Menu
+========================= */
+
+.payment-menu-btn {
+  width: 30px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 8px;
+
+  background:
+    transparent;
+
+  color:
+    var(--text-secondary);
+
+  cursor: pointer;
+
+
+  &:hover {
+    background:
+      var(--bg-soft);
+
+    color:
+      var(--text-primary);
+  }
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+
+  .payment-card {
+    grid-template-columns:
+      minmax(200px, 2fr)
+      minmax(120px, 1fr)
+      minmax(120px, 1fr)
+      36px;
+  }
+
+
+  .payment-card__meta:nth-of-type(4),
+  .payment-card__date {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+
+  .payment-card {
+    grid-template-columns:
+      1fr
+      auto;
+
+    gap: 10px;
+
+    padding: 14px;
+  }
+
+
+  .payment-card__amount,
+  .payment-card__meta,
+  .payment-card__date {
+    grid-column: 1 / -1;
+  }
+
+}

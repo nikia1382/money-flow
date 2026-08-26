@@ -1,12 +1,30 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Output
+} from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule
+} from '@angular/forms';
 
-import { LucideAngularModule, X } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  X
+} from 'lucide-angular';
 
-type TransactionType = 'income' | 'expense' | 'transfer';
+import {
+  AccountsService
+} from '../../../features/accounts/services/accounts';
 
-interface TransactionForm {
+import {
+  TransactionType
+} from '../../../features/transactions/models/transaction.model';
+
+
+export interface TransactionForm {
+  title: string;
   type: TransactionType;
   amount: number | null;
   category: string;
@@ -15,45 +33,119 @@ interface TransactionForm {
   description: string;
 }
 
+
 @Component({
   selector: 'app-add-transaction-modal',
 
-  imports: [FormsModule, LucideAngularModule],
+  imports: [
+    FormsModule,
+    LucideAngularModule
+  ],
 
   templateUrl: './add-transaction-modal.html',
-  styleUrl: './add-transaction-modal.scss',
+  styleUrl: './add-transaction-modal.scss'
 })
 export class AddTransactionModal {
-  @Output()
-  closeModal = new EventEmitter<void>();
+
+  /* =========================
+     Service
+  ========================= */
+
+  private readonly accountsService =
+    inject(AccountsService);
+
+
+  /* =========================
+     Outputs
+  ========================= */
 
   @Output()
-  saveTransaction = new EventEmitter<TransactionForm>();
+  closeModal =
+    new EventEmitter<void>();
+
+  @Output()
+  saveTransaction =
+    new EventEmitter<TransactionForm>();
+
+
+  /* =========================
+     Data
+  ========================= */
+
+  readonly accounts =
+    this.accountsService.accounts;
+
+
+  readonly categories = [
+    'Food',
+    'Bills',
+    'Shopping',
+    'Transportation',
+    'Entertainment',
+    'Salary',
+    'Transfer',
+    'Other'
+  ];
+
+
+  /* =========================
+     Icons
+  ========================= */
 
   readonly X = X;
 
+
+  /* =========================
+     Form
+  ========================= */
+
   form: TransactionForm = {
+    title: '',
     type: 'expense',
     amount: null,
     category: '',
     account: '',
     date: '',
-    description: '',
+    description: ''
   };
 
+
+  /* =========================
+     Close
+  ========================= */
+
   close(): void {
+
     this.closeModal.emit();
+
   }
 
+
+  /* =========================
+     Save
+  ========================= */
+
   save(): void {
-    if (!this.form.amount) {
+
+    if (
+      !this.form.title.trim() ||
+      this.form.amount === null ||
+      this.form.amount <= 0 ||
+      !this.form.category ||
+      !this.form.account ||
+      !this.form.date
+    ) {
       return;
     }
 
+
     this.saveTransaction.emit({
-      ...this.form,
+      ...this.form
     });
 
+
     this.close();
+
   }
+
 }
