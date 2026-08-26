@@ -143,7 +143,11 @@
   },
 
 "common": {
-  "currency": "Toman"
+  "currency": "Toman",
+  "actions": {
+  "edit": "Edit",
+  "delete": "Delete"
+}
 }
 },
   "budgets": {
@@ -229,6 +233,15 @@
     "overdue": "Overdue",
     "payments": "Payments"
   },
+  "editTitle": "Edit Recurring Payment",
+"editSubtitle": "Update the recurring payment details.",
+"saveChanges": "Save Changes",
+  "filters": {
+  "all": "All",
+  "status": "Status",
+  "frequency": "Frequency"
+},
+"searchPlaceholder": "Search recurring payments...",
   "status": {
   "active": "Active",
   "dueSoon": "Due Soon",

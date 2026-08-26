@@ -4,9 +4,7 @@
 
   <div
     class="data-table__header"
-    [style.grid-template-columns]="
-      gridTemplateColumns
-    "
+    [style.grid-template-columns]="gridTemplateColumns"
   >
 
     @for (
@@ -15,14 +13,14 @@
     ) {
 
       <span
-        [class.align-center]="
-          column.align === 'center'
-        "
-        [class.align-end]="
-          column.align === 'end'
-        "
+        [class.align-center]="column.align === 'center'"
+        [class.align-end]="column.align === 'end'"
       >
-        {{ column.labelKey | translate }}
+
+        @if (column.labelKey) {
+          {{ column.labelKey | translate }}
+        }
+
       </span>
 
     }
@@ -30,20 +28,19 @@
   </div>
 
 
-  <!-- Rows -->
+  <!-- Body -->
 
   <div class="data-table__body">
 
     @for (
       row of rows;
-      track $index
+      track $index;
+      let rowIndex = $index
     ) {
 
       <div
         class="data-table__row"
-        [style.grid-template-columns]="
-          gridTemplateColumns
-        "
+        [style.grid-template-columns]="gridTemplateColumns"
       >
 
         @for (
@@ -60,15 +57,13 @@
 
           <div
             class="data-table__cell"
-            [class.align-center]="
-              column.align === 'center'
-            "
-            [class.align-end]="
-              column.align === 'end'
-            "
+            [class.align-center]="column.align === 'center'"
+            [class.align-end]="column.align === 'end'"
           >
 
             @switch (column.type) {
+
+              <!-- Currency -->
 
               @case ('currency') {
 
@@ -87,44 +82,42 @@
               }
 
 
-@case ('badge') {
+              <!-- Badge -->
 
-  @if (isString(value)) {
+              @case ('badge') {
 
-    <span
-      class="data-table__badge"
-      [class.success]="
-        value === 'active'
-      "
-      [class.warning]="
-        value === 'dueSoon'
-      "
-      [class.danger]="
-        value === 'overdue'
-      "
-    >
+                @if (isString(value)) {
 
-      @if (column.valueKeyPrefix) {
+                  <span
+                    class="data-table__badge"
+                    [class.success]="value === 'active'"
+                    [class.warning]="value === 'dueSoon'"
+                    [class.danger]="value === 'overdue'"
+                  >
 
-        {{
-          getTranslatedValueKey(
-            column,
-            value
-          ) | translate
-        }}
+                    @if (column.valueKeyPrefix) {
 
-      } @else {
+                      {{
+                        getTranslatedValueKey(
+                          column,
+                          value
+                        ) | translate
+                      }}
 
-        {{ value }}
+                    } @else {
 
-      }
+                      {{ value }}
 
-    </span>
+                    }
 
-  }
+                  </span>
 
-}
+                }
 
+              }
+
+
+              <!-- Date -->
 
               @case ('date') {
 
@@ -139,11 +132,99 @@
               }
 
 
+              <!-- Actions -->
+
+              @case ('actions') {
+
+                <div class="data-table__actions">
+
+                  <button
+                    type="button"
+                    class="data-table__menu-btn"
+                    aria-label="Row actions"
+                    title="Row actions"
+                    (click)="toggleActions(rowIndex)"
+                  >
+
+                    <lucide-icon
+                      [img]="MoreHorizontal"
+                      [size]="17"
+                      aria-hidden="true"
+                    />
+
+                  </button>
+
+
+                  @if (
+                    openedMenuIndex === rowIndex
+                  ) {
+
+                    <div class="data-table__menu">
+
+                      <button
+                        type="button"
+                        (click)="edit(row)"
+                      >
+
+                        <lucide-icon
+                          [img]="Pencil"
+                          [size]="14"
+                        />
+
+                        <span>
+                          {{ 'common.actions.edit' | translate }}
+                        </span>
+
+                      </button>
+
+
+                      <button
+                        type="button"
+                        class="danger"
+                        (click)="delete(row)"
+                      >
+
+                        <lucide-icon
+                          [img]="Trash2"
+                          [size]="14"
+                        />
+
+                        <span>
+                          {{ 'common.actions.delete' | translate }}
+                        </span>
+
+                      </button>
+
+                    </div>
+
+                  }
+
+                </div>
+
+              }
+
+
+              <!-- Default -->
+
               @default {
 
-                <span>
+                @if (
+                  isString(value) &&
+                  column.valueKeyPrefix
+                ) {
+
+                  {{
+                    getTranslatedValueKey(
+                      column,
+                      value
+                    ) | translate
+                  }}
+
+                } @else {
+
                   {{ value }}
-                </span>
+
+                }
 
               }
 

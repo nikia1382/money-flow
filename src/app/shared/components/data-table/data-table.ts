@@ -1,7 +1,16 @@
 import {
   Component,
-  Input
+  EventEmitter,
+  Input,
+  Output
 } from '@angular/core';
+
+import {
+  LucideAngularModule,
+  MoreHorizontal,
+  Pencil,
+  Trash2
+} from 'lucide-angular';
 
 import {
   TranslatePipe
@@ -16,7 +25,8 @@ import {
   selector: 'app-data-table',
 
   imports: [
-    TranslatePipe
+    TranslatePipe,
+    LucideAngularModule
   ],
 
   templateUrl: './data-table.html',
@@ -46,6 +56,30 @@ export class DataTable<T extends object> {
     'common.table.emptySubtitle';
 
 
+  @Output()
+  editRow =
+    new EventEmitter<T>();
+
+
+  @Output()
+  deleteRow =
+    new EventEmitter<T>();
+
+
+  readonly MoreHorizontal =
+    MoreHorizontal;
+
+  readonly Pencil =
+    Pencil;
+
+  readonly Trash2 =
+    Trash2;
+
+
+  openedMenuIndex:
+    number | null = null;
+
+
   get gridTemplateColumns(): string {
 
     return this.columns
@@ -63,7 +97,34 @@ export class DataTable<T extends object> {
     column: DataTableColumn<T>
   ): unknown {
 
+    if (
+      column.key === 'actions'
+    ) {
+      return null;
+    }
+
     return row[column.key];
+
+  }
+
+
+  getTranslatedValueKey(
+    column: DataTableColumn<T>,
+    value: unknown
+  ): string {
+
+    if (
+      !column.valueKeyPrefix ||
+      typeof value !== 'string'
+    ) {
+      return '';
+    }
+
+    return (
+      column.valueKeyPrefix +
+      '.' +
+      value
+    );
 
   }
 
@@ -84,24 +145,52 @@ export class DataTable<T extends object> {
     return typeof value === 'string';
 
   }
-  getTranslatedValueKey(
-  column: DataTableColumn<T>,
-  value: unknown
-): string {
 
-  if (
-    !column.valueKeyPrefix ||
-    typeof value !== 'string'
-  ) {
-    return '';
-  }
 
-  return (
-    column.valueKeyPrefix +
-    '.' +
-    value
+
+
+toggleActions(
+  index: number
+): void {
+
+  console.log(
+    'MENU CLICKED:',
+    index
+  );
+
+  this.openedMenuIndex =
+    this.openedMenuIndex === index
+      ? null
+      : index;
+
+  console.log(
+    'OPENED MENU INDEX:',
+    this.openedMenuIndex
   );
 
 }
+
+  edit(
+    row: T
+  ): void {
+
+    this.editRow.emit(row);
+
+    this.openedMenuIndex =
+      null;
+
+  }
+
+
+  delete(
+    row: T
+  ): void {
+
+    this.deleteRow.emit(row);
+
+    this.openedMenuIndex =
+      null;
+
+  }
 
 }

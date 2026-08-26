@@ -1,0 +1,75 @@
+<div class="data-toolbar">
+
+  <!-- Search -->
+
+  <div class="data-toolbar__search">
+
+    <lucide-icon
+      [img]="Search"
+      [size]="16"
+    />
+
+    <input
+      type="search"
+      [placeholder]="
+        searchPlaceholderKey
+          | translate
+      "
+      [ngModel]="searchValue"
+      (ngModelChange)="
+        onSearchChange($event)
+      "
+      aria-label="Search"
+    />
+
+  </div>
+
+
+  <!-- Filters -->
+
+  <div class="data-toolbar__filters">
+
+    @for (
+      filter of filters;
+      track filter.key
+    ) {
+
+      <select
+        [ngModel]="
+          filterValues[filter.key]
+        "
+        (ngModelChange)="
+          onFilterChange(
+            filter.key,
+            $event
+          )
+        "
+        [attr.aria-label]="
+          filter.labelKey
+            | translate
+        "
+      >
+
+        @for (
+          option of filter.options;
+          track option.value
+        ) {
+
+          <option
+            [value]="option.value"
+          >
+            {{
+              option.labelKey
+                | translate
+            }}
+          </option>
+
+        }
+
+      </select>
+
+    }
+
+  </div>
+
+</div>

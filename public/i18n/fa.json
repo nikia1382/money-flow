@@ -214,7 +214,15 @@
 }
 },
 "common": {
-  "currency": "تومان"
+  "currency": "تومان",
+  "common": {
+  "currency": "تومان",
+
+  "actions": {
+    "edit": "ویرایش",
+    "delete": "حذف"
+  }
+}
 },
 "recurringPayments": {
   "title": "پرداخت‌های دوره‌ای",
@@ -228,6 +236,15 @@
     "overdue": "معوق",
     "payments": "پرداخت"
   },
+  "editTitle": "ویرایش پرداخت دوره‌ای",
+"editSubtitle": "اطلاعات پرداخت دوره‌ای را ویرایش کنید.",
+"saveChanges": "ذخیره تغییرات",
+  "filters": {
+  "all": "همه",
+  "status": "وضعیت",
+  "frequency": "دوره پرداخت"
+},
+"searchPlaceholder": "جستجو در پرداخت‌های دوره‌ای...",
   "status": {
   "active": "فعال",
   "dueSoon": "نزدیک سررسید",

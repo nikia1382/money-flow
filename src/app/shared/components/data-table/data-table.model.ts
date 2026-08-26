@@ -2,11 +2,12 @@ export type DataTableColumnType =
   | 'text'
   | 'currency'
   | 'date'
-  | 'badge';
+  | 'badge'
+  | 'actions';
 
 
 export interface DataTableColumn<T> {
-  key: keyof T;
+  key: keyof T | 'actions';
 
   labelKey: string;
 
