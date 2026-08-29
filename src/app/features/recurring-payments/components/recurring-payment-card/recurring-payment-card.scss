@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 .payment-card {
   display: grid;
 
@@ -25,27 +24,20 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  background:
-    var(--bg-surface);
+  background: var(--bg-surface);
 
-  transition:
-    background-color 0.15s ease;
-
+  transition: background-color 0.15s ease;
 
   &:hover {
-    background:
-      var(--bg-soft);
+    background: var(--bg-soft);
   }
-
 
   &:last-child {
     border-bottom: 0;
   }
 }
-
 
 /* =========================
    Main
@@ -60,7 +52,6 @@
   gap: 10px;
 }
 
-
 .payment-card__icon {
   width: 36px;
   height: 36px;
@@ -72,18 +63,14 @@
 
   border-radius: 10px;
 
-  background:
-    rgba(79, 70, 229, 0.08);
+  background: rgba(79, 70, 229, 0.08);
 
-  color:
-    var(--primary);
+  color: var(--primary);
 }
-
 
 .payment-card__info {
   min-width: 0;
 }
-
 
 .payment-card__title-row {
   display: flex;
@@ -96,8 +83,7 @@
 
     overflow: hidden;
 
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
 
     font-size: var(--font-size-sm);
     font-weight: 700;
@@ -107,18 +93,15 @@
   }
 }
 
-
 .payment-category {
   display: block;
 
   margin-top: 3px;
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
 }
-
 
 /* =========================
    Status
@@ -127,102 +110,80 @@
 .payment-status {
   flex-shrink: 0;
 
-  padding:
-    4px 7px;
+  padding: 4px 7px;
 
-  border-radius:
-    999px;
+  border-radius: 999px;
 
   font-size: var(--font-size-xs);
   font-weight: 700;
 
-
   &.active {
-    background:
-      rgba(5, 150, 105, 0.08);
+    background: rgba(5, 150, 105, 0.08);
 
-    color:
-      #059669;
+    color: #059669;
   }
-
 
   &.warning {
-    background:
-      rgba(245, 158, 11, 0.1);
+    background: rgba(245, 158, 11, 0.1);
 
-    color:
-      #d97706;
+    color: #d97706;
   }
-
 
   &.danger {
-    background:
-      rgba(220, 38, 38, 0.08);
+    background: rgba(220, 38, 38, 0.08);
 
-    color:
-      #dc2626;
+    color: #dc2626;
   }
 }
-
 
 /* =========================
    Amount
 ========================= */
 
 .payment-card__amount {
-
   strong {
     display: block;
 
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
 
     font-size: var(--font-size-sm);
     font-weight: 700;
 
-    font-variant-numeric:
-      tabular-nums;
+    font-variant-numeric: tabular-nums;
   }
-
 
   small {
     display: block;
 
     margin-top: 2px;
 
-    color:
-      var(--text-secondary);
+    color: var(--text-secondary);
 
     font-size: var(--font-size-xs);
   }
 }
-
 
 /* =========================
    Meta
 ========================= */
 
 .payment-card__meta {
-
   span {
     display: block;
 
     margin-bottom: 3px;
 
-    color:
-      var(--text-secondary);
+    color: var(--text-secondary);
 
     font-size: var(--font-size-xs);
   }
-
 
   strong {
     display: block;
 
     overflow: hidden;
 
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
 
     font-size: var(--font-size-xs);
     font-weight: 600;
@@ -231,7 +192,6 @@
     text-overflow: ellipsis;
   }
 }
-
 
 /* =========================
    Date
@@ -243,12 +203,10 @@
 
   gap: 6px;
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
 }
-
 
 /* =========================
    Menu
@@ -266,31 +224,24 @@
   border: 0;
   border-radius: 8px;
 
-  background:
-    transparent;
+  background: transparent;
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   cursor: pointer;
 
-
   &:hover {
-    background:
-      var(--bg-soft);
+    background: var(--bg-soft);
 
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
   }
 }
-
 
 /* =========================
    Responsive
 ========================= */
 
 @media (max-width: 900px) {
-
   .payment-card {
     grid-template-columns:
       minmax(200px, 2fr)
@@ -299,17 +250,13 @@
       36px;
   }
 
-
   .payment-card__meta:nth-of-type(4),
   .payment-card__date {
     display: none;
   }
-
 }
 
-
 @media (max-width: 650px) {
-
   .payment-card {
     grid-template-columns:
       1fr
@@ -320,11 +267,9 @@
     padding: 14px;
   }
 
-
   .payment-card__amount,
   .payment-card__meta,
   .payment-card__date {
     grid-column: 1 / -1;
   }
-
 }

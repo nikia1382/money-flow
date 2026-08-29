@@ -2,7 +2,6 @@
    Global Styles
 ========================= */
 
-
 /* =========================
    Fonts
 ========================= */
@@ -10,20 +9,17 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/vazirmatn';
 
-
 /* English */
 
 html[lang='en'] {
   font-family: 'Inter Variable', sans-serif;
 }
 
-
 /* Persian */
 
 html[lang='fa'] {
   font-family: 'Vazirmatn Variable', sans-serif;
 }
-
 
 /* =========================
    Design Tokens
@@ -37,24 +33,20 @@ html[lang='fa'] {
   --bg-soft: #f8fafc;
   --bg-muted: #f1f5f9;
 
-
   /* Text */
 
   --text-primary: #0f172a;
   --text-secondary: #64748b;
   --text-muted: #94a3b8;
 
-
   /* Borders */
 
   --border-color: #e5e7eb;
-
 
   /* Brand */
 
   --primary: #4f46e5;
   --primary-hover: #4338ca;
-
 
   /* Status */
 
@@ -62,13 +54,9 @@ html[lang='fa'] {
   --danger: #dc2626;
   --warning: #f59e0b;
 
-
   /* Shadows */
 
-  --shadow-card:
-    0 4px 14px
-    rgba(15, 23, 42, 0.04);
-
+  --shadow-card: 0 4px 14px rgba(15, 23, 42, 0.04);
 
   /* =========================
      Typography
@@ -83,7 +71,6 @@ html[lang='fa'] {
   --font-size-xl: 20px;
   --font-size-2xl: 26px;
 
-
   /* Font weights */
 
   --font-weight-regular: 400;
@@ -91,14 +78,12 @@ html[lang='fa'] {
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-
   /* Line heights */
 
   --line-height-tight: 1.3;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.7;
 }
-
 
 /* =========================
    Dark Mode
@@ -112,24 +97,20 @@ html.dark {
   --bg-soft: #1b2638;
   --bg-muted: #243044;
 
-
   /* Text */
 
   --text-primary: #f8fafc;
   --text-secondary: #b6c2d2;
   --text-muted: #8b9aaf;
 
-
   /* Borders */
 
   --border-color: #2b374a;
-
 
   /* Brand */
 
   --primary: #7168f5;
   --primary-hover: #857df7;
-
 
   /* Status */
 
@@ -137,14 +118,10 @@ html.dark {
   --danger: #fb7185;
   --warning: #fbbf24;
 
-
   /* Shadows */
 
-  --shadow-card:
-    0 4px 20px
-    rgba(0, 0, 0, 0.22);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.22);
 }
-
 
 /* =========================
    Base
@@ -172,7 +149,6 @@ body {
   background: var(--bg-page);
 }
 
-
 /* =========================
    Box Sizing
 ========================= */
@@ -182,7 +158,6 @@ body {
 *::after {
   box-sizing: border-box;
 }
-
 
 /* =========================
    Form Elements
@@ -194,7 +169,6 @@ textarea,
 select {
   font: inherit;
 }
-
 
 /* =========================
    Global Typography
@@ -210,7 +184,6 @@ select {
   color: var(--text-primary);
 }
 
-
 .section-title {
   margin: 0;
 
@@ -220,7 +193,6 @@ select {
 
   color: var(--text-primary);
 }
-
 
 .card-title {
   margin: 0;
@@ -232,13 +204,11 @@ select {
   color: var(--text-primary);
 }
 
-
 .body-text {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-normal);
 }
-
 
 .secondary-text {
   font-size: var(--font-size-sm);
@@ -248,7 +218,6 @@ select {
   color: var(--text-secondary);
 }
 
-
 .caption-text {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
@@ -256,7 +225,6 @@ select {
 
   color: var(--text-secondary);
 }
-
 
 /* =========================
    Financial Numbers

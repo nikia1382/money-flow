@@ -2,7 +2,6 @@
   display: block;
 }
 
-
 /* =========================
    Row
 ========================= */
@@ -29,11 +28,9 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  transition:
-    background-color 0.15s ease;
+  transition: background-color 0.15s ease;
 
   &:hover {
     background: var(--bg-soft);
@@ -43,7 +40,6 @@
     border-bottom: 0;
   }
 }
-
 
 /* =========================
    Main
@@ -57,7 +53,6 @@
 
   gap: 12px;
 }
-
 
 /* =========================
    Icon
@@ -90,7 +85,6 @@
   }
 }
 
-
 /* =========================
    Information
 ========================= */
@@ -120,7 +114,6 @@
   }
 }
 
-
 /* =========================
    Category Badge
 ========================= */
@@ -130,9 +123,7 @@
 
   width: fit-content;
 
-  padding:
-    3px
-    7px;
+  padding: 3px 7px;
 
   border-radius: 999px;
 
@@ -159,7 +150,6 @@
   }
 }
 
-
 /* =========================
    Account / Date
 ========================= */
@@ -182,7 +172,6 @@
   }
 }
 
-
 /* =========================
    Amount
 ========================= */
@@ -196,8 +185,7 @@
 
   color: var(--text-primary);
 
-  font-variant-numeric:
-    tabular-nums;
+  font-variant-numeric: tabular-nums;
 
   white-space: nowrap;
 
@@ -225,7 +213,6 @@
   font-size: var(--font-size-xs);
   font-weight: 500;
 }
-
 
 /* =========================
    Menu
@@ -269,7 +256,6 @@
   }
 }
 
-
 /* =========================
    Dropdown
 ========================= */
@@ -293,16 +279,13 @@
 
   box-sizing: border-box;
 
-  border:
-    1px solid var(--border-color);
+  border: 1px solid var(--border-color);
 
   border-radius: 10px;
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 12px 30px
-    rgba(15, 23, 42, 0.16);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
 
   button {
     width: 100%;
@@ -338,7 +321,6 @@
   }
 }
 
-
 /* =========================
    Mobile labels
 ========================= */
@@ -347,13 +329,11 @@
   display: none;
 }
 
-
 /* =========================
    Tablet
 ========================= */
 
 @media (max-width: 1000px) {
-
   .transaction-row {
     grid-template-columns:
       minmax(200px, 1.7fr)
@@ -366,16 +346,13 @@
 
     padding-inline: 14px;
   }
-
 }
-
 
 /* =========================
    Mobile
 ========================= */
 
 @media (max-width: 800px) {
-
   .transaction-row {
     display: grid;
 
@@ -383,19 +360,15 @@
       1fr
       auto;
 
-    gap:
-      12px
-      16px;
+    gap: 12px 16px;
 
     padding: 16px;
   }
-
 
   .transaction-main {
     grid-column: 1;
     grid-row: 1;
   }
-
 
   .transaction-menu-wrapper {
     grid-column: 2;
@@ -403,7 +376,6 @@
 
     align-self: start;
   }
-
 
   .transaction-account,
   .transaction-date {
@@ -417,20 +389,16 @@
 
     padding-top: 10px;
 
-    border-top:
-      1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
   }
-
 
   .transaction-account {
     grid-row: 2;
   }
 
-
   .transaction-date {
     grid-row: 3;
   }
-
 
   .transaction-amount {
     grid-column: 1 / -1;
@@ -441,7 +409,6 @@
     padding-top: 4px;
   }
 
-
   .mobile-label {
     display: inline;
 
@@ -451,9 +418,7 @@
     font-weight: 600;
   }
 
-
   .transaction-amount__value {
     font-size: var(--font-size-lg);
   }
-
 }

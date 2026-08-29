@@ -1,24 +1,14 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-export type ConfirmDialogVariant =
-  | 'danger'
-  | 'warning'
-  | 'primary';
-
+export type ConfirmDialogVariant = 'danger' | 'warning' | 'primary';
 
 @Component({
   selector: 'app-confirm-dialog',
 
   templateUrl: './confirm-dialog.html',
-  styleUrl: './confirm-dialog.scss'
+  styleUrl: './confirm-dialog.scss',
 })
 export class ConfirmDialog {
-
   /* =========================
      Content
   ========================= */
@@ -27,9 +17,7 @@ export class ConfirmDialog {
   title = 'Are you sure?';
 
   @Input()
-  message =
-    'This action cannot be undone.';
-
+  message = 'This action cannot be undone.';
 
   /* =========================
      Buttons
@@ -41,44 +29,32 @@ export class ConfirmDialog {
   @Input()
   cancelText = 'Cancel';
 
-
   /* =========================
      Appearance
   ========================= */
 
   @Input()
-  variant:
-    ConfirmDialogVariant = 'danger';
-
+  variant: ConfirmDialogVariant = 'danger';
 
   /* =========================
      Events
   ========================= */
 
   @Output()
-  confirm =
-    new EventEmitter<void>();
+  confirm = new EventEmitter<void>();
 
   @Output()
-  cancel =
-    new EventEmitter<void>();
-
+  cancel = new EventEmitter<void>();
 
   /* =========================
      Actions
   ========================= */
 
   confirmAction(): void {
-
     this.confirm.emit();
-
   }
-
 
   cancelAction(): void {
-
     this.cancel.emit();
-
   }
-
 }

@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 /* =========================
    Page
 ========================= */
@@ -14,7 +13,6 @@
 
   margin-inline: auto;
 }
-
 
 /* =========================
    Header
@@ -29,7 +27,6 @@
 
   margin-bottom: 20px;
 }
-
 
 .recurring-page__title {
   h1 {
@@ -51,7 +48,6 @@
     line-height: var(--line-height-normal);
   }
 }
-
 
 /* =========================
    Add Payment Button
@@ -79,9 +75,7 @@
 
   cursor: pointer;
 
-  box-shadow:
-    0 6px 16px
-    rgba(79, 70, 229, 0.18);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.18);
 
   transition:
     transform 0.15s ease,
@@ -90,12 +84,9 @@
   &:hover {
     transform: translateY(-1px);
 
-    box-shadow:
-      0 8px 20px
-      rgba(79, 70, 229, 0.22);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.22);
   }
 }
-
 
 /* =========================
    Summary
@@ -104,14 +95,12 @@
 .recurring-summary {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 
   margin-bottom: 18px;
 }
-
 
 .recurring-summary__card {
   min-width: 0;
@@ -128,11 +117,8 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 3px 12px
-    rgba(15, 23, 42, 0.035);
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);
 }
-
 
 /* =========================
    Summary Icon
@@ -150,34 +136,29 @@
   border-radius: 12px;
 
   &.primary {
-    background:
-      rgba(79, 70, 229, 0.09);
+    background: rgba(79, 70, 229, 0.09);
 
     color: var(--primary);
   }
 
   &.active {
-    background:
-      rgba(5, 150, 105, 0.09);
+    background: rgba(5, 150, 105, 0.09);
 
     color: var(--success);
   }
 
   &.warning {
-    background:
-      rgba(245, 158, 11, 0.1);
+    background: rgba(245, 158, 11, 0.1);
 
     color: var(--warning);
   }
 
   &.danger {
-    background:
-      rgba(220, 38, 38, 0.09);
+    background: rgba(220, 38, 38, 0.09);
 
     color: var(--danger);
   }
 }
-
 
 /* =========================
    Summary Content
@@ -207,8 +188,7 @@
     font-weight: var(--font-weight-bold);
     line-height: var(--line-height-tight);
 
-    font-variant-numeric:
-      tabular-nums;
+    font-variant-numeric: tabular-nums;
   }
 
   small {
@@ -223,16 +203,13 @@
   }
 }
 
-
 .warning-value {
   color: var(--warning) !important;
 }
 
-
 .danger-value {
   color: var(--danger) !important;
 }
-
 
 /* =========================
    Payments List
@@ -241,20 +218,14 @@
 .payments-list {
   overflow: hidden;
 
-  border:
-    1px solid
-    var(--border-color);
+  border: 1px solid var(--border-color);
 
   border-radius: 16px;
 
-  background:
-    var(--bg-surface);
+  background: var(--bg-surface);
 
-  box-shadow:
-    0 4px 16px
-    rgba(15, 23, 42, 0.035);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.035);
 }
-
 
 /* =========================
    Payments List Header
@@ -281,21 +252,16 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid
-    var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  background:
-    var(--bg-soft);
+  background: var(--bg-soft);
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-normal);
 }
-
 
 /* =========================
    Responsive
@@ -303,11 +269,9 @@
 
 @media (max-width: 1100px) {
   .recurring-summary {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
 
 @media (max-width: 900px) {
   .payments-list__header {
@@ -315,24 +279,20 @@
   }
 }
 
-
 @media (max-width: 700px) {
   .recurring-page__header {
     flex-direction: column;
   }
-
 
   .add-payment-btn {
     width: 100%;
   }
 }
 
-
 @media (max-width: 600px) {
   .recurring-summary {
     grid-template-columns: 1fr;
   }
-
 
   .recurring-page__title h1 {
     font-size: var(--font-size-xl);

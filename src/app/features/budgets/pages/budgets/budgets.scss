@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 /* =========================
    Page
 ========================= */
@@ -14,7 +13,6 @@
 
   margin-inline: auto;
 }
-
 
 /* =========================
    Header
@@ -29,7 +27,6 @@
 
   margin-bottom: 20px;
 }
-
 
 .budgets-page__title {
   min-width: 0;
@@ -53,7 +50,6 @@
     line-height: var(--line-height-normal);
   }
 }
-
 
 /* =========================
    Add Budget Button
@@ -83,9 +79,7 @@
 
   cursor: pointer;
 
-  box-shadow:
-    0 6px 16px
-    rgba(79, 70, 229, 0.18);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.18);
 
   transition:
     transform 0.15s ease,
@@ -94,12 +88,9 @@
   &:hover {
     transform: translateY(-1px);
 
-    box-shadow:
-      0 8px 20px
-      rgba(79, 70, 229, 0.22);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.22);
   }
 }
-
 
 /* =========================
    Summary
@@ -108,14 +99,12 @@
 .budgets-summary {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 
   margin-bottom: 18px;
 }
-
 
 .budgets-summary__card {
   min-width: 0;
@@ -134,9 +123,7 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 3px 12px
-    rgba(15, 23, 42, 0.035);
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);
 
   transition:
     transform 0.15s ease,
@@ -145,12 +132,9 @@
   &:hover {
     transform: translateY(-1px);
 
-    box-shadow:
-      0 6px 18px
-      rgba(15, 23, 42, 0.07);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.07);
   }
 }
-
 
 /* =========================
    Summary Icon
@@ -171,34 +155,29 @@
   font-weight: var(--font-weight-bold);
 
   &.total {
-    background:
-      rgba(79, 70, 229, 0.09);
+    background: rgba(79, 70, 229, 0.09);
 
     color: var(--primary);
   }
 
   &.spent {
-    background:
-      rgba(220, 38, 38, 0.08);
+    background: rgba(220, 38, 38, 0.08);
 
     color: var(--danger);
   }
 
   &.remaining {
-    background:
-      rgba(5, 150, 105, 0.09);
+    background: rgba(5, 150, 105, 0.09);
 
     color: var(--success);
   }
 
   &.danger {
-    background:
-      rgba(220, 38, 38, 0.08);
+    background: rgba(220, 38, 38, 0.08);
 
     color: var(--danger);
   }
 }
-
 
 /* =========================
    Summary Content
@@ -233,8 +212,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    font-variant-numeric:
-      tabular-nums;
+    font-variant-numeric: tabular-nums;
   }
 
   small {
@@ -250,11 +228,9 @@
   }
 }
 
-
 .spent-value {
   color: var(--danger) !important;
 }
-
 
 .remaining-value {
   color: var(--success) !important;
@@ -264,11 +240,9 @@
   }
 }
 
-
 .danger-value {
   color: var(--danger) !important;
 }
-
 
 /* =========================
    Toolbar
@@ -292,11 +266,8 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 3px 12px
-    rgba(15, 23, 42, 0.025);
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.025);
 }
-
 
 /* =========================
    Status Filter
@@ -344,13 +315,10 @@
 
       color: var(--primary);
 
-      box-shadow:
-        0 2px 8px
-        rgba(15, 23, 42, 0.07);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.07);
     }
   }
 }
-
 
 /* =========================
    Budgets Grid
@@ -359,11 +327,7 @@
 .budgets-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(290px, 340px)
-    );
+  grid-template-columns: repeat(auto-fill, minmax(290px, 340px));
 
   align-items: start;
 
@@ -373,7 +337,6 @@
 
   width: 100%;
 }
-
 
 /* =========================
    Empty State
@@ -403,7 +366,6 @@
   text-align: center;
 }
 
-
 .budgets-empty__icon {
   width: 46px;
   height: 46px;
@@ -419,7 +381,6 @@
   color: var(--text-secondary);
 }
 
-
 .budgets-empty strong {
   color: var(--text-primary);
 
@@ -428,7 +389,6 @@
   line-height: var(--line-height-tight);
 }
 
-
 .budgets-empty span {
   color: var(--text-secondary);
 
@@ -436,18 +396,15 @@
   line-height: var(--line-height-normal);
 }
 
-
 /* =========================
    Tablet
 ========================= */
 
 @media (max-width: 1100px) {
   .budgets-summary {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
 
 /* =========================
    Mobile
@@ -460,48 +417,40 @@
     gap: 14px;
   }
 
-
   .add-budget-btn {
     width: 100%;
   }
-
 
   .budgets-toolbar {
     align-items: stretch;
     flex-direction: column;
   }
 
-
   .month-select-wrapper {
     width: 100%;
   }
-
 
   .status-filter {
     width: 100%;
 
     display: grid;
 
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     button {
       width: 100%;
     }
   }
 
-
   .budgets-grid {
     grid-template-columns: 1fr;
   }
 }
 
-
 @media (max-width: 600px) {
   .budgets-summary {
     grid-template-columns: 1fr;
   }
-
 
   .budgets-page__title h1 {
     font-size: var(--font-size-xl);

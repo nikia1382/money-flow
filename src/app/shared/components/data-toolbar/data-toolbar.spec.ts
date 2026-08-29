@@ -8,9 +8,8 @@ describe('DataToolbar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataToolbar]
-    })
-    .compileComponents();
+      imports: [DataToolbar],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DataToolbar);
     component = fixture.componentInstance;

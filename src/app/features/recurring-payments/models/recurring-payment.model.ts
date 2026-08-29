@@ -1,13 +1,6 @@
-export type RecurringPaymentFrequency =
-  | 'weekly'
-  | 'monthly'
-  | 'yearly';
+export type RecurringPaymentFrequency = 'weekly' | 'monthly' | 'yearly';
 
-export type RecurringPaymentStatus =
-  | 'active'
-  | 'dueSoon'
-  | 'overdue';
-
+export type RecurringPaymentStatus = 'active' | 'dueSoon' | 'overdue';
 
 export interface RecurringPayment {
   id: number;
@@ -20,11 +13,9 @@ export interface RecurringPayment {
 
   account: string;
 
-  frequency:
-    RecurringPaymentFrequency;
+  frequency: RecurringPaymentFrequency;
 
   nextPaymentDate: string;
 
-  status:
-    RecurringPaymentStatus;
+  status: RecurringPaymentStatus;
 }

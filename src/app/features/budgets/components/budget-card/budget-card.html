@@ -4,25 +4,17 @@
   [class.warning]="progressState === 'warning'"
   [class.danger]="progressState === 'danger'"
 >
-
   <!-- =========================
        Header
   ========================== -->
 
   <div class="budget-card__header">
-
     <div class="budget-card__title">
-
-      <div
-        class="budget-card__icon"
-        [class.danger]="isOverBudget"
-      >
+      <div class="budget-card__icon" [class.danger]="isOverBudget">
         {{ budget.category.charAt(0) }}
       </div>
 
-
       <div class="budget-card__title-content">
-
         <h3>
           {{ budget.category }}
         </h3>
@@ -30,16 +22,12 @@
         <span>
           {{ budget.month }}
         </span>
-
       </div>
-
     </div>
-
 
     <!-- Header Actions -->
 
     <div class="budget-card__actions">
-
       <div
         class="budget-card__percentage"
         [class.warning]="progressState === 'warning'"
@@ -48,99 +36,61 @@
         {{ progress.toFixed(0) }}%
       </div>
 
-
       <div class="budget-menu-wrapper">
-
-<button
-  type="button"
-  class="budget-menu-btn"
-  (click)="toggleMenu()"
-  aria-label="Budget options"
-  title="Budget options"
->
-  <lucide-icon
-    [img]="MoreHorizontal"
-    [size]="17"
-    aria-hidden="true"
-  />
-</button>
-
+        <button
+          type="button"
+          class="budget-menu-btn"
+          (click)="toggleMenu()"
+          aria-label="Budget options"
+          title="Budget options"
+        >
+          <lucide-icon [img]="MoreHorizontal" [size]="17" aria-hidden="true" />
+        </button>
 
         @if (isMenuOpen()) {
-
           <div class="budget-menu">
-
-            <button
-              type="button"
-              (click)="edit()"
-            >
-
-              <lucide-icon
-                [img]="Pencil"
-                [size]="14"
-              />
+            <button type="button" (click)="edit()">
+              <lucide-icon [img]="Pencil" [size]="14" />
 
               <span>
                 {{ 'budgets.actions.edit' | translate }}
               </span>
-
             </button>
 
-
-            <button
-              type="button"
-              class="danger"
-              (click)="delete()"
-            >
-
-              <lucide-icon
-                [img]="Trash2"
-                [size]="14"
-              />
+            <button type="button" class="danger" (click)="delete()">
+              <lucide-icon [img]="Trash2" [size]="14" />
 
               <span>
                 {{ 'budgets.actions.delete' | translate }}
               </span>
-
             </button>
-
           </div>
-
         }
-
       </div>
-
     </div>
-
   </div>
-
 
   <!-- =========================
        Progress
   ========================== -->
 
   <div class="budget-card__progress">
-
     <div
       class="budget-card__progress-value"
       [class.warning]="progressState === 'warning'"
       [class.danger]="progressState === 'danger'"
       [style.width.%]="progress"
     ></div>
-
   </div>
-
 
   <!-- =========================
        Stats
   ========================== -->
 
   <div class="budget-card__stats">
-
     <!-- Spent -->
 
     <div class="budget-stat">
-
       <span>
         {{ 'budgets.card.spent' | translate }}
       </span>
@@ -152,14 +102,11 @@
       <small>
         {{ 'common.currency' | translate }}
       </small>
-
     </div>
-
 
     <!-- Budget -->
 
     <div class="budget-stat budget-stat--right">
-
       <span>
         {{ 'budgets.card.budget' | translate }}
       </span>
@@ -171,52 +118,38 @@
       <small>
         {{ 'common.currency' | translate }}
       </small>
-
     </div>
-
   </div>
-
 
   <!-- =========================
        Footer
   ========================== -->
 
   <div class="budget-card__footer">
-
     @if (isOverBudget) {
-
       <span class="budget-status danger">
-
         <span class="status-dot"></span>
 
         {{
           'budgets.card.overBudget'
-            | translate: {
-                amount:
-                  (-remaining).toLocaleString()
-              }
+            | translate
+              : {
+                  amount: (-remaining).toLocaleString(),
+                }
         }}
-
       </span>
-
     } @else {
-
       <span class="budget-status">
-
         <span class="status-dot"></span>
 
         {{
           'budgets.card.remaining'
-            | translate: {
-                amount:
-                  remaining.toLocaleString()
-              }
+            | translate
+              : {
+                  amount: remaining.toLocaleString(),
+                }
         }}
-
       </span>
-
     }
-
   </div>
-
 </article>

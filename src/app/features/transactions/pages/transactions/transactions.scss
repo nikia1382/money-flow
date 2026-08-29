@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 /* =========================
    Page
 ========================= */
@@ -14,7 +13,6 @@
 
   margin-inline: auto;
 }
-
 
 /* =========================
    Header
@@ -29,7 +27,6 @@
 
   margin-bottom: 20px;
 }
-
 
 .transactions-page__title {
   min-width: 0;
@@ -53,7 +50,6 @@
     line-height: var(--line-height-normal);
   }
 }
-
 
 /* =========================
    Add Transaction
@@ -83,9 +79,7 @@
 
   cursor: pointer;
 
-  box-shadow:
-    0 6px 16px
-    rgba(79, 70, 229, 0.18);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.18);
 
   transition:
     transform 0.15s ease,
@@ -94,16 +88,13 @@
   &:hover {
     transform: translateY(-1px);
 
-    box-shadow:
-      0 8px 20px
-      rgba(79, 70, 229, 0.22);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.22);
   }
 
   &:active {
     transform: translateY(0);
   }
 }
-
 
 /* =========================
    Summary
@@ -112,14 +103,12 @@
 .transactions-summary {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 
   margin-bottom: 18px;
 }
-
 
 .transactions-summary__card {
   min-width: 0;
@@ -131,9 +120,7 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 3px 12px
-    rgba(15, 23, 42, 0.03);
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.03);
 
   span {
     display: block;
@@ -183,7 +170,6 @@
   }
 }
 
-
 /* =========================
    Toolbar
 ========================= */
@@ -207,7 +193,6 @@
 
   background: var(--bg-surface);
 }
-
 
 /* =========================
    Search
@@ -263,7 +248,6 @@
   }
 }
 
-
 /* =========================
    Filter Button
 ========================= */
@@ -273,7 +257,6 @@
 
   flex-shrink: 0;
 }
-
 
 .filter-btn {
   height: 42px;
@@ -313,7 +296,6 @@
   }
 }
 
-
 .filter-count {
   min-width: 18px;
   height: 18px;
@@ -331,7 +313,6 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
 }
-
 
 /* =========================
    Filter Panel
@@ -356,11 +337,8 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 16px 40px
-    rgba(15, 23, 42, 0.16);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
 }
-
 
 .filter-panel__header {
   display: flex;
@@ -379,7 +357,6 @@
   }
 }
 
-
 .clear-filter-btn {
   padding: 0;
 
@@ -394,14 +371,12 @@
   cursor: pointer;
 }
 
-
 .filter-section {
   display: flex;
   flex-direction: column;
 
   gap: 9px;
 }
-
 
 .filter-section__title {
   color: var(--text-secondary);
@@ -410,12 +385,10 @@
   font-weight: var(--font-weight-semibold);
 }
 
-
 .type-filter {
   display: grid;
 
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 7px;
 
@@ -448,7 +421,6 @@
   }
 }
 
-
 /* =========================
    Filter Divider
 ========================= */
@@ -460,7 +432,6 @@
 
   background: var(--border-color);
 }
-
 
 /* =========================
    Filter Select
@@ -489,12 +460,9 @@
   &:focus {
     border-color: var(--primary);
 
-    box-shadow:
-      0 0 0 3px
-      rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
   }
 }
-
 
 /* =========================
    Sort
@@ -533,7 +501,6 @@
   }
 }
 
-
 .sort-select {
   min-width: 110px;
 
@@ -549,7 +516,6 @@
   cursor: pointer;
 }
 
-
 /* =========================
    Active Filters
 ========================= */
@@ -564,7 +530,6 @@
   margin-bottom: 14px;
 }
 
-
 .active-filters__chips {
   display: flex;
   align-items: center;
@@ -572,7 +537,6 @@
 
   gap: 7px;
 }
-
 
 .filter-chip {
   min-height: 30px;
@@ -607,7 +571,6 @@
   }
 }
 
-
 .filter-chip__close {
   display: grid;
   place-items: center;
@@ -622,7 +585,6 @@
   font-size: var(--font-size-sm);
   line-height: 1;
 }
-
 
 .clear-all-filters {
   flex-shrink: 0;
@@ -644,7 +606,6 @@
   }
 }
 
-
 /* =========================
    Transactions Card
 ========================= */
@@ -663,11 +624,8 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 4px 16px
-    rgba(15, 23, 42, 0.04);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
 }
-
 
 /* =========================
    Table Header
@@ -695,15 +653,9 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid
-    var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  border-radius:
-    16px
-    16px
-    0
-    0;
+  border-radius: 16px 16px 0 0;
 
   background: var(--bg-soft);
 
@@ -712,7 +664,6 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
 }
-
 
 /* =========================
    Transactions List
@@ -723,13 +674,8 @@
 
   overflow: visible;
 
-  border-radius:
-    0
-    0
-    16px
-    16px;
+  border-radius: 0 0 16px 16px;
 }
-
 
 /* =========================
    Empty State
@@ -752,7 +698,6 @@
   text-align: center;
 }
 
-
 .transactions-empty__icon {
   width: 44px;
   height: 44px;
@@ -768,14 +713,12 @@
   color: var(--text-secondary);
 }
 
-
 .transactions-empty strong {
   color: var(--text-primary);
 
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
 }
-
 
 .transactions-empty span {
   color: var(--text-secondary);
@@ -784,17 +727,14 @@
   line-height: var(--line-height-normal);
 }
 
-
 /* =========================
    Tablet
 ========================= */
 
 @media (max-width: 1100px) {
   .transactions-summary {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 
   .transactions-card__header {
     grid-template-columns:
@@ -810,7 +750,6 @@
   }
 }
 
-
 /* =========================
    Mobile
 ========================= */
@@ -822,29 +761,24 @@
     gap: 14px;
   }
 
-
   .add-transaction-btn {
     width: 100%;
   }
-
 
   .transactions-toolbar {
     align-items: stretch;
     flex-direction: column;
   }
 
-
   .transactions-search,
   .filter-btn {
     width: 100%;
   }
 
-
   .transactions-card__header {
     display: none;
   }
 }
-
 
 @media (max-width: 700px) {
   .active-filters {
@@ -853,17 +787,14 @@
   }
 }
 
-
 @media (max-width: 600px) {
   .transactions-summary {
     grid-template-columns: 1fr;
   }
 
-
   .transactions-page__title h1 {
     font-size: var(--font-size-xl);
   }
-
 
   .filter-panel {
     position: fixed;

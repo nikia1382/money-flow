@@ -1,96 +1,52 @@
-import {
-  Component,
-  inject,
-  signal
-} from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
-import {
-  FormsModule
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import {
-  LucideAngularModule,
-  Plus,
-  Search,
-  SlidersHorizontal,
-  ArrowUpDown
-} from 'lucide-angular';
+import { LucideAngularModule, Plus, Search, SlidersHorizontal, ArrowUpDown } from 'lucide-angular';
 
-import {
-  TransactionRow
-} from '../../components/transaction-row/transaction-row';
+import { TransactionRow } from '../../components/transaction-row/transaction-row';
 
-import {
-  TransactionsService
-} from '../../services/transactions';
+import { TransactionsService } from '../../services/transactions';
 
-import {
-  Transaction,
-  TransactionType
-} from '../../models/transaction.model';
+import { Transaction, TransactionType } from '../../models/transaction.model';
 
-import {
-  AccountsService
-} from '../../../accounts/services/accounts';
+import { AccountsService } from '../../../accounts/services/accounts';
 
-import {
-  Pagination
-} from '../../../../shared/components/pagination/pagination';
+import { Pagination } from '../../../../shared/components/pagination/pagination';
 
 import {
   AddTransactionModal,
-  TransactionForm
+  TransactionForm,
 } from '../../../../shared/components/add-transaction-modal/add-transaction-modal';
 
-type TransactionTypeFilter =
-  | 'all'
-  | TransactionType;
+type TransactionTypeFilter = 'all' | TransactionType;
 
-
-type TransactionSort =
-  | 'newest'
-  | 'oldest'
-  | 'highest'
-  | 'lowest';
-
+type TransactionSort = 'newest' | 'oldest' | 'highest' | 'lowest';
 
 @Component({
   selector: 'app-transactions',
 
-  imports: [
-    LucideAngularModule,
-    FormsModule,
-    TransactionRow,
-    Pagination,
-    AddTransactionModal
-  ],
+  imports: [LucideAngularModule, FormsModule, TransactionRow, Pagination, AddTransactionModal],
 
   templateUrl: './transactions.html',
-  styleUrl: './transactions.scss'
+  styleUrl: './transactions.scss',
 })
 export class Transactions {
-
   /* =========================
      Services
   ========================= */
 
-  private readonly transactionsService =
-    inject(TransactionsService);
+  private readonly transactionsService = inject(TransactionsService);
 
-  private readonly accountsService =
-    inject(AccountsService);
-
+  private readonly accountsService = inject(AccountsService);
 
   /* =========================
      Data
   ========================= */
 
-  readonly transactions =
-    this.transactionsService.transactions;
+  readonly transactions = this.transactionsService.transactions;
 
-  readonly accounts =
-    this.accountsService.accounts;
-
+  readonly accounts = this.accountsService.accounts;
 
   readonly categories = [
     'Income',
@@ -100,9 +56,8 @@ export class Transactions {
     'Shopping',
     'Transportation',
     'Entertainment',
-    'Other'
+    'Other',
   ];
-
 
   /* =========================
      Icons
@@ -112,12 +67,9 @@ export class Transactions {
 
   readonly Search = Search;
 
-  readonly SlidersHorizontal =
-    SlidersHorizontal;
+  readonly SlidersHorizontal = SlidersHorizontal;
 
-  readonly ArrowUpDown =
-    ArrowUpDown;
-
+  readonly ArrowUpDown = ArrowUpDown;
 
   /* =========================
      Search
@@ -125,28 +77,23 @@ export class Transactions {
 
   searchTerm = '';
 
-
   /* =========================
      Filters
   ========================= */
 
   isFilterOpen = false;
 
-  selectedType:
-    TransactionTypeFilter = 'all';
+  selectedType: TransactionTypeFilter = 'all';
 
   selectedAccount = 'all';
 
   selectedCategory = 'all';
 
-
   /* =========================
      Sort
   ========================= */
 
-  selectedSort:
-    TransactionSort = 'newest';
-
+  selectedSort: TransactionSort = 'newest';
 
   /* =========================
      Pagination
@@ -156,325 +103,168 @@ export class Transactions {
 
   pageSize = 10;
 
-
   /* =========================
      Add Transaction Modal
   ========================= */
 
-/*   isAddTransactionOpen = false;
- */
+  /*   isAddTransactionOpen = false;
+   */
 
   /* =========================
      Filter Actions
   ========================= */
 
   toggleFilter(): void {
-
-    this.isFilterOpen =
-      !this.isFilterOpen;
-
+    this.isFilterOpen = !this.isFilterOpen;
   }
 
-
-  selectType(
-    type: TransactionTypeFilter
-  ): void {
-
-    this.selectedType =
-      type;
+  selectType(type: TransactionTypeFilter): void {
+    this.selectedType = type;
 
     this.resetPagination();
-
   }
-
 
   clearFilters(): void {
+    this.selectedType = 'all';
 
-    this.selectedType =
-      'all';
+    this.selectedAccount = 'all';
 
-    this.selectedAccount =
-      'all';
-
-    this.selectedCategory =
-      'all';
+    this.selectedCategory = 'all';
 
     this.resetPagination();
-
   }
-
 
   clearTypeFilter(): void {
-
-    this.selectedType =
-      'all';
+    this.selectedType = 'all';
 
     this.resetPagination();
-
   }
-
 
   clearAccountFilter(): void {
-
-    this.selectedAccount =
-      'all';
+    this.selectedAccount = 'all';
 
     this.resetPagination();
-
   }
-
 
   clearCategoryFilter(): void {
-
-    this.selectedCategory =
-      'all';
+    this.selectedCategory = 'all';
 
     this.resetPagination();
-
   }
-
 
   /* =========================
      Active Filter Count
   ========================= */
 
   get activeFiltersCount(): number {
-
     let count = 0;
 
-
-    if (
-      this.selectedType !== 'all'
-    ) {
+    if (this.selectedType !== 'all') {
       count++;
     }
 
-
-    if (
-      this.selectedAccount !== 'all'
-    ) {
+    if (this.selectedAccount !== 'all') {
       count++;
     }
 
-
-    if (
-      this.selectedCategory !== 'all'
-    ) {
+    if (this.selectedCategory !== 'all') {
       count++;
     }
-
 
     return count;
-
   }
-
 
   /* =========================
      Filter + Sort
   ========================= */
 
-  get filteredTransactions():
-    Transaction[] {
+  get filteredTransactions(): Transaction[] {
+    const search = this.searchTerm.trim().toLowerCase();
 
-    const search =
-      this.searchTerm
-        .trim()
+    const filtered = this.transactions().filter((transaction) => {
+      const searchableText = [
+        transaction.title,
+        transaction.category,
+        transaction.account,
+        transaction.type,
+      ]
+        .join(' ')
         .toLowerCase();
 
+      const matchesSearch = !search || searchableText.includes(search);
 
-    const filtered =
-      this.transactions()
-        .filter(transaction => {
+      const matchesType = this.selectedType === 'all' || transaction.type === this.selectedType;
 
-          const searchableText = [
-            transaction.title,
-            transaction.category,
-            transaction.account,
-            transaction.type
-          ]
-            .join(' ')
-            .toLowerCase();
+      const matchesAccount =
+        this.selectedAccount === 'all' || transaction.account === this.selectedAccount;
 
+      const matchesCategory =
+        this.selectedCategory === 'all' || transaction.category === this.selectedCategory;
 
-          const matchesSearch =
-            !search ||
-            searchableText.includes(
-              search
-            );
+      return matchesSearch && matchesType && matchesAccount && matchesCategory;
+    });
 
+    return [...filtered].sort((a, b) => {
+      switch (this.selectedSort) {
+        case 'highest':
+          return b.amount - a.amount;
 
-          const matchesType =
-            this.selectedType === 'all' ||
-            transaction.type ===
-              this.selectedType;
+        case 'lowest':
+          return a.amount - b.amount;
 
+        case 'oldest':
+          return a.id - b.id;
 
-          const matchesAccount =
-            this.selectedAccount === 'all' ||
-            transaction.account ===
-              this.selectedAccount;
-
-
-          const matchesCategory =
-            this.selectedCategory === 'all' ||
-            transaction.category ===
-              this.selectedCategory;
-
-
-          return (
-            matchesSearch &&
-            matchesType &&
-            matchesAccount &&
-            matchesCategory
-          );
-
-        });
-
-
-    return [...filtered]
-      .sort((a, b) => {
-
-        switch (
-          this.selectedSort
-        ) {
-
-          case 'highest':
-            return (
-              b.amount -
-              a.amount
-            );
-
-
-          case 'lowest':
-            return (
-              a.amount -
-              b.amount
-            );
-
-
-          case 'oldest':
-            return (
-              a.id -
-              b.id
-            );
-
-
-          case 'newest':
-          default:
-            return (
-              b.id -
-              a.id
-            );
-
-        }
-
-      });
-
+        case 'newest':
+        default:
+          return b.id - a.id;
+      }
+    });
   }
-
 
   /* =========================
      Pagination Data
   ========================= */
 
-  get paginatedTransactions():
-    Transaction[] {
+  get paginatedTransactions(): Transaction[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
 
-    const startIndex =
-      (
-        this.currentPage - 1
-      ) *
-      this.pageSize;
-
-
-    return this.filteredTransactions
-      .slice(
-        startIndex,
-        startIndex +
-        this.pageSize
-      );
-
+    return this.filteredTransactions.slice(startIndex, startIndex + this.pageSize);
   }
 
-
-  goToPage(
-    page: number
-  ): void {
-
-    this.currentPage =
-      page;
-
+  goToPage(page: number): void {
+    this.currentPage = page;
   }
-
 
   resetPagination(): void {
-
     this.currentPage = 1;
-
   }
-
 
   /* =========================
      Summary
   ========================= */
 
   get totalIncome(): number {
-
     return this.transactions()
-      .filter(
-        transaction =>
-          transaction.type ===
-          'income'
-      )
-      .reduce(
-        (
-          total,
-          transaction
-        ) =>
-          total +
-          transaction.amount,
-        0
-      );
-
+      .filter((transaction) => transaction.type === 'income')
+      .reduce((total, transaction) => total + transaction.amount, 0);
   }
-
 
   get totalExpenses(): number {
-
     return this.transactions()
-      .filter(
-        transaction =>
-          transaction.type ===
-          'expense'
-      )
-      .reduce(
-        (
-          total,
-          transaction
-        ) =>
-          total +
-          transaction.amount,
-        0
-      );
-
+      .filter((transaction) => transaction.type === 'expense')
+      .reduce((total, transaction) => total + transaction.amount, 0);
   }
-
 
   get netFlow(): number {
-
-    return (
-      this.totalIncome -
-      this.totalExpenses
-    );
-
+    return this.totalIncome - this.totalExpenses;
   }
-
 
   /* =========================
      Add Transaction
   ========================= */
 
-/*   openAddTransaction(): void {
+  /*   openAddTransaction(): void {
 
     this.isAddTransactionOpen =
       true;
@@ -488,66 +278,41 @@ export class Transactions {
       false;
 
   } */
-readonly isAddTransactionOpen =
-  signal(false);
+  readonly isAddTransactionOpen = signal(false);
 
+  openAddTransaction(): void {
+    console.log('1 - BUTTON CLICKED');
 
-openAddTransaction(): void {
+    this.isAddTransactionOpen.set(true);
 
-  console.log('1 - BUTTON CLICKED');
+    console.log('2 - MODAL STATE:', this.isAddTransactionOpen());
+  }
 
-  this.isAddTransactionOpen.set(true);
+  closeAddTransaction(): void {
+    this.isAddTransactionOpen.set(false);
+  }
 
-  console.log(
-    '2 - MODAL STATE:',
-    this.isAddTransactionOpen()
-  );
-}
-
-
-closeAddTransaction(): void {
-
-  this.isAddTransactionOpen.set(false);
-
-}
-
-  addTransaction(
-    newTransaction: TransactionForm
-  ): void {
-
-    if (
-      newTransaction.amount === null
-    ) {
+  addTransaction(newTransaction: TransactionForm): void {
+    if (newTransaction.amount === null) {
       return;
     }
 
+    this.transactionsService.addTransaction({
+      title: newTransaction.title,
 
-    this.transactionsService
-      .addTransaction({
-        title:
-          newTransaction.title,
+      category: newTransaction.category,
 
-        category:
-          newTransaction.category,
+      account: newTransaction.account,
 
-        account:
-          newTransaction.account,
+      date: newTransaction.date,
 
-        date:
-          newTransaction.date,
+      amount: newTransaction.amount,
 
-        amount:
-          newTransaction.amount,
-
-        type:
-          newTransaction.type
-      });
-
+      type: newTransaction.type,
+    });
 
     this.closeAddTransaction();
 
     this.resetPagination();
-
   }
-
 }

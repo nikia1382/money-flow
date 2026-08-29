@@ -1,66 +1,36 @@
 <article class="payment-card">
-
   <!-- Main -->
 
   <div class="payment-card__main">
-
     <div class="payment-card__icon">
-
-      <lucide-icon
-        [img]="Repeat2"
-        [size]="18"
-      />
-
+      <lucide-icon [img]="Repeat2" [size]="18" />
     </div>
 
-
     <div class="payment-card__info">
-
       <div class="payment-card__title-row">
-
         <h3>
           {{ payment.title }}
         </h3>
 
-
         <span
           class="payment-status"
-          [class.active]="
-            payment.status === 'active'
-          "
-          [class.warning]="
-            payment.status === 'dueSoon'
-          "
-          [class.danger]="
-            payment.status === 'overdue'
-          "
+          [class.active]="payment.status === 'active'"
+          [class.warning]="payment.status === 'dueSoon'"
+          [class.danger]="payment.status === 'overdue'"
         >
-
-          {{
-            (
-              'recurringPayments.status.' +
-              payment.status
-            ) | translate
-          }}
-
+          {{ 'recurringPayments.status.' + payment.status | translate }}
         </span>
-
       </div>
-
 
       <span class="payment-category">
         {{ payment.category }}
       </span>
-
     </div>
-
   </div>
-
 
   <!-- Amount -->
 
   <div class="payment-card__amount">
-
     <strong>
       {{ payment.amount.toLocaleString() }}
     </strong>
@@ -68,14 +38,11 @@
     <small>
       {{ 'common.currency' | translate }}
     </small>
-
   </div>
-
 
   <!-- Account -->
 
   <div class="payment-card__meta">
-
     <span>
       {{ 'recurringPayments.card.account' | translate }}
     </span>
@@ -83,45 +50,29 @@
     <strong>
       {{ payment.account }}
     </strong>
-
   </div>
-
 
   <!-- Frequency -->
 
   <div class="payment-card__meta">
-
     <span>
       {{ 'recurringPayments.card.frequency' | translate }}
     </span>
 
     <strong>
-      {{
-        (
-          'recurringPayments.frequency.' +
-          payment.frequency
-        ) | translate
-      }}
+      {{ 'recurringPayments.frequency.' + payment.frequency | translate }}
     </strong>
-
   </div>
-
 
   <!-- Next Payment -->
 
   <div class="payment-card__date">
-
-    <lucide-icon
-      [img]="CalendarDays"
-      [size]="14"
-    />
+    <lucide-icon [img]="CalendarDays" [size]="14" />
 
     <span>
       {{ payment.nextPaymentDate }}
     </span>
-
   </div>
-
 
   <!-- Menu -->
 
@@ -131,13 +82,6 @@
     aria-label="Recurring payment options"
     title="Recurring payment options"
   >
-
-    <lucide-icon
-      [img]="MoreHorizontal"
-      [size]="17"
-      aria-hidden="true"
-    />
-
+    <lucide-icon [img]="MoreHorizontal" [size]="17" aria-hidden="true" />
   </button>
-
 </article>

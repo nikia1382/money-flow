@@ -1,13 +1,10 @@
 <section class="recurring-page">
-
   <!-- =========================
        Header
   ========================== -->
 
   <div class="recurring-page__header">
-
     <div class="recurring-page__title">
-
       <h1>
         {{ 'recurringPayments.title' | translate }}
       </h1>
@@ -15,57 +12,32 @@
       <p>
         {{ 'recurringPayments.subtitle' | translate }}
       </p>
-
     </div>
 
-
-    <button
-      type="button"
-      class="add-payment-btn"
-      (click)="openAddPayment()"
-    >
-
-      <lucide-icon
-        [img]="Plus"
-        [size]="17"
-      />
+    <button type="button" class="add-payment-btn" (click)="openAddPayment()">
+      <lucide-icon [img]="Plus" [size]="17" />
 
       <span>
         {{ 'recurringPayments.addPayment' | translate }}
       </span>
-
     </button>
-
   </div>
-
 
   <!-- =========================
        Summary
   ========================== -->
 
   <div class="recurring-summary">
-
     <!-- Monthly Total -->
 
     <article class="recurring-summary__card">
-
       <div class="summary-icon primary">
-
-        <lucide-icon
-          [img]="CircleDollarSign"
-          [size]="19"
-        />
-
+        <lucide-icon [img]="CircleDollarSign" [size]="19" />
       </div>
 
-
       <div class="summary-content">
-
         <span>
-          {{
-            'recurringPayments.summary.monthlyTotal'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.monthlyTotal' | translate }}
         </span>
 
         <strong>
@@ -75,33 +47,19 @@
         <small>
           {{ 'common.currency' | translate }}
         </small>
-
       </div>
-
     </article>
-
 
     <!-- Active -->
 
     <article class="recurring-summary__card">
-
       <div class="summary-icon active">
-
-        <lucide-icon
-          [img]="CalendarClock"
-          [size]="19"
-        />
-
+        <lucide-icon [img]="CalendarClock" [size]="19" />
       </div>
 
-
       <div class="summary-content">
-
         <span>
-          {{
-            'recurringPayments.summary.active'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.active' | translate }}
         </span>
 
         <strong>
@@ -109,38 +67,21 @@
         </strong>
 
         <small>
-          {{
-            'recurringPayments.summary.payments'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.payments' | translate }}
         </small>
-
       </div>
-
     </article>
-
 
     <!-- Due Soon -->
 
     <article class="recurring-summary__card">
-
       <div class="summary-icon warning">
-
-        <lucide-icon
-          [img]="Clock3"
-          [size]="19"
-        />
-
+        <lucide-icon [img]="Clock3" [size]="19" />
       </div>
 
-
       <div class="summary-content">
-
         <span>
-          {{
-            'recurringPayments.summary.dueSoon'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.dueSoon' | translate }}
         </span>
 
         <strong class="warning-value">
@@ -148,38 +89,21 @@
         </strong>
 
         <small>
-          {{
-            'recurringPayments.summary.payments'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.payments' | translate }}
         </small>
-
       </div>
-
     </article>
-
 
     <!-- Overdue -->
 
     <article class="recurring-summary__card">
-
       <div class="summary-icon danger">
-
-        <lucide-icon
-          [img]="TriangleAlert"
-          [size]="19"
-        />
-
+        <lucide-icon [img]="TriangleAlert" [size]="19" />
       </div>
 
-
       <div class="summary-content">
-
         <span>
-          {{
-            'recurringPayments.summary.overdue'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.overdue' | translate }}
         </span>
 
         <strong class="danger-value">
@@ -187,18 +111,11 @@
         </strong>
 
         <small>
-          {{
-            'recurringPayments.summary.payments'
-              | translate
-          }}
+          {{ 'recurringPayments.summary.payments' | translate }}
         </small>
-
       </div>
-
     </article>
-
   </div>
-
 
   <!-- =========================
        Search + Filters
@@ -213,63 +130,52 @@
     (filterChange)="onToolbarFilterChange($event)"
   />
 
-
   <!-- =========================
        Data Table
   ========================== -->
 
-@if (filteredPayments.length) {
-
-  <app-data-table
-    [columns]="paymentColumns"
-    [rows]="filteredPayments"
-    (editRow)="editPayment($event)"
-    (deleteRow)="deletePayment($event)"
-  />
-
-} @else if (payments.length) {
-
-  <app-state-view
-    type="no-results"
-    [icon]="SearchX"
-    [title]="'recurringPayments.noResultsTitle' | translate"
-    [description]="'recurringPayments.noResultsDescription' | translate"
-    [actionLabel]="'recurringPayments.clearFilters' | translate"
-    (action)="clearFilters()"
-  />
-
-} @else {
-
-  <app-state-view
-    type="empty"
-    [icon]="CalendarClock"
-    [title]="'recurringPayments.emptyTitle' | translate"
-    [description]="'recurringPayments.emptyDescription' | translate"
-    [actionLabel]="'recurringPayments.addPayment' | translate"
-    (action)="openAddPayment()"
-  />
-
-}
+  @if (filteredPayments.length) {
+    <app-data-table
+      [columns]="paymentColumns"
+      [rows]="filteredPayments"
+      (editRow)="editPayment($event)"
+      (deleteRow)="deletePayment($event)"
+    />
+  } @else if (payments.length) {
+    <app-state-view
+      type="no-results"
+      [icon]="SearchX"
+      [title]="'recurringPayments.noResultsTitle' | translate"
+      [description]="'recurringPayments.noResultsDescription' | translate"
+      [actionLabel]="'recurringPayments.clearFilters' | translate"
+      (action)="clearFilters()"
+    />
+  } @else {
+    <app-state-view
+      type="empty"
+      [icon]="CalendarClock"
+      [title]="'recurringPayments.emptyTitle' | translate"
+      [description]="'recurringPayments.emptyDescription' | translate"
+      [actionLabel]="'recurringPayments.addPayment' | translate"
+      (action)="openAddPayment()"
+    />
+  }
 
   <!-- =========================
        Add Payment Modal
   ========================== -->
 
   @if (isAddPaymentOpen()) {
-
     <app-add-recurring-payment-modal
       (closeModal)="closeAddPayment()"
       (savePayment)="addPayment($event)"
     />
-
   }
-@if (editingPayment()) {
-
-  <app-add-recurring-payment-modal
-    [paymentToEdit]="editingPayment()"
-    (closeModal)="closeEditPayment()"
-    (savePayment)="updatePayment($event)"
-  />
-
-}
+  @if (editingPayment()) {
+    <app-add-recurring-payment-modal
+      [paymentToEdit]="editingPayment()"
+      (closeModal)="closeEditPayment()"
+      (savePayment)="updatePayment($event)"
+    />
+  }
 </section>

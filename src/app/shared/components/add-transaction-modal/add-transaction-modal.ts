@@ -1,27 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 
-import {
-  FormsModule
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import {
-  LucideAngularModule,
-  X
-} from 'lucide-angular';
+import { LucideAngularModule, X } from 'lucide-angular';
 
-import {
-  AccountsService
-} from '../../../features/accounts/services/accounts';
+import { AccountsService } from '../../../features/accounts/services/accounts';
 
-import {
-  TransactionType
-} from '../../../features/transactions/models/transaction.model';
-
+import { TransactionType } from '../../../features/transactions/models/transaction.model';
 
 export interface TransactionForm {
   title: string;
@@ -33,48 +18,36 @@ export interface TransactionForm {
   description: string;
 }
 
-
 @Component({
   selector: 'app-add-transaction-modal',
 
-  imports: [
-    FormsModule,
-    LucideAngularModule
-  ],
+  imports: [FormsModule, LucideAngularModule],
 
   templateUrl: './add-transaction-modal.html',
-  styleUrl: './add-transaction-modal.scss'
+  styleUrl: './add-transaction-modal.scss',
 })
 export class AddTransactionModal {
-
   /* =========================
      Service
   ========================= */
 
-  private readonly accountsService =
-    inject(AccountsService);
-
+  private readonly accountsService = inject(AccountsService);
 
   /* =========================
      Outputs
   ========================= */
 
   @Output()
-  closeModal =
-    new EventEmitter<void>();
+  closeModal = new EventEmitter<void>();
 
   @Output()
-  saveTransaction =
-    new EventEmitter<TransactionForm>();
-
+  saveTransaction = new EventEmitter<TransactionForm>();
 
   /* =========================
      Data
   ========================= */
 
-  readonly accounts =
-    this.accountsService.accounts;
-
+  readonly accounts = this.accountsService.accounts;
 
   readonly categories = [
     'Food',
@@ -84,16 +57,14 @@ export class AddTransactionModal {
     'Entertainment',
     'Salary',
     'Transfer',
-    'Other'
+    'Other',
   ];
-
 
   /* =========================
      Icons
   ========================= */
 
   readonly X = X;
-
 
   /* =========================
      Form
@@ -106,27 +77,22 @@ export class AddTransactionModal {
     category: '',
     account: '',
     date: '',
-    description: ''
+    description: '',
   };
-
 
   /* =========================
      Close
   ========================= */
 
   close(): void {
-
     this.closeModal.emit();
-
   }
-
 
   /* =========================
      Save
   ========================= */
 
   save(): void {
-
     if (
       !this.form.title.trim() ||
       this.form.amount === null ||
@@ -138,14 +104,10 @@ export class AddTransactionModal {
       return;
     }
 
-
     this.saveTransaction.emit({
-      ...this.form
+      ...this.form,
     });
 
-
     this.close();
-
   }
-
 }

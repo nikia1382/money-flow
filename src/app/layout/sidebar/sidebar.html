@@ -63,45 +63,27 @@
         {{ 'sidebar.goals' | translate }}
       </span>
     </a>
-
   </nav>
 
   <!-- Secondary Navigation -->
-  <div class="sidebar__secondary">
-    <a class="sidebar__item secondary-item">
-      <lucide-icon [img]="Bell" [size]="18" />
+  <a
+    routerLink="/notifications"
+    routerLinkActive="active"
+    class="sidebar__item secondary-item"
+    (click)="close()"
+  >
+    <lucide-icon [img]="Bell" [size]="18" />
 
-      <span>
-        {{ 'sidebar.notifications' | translate }}
+    <span>
+      {{ 'sidebar.notifications' | translate }}
+    </span>
+
+    @if (unreadNotifications() > 0) {
+      <span class="sidebar__badge">
+        {{ unreadNotifications() }}
       </span>
-
-      <span class="sidebar__badge"> 3 </span>
-    </a>
-
-    <a class="sidebar__item secondary-item">
-      <lucide-icon [img]="Settings" [size]="18" />
-
-      <span>
-        {{ 'sidebar.settings' | translate }}
-      </span>
-    </a>
-
-<a
-  routerLink="/help"
-  routerLinkActive="active"
-  class="sidebar__item secondary-item"
-  (click)="close()"
->
-  <lucide-icon
-    [img]="CircleHelp"
-    [size]="18"
-  />
-
-  <span>
-    {{ 'sidebar.help' | translate }}
-  </span>
-</a>
-  </div>
+    }
+  </a>
 
   <!-- Premium Card -->
   <div class="premium-card">

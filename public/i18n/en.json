@@ -413,5 +413,13 @@
 "deleteGoalMessage": "This goal will be permanently deleted.",
 "emptyTitle": "No goals yet",
 "emptyDescription": "Create your first financial goal and start building toward something that matters."
+},
+"notifications": {
+  "title": "Notifications",
+  "subtitle": "Stay updated on your payments, budgets and accounts.",
+  "markAllRead": "Mark all as read",
+  "unread": "unread notifications",
+  "emptyTitle": "You're all caught up",
+  "emptyDescription": "You don't have any notifications right now."
 }
 }

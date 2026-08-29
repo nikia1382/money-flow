@@ -1,54 +1,20 @@
-<div
-  class="modal-backdrop"
-  (click)="close()"
->
-
-  <section
-    class="account-modal"
-    (click)="$event.stopPropagation()"
-  >
-
+<div class="modal-backdrop" (click)="close()">
+  <section class="account-modal" (click)="$event.stopPropagation()">
     <div class="account-modal__header">
-
       <div>
-        <h2>
-          Add Account
-        </h2>
+        <h2>Add Account</h2>
 
-        <p>
-          Add a new account to MoneyFlow.
-        </p>
+        <p>Add a new account to MoneyFlow.</p>
       </div>
 
-
-      <button
-        type="button"
-        class="close-btn"
-        aria-label="Close"
-        title="Close"
-        (click)="close()"
-      >
-
-        <lucide-icon
-          [img]="X"
-          [size]="18"
-        />
-
+      <button type="button" class="close-btn" aria-label="Close" title="Close" (click)="close()">
+        <lucide-icon [img]="X" [size]="18" />
       </button>
-
     </div>
 
-
-    <form
-      class="account-form"
-      (ngSubmit)="save()"
-    >
-
+    <form class="account-form" (ngSubmit)="save()">
       <div class="form-group">
-
-        <label for="account-name">
-          Account Name
-        </label>
+        <label for="account-name"> Account Name </label>
 
         <input
           id="account-name"
@@ -58,35 +24,19 @@
           placeholder="Main Bank Account"
           required
         />
-
       </div>
 
-
       <div class="form-group">
-
-        <label>
-          Account Type
-        </label>
+        <label> Account Type </label>
 
         <div class="account-types">
-
-          <button
-            type="button"
-            [class.active]="form.type === 'bank'"
-            (click)="form.type = 'bank'"
-          >
+          <button type="button" [class.active]="form.type === 'bank'" (click)="form.type = 'bank'">
             Bank
           </button>
 
-
-          <button
-            type="button"
-            [class.active]="form.type === 'cash'"
-            (click)="form.type = 'cash'"
-          >
+          <button type="button" [class.active]="form.type === 'cash'" (click)="form.type = 'cash'">
             Cash
           </button>
-
 
           <button
             type="button"
@@ -95,17 +45,11 @@
           >
             Savings
           </button>
-
         </div>
-
       </div>
 
-
       <div class="form-group">
-
-        <label for="balance">
-          Initial Balance
-        </label>
+        <label for="balance"> Initial Balance </label>
 
         <input
           id="balance"
@@ -115,17 +59,11 @@
           placeholder="0"
           required
         />
-
       </div>
 
-
       @if (form.type !== 'cash') {
-
         <div class="form-group">
-
-          <label for="account-number">
-            Account Number
-          </label>
+          <label for="account-number"> Account Number </label>
 
           <input
             id="account-number"
@@ -134,34 +72,14 @@
             [(ngModel)]="form.number"
             placeholder="**** 4821"
           />
-
         </div>
-
       }
 
-
       <div class="account-modal__actions">
+        <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
 
-        <button
-          type="button"
-          class="cancel-btn"
-          (click)="close()"
-        >
-          Cancel
-        </button>
-
-
-        <button
-          type="submit"
-          class="save-btn"
-        >
-          Add Account
-        </button>
-
+        <button type="submit" class="save-btn">Add Account</button>
       </div>
-
     </form>
-
   </section>
-
 </div>

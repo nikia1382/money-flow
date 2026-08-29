@@ -7,7 +7,6 @@
   width: 100%;
 }
 
-
 /* =========================
    Page
 ========================= */
@@ -15,7 +14,6 @@
 .accounts-page {
   width: 100%;
 }
-
 
 /* =========================
    Header
@@ -50,7 +48,6 @@
   }
 }
 
-
 /* =========================
    Add Account
 ========================= */
@@ -71,7 +68,6 @@
 
   cursor: pointer;
 }
-
 
 /* =========================
    Balance Summary
@@ -126,7 +122,6 @@
   }
 }
 
-
 /* =========================
    Accounts Grid
 ========================= */
@@ -134,12 +129,10 @@
 .accounts-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 14px;
 }
-
 
 /* =========================
    Account Card
@@ -153,7 +146,6 @@
   z-index: 1;
 }
 
-
 /* =========================
    Card Menu
 ========================= */
@@ -163,7 +155,6 @@
 
   z-index: 2000;
 }
-
 
 .account-card__dropdown {
   position: absolute;
@@ -185,9 +176,7 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 10px 30px
-    rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 
   button {
     width: 100%;
@@ -224,18 +213,15 @@
   }
 }
 
-
 /* =========================
    Tablet
 ========================= */
 
 @media (max-width: 1100px) {
   .accounts-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
 
 /* =========================
    Mobile
@@ -247,11 +233,9 @@
     flex-direction: column;
   }
 
-
   .add-account-btn {
     width: 100%;
   }
-
 
   .accounts-grid {
     grid-template-columns: 1fr;

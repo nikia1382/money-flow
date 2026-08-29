@@ -1,10 +1,4 @@
-export type DataTableColumnType =
-  | 'text'
-  | 'currency'
-  | 'date'
-  | 'badge'
-  | 'actions';
-
+export type DataTableColumnType = 'text' | 'currency' | 'date' | 'badge' | 'actions';
 
 export interface DataTableColumn<T> {
   key: keyof T | 'actions';
@@ -15,10 +9,7 @@ export interface DataTableColumn<T> {
 
   width?: string;
 
-  align?:
-    | 'start'
-    | 'center'
-    | 'end';
+  align?: 'start' | 'center' | 'end';
 
   valueKeyPrefix?: string;
 }

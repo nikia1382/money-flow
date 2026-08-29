@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  signal
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 
 import {
   LucideAngularModule,
@@ -13,45 +7,32 @@ import {
   PiggyBank,
   MoreHorizontal,
   Pencil,
-  Trash2
+  Trash2,
 } from 'lucide-angular';
 
-import {
-  Account
-} from '../../models/account.model';
-
+import { Account } from '../../models/account.model';
 
 @Component({
   selector: 'app-account-card',
 
-  imports: [
-    LucideAngularModule
-  ],
+  imports: [LucideAngularModule],
 
   templateUrl: './account-card.html',
-  styleUrl: './account-card.scss'
+  styleUrl: './account-card.scss',
 })
 export class AccountCard {
-
   @Input({
-    required: true
+    required: true,
   })
   account!: Account;
 
+  @Output()
+  deleteAccount = new EventEmitter<number>();
 
   @Output()
-  deleteAccount =
-    new EventEmitter<number>();
+  editAccount = new EventEmitter<Account>();
 
-
-  @Output()
-  editAccount =
-    new EventEmitter<Account>();
-
-
-  readonly isMenuOpen =
-    signal(false);
-
+  readonly isMenuOpen = signal(false);
 
   readonly Landmark = Landmark;
   readonly Wallet = Wallet;
@@ -60,31 +41,19 @@ export class AccountCard {
   readonly Pencil = Pencil;
   readonly Trash2 = Trash2;
 
-
   toggleMenu(): void {
-    this.isMenuOpen.update(
-      value => !value
-    );
+    this.isMenuOpen.update((value) => !value);
   }
-
 
   edit(): void {
-
-    this.editAccount.emit(
-      this.account
-    );
+    this.editAccount.emit(this.account);
 
     this.isMenuOpen.set(false);
   }
-
 
   delete(): void {
-
-    this.deleteAccount.emit(
-      this.account.id
-    );
+    this.deleteAccount.emit(this.account.id);
 
     this.isMenuOpen.set(false);
   }
-
 }

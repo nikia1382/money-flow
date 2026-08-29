@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
 
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -20,6 +20,7 @@ import {
   Crown,
   ChevronRight,
 } from 'lucide-angular';
+import { NotificationsService } from '../../features/notifications/services/notifications';
 
 @Component({
   selector: 'app-sidebar',
@@ -40,6 +41,9 @@ export class Sidebar {
   get opened(): boolean {
     return this.isOpen;
   }
+  private readonly notificationsService = inject(NotificationsService);
+
+  readonly unreadNotifications = this.notificationsService.unreadCount;
 
   readonly LayoutDashboard = LayoutDashboard;
   readonly WalletCards = WalletCards;

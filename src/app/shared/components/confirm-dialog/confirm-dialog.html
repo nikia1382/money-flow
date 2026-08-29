@@ -1,8 +1,4 @@
-<div
-  class="confirm-backdrop"
-  (click)="cancelAction()"
->
-
+<div class="confirm-backdrop" (click)="cancelAction()">
   <section
     class="confirm-dialog"
     role="alertdialog"
@@ -11,11 +7,9 @@
     [attr.aria-describedby]="'confirm-dialog-message'"
     (click)="$event.stopPropagation()"
   >
-
     <!-- Content -->
 
     <div class="confirm-dialog__content">
-
       <h2 id="confirm-dialog-title">
         {{ title }}
       </h2>
@@ -23,22 +17,14 @@
       <p id="confirm-dialog-message">
         {{ message }}
       </p>
-
     </div>
-
 
     <!-- Actions -->
 
     <div class="confirm-dialog__actions">
-
-      <button
-        type="button"
-        class="cancel-btn"
-        (click)="cancelAction()"
-      >
+      <button type="button" class="cancel-btn" (click)="cancelAction()">
         {{ cancelText }}
       </button>
-
 
       <button
         type="button"
@@ -50,9 +36,6 @@
       >
         {{ confirmText }}
       </button>
-
     </div>
-
   </section>
-
 </div>

@@ -8,9 +8,8 @@ describe('StateView', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StateView]
-    })
-    .compileComponents();
+      imports: [StateView],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(StateView);
     component = fixture.componentInstance;

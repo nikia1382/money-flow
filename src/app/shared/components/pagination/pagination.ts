@@ -1,19 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output
-} from '@angular/core';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
 
   templateUrl: './pagination.html',
-  styleUrl: './pagination.scss'
+  styleUrl: './pagination.scss',
 })
 export class Pagination {
-
   @Input()
   currentPage = 1;
 
@@ -23,100 +16,51 @@ export class Pagination {
   @Input()
   pageSize = 10;
 
-
   @Output()
-  pageChange =
-    new EventEmitter<number>();
-
+  pageChange = new EventEmitter<number>();
 
   get totalPages(): number {
-
-    return Math.max(
-      1,
-      Math.ceil(
-        this.totalItems /
-        this.pageSize
-      )
-    );
-
+    return Math.max(1, Math.ceil(this.totalItems / this.pageSize));
   }
-
 
   get pages(): number[] {
-
     return Array.from(
       {
-        length: this.totalPages
+        length: this.totalPages,
       },
-      (_, index) =>
-        index + 1
+      (_, index) => index + 1,
     );
-
   }
 
-
   get startItem(): number {
-
-    if (
-      this.totalItems === 0
-    ) {
+    if (this.totalItems === 0) {
       return 0;
     }
 
-    return (
-      (this.currentPage - 1) *
-      this.pageSize
-    ) + 1;
-
+    return (this.currentPage - 1) * this.pageSize + 1;
   }
-
 
   get endItem(): number {
-
     return Math.min(
-      this.currentPage *
-      this.pageSize,
+      this.currentPage * this.pageSize,
 
-      this.totalItems
+      this.totalItems,
     );
-
   }
 
-
-  goToPage(
-    page: number
-  ): void {
-
-    if (
-      page < 1 ||
-      page > this.totalPages ||
-      page === this.currentPage
-    ) {
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) {
       return;
     }
 
-    this.pageChange.emit(
-      page
-    );
-
+    this.pageChange.emit(page);
   }
-
 
   previousPage(): void {
-
-    this.goToPage(
-      this.currentPage - 1
-    );
-
+    this.goToPage(this.currentPage - 1);
   }
-
 
   nextPage(): void {
-
-    this.goToPage(
-      this.currentPage + 1
-    );
-
+    this.goToPage(this.currentPage + 1);
   }
-
 }

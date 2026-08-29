@@ -1,42 +1,30 @@
 @if (totalItems > 0) {
-
   <div class="pagination">
-
     <!-- Info -->
 
     <div class="pagination__info">
-
-      <span>
-        Showing
-      </span>
+      <span> Showing </span>
 
       <strong>
         {{ startItem }}
       </strong>
 
-      <span>
-        -
-      </span>
+      <span> - </span>
 
       <strong>
         {{ endItem }}
       </strong>
 
-      <span>
-        of
-      </span>
+      <span> of </span>
 
       <strong>
         {{ totalItems }}
       </strong>
-
     </div>
-
 
     <!-- Controls -->
 
     <div class="pagination__controls">
-
       <button
         type="button"
         class="pagination__button pagination__arrow"
@@ -47,40 +35,26 @@
         ‹
       </button>
 
-
-      @for (
-        page of pages;
-        track page
-      ) {
-
+      @for (page of pages; track page) {
         <button
           type="button"
           class="pagination__button"
-          [class.active]="
-            currentPage === page
-          "
+          [class.active]="currentPage === page"
           (click)="goToPage(page)"
         >
           {{ page }}
         </button>
-
       }
-
 
       <button
         type="button"
         class="pagination__button pagination__arrow"
-        [disabled]="
-          currentPage === totalPages
-        "
+        [disabled]="currentPage === totalPages"
         (click)="nextPage()"
         aria-label="Next page"
       >
         ›
       </button>
-
     </div>
-
   </div>
-
 }

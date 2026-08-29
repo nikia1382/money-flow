@@ -1,46 +1,25 @@
 <article class="account-card">
-
   <div class="account-card__top">
-
     <div
       class="account-card__icon"
       [class.bank]="account.type === 'bank'"
       [class.cash]="account.type === 'cash'"
       [class.savings]="account.type === 'savings'"
     >
-
       @if (account.type === 'bank') {
-
-        <lucide-icon
-          [img]="Landmark"
-          [size]="20"
-        />
-
+        <lucide-icon [img]="Landmark" [size]="20" />
       }
 
       @if (account.type === 'cash') {
-
-        <lucide-icon
-          [img]="Wallet"
-          [size]="20"
-        />
-
+        <lucide-icon [img]="Wallet" [size]="20" />
       }
 
       @if (account.type === 'savings') {
-
-        <lucide-icon
-          [img]="PiggyBank"
-          [size]="20"
-        />
-
+        <lucide-icon [img]="PiggyBank" [size]="20" />
       }
-
     </div>
 
-
     <div class="account-card__menu-wrapper">
-
       <button
         type="button"
         class="account-card__menu"
@@ -48,88 +27,44 @@
         title="Account options"
         (click)="toggleMenu()"
       >
-
-        <lucide-icon
-          [img]="MoreHorizontal"
-          [size]="18"
-        />
-
+        <lucide-icon [img]="MoreHorizontal" [size]="18" />
       </button>
 
-
       @if (isMenuOpen()) {
-
         <div class="account-card__dropdown">
+          <button type="button" class="edit-action" (click)="edit()">
+            <lucide-icon [img]="Pencil" [size]="15" />
 
-<button
-  type="button"
-  class="edit-action"
-  (click)="edit()"
->
-  <lucide-icon
-    [img]="Pencil"
-    [size]="15"
-  />
-
-  <span>
-    Edit
-  </span>
-</button>
-
-
-          <button
-            type="button"
-            class="delete-action"
-            (click)="delete()"
-          >
-
-            <lucide-icon
-              [img]="Trash2"
-              [size]="15"
-            />
-
-            <span>
-              Delete
-            </span>
-
+            <span> Edit </span>
           </button>
 
+          <button type="button" class="delete-action" (click)="delete()">
+            <lucide-icon [img]="Trash2" [size]="15" />
+
+            <span> Delete </span>
+          </button>
         </div>
-
       }
-
     </div>
-
   </div>
 
-
   <div class="account-card__info">
-
     <span>
       {{ account.name }}
     </span>
 
     @if (account.number) {
-
       <small>
         {{ account.number }}
       </small>
-
     }
-
   </div>
 
-
   <div class="account-card__balance">
-
     <strong>
       {{ account.balance.toLocaleString() }}
     </strong>
 
-    <span>
-      Toman
-    </span>
-
+    <span> Toman </span>
   </div>
-
 </article>

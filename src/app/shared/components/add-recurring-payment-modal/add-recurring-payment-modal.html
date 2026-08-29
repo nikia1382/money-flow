@@ -1,41 +1,23 @@
-<div
-  class="modal-backdrop"
-  (click)="close()"
->
-
-  <section
-    class="payment-modal"
-    (click)="$event.stopPropagation()"
-  >
-
+<div class="modal-backdrop" (click)="close()">
+  <section class="payment-modal" (click)="$event.stopPropagation()">
     <!-- Header -->
 
     <div class="payment-modal__header">
-
       <div>
+        <h2>
+          {{
+            (isEditMode ? 'recurringPayments.form.editTitle' : 'recurringPayments.form.title')
+              | translate
+          }}
+        </h2>
 
-<h2>
-  {{
-    (
-      isEditMode
-        ? 'recurringPayments.form.editTitle'
-        : 'recurringPayments.form.title'
-    ) | translate
-  }}
-</h2>
-
-<p>
-  {{
-    (
-      isEditMode
-        ? 'recurringPayments.form.editSubtitle'
-        : 'recurringPayments.form.subtitle'
-    ) | translate
-  }}
-</p>
-
+        <p>
+          {{
+            (isEditMode ? 'recurringPayments.form.editSubtitle' : 'recurringPayments.form.subtitle')
+              | translate
+          }}
+        </p>
       </div>
-
 
       <button
         type="button"
@@ -44,28 +26,16 @@
         title="Close modal"
         (click)="close()"
       >
-
-        <lucide-icon
-          [img]="X"
-          [size]="18"
-        />
-
+        <lucide-icon [img]="X" [size]="18" />
       </button>
-
     </div>
-
 
     <!-- Form -->
 
-    <form
-      class="payment-form"
-      (ngSubmit)="save()"
-    >
-
+    <form class="payment-form" (ngSubmit)="save()">
       <!-- Title -->
 
       <div class="form-group">
-
         <label for="payment-title">
           {{ 'recurringPayments.form.paymentTitle' | translate }}
         </label>
@@ -75,26 +45,19 @@
           type="text"
           name="title"
           [(ngModel)]="form.title"
-          [placeholder]="
-            'recurringPayments.form.paymentTitlePlaceholder'
-              | translate
-          "
+          [placeholder]="'recurringPayments.form.paymentTitlePlaceholder' | translate"
           required
         />
-
       </div>
-
 
       <!-- Amount -->
 
       <div class="form-group">
-
         <label for="payment-amount">
           {{ 'recurringPayments.form.amount' | translate }}
         </label>
 
         <div class="amount-input">
-
           <input
             id="payment-amount"
             type="number"
@@ -108,92 +71,57 @@
           <span>
             {{ 'common.currency' | translate }}
           </span>
-
         </div>
-
       </div>
-
 
       <!-- Category -->
 
       <div class="form-group">
-
         <label for="payment-category">
           {{ 'recurringPayments.form.category' | translate }}
         </label>
 
-        <select
-          id="payment-category"
-          name="category"
-          [(ngModel)]="form.category"
-          required
-        >
-
+        <select id="payment-category" name="category" [(ngModel)]="form.category" required>
           <option value="">
             {{ 'recurringPayments.form.selectCategory' | translate }}
           </option>
 
-          @for (
-            category of categories;
-            track category
-          ) {
-
+          @for (category of categories; track category) {
             <option [value]="category">
               {{ category }}
             </option>
-
           }
-
         </select>
-
       </div>
-
 
       <!-- Account -->
 
       <div class="form-group">
-
         <label for="payment-account">
           {{ 'recurringPayments.form.account' | translate }}
         </label>
 
-        <select
-          id="payment-account"
-          name="account"
-          [(ngModel)]="form.account"
-          required
-        >
-
+        <select id="payment-account" name="account" [(ngModel)]="form.account" required>
           <option value="">
             {{ 'recurringPayments.form.selectAccount' | translate }}
           </option>
 
-          @for (
-            account of accounts();
-            track account.id
-          ) {
-
+          @for (account of accounts(); track account.id) {
             <option [value]="account.name">
               {{ account.name }}
             </option>
-
           }
-
         </select>
-
       </div>
-
 
       <!-- Frequency -->
 
       <div class="form-group">
-
         <label>
           {{ 'recurringPayments.form.frequency' | translate }}
         </label>
 
         <div class="frequency-options">
-
           <button
             type="button"
             [class.active]="form.frequency === 'weekly'"
@@ -217,16 +145,12 @@
           >
             {{ 'recurringPayments.frequency.yearly' | translate }}
           </button>
-
         </div>
-
       </div>
-
 
       <!-- Date -->
 
       <div class="form-group">
-
         <label for="next-payment-date">
           {{ 'recurringPayments.form.nextPayment' | translate }}
         </label>
@@ -238,43 +162,24 @@
           [(ngModel)]="form.nextPaymentDate"
           required
         />
-
       </div>
-
 
       <!-- Actions -->
 
-     <!-- Actions -->
+      <!-- Actions -->
 
-<div class="payment-modal__actions">
+      <div class="payment-modal__actions">
+        <button type="button" class="cancel-btn" (click)="close()">
+          {{ 'recurringPayments.form.cancel' | translate }}
+        </button>
 
-  <button
-    type="button"
-    class="cancel-btn"
-    (click)="close()"
-  >
-    {{ 'recurringPayments.form.cancel' | translate }}
-  </button>
-
-
-  <button
-    type="submit"
-    class="save-btn"
-    [disabled]="!isFormValid"
-  >
-    {{
-      (
-        isEditMode
-          ? 'recurringPayments.form.saveChanges'
-          : 'recurringPayments.form.save'
-      ) | translate
-    }}
-  </button>
-
-</div>
-
-</form>
-
-</section>
-
+        <button type="submit" class="save-btn" [disabled]="!isFormValid">
+          {{
+            (isEditMode ? 'recurringPayments.form.saveChanges' : 'recurringPayments.form.save')
+              | translate
+          }}
+        </button>
+      </div>
+    </form>
+  </section>
 </div>

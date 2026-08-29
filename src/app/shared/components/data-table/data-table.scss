@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 /* =========================
    Table
 ========================= */
@@ -16,7 +15,6 @@
 
   background: var(--bg-surface);
 }
-
 
 /* =========================
    Header
@@ -34,22 +32,17 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid
-    var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  background:
-    var(--bg-soft);
+  background: var(--bg-soft);
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
 
   letter-spacing: 0.02em;
 }
-
 
 /* =========================
    Row
@@ -67,23 +60,18 @@
 
   box-sizing: border-box;
 
-  border-bottom:
-    1px solid
-    var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-  transition:
-    background-color 0.15s ease;
+  transition: background-color 0.15s ease;
 
   &:hover {
-    background:
-      var(--bg-soft);
+    background: var(--bg-soft);
   }
 
   &:last-child {
     border-bottom: 0;
   }
 }
-
 
 /* =========================
    Cell
@@ -94,8 +82,7 @@
 
   overflow: visible;
 
-  color:
-    var(--text-primary);
+  color: var(--text-primary);
 
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
@@ -104,31 +91,26 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 
-
   strong {
     display: block;
 
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-semibold);
 
-    font-variant-numeric:
-      tabular-nums;
+    font-variant-numeric: tabular-nums;
   }
-
 
   small {
     display: block;
 
     margin-top: 2px;
 
-    color:
-      var(--text-secondary);
+    color: var(--text-secondary);
 
     font-size: var(--font-size-xs);
     line-height: var(--line-height-normal);
   }
 }
-
 
 /* =========================
    Alignment
@@ -138,11 +120,9 @@
   text-align: center;
 }
 
-
 .align-end {
   text-align: end;
 }
-
 
 /* =========================
    Badge
@@ -158,44 +138,32 @@
 
   border-radius: 999px;
 
-  background:
-    var(--bg-soft);
+  background: var(--bg-soft);
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
 
-
   &.success {
-    background:
-      rgba(5, 150, 105, 0.08);
+    background: rgba(5, 150, 105, 0.08);
 
-    color:
-      #059669;
+    color: #059669;
   }
-
 
   &.warning {
-    background:
-      rgba(245, 158, 11, 0.1);
+    background: rgba(245, 158, 11, 0.1);
 
-    color:
-      #d97706;
+    color: #d97706;
   }
-
 
   &.danger {
-    background:
-      rgba(220, 38, 38, 0.08);
+    background: rgba(220, 38, 38, 0.08);
 
-    color:
-      #dc2626;
+    color: #dc2626;
   }
 }
-
 
 /* =========================
    Empty State
@@ -215,25 +183,20 @@
 
   text-align: center;
 
-
   strong {
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
 
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-semibold);
   }
 
-
   span {
-    color:
-      var(--text-secondary);
+    color: var(--text-secondary);
 
     font-size: var(--font-size-sm);
     line-height: var(--line-height-normal);
   }
 }
-
 
 /* =========================
    Actions
@@ -245,7 +208,6 @@
   display: flex;
   justify-content: flex-end;
 }
-
 
 .data-table__menu-btn {
   width: 30px;
@@ -264,16 +226,12 @@
 
   cursor: pointer;
 
-
   &:hover {
-    background:
-      var(--bg-soft);
+    background: var(--bg-soft);
 
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
   }
 }
-
 
 .data-table__menu {
   position: absolute;
@@ -290,13 +248,9 @@
   border: 1px solid var(--border-color);
   border-radius: 10px;
 
-  background:
-    var(--bg-surface);
+  background: var(--bg-surface);
 
-  box-shadow:
-    0 12px 30px
-    rgba(15, 23, 42, 0.14);
-
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
 
   button {
     width: 100%;
@@ -320,31 +274,24 @@
 
     cursor: pointer;
 
-
     &:hover {
-      background:
-        var(--bg-soft);
+      background: var(--bg-soft);
     }
 
-
     &.danger {
-      color:
-        var(--danger);
+      color: var(--danger);
     }
   }
 }
-
 
 /* =========================
    Responsive
 ========================= */
 
 @media (max-width: 800px) {
-
   .data-table {
     overflow-x: auto;
   }
-
 
   .data-table__header,
   .data-table__row {

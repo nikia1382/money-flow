@@ -1,35 +1,19 @@
-import {
-  ComponentFixture,
-  TestBed
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionRow } from './transaction-row';
 
-import {
-  Transaction
-} from '../../models/transaction.model';
-
+import { Transaction } from '../../models/transaction.model';
 
 describe('TransactionRow', () => {
-
   let component: TransactionRow;
   let fixture: ComponentFixture<TransactionRow>;
 
-
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
-      imports: [
-        TransactionRow
-      ]
+      imports: [TransactionRow],
     }).compileComponents();
 
-
-    fixture =
-      TestBed.createComponent(
-        TransactionRow
-      );
-
+    fixture = TestBed.createComponent(TransactionRow);
 
     const mockTransaction: Transaction = {
       id: 1,
@@ -38,30 +22,17 @@ describe('TransactionRow', () => {
       account: 'Main Bank Account',
       date: '2026-08-23',
       amount: 1_000_000,
-      type: 'expense'
+      type: 'expense',
     };
 
+    fixture.componentRef.setInput('transaction', mockTransaction);
 
-    fixture.componentRef.setInput(
-      'transaction',
-      mockTransaction
-    );
-
-
-    component =
-      fixture.componentInstance;
-
+    component = fixture.componentInstance;
 
     fixture.detectChanges();
-
   });
-
 
   it('should create', () => {
-
-    expect(component)
-      .toBeTruthy();
-
+    expect(component).toBeTruthy();
   });
-
 });

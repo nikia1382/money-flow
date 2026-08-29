@@ -1,87 +1,50 @@
 <section class="transactions-page">
-
   <!-- =========================
        Header
   ========================== -->
 
   <div class="transactions-page__header">
-
     <div class="transactions-page__title">
+      <h1>Transactions</h1>
 
-      <h1>
-        Transactions
-      </h1>
-
-      <p>
-        Track and manage all your financial activity.
-      </p>
-
+      <p>Track and manage all your financial activity.</p>
     </div>
 
+    <button type="button" class="add-transaction-btn" (click)="openAddTransaction()">
+      <lucide-icon [img]="Plus" [size]="17" />
 
-    <button
-      type="button"
-      class="add-transaction-btn"
-      (click)="openAddTransaction()"
-    >
-
-      <lucide-icon
-        [img]="Plus"
-        [size]="17"
-      />
-
-      <span>
-        Add Transaction
-      </span>
-
+      <span> Add Transaction </span>
     </button>
-
   </div>
-
 
   <!-- =========================
        Summary
   ========================== -->
 
   <div class="transactions-summary">
-
     <!-- Income -->
 
     <article class="transactions-summary__card income">
-
-      <span>
-        Total Income
-      </span>
+      <span> Total Income </span>
 
       <strong>
         {{ totalIncome.toLocaleString() }}
 
-        <small>
-          Toman
-        </small>
+        <small> Toman </small>
       </strong>
-
     </article>
-
 
     <!-- Expenses -->
 
     <article class="transactions-summary__card expense">
-
-      <span>
-        Total Expenses
-      </span>
+      <span> Total Expenses </span>
 
       <strong>
         {{ totalExpenses.toLocaleString() }}
 
-        <small>
-          Toman
-        </small>
+        <small> Toman </small>
       </strong>
-
     </article>
-
 
     <!-- Net Flow -->
 
@@ -90,54 +53,35 @@
       [class.positive]="netFlow >= 0"
       [class.negative]="netFlow < 0"
     >
-
-      <span>
-        Net Flow
-      </span>
+      <span> Net Flow </span>
 
       <strong>
         {{ netFlow.toLocaleString() }}
 
-        <small>
-          Toman
-        </small>
+        <small> Toman </small>
       </strong>
-
     </article>
-
 
     <!-- Count -->
 
     <article class="transactions-summary__card">
-
-      <span>
-        Transactions
-      </span>
+      <span> Transactions </span>
 
       <strong>
         {{ transactions().length }}
       </strong>
-
     </article>
-
   </div>
-
 
   <!-- =========================
        Toolbar
   ========================== -->
 
   <div class="transactions-toolbar">
-
-
     <!-- Search -->
 
     <div class="transactions-search">
-
-      <lucide-icon
-        [img]="Search"
-        [size]="17"
-      />
+      <lucide-icon [img]="Search" [size]="17" />
 
       <input
         type="search"
@@ -146,18 +90,12 @@
         [(ngModel)]="searchTerm"
         (ngModelChange)="resetPagination()"
       />
-
     </div>
-
 
     <!-- Sort -->
 
     <div class="sort-wrapper">
-
-      <lucide-icon
-        [img]="ArrowUpDown"
-        [size]="16"
-      />
+      <lucide-icon [img]="ArrowUpDown" [size]="16" />
 
       <select
         id="transaction-sort"
@@ -167,104 +105,58 @@
         aria-label="Sort transactions"
         title="Sort transactions"
       >
+        <option value="newest">Newest first</option>
 
-        <option value="newest">
-          Newest first
-        </option>
+        <option value="oldest">Oldest first</option>
 
-        <option value="oldest">
-          Oldest first
-        </option>
+        <option value="highest">Highest amount</option>
 
-        <option value="highest">
-          Highest amount
-        </option>
-
-        <option value="lowest">
-          Lowest amount
-        </option>
-
+        <option value="lowest">Lowest amount</option>
       </select>
-
     </div>
-
 
     <!-- Filters -->
 
     <div class="filter-wrapper">
-
       <button
         type="button"
         class="filter-btn"
         [class.active]="activeFiltersCount > 0"
         (click)="toggleFilter()"
       >
+        <lucide-icon [img]="SlidersHorizontal" [size]="17" />
 
-        <lucide-icon
-          [img]="SlidersHorizontal"
-          [size]="17"
-        />
-
-        <span>
-          Filters
-        </span>
-
+        <span> Filters </span>
 
         @if (activeFiltersCount > 0) {
-
           <span class="filter-count">
             {{ activeFiltersCount }}
           </span>
-
         }
-
       </button>
-
 
       <!-- =========================
            Filter Panel
       ========================== -->
 
       @if (isFilterOpen) {
-
         <div class="filter-panel">
-
-
           <!-- Header -->
 
           <div class="filter-panel__header">
-
-            <strong>
-              Filters
-            </strong>
-
+            <strong> Filters </strong>
 
             @if (activeFiltersCount > 0) {
-
-              <button
-                type="button"
-                class="clear-filter-btn"
-                (click)="clearFilters()"
-              >
-                Clear
-              </button>
-
+              <button type="button" class="clear-filter-btn" (click)="clearFilters()">Clear</button>
             }
-
           </div>
-
 
           <!-- Type -->
 
           <div class="filter-section">
-
-            <span class="filter-section__title">
-              Transaction Type
-            </span>
-
+            <span class="filter-section__title"> Transaction Type </span>
 
             <div class="type-filter">
-
               <button
                 type="button"
                 [class.active]="selectedType === 'all'"
@@ -272,7 +164,6 @@
               >
                 All
               </button>
-
 
               <button
                 type="button"
@@ -282,7 +173,6 @@
                 Income
               </button>
 
-
               <button
                 type="button"
                 [class.active]="selectedType === 'expense'"
@@ -291,7 +181,6 @@
                 Expense
               </button>
 
-
               <button
                 type="button"
                 [class.active]="selectedType === 'transfer'"
@@ -299,26 +188,15 @@
               >
                 Transfer
               </button>
-
             </div>
-
           </div>
 
-
           <div class="filter-divider"></div>
-
 
           <!-- Account -->
 
           <div class="filter-section">
-
-            <label
-              class="filter-section__title"
-              for="account-filter"
-            >
-              Account
-            </label>
-
+            <label class="filter-section__title" for="account-filter"> Account </label>
 
             <select
               id="account-filter"
@@ -328,44 +206,22 @@
               aria-label="Filter transactions by account"
               title="Filter by account"
             >
+              <option value="all">All Accounts</option>
 
-              <option value="all">
-                All Accounts
-              </option>
-
-
-              @for (
-                account of accounts();
-                track account.id
-              ) {
-
-                <option
-                  [value]="account.name"
-                >
+              @for (account of accounts(); track account.id) {
+                <option [value]="account.name">
                   {{ account.name }}
                 </option>
-
               }
-
             </select>
-
           </div>
 
-
           <div class="filter-divider"></div>
-
 
           <!-- Category -->
 
           <div class="filter-section">
-
-            <label
-              class="filter-section__title"
-              for="category-filter"
-            >
-              Category
-            </label>
-
+            <label class="filter-section__title" for="category-filter"> Category </label>
 
             <select
               id="category-filter"
@@ -375,207 +231,104 @@
               aria-label="Filter transactions by category"
               title="Filter by category"
             >
+              <option value="all">All Categories</option>
 
-              <option value="all">
-                All Categories
-              </option>
-
-
-              @for (
-                category of categories;
-                track category
-              ) {
-
-                <option
-                  [value]="category"
-                >
+              @for (category of categories; track category) {
+                <option [value]="category">
                   {{ category }}
                 </option>
-
               }
-
             </select>
-
           </div>
-
         </div>
-
       }
-
     </div>
-
   </div>
-
 
   <!-- =========================
        Active Filters
   ========================== -->
 
   @if (activeFiltersCount > 0) {
-
     <div class="active-filters">
-
       <div class="active-filters__chips">
-
-
         <!-- Type -->
 
         @if (selectedType !== 'all') {
-
-          <button
-            type="button"
-            class="filter-chip"
-            (click)="clearTypeFilter()"
-          >
-
+          <button type="button" class="filter-chip" (click)="clearTypeFilter()">
             <span>
               {{ selectedType }}
             </span>
 
-            <span class="filter-chip__close">
-              ×
-            </span>
-
+            <span class="filter-chip__close"> × </span>
           </button>
-
         }
-
 
         <!-- Account -->
 
         @if (selectedAccount !== 'all') {
-
-          <button
-            type="button"
-            class="filter-chip"
-            (click)="clearAccountFilter()"
-          >
-
+          <button type="button" class="filter-chip" (click)="clearAccountFilter()">
             <span>
               {{ selectedAccount }}
             </span>
 
-            <span class="filter-chip__close">
-              ×
-            </span>
-
+            <span class="filter-chip__close"> × </span>
           </button>
-
         }
-
 
         <!-- Category -->
 
         @if (selectedCategory !== 'all') {
-
-          <button
-            type="button"
-            class="filter-chip"
-            (click)="clearCategoryFilter()"
-          >
-
+          <button type="button" class="filter-chip" (click)="clearCategoryFilter()">
             <span>
               {{ selectedCategory }}
             </span>
 
-            <span class="filter-chip__close">
-              ×
-            </span>
-
+            <span class="filter-chip__close"> × </span>
           </button>
-
         }
-
       </div>
 
-
-      <button
-        type="button"
-        class="clear-all-filters"
-        (click)="clearFilters()"
-      >
-        Clear all
-      </button>
-
+      <button type="button" class="clear-all-filters" (click)="clearFilters()">Clear all</button>
     </div>
-
   }
-
 
   <!-- =========================
        Transactions Table
   ========================== -->
 
   <section class="transactions-card">
-
-
     <!-- Header -->
 
     <div class="transactions-card__header">
+      <span class="column-transaction"> Transaction </span>
 
-      <span class="column-transaction">
-        Transaction
-      </span>
+      <span class="column-account"> Account </span>
 
-      <span class="column-account">
-        Account
-      </span>
+      <span class="column-date"> Date </span>
 
-      <span class="column-date">
-        Date
-      </span>
-
-      <span class="column-amount">
-        Amount
-      </span>
+      <span class="column-amount"> Amount </span>
 
       <span class="column-actions"></span>
-
     </div>
-
 
     <!-- Rows -->
 
     <div class="transactions-list">
-
-      @for (
-        transaction of paginatedTransactions;
-        track transaction.id
-      ) {
-
-        <app-transaction-row
-          [transaction]="transaction"
-        />
-
+      @for (transaction of paginatedTransactions; track transaction.id) {
+        <app-transaction-row [transaction]="transaction" />
       } @empty {
-
         <div class="transactions-empty">
-
           <div class="transactions-empty__icon">
-
-            <lucide-icon
-              [img]="Search"
-              [size]="22"
-            />
-
+            <lucide-icon [img]="Search" [size]="22" />
           </div>
 
+          <strong> No transactions found </strong>
 
-          <strong>
-            No transactions found
-          </strong>
-
-
-          <span>
-            Try changing your search or filters.
-          </span>
-
+          <span> Try changing your search or filters. </span>
         </div>
-
       }
-
     </div>
-
 
     <!-- Pagination -->
 
@@ -585,9 +338,7 @@
       [pageSize]="pageSize"
       (pageChange)="goToPage($event)"
     />
-
   </section>
-
 
   <!-- =========================
        DEBUG
@@ -599,22 +350,16 @@
     {{ isAddTransactionOpen() }}
   </p>
 
-
   <!-- =========================
        Add Transaction Modal
   ========================== -->
 
   @if (isAddTransactionOpen()) {
-
-    <p>
-      Modal block entered
-    </p>
+    <p>Modal block entered</p>
 
     <app-add-transaction-modal
       (closeModal)="closeAddTransaction()"
       (saveTransaction)="addTransaction($event)"
     />
-
   }
-
 </section>

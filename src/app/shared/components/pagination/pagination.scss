@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-
 .pagination {
   min-height: 58px;
 
@@ -13,19 +12,14 @@
 
   gap: 16px;
 
-  padding:
-    10px
-    18px;
+  padding: 10px 18px;
 
   box-sizing: border-box;
 
-  border-top:
-    1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
 
-  background:
-    var(--bg-surface);
+  background: var(--bg-surface);
 }
-
 
 /* =========================
    Info
@@ -37,19 +31,16 @@
 
   gap: 4px;
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
 
   strong {
-    color:
-      var(--text-primary);
+    color: var(--text-primary);
 
     font-weight: 600;
   }
 }
-
 
 /* =========================
    Controls
@@ -62,7 +53,6 @@
   gap: 5px;
 }
 
-
 .pagination__button {
   min-width: 32px;
   height: 32px;
@@ -72,17 +62,13 @@
 
   padding: 0;
 
-  border:
-    1px solid
-    var(--border-color);
+  border: 1px solid var(--border-color);
 
   border-radius: 8px;
 
-  background:
-    var(--bg-surface);
+  background: var(--bg-surface);
 
-  color:
-    var(--text-secondary);
+  color: var(--text-secondary);
 
   font-size: var(--font-size-xs);
   font-weight: 600;
@@ -94,48 +80,36 @@
     background-color 0.15s ease,
     color 0.15s ease;
 
-
   &:hover:not(:disabled) {
-    border-color:
-      var(--primary);
+    border-color: var(--primary);
 
-    color:
-      var(--primary);
+    color: var(--primary);
   }
-
 
   &.active {
-    border-color:
-      var(--primary);
+    border-color: var(--primary);
 
-    background:
-      var(--primary);
+    background: var(--primary);
 
-    color:
-      #ffffff;
+    color: #ffffff;
   }
-
 
   &:disabled {
     opacity: 0.4;
 
-    cursor:
-      not-allowed;
+    cursor: not-allowed;
   }
 }
-
 
 .pagination__arrow {
   font-size: var(--font-size-lg);
 }
-
 
 /* =========================
    Mobile
 ========================= */
 
 @media (max-width: 600px) {
-
   .pagination {
     align-items: stretch;
     flex-direction: column;
@@ -143,16 +117,13 @@
     padding: 14px;
   }
 
-
   .pagination__info {
     justify-content: center;
   }
-
 
   .pagination__controls {
     justify-content: center;
 
     flex-wrap: wrap;
   }
-
 }

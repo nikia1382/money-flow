@@ -1,39 +1,21 @@
-import {
-  Injectable,
-  signal
-} from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
-import {
-  Transaction
-} from '../models/transaction.model';
-
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TransactionsService {
+  private readonly storageKey = 'moneyflow_transactions';
 
-  private readonly storageKey =
-    'moneyflow_transactions';
-
-
-  readonly transactions =
-    signal<Transaction[]>(
-      this.loadTransactions()
-    );
-
+  readonly transactions = signal<Transaction[]>(this.loadTransactions());
 
   private loadTransactions(): Transaction[] {
-
-    const saved =
-      localStorage.getItem(
-        this.storageKey
-      );
+    const saved = localStorage.getItem(this.storageKey);
 
     if (saved) {
       return JSON.parse(saved);
     }
-
 
     return [
       {
@@ -43,7 +25,7 @@ export class TransactionsService {
         account: 'Main Bank Account',
         date: 'Aug 19, 2026',
         amount: 35_000_000,
-        type: 'income'
+        type: 'income',
       },
 
       {
@@ -53,7 +35,7 @@ export class TransactionsService {
         account: 'Main Bank Account',
         date: 'Aug 18, 2026',
         amount: 1_850_000,
-        type: 'expense'
+        type: 'expense',
       },
 
       {
@@ -63,85 +45,41 @@ export class TransactionsService {
         account: 'Savings Account',
         date: 'Aug 17, 2026',
         amount: 5_000_000,
-        type: 'transfer'
-      }
+        type: 'transfer',
+      },
     ];
-
   }
-
 
   private saveTransactions(): void {
-
-    localStorage.setItem(
-      this.storageKey,
-      JSON.stringify(
-        this.transactions()
-      )
-    );
-
+    localStorage.setItem(this.storageKey, JSON.stringify(this.transactions()));
   }
 
-
-  addTransaction(
-    transaction: Omit<Transaction, 'id'>
-  ): void {
-
+  addTransaction(transaction: Omit<Transaction, 'id'>): void {
     const newTransaction: Transaction = {
       id: Date.now(),
-      ...transaction
+      ...transaction,
     };
 
-
-    this.transactions.update(
-      transactions => [
-        ...transactions,
-        newTransaction
-      ]
-    );
-
+    this.transactions.update((transactions) => [...transactions, newTransaction]);
 
     this.saveTransactions();
-
   }
 
-
-  updateTransaction(
-    updatedTransaction: Transaction
-  ): void {
-
-    this.transactions.update(
-      transactions =>
-        transactions.map(
-          transaction =>
-            transaction.id ===
-            updatedTransaction.id
-              ? updatedTransaction
-              : transaction
-        )
+  updateTransaction(updatedTransaction: Transaction): void {
+    this.transactions.update((transactions) =>
+      transactions.map((transaction) =>
+        transaction.id === updatedTransaction.id ? updatedTransaction : transaction,
+      ),
     );
 
-
     this.saveTransactions();
-
   }
 
-
-  deleteTransaction(
-    transactionId: number
-  ): void {
-
-    this.transactions.update(
-      transactions =>
-        transactions.filter(
-          transaction =>
-            transaction.id !==
-            transactionId
-        )
+  deleteTransaction(transactionId: number): void {
+    this.transactions.update((transactions) =>
+      transactions.filter((transaction) => transaction.id !== transactionId),
     );
 
-
     this.saveTransactions();
-
   }
-
 }

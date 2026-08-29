@@ -8,7 +8,6 @@
   display: block;
 }
 
-
 .modal-backdrop {
   position: fixed;
 
@@ -21,11 +20,8 @@
 
   box-sizing: border-box;
 
-  background:
-    rgba(15, 23, 42, 0.58);
-
+  background: rgba(15, 23, 42, 0.58);
 }
-
 
 .account-modal {
   width: min(480px, 100%);
@@ -43,11 +39,8 @@
 
   background: var(--bg-surface);
 
-  box-shadow:
-    0 24px 60px
-    rgba(15, 23, 42, 0.25);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
 }
-
 
 .account-modal__header {
   display: flex;
@@ -76,7 +69,6 @@
   }
 }
 
-
 .close-btn {
   width: 36px;
   height: 36px;
@@ -98,14 +90,12 @@
   cursor: pointer;
 }
 
-
 .account-form {
   display: flex;
   flex-direction: column;
 
   gap: 16px;
 }
-
 
 .form-group {
   display: flex;
@@ -140,19 +130,15 @@
     &:focus {
       border-color: var(--primary);
 
-      box-shadow:
-        0 0 0 3px
-        rgba(79, 70, 229, 0.12);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
     }
   }
 }
 
-
 .account-types {
   display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   gap: 8px;
 
@@ -179,7 +165,6 @@
   }
 }
 
-
 .account-modal__actions {
   display: flex;
   justify-content: flex-end;
@@ -188,7 +173,6 @@
 
   margin-top: 4px;
 }
-
 
 .cancel-btn,
 .save-btn {
@@ -204,14 +188,12 @@
   cursor: pointer;
 }
 
-
 .cancel-btn {
   border: 1px solid var(--border-color);
 
   background: var(--bg-surface);
   color: var(--text-primary);
 }
-
 
 .save-btn {
   border: 0;
@@ -224,15 +206,12 @@
   }
 }
 
-
 @media (max-width: 600px) {
-
   .modal-backdrop {
     align-items: end;
 
     padding: 0;
   }
-
 
   .account-modal {
     width: 100%;
@@ -241,19 +220,12 @@
 
     padding: 18px 14px;
 
-    border-radius:
-      18px
-      18px
-      0
-      0;
+    border-radius: 18px 18px 0 0;
   }
-
 
   .account-modal__actions {
     display: grid;
 
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
-
 }

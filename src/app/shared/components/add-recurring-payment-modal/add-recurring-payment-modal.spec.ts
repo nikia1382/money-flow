@@ -8,9 +8,8 @@ describe('AddRecurringPaymentModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddRecurringPaymentModal]
-    })
-    .compileComponents();
+      imports: [AddRecurringPaymentModal],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddRecurringPaymentModal);
     component = fixture.componentInstance;

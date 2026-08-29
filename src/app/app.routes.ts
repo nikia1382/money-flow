@@ -15,49 +15,49 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/dashboard/pages/dashboard/dashboard').then((m) => m.Dashboard),
       },
-            {
+      {
         path: 'accounts',
         loadComponent: () =>
           import('./features/accounts/pages/accounts/accounts').then((m) => m.Accounts),
       },
 
-    {
+      {
         path: 'transactions',
         loadComponent: () =>
-          import('./features/transactions/pages/transactions/transactions').then((m) => m.Transactions),
+          import('./features/transactions/pages/transactions/transactions').then(
+            (m) => m.Transactions,
+          ),
       },
-          {
+      {
         path: 'budgets',
         loadComponent: () =>
           import('./features/budgets/pages/budgets/budgets').then((m) => m.Budgets),
       },
 
-{
-  path: 'recurring-payments',
+      {
+        path: 'recurring-payments',
 
-  loadComponent: () =>
-    import(
-      './features/recurring-payments/pages/recurring-payments/recurring-payments'
-    ).then(
-      m => m.RecurringPayments
-    )
-},
-{
-  path: 'help',
+        loadComponent: () =>
+          import('./features/recurring-payments/pages/recurring-payments/recurring-payments').then(
+            (m) => m.RecurringPayments,
+          ),
+      },
+      {
+        path: 'help',
 
-  loadComponent: () =>
-    import(
-      './features/help/pages/help/help'
-    ).then(
-      m => m.Help
-    )
-},
-{
-  path: 'goals',
-  loadComponent: () =>
-    import('./features/goals/pages/goals/goals')
-      .then(m => m.Goals)
-},
+        loadComponent: () => import('./features/help/pages/help/help').then((m) => m.Help),
+      },
+      {
+        path: 'goals',
+        loadComponent: () => import('./features/goals/pages/goals/goals').then((m) => m.Goals),
+      },
+      {
+        path: 'notifications',
+        loadComponent: () =>
+          import('./features/notifications/pages/notifications/notifications').then(
+            (m) => m.Notifications,
+          ),
+      },
     ],
   },
 ];

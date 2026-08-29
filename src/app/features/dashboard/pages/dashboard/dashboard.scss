@@ -4,7 +4,6 @@
   padding-bottom: 20px;
 }
 
-
 /* =========================
    Heading
 ========================= */
@@ -32,7 +31,6 @@
   }
 }
 
-
 /* =========================
    Summary Cards
 ========================= */
@@ -40,12 +38,10 @@
 .summary-grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 }
-
 
 .summary-card {
   min-width: 0;
@@ -60,9 +56,7 @@
   border: 1px solid var(--border-color);
   border-radius: 16px;
 
-  box-shadow:
-    0 4px 14px
-    rgba(15, 23, 42, 0.03);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
 
   transition:
     transform 0.2s ease,
@@ -73,12 +67,9 @@
   &:hover {
     transform: translateY(-2px);
 
-    box-shadow:
-      0 8px 24px
-      rgba(15, 23, 42, 0.06);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
   }
 }
-
 
 .summary-card__top {
   display: flex;
@@ -87,7 +78,6 @@
 
   gap: 12px;
 }
-
 
 .summary-card__icon {
   width: 40px;
@@ -103,7 +93,6 @@
   background: var(--bg-muted);
   color: var(--text-secondary);
 }
-
 
 /* =========================
    Trend
@@ -123,18 +112,15 @@
   &.positive {
     color: var(--success);
 
-    background:
-      rgba(22, 163, 74, 0.08);
+    background: rgba(22, 163, 74, 0.08);
   }
 
   &.negative {
     color: var(--danger);
 
-    background:
-      rgba(220, 38, 38, 0.08);
+    background: rgba(220, 38, 38, 0.08);
   }
 }
-
 
 /* =========================
    Summary Typography
@@ -149,7 +135,6 @@
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-normal);
 }
-
 
 .summary-card__amount {
   margin: 0;
@@ -174,7 +159,6 @@
   }
 }
 
-
 .summary-card__comparison {
   margin: 7px 0 0;
 
@@ -183,7 +167,6 @@
   font-size: var(--font-size-xs);
   line-height: var(--line-height-normal);
 }
-
 
 /* =========================
    Shared Dashboard Grids
@@ -205,7 +188,6 @@
   align-items: stretch;
 }
 
-
 /* =========================
    Analytics Row
 ========================= */
@@ -218,13 +200,11 @@
   display: flex;
 }
 
-
 .dashboard__chart > *,
 .dashboard__spending > *,
 .dashboard__budget > * {
   width: 100%;
 }
-
 
 /* Chart intentionally does not use height: 100% */
 
@@ -232,7 +212,6 @@
 .dashboard__budget > * {
   height: 100%;
 }
-
 
 /* =========================
    Bottom Row
@@ -246,7 +225,6 @@
   display: flex;
 }
 
-
 .dashboard__transactions > *,
 .dashboard__upcoming-payments > *,
 .dashboard__financial-goals > * {
@@ -254,31 +232,25 @@
   height: 100%;
 }
 
-
 /* =========================
    Desktop / Small Laptop
 ========================= */
 
 @media (max-width: 1300px) {
   .summary-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 
   .dashboard__analytics,
   .dashboard__bottom-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 
   .dashboard__chart,
   .dashboard__transactions {
     grid-column: 1 / -1;
   }
 }
-
 
 /* =========================
    Tablet
@@ -291,12 +263,10 @@
     grid-template-columns: 1fr;
   }
 
-
   .dashboard__chart,
   .dashboard__transactions {
     grid-column: auto;
   }
-
 
   .dashboard__analytics,
   .dashboard__bottom-grid {
@@ -306,19 +276,16 @@
   }
 }
 
-
 /* =========================
    Mobile
 ========================= */
 
 @media (max-width: 700px) {
   .summary-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 10px;
   }
-
 
   .summary-card {
     min-width: 0;
@@ -327,12 +294,10 @@
     padding: 12px;
   }
 
-
   .summary-card__icon {
     width: 34px;
     height: 34px;
   }
-
 
   .summary-card__trend {
     padding: 3px 5px;
@@ -340,13 +305,11 @@
     font-size: var(--font-size-xs);
   }
 
-
   .summary-card__title {
     margin: 12px 0 5px;
 
     font-size: var(--font-size-xs);
   }
-
 
   .summary-card__amount {
     font-size: 18px;
@@ -361,14 +324,12 @@
     }
   }
 
-
   .summary-card__comparison {
     margin-top: 5px;
 
     font-size: var(--font-size-xs);
   }
 }
-
 
 /* =========================
    Small Mobile
@@ -379,11 +340,9 @@
     grid-template-columns: 1fr;
   }
 
-
   .summary-card {
     min-height: auto;
   }
-
 
   .summary-card__amount {
     font-size: 19px;

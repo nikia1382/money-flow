@@ -1,0 +1,71 @@
+<section class="notifications-page">
+  <header class="notifications-header">
+    <div>
+      <h1>
+        {{ 'notifications.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'notifications.subtitle' | translate }}
+      </p>
+    </div>
+
+    @if (unreadCount() > 0) {
+      <button type="button" class="mark-all-btn" (click)="markAllAsRead()">
+        <lucide-icon [img]="CheckCheck" [size]="17" />
+
+        {{ 'notifications.markAllRead' | translate }}
+      </button>
+    }
+  </header>
+
+  @if (notifications().length) {
+    <div class="notifications-summary">
+      <span>
+        {{ unreadCount() }}
+        {{ 'notifications.unread' | translate }}
+      </span>
+    </div>
+
+    <div class="notifications-list">
+      @for (notification of notifications(); track notification.id) {
+        <article
+          class="notification-item"
+          [class.notification-item--unread]="!notification.isRead"
+          (click)="markAsRead(notification.id)"
+        >
+          <div class="notification-icon">
+            <lucide-icon [img]="getIcon(notification.type)" [size]="19" />
+          </div>
+
+          <div class="notification-content">
+            <div class="notification-title">
+              <strong>
+                {{ notification.title }}
+              </strong>
+
+              @if (!notification.isRead) {
+                <span class="unread-dot"></span>
+              }
+            </div>
+
+            <p>
+              {{ notification.description }}
+            </p>
+
+            <small>
+              {{ notification.date | date: 'mediumDate' }}
+            </small>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <app-state-view
+      type="empty"
+      [icon]="Bell"
+      [title]="'notifications.emptyTitle' | translate"
+      [description]="'notifications.emptyDescription' | translate"
+    />
+  }
+</section>
