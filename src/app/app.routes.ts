@@ -51,7 +51,13 @@ export const routes: Routes = [
     ).then(
       m => m.Help
     )
-}
+},
+{
+  path: 'goals',
+  loadComponent: () =>
+    import('./features/goals/pages/goals/goals')
+      .then(m => m.Goals)
+},
     ],
   },
 ];

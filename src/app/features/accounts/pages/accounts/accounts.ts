@@ -23,16 +23,13 @@ import {
 import {
   Account
 } from '../../models/account.model';
+import {
+  Landmark,
+  SearchX
+} from 'lucide-angular';
 
-/* export interface Account {
-  id: number;
-  name: string;
-  type: 'bank' | 'cash' | 'savings';
-  balance: number;
-  number?: string;
-} */
-
-
+import { StateView } from '../../../../shared/components/state-view/state-view';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-accounts',
@@ -40,7 +37,9 @@ import {
   imports: [
     AccountCard,
     AddAccountModal,
-    ConfirmDialog
+    ConfirmDialog,
+    StateView,
+    TranslatePipe
   ],
 
   templateUrl: './accounts.html',
@@ -77,7 +76,8 @@ export class Accounts {
   readonly accountPendingDelete =
     signal<Account | null>(null);
 
-
+readonly Landmark = Landmark;
+readonly SearchX = SearchX;
   /* =========================
      Total Balance
   ========================= */
@@ -210,5 +210,6 @@ export class Accounts {
       .set(null);
 
   }
-
+clearFilters(): void {
+}
 }

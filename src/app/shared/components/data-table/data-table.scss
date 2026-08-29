@@ -4,6 +4,10 @@
 }
 
 
+/* =========================
+   Table
+========================= */
+
 .data-table {
   overflow: visible;
 
@@ -40,11 +44,10 @@
   color:
     var(--text-secondary);
 
-  font-size: 9px;
-  font-weight: 650;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 
-  letter-spacing:
-    0.02em;
+  letter-spacing: 0.02em;
 }
 
 
@@ -94,7 +97,9 @@
   color:
     var(--text-primary);
 
-  font-size: 10px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
 
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -103,8 +108,8 @@
   strong {
     display: block;
 
-    font-size: 11px;
-    font-weight: 700;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
 
     font-variant-numeric:
       tabular-nums;
@@ -119,7 +124,8 @@
     color:
       var(--text-secondary);
 
-    font-size: 8px;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-normal);
   }
 }
 
@@ -158,8 +164,9 @@
   color:
     var(--text-secondary);
 
-  font-size: 8px;
-  font-weight: 700;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 
 
   &.success {
@@ -191,7 +198,7 @@
 
 
 /* =========================
-   Empty
+   Empty State
 ========================= */
 
 .data-table__empty {
@@ -213,7 +220,8 @@
     color:
       var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
   }
 
 
@@ -221,28 +229,12 @@
     color:
       var(--text-secondary);
 
-    font-size: 9px;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
 
 
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width: 800px) {
-
-  .data-table {
-    overflow-x: auto;
-  }
-
-
-  .data-table__header,
-  .data-table__row {
-    min-width: 760px;
-  }
-
-}
 /* =========================
    Actions
 ========================= */
@@ -272,10 +264,13 @@
 
   cursor: pointer;
 
-  &:hover {
-    background: var(--bg-soft);
 
-    color: var(--text-primary);
+  &:hover {
+    background:
+      var(--bg-soft);
+
+    color:
+      var(--text-primary);
   }
 }
 
@@ -295,7 +290,8 @@
   border: 1px solid var(--border-color);
   border-radius: 10px;
 
-  background: var(--bg-surface);
+  background:
+    var(--bg-surface);
 
   box-shadow:
     0 12px 30px
@@ -319,19 +315,39 @@
     background: transparent;
     color: var(--text-primary);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
 
     cursor: pointer;
 
 
     &:hover {
-      background: var(--bg-soft);
+      background:
+        var(--bg-soft);
     }
 
 
     &.danger {
-      color: #dc2626;
+      color:
+        var(--danger);
     }
+  }
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 800px) {
+
+  .data-table {
+    overflow-x: auto;
+  }
+
+
+  .data-table__header,
+  .data-table__row {
+    min-width: 760px;
   }
 }

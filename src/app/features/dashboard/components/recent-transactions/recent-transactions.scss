@@ -28,7 +28,7 @@
 
   p {
     margin: 6px 0 0;
-    font-size: 13px;
+    font-size: var(--font-size-sm);
     color: var(--text-secondary);
   }
 }
@@ -42,7 +42,7 @@
   background: var(--bg-surface);
   color: #4f46e5;
 
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   font-weight: 600;
 
   cursor: pointer;
@@ -102,7 +102,7 @@
 
   strong {
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: var(--font-size-md);
     font-weight: 600;
   }
 
@@ -111,12 +111,12 @@
 
     color: #94a3b8;
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
   }
 }
 
 .transaction-amount {
-  font-size: 14px;
+  font-size: var(--font-size-md);
   font-weight: 700;
 
   color: #475569;
@@ -130,7 +130,7 @@
   }
 
   small {
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 500;
   }
 }
@@ -145,16 +145,16 @@
     margin-bottom: 14px;
 
     h3 {
-      font-size: 14px;
+      font-size: var(--font-size-md);
     }
 
     p {
-      font-size: 10px;
+      font-size: var(--font-size-xs);
     }
   }
 
   .view-all-btn {
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 
   .transaction-row {
@@ -172,23 +172,23 @@
 
   .transaction-info {
     strong {
-      font-size: 11px;
+      font-size: var(--font-size-xs);
     }
 
     span {
-      font-size: 9px;
+      font-size: var(--font-size-xs);
     }
   }
 
   .transaction-amount {
-    font-size: 11px;
+    font-size: var(--font-size-xs);
 
     small {
       display: block;
 
       margin-top: 2px;
 
-      font-size: 8px;
+      font-size: var(--font-size-xs);
     }
   }
 }

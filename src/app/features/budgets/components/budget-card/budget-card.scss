@@ -74,7 +74,7 @@
 
     color: var(--text-primary);
 
-    font-size: 13px;
+    font-size: var(--font-size-sm);
     font-weight: 700;
 
     white-space: nowrap;
@@ -89,7 +89,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 9px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -109,7 +109,7 @@
 
   color: var(--primary);
 
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 
   &.danger {
@@ -133,7 +133,7 @@
 
   text-align: center;
 
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 
   &.danger {
@@ -203,14 +203,14 @@
 
     color: var(--text-secondary);
 
-    font-size: 8px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
   }
 
   strong {
     color: var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     font-weight: 700;
 
     font-variant-numeric:
@@ -222,7 +222,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 8px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -247,7 +247,7 @@
 
   color: #059669;
 
-  font-size: 9px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
 
   &.danger {
@@ -332,7 +332,7 @@
 
   color: #059669;
 
-  font-size: 8px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 
   &.warning {
@@ -434,7 +434,7 @@
     background: transparent;
     color: var(--text-primary);
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
 
     cursor: pointer;

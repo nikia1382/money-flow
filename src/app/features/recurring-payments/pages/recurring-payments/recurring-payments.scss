@@ -4,6 +4,10 @@
 }
 
 
+/* =========================
+   Page
+========================= */
+
 .recurring-page {
   width: 100%;
   max-width: 1600px;
@@ -28,14 +32,14 @@
 
 
 .recurring-page__title {
-
   h1 {
     margin: 0;
 
     color: var(--text-primary);
 
-    font-size: 26px;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
   }
 
   p {
@@ -43,10 +47,15 @@
 
     color: var(--text-secondary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
 
+
+/* =========================
+   Add Payment Button
+========================= */
 
 .add-payment-btn {
   height: 42px;
@@ -65,8 +74,8 @@
   background: var(--primary);
   color: #ffffff;
 
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
@@ -125,6 +134,10 @@
 }
 
 
+/* =========================
+   Summary Icon
+========================= */
+
 .summary-icon {
   width: 42px;
   height: 42px;
@@ -147,24 +160,28 @@
     background:
       rgba(5, 150, 105, 0.09);
 
-    color: #059669;
+    color: var(--success);
   }
 
   &.warning {
     background:
       rgba(245, 158, 11, 0.1);
 
-    color: #d97706;
+    color: var(--warning);
   }
 
   &.danger {
     background:
       rgba(220, 38, 38, 0.09);
 
-    color: #dc2626;
+    color: var(--danger);
   }
 }
 
+
+/* =========================
+   Summary Content
+========================= */
 
 .summary-content {
   min-width: 0;
@@ -176,8 +193,9 @@
 
     color: var(--text-secondary);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
   }
 
   strong {
@@ -186,7 +204,8 @@
     color: var(--text-primary);
 
     font-size: 18px;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
 
     font-variant-numeric:
       tabular-nums;
@@ -199,61 +218,26 @@
 
     color: var(--text-secondary);
 
-    font-size: 8px;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-normal);
   }
 }
 
 
 .warning-value {
-  color: #d97706 !important;
+  color: var(--warning) !important;
 }
 
 
 .danger-value {
-  color: #dc2626 !important;
+  color: var(--danger) !important;
 }
 
 
 /* =========================
-   Responsive
+   Payments List
 ========================= */
 
-@media (max-width: 1100px) {
-
-  .recurring-summary {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-}
-
-
-@media (max-width: 700px) {
-
-  .recurring-page__header {
-    flex-direction: column;
-  }
-
-
-  .add-payment-btn {
-    width: 100%;
-  }
-
-}
-
-
-@media (max-width: 600px) {
-
-  .recurring-summary {
-    grid-template-columns: 1fr;
-  }
-
-
-  .recurring-page__title h1 {
-    font-size: 22px;
-  }
-
-}
 .payments-list {
   overflow: hidden;
 
@@ -261,8 +245,7 @@
     1px solid
     var(--border-color);
 
-  border-radius:
-    16px;
+  border-radius: 16px;
 
   background:
     var(--bg-surface);
@@ -272,6 +255,10 @@
     rgba(15, 23, 42, 0.035);
 }
 
+
+/* =========================
+   Payments List Header
+========================= */
 
 .payments-list__header {
   display: grid;
@@ -290,11 +277,9 @@
 
   min-height: 42px;
 
-  padding-inline:
-    16px;
+  padding-inline: 16px;
 
-  box-sizing:
-    border-box;
+  box-sizing: border-box;
 
   border-bottom:
     1px solid
@@ -306,15 +291,50 @@
   color:
     var(--text-secondary);
 
-  font-size: 9px;
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 1100px) {
+  .recurring-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
 }
 
 
 @media (max-width: 900px) {
-
   .payments-list__header {
     display: none;
   }
+}
 
+
+@media (max-width: 700px) {
+  .recurring-page__header {
+    flex-direction: column;
+  }
+
+
+  .add-payment-btn {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .recurring-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .recurring-page__title h1 {
+    font-size: var(--font-size-xl);
+  }
 }

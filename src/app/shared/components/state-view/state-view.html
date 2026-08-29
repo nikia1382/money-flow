@@ -1,0 +1,64 @@
+<section
+  class="state-view"
+  [class.state-view--compact]="compact"
+  [attr.data-type]="type"
+>
+
+  @if (icon) {
+    <div class="state-view__visual">
+
+      <div class="state-view__glow"></div>
+
+      <div class="state-view__icon">
+        <lucide-icon
+          [img]="icon"
+          [size]="compact ? 22 : 28"
+        />
+      </div>
+
+    </div>
+  }
+
+  <div class="state-view__content">
+
+    <h3>
+      {{ title }}
+    </h3>
+
+    @if (description) {
+      <p>
+        {{ description }}
+      </p>
+    }
+
+  </div>
+
+  @if (actionLabel || secondaryActionLabel) {
+
+    <div class="state-view__actions">
+
+      @if (actionLabel) {
+        <button
+          type="button"
+          class="state-view__primary"
+          (click)="primaryAction()"
+        >
+          {{ actionLabel }}
+        </button>
+      }
+
+      @if (secondaryActionLabel) {
+        <button
+          type="button"
+          class="state-view__secondary"
+          (click)="secondaryActionClick()"
+        >
+          {{ secondaryActionLabel }}
+        </button>
+      }
+
+    </div>
+
+  }
+
+</section>

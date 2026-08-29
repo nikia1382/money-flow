@@ -40,7 +40,7 @@
   color:
     var(--text-secondary);
 
-  font-size: 10px;
+  font-size: var(--font-size-xs);
 
   strong {
     color:
@@ -84,7 +84,7 @@
   color:
     var(--text-secondary);
 
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
 
   cursor: pointer;
@@ -126,7 +126,7 @@
 
 
 .pagination__arrow {
-  font-size: 16px;
+  font-size: var(--font-size-lg);
 }
 
 

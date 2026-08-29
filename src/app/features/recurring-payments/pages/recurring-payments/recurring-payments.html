@@ -218,15 +218,38 @@
        Data Table
   ========================== -->
 
+@if (filteredPayments.length) {
+
   <app-data-table
     [columns]="paymentColumns"
     [rows]="filteredPayments"
-    emptyTitleKey="recurringPayments.empty.title"
-    emptySubtitleKey="recurringPayments.empty.subtitle"
     (editRow)="editPayment($event)"
     (deleteRow)="deletePayment($event)"
   />
 
+} @else if (payments.length) {
+
+  <app-state-view
+    type="no-results"
+    [icon]="SearchX"
+    [title]="'recurringPayments.noResultsTitle' | translate"
+    [description]="'recurringPayments.noResultsDescription' | translate"
+    [actionLabel]="'recurringPayments.clearFilters' | translate"
+    (action)="clearFilters()"
+  />
+
+} @else {
+
+  <app-state-view
+    type="empty"
+    [icon]="CalendarClock"
+    [title]="'recurringPayments.emptyTitle' | translate"
+    [description]="'recurringPayments.emptyDescription' | translate"
+    [actionLabel]="'recurringPayments.addPayment' | translate"
+    (action)="openAddPayment()"
+  />
+
+}
 
   <!-- =========================
        Add Payment Modal

@@ -112,7 +112,7 @@
 
     color: var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     font-weight: 650;
 
     white-space: nowrap;
@@ -140,7 +140,7 @@
 
   color: var(--text-secondary);
 
-  font-size: 9px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
 
   &.income {
@@ -170,7 +170,7 @@
 
   color: var(--text-secondary);
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
 
   span:last-child {
     display: block;
@@ -215,14 +215,14 @@
 }
 
 .transaction-amount__value {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   font-weight: 750;
 }
 
 .transaction-amount small {
   color: var(--text-secondary);
 
-  font-size: 8px;
+  font-size: var(--font-size-xs);
   font-weight: 500;
 }
 
@@ -323,7 +323,7 @@
 
     text-align: start;
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
     font-weight: 500;
 
     cursor: pointer;
@@ -447,13 +447,13 @@
 
     color: var(--text-muted);
 
-    font-size: 9px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
   }
 
 
   .transaction-amount__value {
-    font-size: 15px;
+    font-size: var(--font-size-lg);
   }
 
 }

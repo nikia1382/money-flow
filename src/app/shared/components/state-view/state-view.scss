@@ -1,0 +1,317 @@
+.state-view {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 300px;
+
+  padding: 38px 24px;
+
+  overflow: hidden;
+
+  border: 1px dashed var(--border-color);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--bg-surface) 0%,
+      var(--bg-soft) 100%
+    );
+
+  text-align: center;
+}
+
+.state-view::before {
+  content: '';
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -120px;
+  left: 50%;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  opacity: 0.04;
+  filter: blur(30px);
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   Visual
+========================= */
+
+.state-view__visual {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 82px;
+  height: 82px;
+
+  margin-bottom: 20px;
+}
+
+.state-view__glow {
+  position: absolute;
+  inset: 8px;
+
+  border-radius: 50%;
+
+  background: var(--primary);
+
+  opacity: 0.12;
+
+  filter: blur(16px);
+}
+
+.state-view__icon {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 62px;
+  height: 62px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+
+  color: var(--primary);
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 10px 30px
+    rgba(15, 23, 42, 0.08);
+
+  transform: rotate(-3deg);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.state-view:hover .state-view__icon {
+  transform:
+    rotate(0deg)
+    translateY(-2px);
+
+  box-shadow:
+    0 14px 34px
+    rgba(15, 23, 42, 0.12);
+}
+
+
+/* =========================
+   Content
+========================= */
+
+.state-view__content {
+  position: relative;
+  z-index: 1;
+
+  max-width: 430px;
+
+  h3 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+  }
+
+  p {
+    margin: 8px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+
+/* =========================
+   Actions
+========================= */
+
+.state-view__actions {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.state-view__primary,
+.state-view__secondary {
+  min-height: 40px;
+
+  padding: 0 16px;
+
+  border-radius: 10px;
+
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.state-view__primary {
+  border: 0;
+
+  color: #fff;
+  background: var(--primary);
+
+  &:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+  }
+}
+
+.state-view__secondary {
+  border: 1px solid var(--border-color);
+
+  color: var(--text-primary);
+  background: var(--bg-surface);
+
+  &:hover {
+    background: var(--bg-muted);
+  }
+}
+
+
+/* =========================
+   State Types
+========================= */
+
+.state-view[data-type='error'] {
+  .state-view__icon {
+    color: var(--danger);
+  }
+
+  .state-view__glow {
+    background: var(--danger);
+  }
+
+  &::before {
+    background: var(--danger);
+  }
+}
+
+.state-view[data-type='success'] {
+  .state-view__icon {
+    color: var(--success);
+  }
+
+  .state-view__glow {
+    background: var(--success);
+  }
+
+  &::before {
+    background: var(--success);
+  }
+}
+
+.state-view[data-type='locked'] {
+  .state-view__icon {
+    color: var(--warning);
+  }
+
+  .state-view__glow {
+    background: var(--warning);
+  }
+
+  &::before {
+    background: var(--warning);
+  }
+}
+
+.state-view[data-type='no-results'] {
+  .state-view__icon {
+    color: var(--text-secondary);
+  }
+
+  .state-view__glow {
+    background: var(--text-secondary);
+  }
+}
+
+
+/* =========================
+   Compact
+========================= */
+
+.state-view--compact {
+  min-height: 210px;
+
+  padding: 26px 20px;
+
+  .state-view__visual {
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 14px;
+  }
+
+  .state-view__icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+  }
+
+  .state-view__actions {
+    margin-top: 16px;
+  }
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+  .state-view {
+    min-height: 250px;
+
+    padding: 30px 18px;
+  }
+
+  .state-view__actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .state-view__primary,
+  .state-view__secondary {
+    width: 100%;
+  }
+}

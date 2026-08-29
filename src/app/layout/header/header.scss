@@ -49,7 +49,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
 
     line-height: 1.4;
   }
@@ -120,7 +120,7 @@
 
     color: var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
 
     &::placeholder {
       color: var(--text-secondary);
@@ -143,7 +143,7 @@
 
   color: var(--text-secondary);
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
 }
 
 /* =========================
@@ -196,7 +196,7 @@
 
   white-space: nowrap;
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 500;
 }
 
@@ -223,7 +223,7 @@
 
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: var(--font-size-sm);
   font-weight: 600;
 
   cursor: pointer;
@@ -276,7 +276,7 @@
 
   color: #ffffff;
 
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 }
 
@@ -287,7 +287,7 @@
 .language-btn {
   padding-inline: 11px;
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
 }
 
@@ -319,7 +319,7 @@
 
   color: #ffffff;
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 }
 
@@ -385,7 +385,7 @@
     }
 
     p {
-      font-size: 11px;
+      font-size: var(--font-size-xs);
     }
   }
 
@@ -526,7 +526,7 @@
 
     text-align: start;
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 500;
 
     cursor: pointer;
@@ -576,7 +576,7 @@
   strong {
     color: var(--text-primary);
 
-    font-size: 13px;
+    font-size: var(--font-size-sm);
   }
 
   button {
@@ -587,7 +587,7 @@
     background: transparent;
     color: var(--primary);
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
 
     cursor: pointer;
@@ -622,14 +622,14 @@
   strong {
     color: var(--text-primary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
   }
 
   span {
     color: var(--text-secondary);
 
-    font-size: 9px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -695,7 +695,7 @@
 
     text-align: start;
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 500;
 
     cursor: pointer;
@@ -726,7 +726,7 @@
   strong {
     color: var(--text-primary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
   }
 
@@ -735,7 +735,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 9px;
+    font-size: var(--font-size-xs);
 
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -757,7 +757,7 @@
 
   color: #ffffff;
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 700;
 }
 

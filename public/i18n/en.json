@@ -264,7 +264,12 @@
   "nextPayment": "Next Payment",
     "status": "وضعیت"
 
-}
+},
+"emptyTitle": "No recurring payments yet",
+"emptyDescription": "Add recurring expenses like rent, subscriptions, or bills and never lose track of upcoming payments.",
+"noResultsTitle": "No matching payments",
+"noResultsDescription": "No recurring payments match your current filters.",
+"clearFilters": "Clear filters"
 },
 "table": {
   "payment": "Payment",
@@ -336,12 +341,22 @@
 
       "transactions": {
         "question": "How do I manage transactions?",
-        "answer": "Open Transactions to search, filter, add and manage your financial activity."
+        "answer": "Open Transactions to search, filter, add and manage your financial activity.",
+        "noResultsTitle": "No matching transactions",
+"noResultsDescription": "Try changing your search or filters.",
+"clearFilters": "Clear filters",
+"emptyTitle": "No transactions yet",
+"emptyDescription": "Add your first transaction to start tracking your money."
       },
 
       "budgets": {
         "question": "How are budgets calculated?",
-        "answer": "Each budget compares the spending amount with the spending limit you set for that category."
+        "answer": "Each budget compares the spending amount with the spending limit you set for that category.",
+        "emptyTitle": "No budgets yet",
+"emptyDescription": "Create your first budget and start keeping your spending under control.",
+"noResultsTitle": "No matching budgets",
+"noResultsDescription": "Try changing the month or status filter.",
+"clearFilters": "Clear filters"
       },
 
       "recurring": {
@@ -371,5 +386,32 @@
     "subtitle": "Contact our support team if you couldn't find the answer you need.",
     "button": "Contact Support"
   }
+},
+"goals": {
+  "title": "Financial Goals",
+  "subtitle": "Track your savings and reach your financial goals.",
+  "addGoal": "Add Goal",
+  "totalSaved": "Total Saved",
+  "totalTarget": "Total Target",
+  "overallProgress": "Overall Progress",
+  "completedGoals": "Completed Goals",
+  "yourGoals": "Your Goals",
+  "activeGoals": "active goals",
+  "saved": "Saved",
+  "target": "Target",
+  "remaining": "remaining",
+  "addGoalDescription": "Create a new savings goal and track your progress.",
+"goalName": "Goal name",
+"goalNamePlaceholder": "e.g. New car",
+"category": "Category",
+"selectCategory": "Select category",
+"targetAmount": "Target amount",
+"savedAmount": "Already saved",
+"deadline": "Deadline",
+"requiredField": "This field is required.",
+"deleteGoalTitle": "Delete Goal?",
+"deleteGoalMessage": "This goal will be permanently deleted.",
+"emptyTitle": "No goals yet",
+"emptyDescription": "Create your first financial goal and start building toward something that matters."
 }
 }

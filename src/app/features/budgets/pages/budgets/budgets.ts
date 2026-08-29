@@ -33,7 +33,12 @@ import { AddBudgetModal, BudgetForm } from '../../../../shared/components/add-bu
 import { MonthSelector } from '../../../../shared/components/month-selector/month-selector';
 import { MonthOption } from '../../../../shared/components/month-selector/month-option.model';
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import {
+  PiggyBank,
+  SearchX
+} from 'lucide-angular';
 
+import { StateView } from '../../../../shared/components/state-view/state-view';
 
 type BudgetStatusFilter =
   | 'all'
@@ -51,7 +56,8 @@ imports: [
   BudgetCard,
   AddBudgetModal,
   MonthSelector,
-  ConfirmDialog
+  ConfirmDialog,
+  StateView
 ],
 
   templateUrl: './budgets.html',
@@ -67,7 +73,8 @@ export class Budgets {
     this.budgetsService.budgets;
 readonly editingBudget =
   signal<Budget | null>(null);
-
+readonly PiggyBank = PiggyBank;
+readonly SearchX = SearchX;
   readonly Plus = Plus;
 
 /*   readonly CalendarDays =
@@ -351,5 +358,8 @@ confirmDeleteBudget(): void {
     null
   );
 
+}
+clearFilters(): void {
+  this.selectedStatus = 'all';
 }
 }

@@ -48,22 +48,38 @@
 
 
   <!-- Accounts -->
+<!-- Accounts -->
+
+<!-- Accounts -->
+
+@if (accounts().length > 0) {
+
   <div class="accounts-grid">
 
-    @for (
-      account of accounts();
-      track account.id
-    ) {
+    @for (account of accounts(); track account.id) {
 
-<app-account-card
-  [account]="account"
-  (deleteAccount)="requestDeleteAccount($event)"
-  (editAccount)="openEditAccount($event)"
-/>
+      <app-account-card
+        [account]="account"
+        (editAccount)="openEditAccount($event)"
+        (deleteAccount)="requestDeleteAccount($event)"
+      />
 
     }
 
   </div>
+
+} @else {
+
+  <app-state-view
+    type="empty"
+    [icon]="Landmark"
+    [title]="'accounts.emptyTitle' | translate"
+    [description]="'accounts.emptyDescription' | translate"
+    [actionLabel]="'accounts.addAccount' | translate"
+    (action)="openAddAccount()"
+  />
+
+}
 
 </section>
 

@@ -1,7 +1,9 @@
 .dashboard {
   width: 100%;
+
   padding-bottom: 20px;
 }
+
 
 /* =========================
    Heading
@@ -15,8 +17,9 @@
 
     color: var(--text-primary);
 
-    font-size: 24px;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
   }
 
   p {
@@ -24,9 +27,11 @@
 
     color: var(--text-secondary);
 
-    font-size: 13px;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
+
 
 /* =========================
    Summary Cards
@@ -35,10 +40,12 @@
 .summary-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 }
+
 
 .summary-card {
   min-width: 0;
@@ -53,7 +60,9 @@
   border: 1px solid var(--border-color);
   border-radius: 16px;
 
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+  box-shadow:
+    0 4px 14px
+    rgba(15, 23, 42, 0.03);
 
   transition:
     transform 0.2s ease,
@@ -64,9 +73,12 @@
   &:hover {
     transform: translateY(-2px);
 
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    box-shadow:
+      0 8px 24px
+      rgba(15, 23, 42, 0.06);
   }
 }
+
 
 .summary-card__top {
   display: flex;
@@ -75,6 +87,7 @@
 
   gap: 12px;
 }
+
 
 .summary-card__icon {
   width: 40px;
@@ -91,35 +104,52 @@
   color: var(--text-secondary);
 }
 
+
+/* =========================
+   Trend
+========================= */
+
 .summary-card__trend {
   padding: 4px 7px;
 
   border-radius: 7px;
 
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
 
   white-space: nowrap;
 
   &.positive {
-    color: #15803d;
-    background: #f0fdf4;
+    color: var(--success);
+
+    background:
+      rgba(22, 163, 74, 0.08);
   }
 
   &.negative {
-    color: #b91c1c;
-    background: #fef2f2;
+    color: var(--danger);
+
+    background:
+      rgba(220, 38, 38, 0.08);
   }
 }
+
+
+/* =========================
+   Summary Typography
+========================= */
 
 .summary-card__title {
   margin: 16px 0 7px;
 
   color: var(--text-secondary);
 
-  font-size: 12px;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
 }
+
 
 .summary-card__amount {
   margin: 0;
@@ -127,7 +157,8 @@
   color: var(--text-primary);
 
   font-size: 22px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
 
   font-variant-numeric: tabular-nums;
 
@@ -138,18 +169,21 @@
 
     color: var(--text-secondary);
 
-    font-size: 10px;
-    font-weight: 500;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
   }
 }
+
 
 .summary-card__comparison {
   margin: 7px 0 0;
 
   color: var(--text-muted);
 
-  font-size: 10px;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
 }
+
 
 /* =========================
    Shared Dashboard Grids
@@ -171,6 +205,7 @@
   align-items: stretch;
 }
 
+
 /* =========================
    Analytics Row
 ========================= */
@@ -183,17 +218,21 @@
   display: flex;
 }
 
+
 .dashboard__chart > *,
 .dashboard__spending > *,
 .dashboard__budget > * {
   width: 100%;
 }
 
-/* Chart عمداً height:100% نمی‌گیرد */
+
+/* Chart intentionally does not use height: 100% */
+
 .dashboard__spending > *,
 .dashboard__budget > * {
   height: 100%;
 }
+
 
 /* =========================
    Bottom Row
@@ -207,6 +246,7 @@
   display: flex;
 }
 
+
 .dashboard__transactions > *,
 .dashboard__upcoming-payments > *,
 .dashboard__financial-goals > * {
@@ -214,25 +254,31 @@
   height: 100%;
 }
 
+
 /* =========================
    Desktop / Small Laptop
 ========================= */
 
 @media (max-width: 1300px) {
   .summary-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
+
 
   .dashboard__analytics,
   .dashboard__bottom-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
+
 
   .dashboard__chart,
   .dashboard__transactions {
     grid-column: 1 / -1;
   }
 }
+
 
 /* =========================
    Tablet
@@ -245,17 +291,21 @@
     grid-template-columns: 1fr;
   }
 
+
   .dashboard__chart,
   .dashboard__transactions {
     grid-column: auto;
   }
 
+
   .dashboard__analytics,
   .dashboard__bottom-grid {
     gap: 12px;
+
     margin-top: 12px;
   }
 }
+
 
 /* =========================
    Mobile
@@ -263,10 +313,12 @@
 
 @media (max-width: 700px) {
   .summary-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
     gap: 10px;
   }
+
 
   .summary-card {
     min-width: 0;
@@ -275,51 +327,63 @@
     padding: 12px;
   }
 
+
   .summary-card__icon {
     width: 34px;
     height: 34px;
   }
 
+
   .summary-card__trend {
     padding: 3px 5px;
 
-    font-size: 9px;
+    font-size: var(--font-size-xs);
   }
+
 
   .summary-card__title {
     margin: 12px 0 5px;
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 
-  .summary-card__amount {
-    font-size: 17px;
 
-    line-height: 1.2;
+  .summary-card__amount {
+    font-size: 18px;
+    line-height: var(--line-height-tight);
 
     small {
       display: block;
 
       margin: 3px 0 0;
 
-      font-size: 8px;
+      font-size: var(--font-size-xs);
     }
   }
+
 
   .summary-card__comparison {
     margin-top: 5px;
 
-    font-size: 8px;
+    font-size: var(--font-size-xs);
   }
 }
+
+
+/* =========================
+   Small Mobile
+========================= */
+
 @media (max-width: 360px) {
   .summary-grid {
     grid-template-columns: 1fr;
   }
 
+
   .summary-card {
     min-height: auto;
   }
+
 
   .summary-card__amount {
     font-size: 19px;

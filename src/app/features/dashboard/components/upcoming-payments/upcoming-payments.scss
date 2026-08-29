@@ -29,7 +29,7 @@
 
     color: var(--text-primary);
 
-    font-size: 15px;
+    font-size: var(--font-size-lg);
     font-weight: 700;
   }
 
@@ -38,7 +38,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -51,7 +51,7 @@
 
   color: #4f46e5;
 
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: 600;
 
   white-space: nowrap;
@@ -134,7 +134,7 @@
 
     color: var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
     font-weight: 600;
 
     white-space: nowrap;
@@ -144,7 +144,7 @@
   span {
     color: var(--text-secondary);
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -159,7 +159,7 @@
   strong {
     color: var(--text-primary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
     font-weight: 700;
 
     font-variant-numeric: tabular-nums;
@@ -170,7 +170,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -190,16 +190,16 @@
     margin-bottom: 14px;
 
     h3 {
-      font-size: 14px;
+      font-size: var(--font-size-md);
     }
 
     p {
-      font-size: 10px;
+      font-size: var(--font-size-xs);
     }
   }
 
   .view-all-btn {
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 
   .payment-item {
@@ -217,21 +217,21 @@
 
   .payment-item__info {
     strong {
-      font-size: 11px;
+      font-size: var(--font-size-xs);
     }
 
     span {
-      font-size: 9px;
+      font-size: var(--font-size-xs);
     }
   }
 
   .payment-item__amount {
     strong {
-      font-size: 10px;
+      font-size: var(--font-size-xs);
     }
 
     small {
-      font-size: 8px;
+      font-size: var(--font-size-xs);
     }
   }
 }

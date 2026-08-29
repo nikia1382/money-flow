@@ -1,6 +1,25 @@
+:host {
+  display: block;
+  position: relative;
+
+  overflow: visible;
+
+  width: 100%;
+}
+
+
+/* =========================
+   Page
+========================= */
+
 .accounts-page {
   width: 100%;
 }
+
+
+/* =========================
+   Header
+========================= */
 
 .accounts-page__header {
   display: flex;
@@ -16,8 +35,9 @@
 
     color: var(--text-primary);
 
-    font-size: 24px;
-    font-weight: 700;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
   }
 
   p {
@@ -25,9 +45,15 @@
 
     color: var(--text-secondary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
+
+
+/* =========================
+   Add Account
+========================= */
 
 .add-account-btn {
   height: 40px;
@@ -40,11 +66,16 @@
   background: var(--primary);
   color: #ffffff;
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 }
+
+
+/* =========================
+   Balance Summary
+========================= */
 
 .balance-summary {
   padding: 22px;
@@ -59,7 +90,9 @@
   span {
     color: var(--text-secondary);
 
-    font-size: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
   }
 
   strong {
@@ -70,10 +103,14 @@
     color: var(--text-primary);
 
     font-size: 28px;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+
+    font-variant-numeric: tabular-nums;
 
     small {
-      font-size: 11px;
-      font-weight: 500;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-medium);
 
       color: var(--text-secondary);
     }
@@ -84,9 +121,15 @@
 
     color: var(--text-muted);
 
-    font-size: 10px;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
+
+
+/* =========================
+   Accounts Grid
+========================= */
 
 .accounts-grid {
   display: grid;
@@ -97,34 +140,10 @@
   gap: 14px;
 }
 
-@media (max-width: 1100px) {
-  .accounts-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-}
 
-@media (max-width: 700px) {
-
-  .accounts-page__header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .add-account-btn {
-    width: 100%;
-  }
-
-  .accounts-grid {
-    grid-template-columns: 1fr;
-  }
-
-}
-:host {
-  display: block;
-  position: relative;
-  overflow: visible;
-}
+/* =========================
+   Account Card
+========================= */
 
 .account-card {
   position: relative;
@@ -134,11 +153,17 @@
   z-index: 1;
 }
 
+
+/* =========================
+   Card Menu
+========================= */
+
 .account-card__menu-wrapper {
   position: relative;
 
   z-index: 2000;
 }
+
 
 .account-card__dropdown {
   position: absolute;
@@ -155,12 +180,14 @@
 
   padding: 6px;
 
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 10px;
 
-  background: #ffffff;
+  background: var(--bg-surface);
 
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.18);
 
   button {
     width: 100%;
@@ -177,18 +204,56 @@
 
     background: transparent;
 
-    color: #111827;
+    color: var(--text-primary);
+
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
 
     cursor: pointer;
 
-    text-align: left;
+    text-align: start;
 
     &:hover {
-      background: #f1f5f9;
+      background: var(--bg-soft);
     }
   }
 
   .delete-action {
-    color: #dc2626;
+    color: var(--danger);
+  }
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1100px) {
+  .accounts-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 700px) {
+  .accounts-page__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .add-account-btn {
+    width: 100%;
+  }
+
+
+  .accounts-grid {
+    grid-template-columns: 1fr;
   }
 }

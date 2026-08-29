@@ -39,9 +39,9 @@
 
     color: var(--text-primary);
 
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
   }
 
   p {
@@ -49,11 +49,15 @@
 
     color: var(--text-secondary);
 
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
 
+
+/* =========================
+   Add Budget Button
+========================= */
 
 .add-budget-btn {
   height: 42px;
@@ -74,8 +78,8 @@
   background: var(--primary);
   color: #ffffff;
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
@@ -148,6 +152,10 @@
 }
 
 
+/* =========================
+   Summary Icon
+========================= */
+
 .budgets-summary__icon {
   width: 42px;
   height: 42px;
@@ -159,8 +167,8 @@
 
   border-radius: 12px;
 
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
 
   &.total {
     background:
@@ -173,24 +181,28 @@
     background:
       rgba(220, 38, 38, 0.08);
 
-    color: #dc2626;
+    color: var(--danger);
   }
 
   &.remaining {
     background:
       rgba(5, 150, 105, 0.09);
 
-    color: #059669;
+    color: var(--success);
   }
 
   &.danger {
     background:
       rgba(220, 38, 38, 0.08);
 
-    color: #dc2626;
+    color: var(--danger);
   }
 }
 
+
+/* =========================
+   Summary Content
+========================= */
 
 .budgets-summary__content {
   min-width: 0;
@@ -202,8 +214,9 @@
 
     color: var(--text-secondary);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
   }
 
   strong {
@@ -214,7 +227,8 @@
     color: var(--text-primary);
 
     font-size: 18px;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
 
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -230,28 +244,29 @@
 
     color: var(--text-secondary);
 
-    font-size: 8px;
-    font-weight: 500;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
   }
 }
 
 
 .spent-value {
-  color: #dc2626 !important;
+  color: var(--danger) !important;
 }
 
 
 .remaining-value {
-  color: #059669 !important;
+  color: var(--success) !important;
 
   &.negative {
-    color: #dc2626 !important;
+    color: var(--danger) !important;
   }
 }
 
 
 .danger-value {
-  color: #dc2626 !important;
+  color: var(--danger) !important;
 }
 
 
@@ -284,61 +299,6 @@
 
 
 /* =========================
-   Month Selector
-========================= */
-
-/* .month-select-wrapper {
-  min-width: 170px;
-  height: 40px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  padding-inline: 12px;
-
-  box-sizing: border-box;
-
-  border: 1px solid transparent;
-  border-radius: 10px;
-
-  background: var(--bg-soft);
-  color: var(--text-secondary);
-
-  transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease;
-
-  &:hover {
-    border-color: var(--border-color);
-
-    background: var(--bg-surface);
-  }
-
-  &:focus-within {
-    border-color: var(--primary);
-  }
-
-  select {
-    flex: 1;
-    min-width: 0;
-
-    border: 0;
-    outline: 0;
-
-    background: transparent;
-    color: var(--text-primary);
-
-    font-size: 11px;
-    font-weight: 600;
-
-    cursor: pointer;
-  }
-}
- */
-
-/* =========================
    Status Filter
 ========================= */
 
@@ -365,8 +325,8 @@
     background: transparent;
     color: var(--text-secondary);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
 
     cursor: pointer;
 
@@ -391,10 +351,6 @@
   }
 }
 
-
-/* =========================
-   Budget Grid
-========================= */
 
 /* =========================
    Budgets Grid
@@ -467,15 +423,17 @@
 .budgets-empty strong {
   color: var(--text-primary);
 
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
 }
 
 
 .budgets-empty span {
   color: var(--text-secondary);
 
-  font-size: 10px;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
 }
 
 
@@ -484,12 +442,10 @@
 ========================= */
 
 @media (max-width: 1100px) {
-
   .budgets-summary {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
-
 }
 
 
@@ -498,7 +454,6 @@
 ========================= */
 
 @media (max-width: 700px) {
-
   .budgets-page__header {
     flex-direction: column;
 
@@ -539,19 +494,16 @@
   .budgets-grid {
     grid-template-columns: 1fr;
   }
-
 }
 
 
 @media (max-width: 600px) {
-
   .budgets-summary {
     grid-template-columns: 1fr;
   }
 
 
   .budgets-page__title h1 {
-    font-size: 22px;
+    font-size: var(--font-size-xl);
   }
-
 }

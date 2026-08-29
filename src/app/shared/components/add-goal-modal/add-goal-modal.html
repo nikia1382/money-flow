@@ -1,0 +1,169 @@
+@if (isOpen) {
+
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+  >
+
+    <section
+      class="goal-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <header class="goal-modal__header">
+
+        <div>
+<h2>
+  {{
+    (mode === 'edit'
+      ? 'goals.editGoal'
+      : 'goals.addGoal') | translate
+  }}
+</h2>
+          <p>
+            {{ 'goals.addGoalDescription' | translate }}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="goal-modal__close"
+          title="Close"
+          (click)="closeModal()"
+        >
+          <lucide-icon
+            [img]="X"
+            [size]="18"
+          />
+        </button>
+
+      </header>
+
+
+      <form
+        class="goal-modal__form"
+        [formGroup]="goalForm"
+        (ngSubmit)="submit()"
+      >
+
+        <div class="form-field">
+
+          <label>
+            {{ 'goals.goalName' | translate }}
+          </label>
+
+          <input
+            type="text"
+            formControlName="title"
+            [placeholder]="'goals.goalNamePlaceholder' | translate"
+          />
+
+          @if (
+            goalForm.get('title')?.touched &&
+            goalForm.get('title')?.invalid
+          ) {
+            <small class="form-error">
+              {{ 'goals.requiredField' | translate }}
+            </small>
+          }
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>
+            {{ 'goals.category' | translate }}
+          </label>
+
+          <select formControlName="category">
+
+            <option value="">
+              {{ 'goals.selectCategory' | translate }}
+            </option>
+
+            @for (category of categories; track category) {
+              <option [value]="category">
+                {{ category }}
+              </option>
+            }
+
+          </select>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-field">
+
+            <label>
+              {{ 'goals.targetAmount' | translate }}
+            </label>
+
+            <input
+              type="number"
+              formControlName="targetAmount"
+              min="1"
+            />
+
+          </div>
+
+
+          <div class="form-field">
+
+            <label>
+              {{ 'goals.savedAmount' | translate }}
+            </label>
+
+            <input
+              type="number"
+              formControlName="savedAmount"
+              min="0"
+            />
+
+          </div>
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label>
+            {{ 'goals.deadline' | translate }}
+          </label>
+
+          <input
+            type="date"
+            formControlName="deadline"
+          />
+
+        </div>
+
+
+        <footer class="goal-modal__actions">
+
+          <button
+            type="button"
+            class="goal-modal__cancel"
+            (click)="closeModal()"
+          >
+            {{ 'common.cancel' | translate }}
+          </button>
+
+          <button
+            type="submit"
+            class="goal-modal__save"
+          >
+            {{ 'common.save' | translate }}
+          </button>
+
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+
+}

@@ -208,6 +208,8 @@
        Budget Cards
   ========================== -->
 
+@if (filteredBudgets.length) {
+
   <div class="budgets-grid">
 
     @for (
@@ -215,40 +217,39 @@
       track budget.id
     ) {
 
-<app-budget-card
-  [budget]="budget"
-  (editBudget)="openEditBudget($event)"
-  (deleteBudget)="openDeleteBudget($event)"
-/>
-
-    } @empty {
-
-      <div class="budgets-empty">
-
-        <div class="budgets-empty__icon">
-
-          <lucide-icon
-            [img]="SlidersHorizontal"
-            [size]="22"
-          />
-
-        </div>
-
-
-        <strong>
-          {{ 'budgets.empty.title' | translate }}
-        </strong>
-
-
-        <span>
-          {{ 'budgets.empty.subtitle' | translate }}
-        </span>
-
-      </div>
+      <app-budget-card
+        [budget]="budget"
+        (editBudget)="openEditBudget($event)"
+        (deleteBudget)="openDeleteBudget($event)"
+      />
 
     }
 
   </div>
+
+} @else if (budgets.length) {
+
+  <app-state-view
+    type="no-results"
+    [icon]="SearchX"
+    [title]="'budgets.noResultsTitle' | translate"
+    [description]="'budgets.noResultsDescription' | translate"
+    [actionLabel]="'budgets.clearFilters' | translate"
+    (action)="clearFilters()"
+  />
+
+} @else {
+
+  <app-state-view
+    type="empty"
+    [icon]="PiggyBank"
+    [title]="'budgets.emptyTitle' | translate"
+    [description]="'budgets.emptyDescription' | translate"
+    [actionLabel]="'budgets.addBudget' | translate"
+    (action)="openAddBudget()"
+  />
+
+}
 
 
   <!-- =========================

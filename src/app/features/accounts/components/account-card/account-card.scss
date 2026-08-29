@@ -90,14 +90,14 @@
   span {
     color: var(--text-primary);
 
-    font-size: 13px;
+    font-size: var(--font-size-sm);
     font-weight: 600;
   }
 
   small {
     color: var(--text-secondary);
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 }
 
@@ -118,7 +118,7 @@
 
     color: var(--text-secondary);
 
-    font-size: 10px;
+    font-size: var(--font-size-xs);
   }
 }
 .account-card__menu-wrapper {
@@ -167,7 +167,7 @@
 
     color: var(--text-primary);
 
-    font-size: 11px;
+    font-size: var(--font-size-xs);
 
     cursor: pointer;
 

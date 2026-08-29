@@ -9,7 +9,8 @@ import {
   CalendarClock,
   CircleDollarSign,
   Clock3,
-  TriangleAlert
+  TriangleAlert,
+SearchX
 } from 'lucide-angular';
 
 import {
@@ -36,6 +37,7 @@ import {
   ToolbarFilter
 } from '../../../../shared/components/data-toolbar/data-toolbar.model';
 import { AddRecurringPaymentModal, RecurringPaymentForm } from '../../../../shared/components/add-recurring-payment-modal/add-recurring-payment-modal';
+import { StateView } from '../../../../shared/components/state-view/state-view';
 
 
 @Component({
@@ -48,7 +50,8 @@ import { AddRecurringPaymentModal, RecurringPaymentForm } from '../../../../shar
     TranslatePipe,
     DataTable,
     DataToolbar,
-    AddRecurringPaymentModal
+    AddRecurringPaymentModal,
+    StateView
   ],
 
   templateUrl: './recurring-payments.html',
@@ -73,7 +76,7 @@ export class RecurringPayments {
 
   readonly TriangleAlert =
     TriangleAlert;
-
+readonly SearchX = SearchX;
 
   /* =========================
      Summary
@@ -631,5 +634,10 @@ updatePayment(
 
   this.closeEditPayment();
 
+}
+clearFilters(): void {
+  this.searchTerm = '';
+  this.selectedStatus = 'all';
+  this.selectedFrequency = 'all';
 }
 }

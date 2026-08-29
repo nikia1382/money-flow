@@ -1,0 +1,332 @@
+<section class="goals">
+
+  <header class="goals__header">
+
+    <div class="goals__heading">
+      <h1>{{ 'goals.title' | translate }}</h1>
+
+      <p>
+        {{ 'goals.subtitle' | translate }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="goals__add-btn"
+      (click)="addGoal()"
+    >
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
+
+      <span>
+        {{ 'goals.addGoal' | translate }}
+      </span>
+    </button>
+
+  </header>
+
+
+  <section class="goals-summary">
+
+    <article class="summary-card">
+
+      <div class="summary-card__icon">
+        <lucide-icon
+          [img]="CircleDollarSign"
+          [size]="20"
+        />
+      </div>
+
+      <div>
+        <span class="summary-card__label">
+          {{ 'goals.totalSaved' | translate }}
+        </span>
+
+        <h2 class="summary-card__amount">
+          {{ totalSaved | number }}
+          <small>
+            {{ 'common.currency' | translate }}
+          </small>
+        </h2>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-card__icon">
+        <lucide-icon
+          [img]="Target"
+          [size]="20"
+        />
+      </div>
+
+      <div>
+        <span class="summary-card__label">
+          {{ 'goals.totalTarget' | translate }}
+        </span>
+
+        <h2 class="summary-card__amount">
+          {{ totalTarget | number }}
+          <small>
+            {{ 'common.currency' | translate }}
+          </small>
+        </h2>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-card__icon">
+        <lucide-icon
+          [img]="TrendingUp"
+          [size]="20"
+        />
+      </div>
+
+      <div>
+        <span class="summary-card__label">
+          {{ 'goals.overallProgress' | translate }}
+        </span>
+
+        <h2 class="summary-card__amount">
+          {{ overallProgress }}%
+        </h2>
+      </div>
+
+    </article>
+
+
+    <article class="summary-card">
+
+      <div class="summary-card__icon">
+        <lucide-icon
+          [img]="Target"
+          [size]="20"
+        />
+      </div>
+
+      <div>
+        <span class="summary-card__label">
+          {{ 'goals.completedGoals' | translate }}
+        </span>
+
+        <h2 class="summary-card__amount">
+          {{ completedGoals }}
+        </h2>
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <section class="goals-list">
+
+    <div class="goals-list__header">
+
+      <div>
+        <h2>
+          {{ 'goals.yourGoals' | translate }}
+        </h2>
+
+        <p>
+          {{ goals.length }}
+          {{ 'goals.activeGoals' | translate }}
+        </p>
+      </div>
+
+    </div>
+
+
+@if (goals.length) {
+
+  <div class="goals-grid">
+
+    @for (goal of goals; track goal.id) {
+
+      <article class="goal-card">
+
+        <header class="goal-card__header">
+
+          <div class="goal-card__icon">
+            <lucide-icon
+              [img]="Target"
+              [size]="20"
+            />
+          </div>
+
+          <button
+            type="button"
+            class="goal-card__menu"
+            title="Goal actions"
+            (click)="openGoalMenu(goal)"
+          >
+            <lucide-icon
+              [img]="MoreHorizontal"
+              [size]="19"
+            />
+          </button>
+
+          @if (selectedGoal?.id === goal.id) {
+
+            <div class="goal-card__actions">
+
+              <button
+                type="button"
+                (click)="editGoal(goal)"
+              >
+                {{ 'common.edit' | translate }}
+              </button>
+
+              <button
+                type="button"
+                class="delete"
+                (click)="requestDelete(goal)"
+              >
+                {{ 'common.delete' | translate }}
+              </button>
+
+            </div>
+
+          }
+
+        </header>
+
+
+        <div class="goal-card__content">
+
+          <div class="goal-card__title-row">
+
+            <div>
+
+              <span class="goal-card__category">
+                {{ goal.category }}
+              </span>
+
+              <h3>
+                {{ goal.title }}
+              </h3>
+
+            </div>
+
+            <strong>
+              {{ getProgress(goal) }}%
+            </strong>
+
+          </div>
+
+
+          <div class="goal-card__amounts">
+
+            <div>
+
+              <span>
+                {{ 'goals.saved' | translate }}
+              </span>
+
+              <strong>
+                {{ goal.savedAmount | number }}
+              </strong>
+
+            </div>
+
+
+            <div class="goal-card__target">
+
+              <span>
+                {{ 'goals.target' | translate }}
+              </span>
+
+              <strong>
+                {{ goal.targetAmount | number }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="goal-card__progress">
+
+            <div
+              class="goal-card__progress-value"
+              [style.width.%]="getProgress(goal)"
+            ></div>
+
+          </div>
+
+
+          <footer class="goal-card__footer">
+
+            <div>
+
+              <lucide-icon
+                [img]="CalendarDays"
+                [size]="14"
+              />
+
+              <span>
+                {{ goal.deadline }}
+              </span>
+
+            </div>
+
+            <span>
+              {{ getRemaining(goal) | number }}
+              {{ 'common.currency' | translate }}
+              {{ 'goals.remaining' | translate }}
+            </span>
+
+          </footer>
+
+        </div>
+
+      </article>
+
+    }
+
+  </div>
+
+} @else {
+
+  <app-state-view
+    type="empty"
+    [icon]="Target"
+    [title]="'goals.emptyTitle' | translate"
+    [description]="'goals.emptyDescription' | translate"
+    [actionLabel]="'goals.addGoal' | translate"
+    (action)="addGoal()"
+  />
+
+}
+
+  </section>
+  <app-add-goal-modal
+  [isOpen]="isAddGoalOpen"
+  mode="add"
+  (close)="closeAddGoal()"
+  (save)="saveGoal($event)"
+/>
+<app-add-goal-modal
+  [isOpen]="isEditGoalOpen"
+  mode="edit"
+  [goal]="selectedGoal"
+  (close)="closeEditGoal()"
+  (save)="updateGoal($event)"
+/>
+
+@if (goalToDelete) {
+  <app-confirm-dialog
+    [title]="'goals.deleteGoalTitle' | translate"
+    [message]="'goals.deleteGoalMessage' | translate"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()"
+  />
+}
+</section>

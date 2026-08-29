@@ -3,6 +3,7 @@
   width: 100%;
 }
 
+
 /* =========================
    Page
 ========================= */
@@ -29,6 +30,7 @@
   margin-bottom: 20px;
 }
 
+
 .transactions-page__title {
   min-width: 0;
 
@@ -37,9 +39,9 @@
 
     color: var(--text-primary);
 
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
   }
 
   p {
@@ -47,10 +49,15 @@
 
     color: var(--text-secondary);
 
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-normal);
   }
 }
+
+
+/* =========================
+   Add Transaction
+========================= */
 
 .add-transaction-btn {
   height: 42px;
@@ -71,13 +78,14 @@
   background: var(--primary);
   color: #ffffff;
 
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
   box-shadow:
-    0 6px 16px rgba(79, 70, 229, 0.18);
+    0 6px 16px
+    rgba(79, 70, 229, 0.18);
 
   transition:
     transform 0.15s ease,
@@ -87,7 +95,8 @@
     transform: translateY(-1px);
 
     box-shadow:
-      0 8px 20px rgba(79, 70, 229, 0.22);
+      0 8px 20px
+      rgba(79, 70, 229, 0.22);
   }
 
   &:active {
@@ -111,6 +120,7 @@
   margin-bottom: 18px;
 }
 
+
 .transactions-summary__card {
   min-width: 0;
 
@@ -122,7 +132,8 @@
   background: var(--bg-surface);
 
   box-shadow:
-    0 3px 12px rgba(15, 23, 42, 0.03);
+    0 3px 12px
+    rgba(15, 23, 42, 0.03);
 
   span {
     display: block;
@@ -131,15 +142,17 @@
 
     color: var(--text-secondary);
 
-    font-size: 11px;
-    font-weight: 600;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
   }
 
   strong {
     color: var(--text-primary);
 
     font-size: 21px;
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
 
     font-variant-numeric: tabular-nums;
   }
@@ -149,24 +162,24 @@
 
     color: var(--text-secondary);
 
-    font-size: 9px;
-    font-weight: 500;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
   }
 
   &.income strong {
-    color: #059669;
+    color: var(--success);
   }
 
   &.expense strong {
-    color: #dc2626;
+    color: var(--danger);
   }
 
   &.net.positive strong {
-    color: #059669;
+    color: var(--success);
   }
 
   &.net.negative strong {
-    color: #dc2626;
+    color: var(--danger);
   }
 }
 
@@ -194,6 +207,11 @@
 
   background: var(--bg-surface);
 }
+
+
+/* =========================
+   Search
+========================= */
 
 .transactions-search {
   flex: 1;
@@ -236,7 +254,8 @@
     background: transparent;
     color: var(--text-primary);
 
-    font-size: 12px;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
 
     &::placeholder {
       color: var(--text-secondary);
@@ -255,6 +274,7 @@
   flex-shrink: 0;
 }
 
+
 .filter-btn {
   height: 42px;
 
@@ -272,8 +292,8 @@
   background: var(--bg-surface);
   color: var(--text-primary);
 
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
@@ -293,6 +313,7 @@
   }
 }
 
+
 .filter-count {
   min-width: 18px;
   height: 18px;
@@ -307,8 +328,8 @@
   background: var(--primary);
   color: #ffffff;
 
-  font-size: 9px;
-  font-weight: 700;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
 }
 
 
@@ -336,8 +357,10 @@
   background: var(--bg-surface);
 
   box-shadow:
-    0 16px 40px rgba(15, 23, 42, 0.16);
+    0 16px 40px
+    rgba(15, 23, 42, 0.16);
 }
+
 
 .filter-panel__header {
   display: flex;
@@ -351,10 +374,11 @@
   strong {
     color: var(--text-primary);
 
-    font-size: 13px;
-    font-weight: 700;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
   }
 }
+
 
 .clear-filter-btn {
   padding: 0;
@@ -364,11 +388,12 @@
   background: transparent;
   color: var(--primary);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 }
+
 
 .filter-section {
   display: flex;
@@ -377,12 +402,14 @@
   gap: 9px;
 }
 
+
 .filter-section__title {
   color: var(--text-secondary);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 }
+
 
 .type-filter {
   display: grid;
@@ -401,8 +428,8 @@
     background: var(--bg-soft);
     color: var(--text-secondary);
 
-    font-size: 10px;
-    font-weight: 600;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
 
     cursor: pointer;
 
@@ -423,220 +450,9 @@
 
 
 /* =========================
-   Transactions Card
+   Filter Divider
 ========================= */
 
-.transactions-card {
-  position: relative;
-
-  width: 100%;
-
-  overflow: visible;
-
-  box-sizing: border-box;
-
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-
-  background: var(--bg-surface);
-
-  box-shadow:
-    0 4px 16px rgba(15, 23, 42, 0.04);
-}
-
-
-/* =========================
-   Table Header
-========================= */
-
-.transactions-card__header {
-  width: 100%;
-
-  display: grid;
-
-  grid-template-columns:
-    minmax(230px, 2fr)
-    minmax(150px, 1fr)
-    minmax(120px, 0.8fr)
-    minmax(160px, 1fr)
-    40px;
-
-  align-items: center;
-
-  gap: 16px;
-
-  min-height: 46px;
-
-  padding-inline: 18px;
-
-  box-sizing: border-box;
-
-  border-bottom: 1px solid var(--border-color);
-
-  border-radius:
-    16px
-    16px
-    0
-    0;
-
-  background: var(--bg-soft);
-
-  color: var(--text-secondary);
-
-  font-size: 10px;
-  font-weight: 600;
-}
-
-
-/* =========================
-   Transactions List
-========================= */
-
-.transactions-list {
-  width: 100%;
-
-  overflow: visible;
-
-  border-radius:
-    0
-    0
-    16px
-    16px;
-}
-
-
-/* =========================
-   Empty State
-========================= */
-
-.transactions-empty {
-  min-height: 220px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  gap: 7px;
-
-  padding: 32px;
-
-  box-sizing: border-box;
-
-  text-align: center;
-}
-
-.transactions-empty__icon {
-  width: 44px;
-  height: 44px;
-
-  display: grid;
-  place-items: center;
-
-  margin-bottom: 4px;
-
-  border-radius: 12px;
-
-  background: var(--bg-soft);
-
-  color: var(--text-secondary);
-}
-
-.transactions-empty strong {
-  color: var(--text-primary);
-
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.transactions-empty span {
-  color: var(--text-secondary);
-
-  font-size: 10px;
-}
-
-
-/* =========================
-   Tablet
-========================= */
-
-@media (max-width: 1100px) {
-
-  .transactions-summary {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .transactions-card__header {
-    grid-template-columns:
-      minmax(200px, 1.7fr)
-      minmax(130px, 1fr)
-      minmax(110px, 0.8fr)
-      minmax(140px, 1fr)
-      36px;
-
-    gap: 10px;
-
-    padding-inline: 14px;
-  }
-
-}
-
-
-/* =========================
-   Mobile
-========================= */
-
-@media (max-width: 800px) {
-
-  .transactions-page__header {
-    flex-direction: column;
-
-    gap: 14px;
-  }
-
-  .add-transaction-btn {
-    width: 100%;
-  }
-
-  .transactions-toolbar {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .transactions-search,
-  .filter-btn {
-    width: 100%;
-  }
-
-  .transactions-card__header {
-    display: none;
-  }
-
-}
-
-
-@media (max-width: 600px) {
-
-  .transactions-summary {
-    grid-template-columns: 1fr;
-  }
-
-  .transactions-page__title h1 {
-    font-size: 22px;
-  }
-
-  .filter-panel {
-    position: fixed;
-
-    top: 150px;
-
-    inset-inline: 12px;
-
-    width: auto;
-  }
-
-}
 .filter-divider {
   height: 1px;
 
@@ -645,6 +461,10 @@
   background: var(--border-color);
 }
 
+
+/* =========================
+   Filter Select
+========================= */
 
 .filter-select {
   width: 100%;
@@ -662,7 +482,7 @@
   background: var(--bg-surface);
   color: var(--text-primary);
 
-  font-size: 10px;
+  font-size: var(--font-size-sm);
 
   cursor: pointer;
 
@@ -674,6 +494,8 @@
       rgba(79, 70, 229, 0.1);
   }
 }
+
+
 /* =========================
    Sort
 ========================= */
@@ -721,11 +543,13 @@
   background: transparent;
   color: var(--text-primary);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 }
+
+
 /* =========================
    Active Filters
 ========================= */
@@ -740,6 +564,7 @@
   margin-bottom: 14px;
 }
 
+
 .active-filters__chips {
   display: flex;
   align-items: center;
@@ -747,6 +572,7 @@
 
   gap: 7px;
 }
+
 
 .filter-chip {
   min-height: 30px;
@@ -764,8 +590,8 @@
   background: var(--bg-surface);
   color: var(--text-primary);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
@@ -781,6 +607,7 @@
   }
 }
 
+
 .filter-chip__close {
   display: grid;
   place-items: center;
@@ -792,9 +619,10 @@
 
   color: var(--text-secondary);
 
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   line-height: 1;
 }
+
 
 .clear-all-filters {
   flex-shrink: 0;
@@ -806,8 +634,8 @@
   background: transparent;
   color: var(--primary);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
 
@@ -816,11 +644,234 @@
   }
 }
 
-@media (max-width: 700px) {
 
+/* =========================
+   Transactions Card
+========================= */
+
+.transactions-card {
+  position: relative;
+
+  width: 100%;
+
+  overflow: visible;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+
+  background: var(--bg-surface);
+
+  box-shadow:
+    0 4px 16px
+    rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================
+   Table Header
+========================= */
+
+.transactions-card__header {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(230px, 2fr)
+    minmax(150px, 1fr)
+    minmax(120px, 0.8fr)
+    minmax(160px, 1fr)
+    40px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 46px;
+
+  padding-inline: 18px;
+
+  box-sizing: border-box;
+
+  border-bottom:
+    1px solid
+    var(--border-color);
+
+  border-radius:
+    16px
+    16px
+    0
+    0;
+
+  background: var(--bg-soft);
+
+  color: var(--text-secondary);
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+
+/* =========================
+   Transactions List
+========================= */
+
+.transactions-list {
+  width: 100%;
+
+  overflow: visible;
+
+  border-radius:
+    0
+    0
+    16px
+    16px;
+}
+
+
+/* =========================
+   Empty State
+========================= */
+
+.transactions-empty {
+  min-height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 32px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+
+.transactions-empty__icon {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 4px;
+
+  border-radius: 12px;
+
+  background: var(--bg-soft);
+  color: var(--text-secondary);
+}
+
+
+.transactions-empty strong {
+  color: var(--text-primary);
+
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+
+.transactions-empty span {
+  color: var(--text-secondary);
+
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+
+/* =========================
+   Tablet
+========================= */
+
+@media (max-width: 1100px) {
+  .transactions-summary {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .transactions-card__header {
+    grid-template-columns:
+      minmax(200px, 1.7fr)
+      minmax(130px, 1fr)
+      minmax(110px, 0.8fr)
+      minmax(140px, 1fr)
+      36px;
+
+    gap: 10px;
+
+    padding-inline: 14px;
+  }
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 800px) {
+  .transactions-page__header {
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+
+  .add-transaction-btn {
+    width: 100%;
+  }
+
+
+  .transactions-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+
+  .transactions-search,
+  .filter-btn {
+    width: 100%;
+  }
+
+
+  .transactions-card__header {
+    display: none;
+  }
+}
+
+
+@media (max-width: 700px) {
   .active-filters {
     align-items: flex-start;
     flex-direction: column;
   }
+}
 
+
+@media (max-width: 600px) {
+  .transactions-summary {
+    grid-template-columns: 1fr;
+  }
+
+
+  .transactions-page__title h1 {
+    font-size: var(--font-size-xl);
+  }
+
+
+  .filter-panel {
+    position: fixed;
+
+    top: 150px;
+
+    inset-inline: 12px;
+
+    width: auto;
+  }
 }
