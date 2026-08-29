@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RecurringPayments } from './features/recurring-payments/services/recurring-payments';
 export const routes: Routes = [
   {
     path: '',
@@ -41,6 +40,16 @@ export const routes: Routes = [
       './features/recurring-payments/pages/recurring-payments/recurring-payments'
     ).then(
       m => m.RecurringPayments
+    )
+},
+{
+  path: 'help',
+
+  loadComponent: () =>
+    import(
+      './features/help/pages/help/help'
+    ).then(
+      m => m.Help
     )
 }
     ],

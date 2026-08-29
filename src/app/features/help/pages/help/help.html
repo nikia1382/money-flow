@@ -1,0 +1,255 @@
+<section class="help-page">
+
+  <!-- =========================
+       Header
+  ========================== -->
+
+  <div class="help-page__header">
+
+    <div>
+
+      <h1>
+        {{ 'help.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'help.subtitle' | translate }}
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       Hero Search
+  ========================== -->
+
+  <section class="help-hero">
+
+    <div class="help-hero__content">
+
+      <h2>
+        {{ 'help.hero.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'help.hero.subtitle' | translate }}
+      </p>
+
+
+      <div class="help-search">
+
+        <lucide-icon
+          [img]="Search"
+          [size]="18"
+        />
+
+        <input
+          type="search"
+          [(ngModel)]="searchTerm"
+          [placeholder]="
+            'help.searchPlaceholder'
+              | translate
+          "
+          aria-label="Search help"
+        />
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Topics
+  ========================== -->
+
+  <section class="help-section">
+
+    <div class="help-section__header">
+
+      <h2>
+        {{ 'help.topics.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'help.topics.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <div class="help-topics">
+
+      @for (
+        topic of topics;
+        track topic.id
+      ) {
+
+        <article class="help-topic-card">
+
+          <div class="help-topic-card__icon">
+
+            <lucide-icon
+              [img]="topic.icon"
+              [size]="20"
+            />
+
+          </div>
+
+
+          <div>
+
+            <h3>
+              {{ topic.titleKey | translate }}
+            </h3>
+
+            <p>
+              {{ topic.descriptionKey | translate }}
+            </p>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FAQ
+  ========================== -->
+
+  <section class="help-section">
+
+    <div class="help-section__header">
+
+      <h2>
+        {{ 'help.faq.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'help.faq.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <div class="faq-list">
+
+      @for (
+        faq of filteredFaqs;
+        track faq.id
+      ) {
+
+        <article
+          class="faq-item"
+          [class.open]="
+            openedFaqId === faq.id
+          "
+        >
+
+          <button
+            type="button"
+            class="faq-question"
+            [attr.aria-expanded]="
+              openedFaqId === faq.id
+            "
+            (click)="toggleFaq(faq.id)"
+          >
+
+            <span>
+              {{ faq.questionKey | translate }}
+            </span>
+
+
+            <lucide-icon
+              class="faq-chevron"
+              [img]="ChevronDown"
+              [size]="17"
+            />
+
+          </button>
+
+
+          @if (
+            openedFaqId === faq.id
+          ) {
+
+            <div class="faq-answer">
+
+              <p>
+                {{ faq.answerKey | translate }}
+              </p>
+
+            </div>
+
+          }
+
+        </article>
+
+      } @empty {
+
+        <div class="help-empty">
+
+          <strong>
+            {{ 'help.empty.title' | translate }}
+          </strong>
+
+          <span>
+            {{ 'help.empty.subtitle' | translate }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       Support
+  ========================== -->
+
+  <section class="support-card">
+
+    <div class="support-card__icon">
+
+      <lucide-icon
+        [img]="Mail"
+        [size]="21"
+      />
+
+    </div>
+
+
+    <div class="support-card__content">
+
+      <h2>
+        {{ 'help.support.title' | translate }}
+      </h2>
+
+      <p>
+        {{ 'help.support.subtitle' | translate }}
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="support-btn"
+    >
+      {{ 'help.support.button' | translate }}
+    </button>
+
+  </section>
+
+</section>

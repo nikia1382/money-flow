@@ -1,0 +1,502 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================
+   Page
+========================= */
+
+.help-page {
+  width: 100%;
+  max-width: 1400px;
+
+  margin-inline: auto;
+}
+
+
+/* =========================
+   Header
+========================= */
+
+.help-page__header {
+  margin-bottom: 18px;
+
+  h1 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 6px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+  }
+}
+
+
+/* =========================
+   Hero
+========================= */
+
+.help-hero {
+  margin-bottom: 26px;
+
+  padding: 28px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(79, 70, 229, 0.08),
+      rgba(79, 70, 229, 0.015)
+    );
+}
+
+
+.help-hero__content {
+  max-width: 680px;
+
+  margin-inline: auto;
+
+  text-align: center;
+
+  h2 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 7px 0 18px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+  }
+}
+
+
+/* =========================
+   Search
+========================= */
+
+.help-search {
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding-inline: 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid var(--border-color);
+  border-radius: 11px;
+
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+
+  box-shadow:
+    0 4px 15px
+    rgba(15, 23, 42, 0.04);
+
+  &:focus-within {
+    border-color: var(--primary);
+
+    box-shadow:
+      0 0 0 3px
+      rgba(79, 70, 229, 0.08);
+  }
+
+  input {
+    flex: 1;
+
+    min-width: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--text-primary);
+
+    font-family: inherit;
+    font-size: 11px;
+  }
+}
+
+
+/* =========================
+   Sections
+========================= */
+
+.help-section {
+  margin-bottom: 28px;
+}
+
+
+.help-section__header {
+  margin-bottom: 13px;
+
+  h2 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 4px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+  }
+}
+
+
+/* =========================
+   Topics
+========================= */
+
+.help-topics {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+.help-topic-card {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 15px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+
+  background: var(--bg-surface);
+
+  cursor: default;
+
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+
+    border-color:
+      rgba(79, 70, 229, 0.28);
+
+    box-shadow:
+      0 7px 20px
+      rgba(15, 23, 42, 0.05);
+  }
+
+  h3 {
+    margin: 1px 0 4px;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+    line-height: 1.6;
+  }
+}
+
+
+.help-topic-card__icon {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  background:
+    rgba(79, 70, 229, 0.08);
+
+  color: var(--primary);
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+.faq-list {
+  overflow: hidden;
+
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+
+  background: var(--bg-surface);
+}
+
+
+.faq-item {
+  border-bottom:
+    1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+.faq-question {
+  width: 100%;
+  min-height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 12px 15px;
+
+  border: 0;
+
+  background: transparent;
+  color: var(--text-primary);
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 650;
+
+  text-align: start;
+
+  cursor: pointer;
+
+  &:hover {
+    background: var(--bg-soft);
+  }
+}
+
+
+.faq-chevron {
+  flex-shrink: 0;
+
+  color: var(--text-secondary);
+
+  transition:
+    transform 0.2s ease;
+}
+
+
+.faq-item.open {
+
+  .faq-chevron {
+    transform:
+      rotate(180deg);
+  }
+}
+
+
+.faq-answer {
+  padding:
+    0 15px 15px;
+
+  p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    line-height: 1.8;
+  }
+}
+
+
+/* =========================
+   Empty
+========================= */
+
+.help-empty {
+  min-height: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  strong {
+    color: var(--text-primary);
+
+    font-size: 12px;
+  }
+
+  span {
+    color: var(--text-secondary);
+
+    font-size: 9px;
+  }
+}
+
+
+/* =========================
+   Support
+========================= */
+
+.support-card {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 18px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+
+  background: var(--bg-surface);
+}
+
+
+.support-card__icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background:
+    rgba(79, 70, 229, 0.08);
+
+  color: var(--primary);
+}
+
+
+.support-card__content {
+  flex: 1;
+
+  min-width: 0;
+
+  h2 {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 4px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 9px;
+  }
+}
+
+
+.support-btn {
+  height: 38px;
+
+  flex-shrink: 0;
+
+  padding-inline: 14px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--primary);
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+
+  .help-topics {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .help-page__header h1 {
+    font-size: 22px;
+  }
+
+
+  .help-hero {
+    padding: 20px 14px;
+  }
+
+
+  .help-topics {
+    grid-template-columns: 1fr;
+  }
+
+
+  .support-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .support-btn {
+    width: 100%;
+  }
+
+}

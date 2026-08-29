@@ -93,13 +93,21 @@
       </span>
     </a>
 
-    <a class="sidebar__item secondary-item">
-      <lucide-icon [img]="CircleHelp" [size]="18" />
+<a
+  routerLink="/help"
+  routerLinkActive="active"
+  class="sidebar__item secondary-item"
+  (click)="close()"
+>
+  <lucide-icon
+    [img]="CircleHelp"
+    [size]="18"
+  />
 
-      <span>
-        {{ 'sidebar.help' | translate }}
-      </span>
-    </a>
+  <span>
+    {{ 'sidebar.help' | translate }}
+  </span>
+</a>
   </div>
 
   <!-- Premium Card -->

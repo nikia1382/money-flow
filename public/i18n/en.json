@@ -277,5 +277,99 @@
 "empty": {
   "title": "No recurring payments",
   "subtitle": "Add your first recurring payment to get started."
+},
+"help": {
+  "title": "Help & Support",
+  "subtitle": "Find answers and learn how to use MoneyFlow.",
+
+  "hero": {
+    "title": "How can we help you?",
+    "subtitle": "Search for answers or explore popular topics."
+  },
+
+  "searchPlaceholder": "Search for help...",
+
+  "topics": {
+    "title": "Popular Topics",
+    "subtitle": "Explore the most common areas of MoneyFlow.",
+
+    "gettingStarted": {
+      "title": "Getting Started",
+      "description": "Learn the basics and set up MoneyFlow."
+    },
+
+    "accounts": {
+      "title": "Accounts",
+      "description": "Manage bank accounts, cash and savings."
+    },
+
+    "transactions": {
+      "title": "Transactions",
+      "description": "Add, edit and manage financial activity."
+    },
+
+    "budgets": {
+      "title": "Budgets",
+      "description": "Plan spending and track budget limits."
+    },
+
+    "language": {
+      "title": "Language",
+      "description": "Manage language and localization options."
+    },
+
+    "appearance": {
+      "title": "Appearance",
+      "description": "Customize light and dark appearance."
+    }
+  },
+
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Quick answers to common questions.",
+
+    "items": {
+      "addAccount": {
+        "question": "How do I add a new account?",
+        "answer": "Go to Accounts and select Add Account. Enter the account name, type and initial balance, then save it."
+      },
+
+      "transactions": {
+        "question": "How do I manage transactions?",
+        "answer": "Open Transactions to search, filter, add and manage your financial activity."
+      },
+
+      "budgets": {
+        "question": "How are budgets calculated?",
+        "answer": "Each budget compares the spending amount with the spending limit you set for that category."
+      },
+
+      "recurring": {
+        "question": "How do recurring payments work?",
+        "answer": "Recurring Payments help you track bills, subscriptions and other payments that repeat on a schedule."
+      },
+
+      "language": {
+        "question": "Can I change the application language?",
+        "answer": "Yes. MoneyFlow supports multiple languages and adjusts its interface based on your selected language."
+      },
+
+      "theme": {
+        "question": "Can I use dark mode?",
+        "answer": "Yes. You can switch between light and dark appearance from the application settings."
+      }
+    }
+  },
+
+  "empty": {
+    "title": "No help topics found",
+    "subtitle": "Try searching with a different keyword."
+  },
+
+  "support": {
+    "title": "Still need help?",
+    "subtitle": "Contact our support team if you couldn't find the answer you need.",
+    "button": "Contact Support"
+  }
 }
 }
