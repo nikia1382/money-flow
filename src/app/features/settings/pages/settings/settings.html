@@ -1,0 +1,96 @@
+<section class="settings-page">
+  <header class="settings-header">
+    <h1>
+      {{ 'settings.title' | translate }}
+    </h1>
+
+    <p>
+      {{ 'settings.subtitle' | translate }}
+    </p>
+  </header>
+
+  <div class="settings-list">
+    <!-- Language -->
+
+    <article class="setting-card">
+      <div class="setting-card__info">
+        <div class="setting-card__icon">
+          <lucide-icon [img]="Languages" [size]="20" />
+        </div>
+
+        <div>
+          <strong>
+            {{ 'settings.language.title' | translate }}
+          </strong>
+
+          <p>
+            {{ 'settings.language.description' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <select [value]="language()" (change)="setLanguage($any($event.target).value)">
+        <option value="en">English</option>
+        <option value="fa">فارسی</option>
+      </select>
+    </article>
+
+    <!-- Appearance -->
+
+    <article class="setting-card">
+      <div class="setting-card__info">
+        <div class="setting-card__icon">
+          <lucide-icon [img]="Moon" [size]="20" />
+        </div>
+
+        <div>
+          <strong>
+            {{ 'settings.appearance.title' | translate }}
+          </strong>
+
+          <p>
+            {{ 'settings.appearance.description' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <select [value]="appearance()" (change)="setAppearance($any($event.target).value)">
+        <option value="light">
+          {{ 'settings.appearance.light' | translate }}
+        </option>
+
+        <option value="dark">
+          {{ 'settings.appearance.dark' | translate }}
+        </option>
+      </select>
+    </article>
+
+    <!-- Currency -->
+
+    <article class="setting-card">
+      <div class="setting-card__info">
+        <div class="setting-card__icon">
+          <lucide-icon [img]="WalletCards" [size]="20" />
+        </div>
+
+        <div>
+          <strong>
+            {{ 'settings.currency.title' | translate }}
+          </strong>
+
+          <p>
+            {{ 'settings.currency.description' | translate }}
+          </p>
+        </div>
+      </div>
+
+      <select [value]="currency()" (change)="setCurrency($any($event.target).value)">
+        <option value="Toman">Toman</option>
+
+        <option value="USD">USD</option>
+
+        <option value="EUR">EUR</option>
+      </select>
+    </article>
+  </div>
+</section>

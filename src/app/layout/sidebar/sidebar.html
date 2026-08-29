@@ -66,13 +66,20 @@
   </nav>
 
   <!-- Secondary Navigation -->
+<!-- Secondary Navigation -->
+
+<div class="sidebar__secondary">
+
   <a
     routerLink="/notifications"
     routerLinkActive="active"
     class="sidebar__item secondary-item"
     (click)="close()"
   >
-    <lucide-icon [img]="Bell" [size]="18" />
+    <lucide-icon
+      [img]="Bell"
+      [size]="18"
+    />
 
     <span>
       {{ 'sidebar.notifications' | translate }}
@@ -85,6 +92,41 @@
     }
   </a>
 
+
+  <a
+    routerLink="/settings"
+    routerLinkActive="active"
+    class="sidebar__item secondary-item"
+    (click)="close()"
+  >
+    <lucide-icon
+      [img]="Settings"
+      [size]="18"
+    />
+
+    <span>
+      {{ 'sidebar.settings' | translate }}
+    </span>
+  </a>
+
+
+  <a
+    routerLink="/help"
+    routerLinkActive="active"
+    class="sidebar__item secondary-item"
+    (click)="close()"
+  >
+    <lucide-icon
+      [img]="CircleHelp"
+      [size]="18"
+    />
+
+    <span>
+      {{ 'sidebar.help' | translate }}
+    </span>
+  </a>
+
+</div>
   <!-- Premium Card -->
   <div class="premium-card">
     <div class="premium-card__icon">

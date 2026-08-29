@@ -421,5 +421,26 @@
   "unread": "unread notifications",
   "emptyTitle": "You're all caught up",
   "emptyDescription": "You don't have any notifications right now."
+},
+"settings": {
+  "title": "Settings",
+  "subtitle": "Customize your MoneyFlow experience.",
+
+  "language": {
+    "title": "Language",
+    "description": "Choose the language used across the application."
+  },
+
+  "appearance": {
+    "title": "Appearance",
+    "description": "Choose your preferred interface theme.",
+    "light": "Light",
+    "dark": "Dark"
+  },
+
+  "currency": {
+    "title": "Currency",
+    "description": "Choose your preferred display currency."
+  }
 }
 }
