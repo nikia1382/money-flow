@@ -26,6 +26,7 @@ import {
   RecurringPaymentForm,
 } from '../../../../shared/components/add-recurring-payment-modal/add-recurring-payment-modal';
 import { StateView } from '../../../../shared/components/state-view/state-view';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-recurring-payments',
@@ -39,6 +40,7 @@ import { StateView } from '../../../../shared/components/state-view/state-view';
     DataToolbar,
     AddRecurringPaymentModal,
     StateView,
+    LocaleNumberPipe,
   ],
 
   templateUrl: './recurring-payments.html',
@@ -328,9 +330,7 @@ export class RecurringPayments {
     this.editingPayment.set(payment);
   }
 
-  deletePayment(payment: RecurringPayment): void {
-    console.log('DELETE:', payment);
-  }
+  deletePayment(payment: RecurringPayment): void {}
   addPayment(form: RecurringPaymentForm): void {
     if (form.amount === null) {
       return;

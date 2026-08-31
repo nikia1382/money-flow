@@ -11,11 +11,12 @@ import {
 } from 'lucide-angular';
 
 import { Transaction } from '../../models/transaction.model';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-transaction-row',
 
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, LocaleNumberPipe],
 
   templateUrl: './transaction-row.html',
   styleUrl: './transaction-row.scss',

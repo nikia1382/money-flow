@@ -11,11 +11,12 @@ import {
 } from 'lucide-angular';
 
 import { Account } from '../../models/account.model';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-account-card',
 
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, LocaleNumberPipe],
 
   templateUrl: './account-card.html',
   styleUrl: './account-card.scss',

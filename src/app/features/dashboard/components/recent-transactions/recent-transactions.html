@@ -67,7 +67,7 @@
             -
           }
 
-          {{ transaction.amount.toLocaleString() }}
+          {{ transaction.amount | localeNumber }}
 
           <small>
             {{ 'dashboard.chart.currency' | translate }}

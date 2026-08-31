@@ -50,7 +50,7 @@
     </span>
 
     <strong>
-      {{ remainingAmount.toLocaleString() }}
+      {{ remainingAmount | localeNumber }}
     </strong>
 
     <small>
@@ -81,7 +81,7 @@
       </span>
 
       <strong>
-        {{ debt.totalAmount.toLocaleString() }}
+        {{ debt.totalAmount | localeNumber }}
       </strong>
     </div>
 
@@ -91,7 +91,7 @@
       </span>
 
       <strong>
-        {{ debt.paidAmount.toLocaleString() }}
+        {{ debt.paidAmount | localeNumber }}
       </strong>
     </div>
   </div>

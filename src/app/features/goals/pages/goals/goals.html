@@ -29,7 +29,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalSaved | number }}
+          {{ totalSaved | localeNumber }}
           <small>
             {{ 'common.currency' | translate }}
           </small>
@@ -48,7 +48,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalTarget | number }}
+          {{ totalTarget | localeNumber }}
           <small>
             {{ 'common.currency' | translate }}
           </small>
@@ -66,7 +66,7 @@
           {{ 'goals.overallProgress' | translate }}
         </span>
 
-        <h2 class="summary-card__amount">{{ overallProgress }}%</h2>
+        <h2 class="summary-card__amount">{{ overallProgress | localeNumber }}%</h2>
       </div>
     </article>
 
@@ -81,7 +81,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ completedGoals }}
+          {{ completedGoals | localeNumber }}
         </h2>
       </div>
     </article>
@@ -95,7 +95,7 @@
         </h2>
 
         <p>
-          {{ goals.length }}
+          {{ goals.length | localeNumber }}
           {{ 'goals.activeGoals' | translate }}
         </p>
       </div>
@@ -136,15 +136,15 @@
               <div class="goal-card__title-row">
                 <div>
                   <span class="goal-card__category">
-                    {{ goal.category }}
+                    {{ goal.category | translate }}
                   </span>
 
                   <h3>
-                    {{ goal.title }}
+                    {{ goal.title | translate }}
                   </h3>
                 </div>
 
-                <strong> {{ getProgress(goal) }}% </strong>
+                <strong> {{ getProgress(goal) | localeNumber }}% </strong>
               </div>
 
               <div class="goal-card__amounts">
@@ -154,7 +154,7 @@
                   </span>
 
                   <strong>
-                    {{ goal.savedAmount | number }}
+                    {{ goal.savedAmount | localeNumber }}
                   </strong>
                 </div>
 
@@ -164,7 +164,7 @@
                   </span>
 
                   <strong>
-                    {{ goal.targetAmount | number }}
+                    {{ goal.targetAmount | localeNumber }}
                   </strong>
                 </div>
               </div>
@@ -183,7 +183,7 @@
                 </div>
 
                 <span>
-                  {{ getRemaining(goal) | number }}
+                  {{ getRemaining(goal) | localeNumber }}
                   {{ 'common.currency' | translate }}
                   {{ 'goals.remaining' | translate }}
                 </span>

@@ -12,11 +12,19 @@ import { Landmark, SearchX } from 'lucide-angular';
 
 import { StateView } from '../../../../shared/components/state-view/state-view';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-accounts',
 
-  imports: [AccountCard, AddAccountModal, ConfirmDialog, StateView, TranslatePipe],
+  imports: [
+    AccountCard,
+    AddAccountModal,
+    ConfirmDialog,
+    StateView,
+    TranslatePipe,
+    LocaleNumberPipe,
+  ],
 
   templateUrl: './accounts.html',
   styleUrl: './accounts.scss',

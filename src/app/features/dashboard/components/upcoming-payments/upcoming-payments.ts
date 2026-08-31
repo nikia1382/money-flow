@@ -9,6 +9,7 @@ import {
   CreditCard,
   ChevronRight,
 } from 'lucide-angular';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 interface UpcomingPayment {
   id: number;
@@ -22,7 +23,7 @@ interface UpcomingPayment {
 @Component({
   selector: 'app-upcoming-payments',
 
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
 
   templateUrl: './upcoming-payments.html',
   styleUrl: './upcoming-payments.scss',

@@ -10,13 +10,14 @@ import {
 
 import { TranslatePipe } from '@ngx-translate/core';
 import { Debt } from '../../model/debt.model';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-debt-card',
 
   standalone: true,
 
-  imports: [LucideAngularModule, TranslatePipe],
+  imports: [LucideAngularModule, TranslatePipe, LocaleNumberPipe],
 
   templateUrl: './debt-card.html',
   styleUrl: './debt-card.scss',

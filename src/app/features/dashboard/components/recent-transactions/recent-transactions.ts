@@ -3,6 +3,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideAngularModule, ArrowDownLeft, ArrowUpRight, ArrowLeftRight } from 'lucide-angular';
 import { DashboardSearchService } from '../../../../core/services/dashboard-search.service';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 type TransactionType = 'income' | 'expense' | 'transfer';
 
@@ -17,12 +18,13 @@ interface Transaction {
 
 @Component({
   selector: 'app-recent-transactions',
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
   templateUrl: './recent-transactions.html',
   styleUrl: './recent-transactions.scss',
 })
 export class RecentTransactions {
   private readonly dashboardSearch = inject(DashboardSearchService);
+
   readonly ArrowDownLeft = ArrowDownLeft;
   readonly ArrowUpRight = ArrowUpRight;
   readonly ArrowLeftRight = ArrowLeftRight;

@@ -18,6 +18,8 @@ import { AddDebtModal, NewDebt } from '../../components/add-debt-modal/add-debt-
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { Debt } from '../../model/debt.model';
 import { RecordPaymentModal } from '../../components/record-payment-modal/record-payment-modal';
+import { ToastService } from '../../../../shared/services/toast';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-debts',
@@ -31,6 +33,7 @@ import { RecordPaymentModal } from '../../components/record-payment-modal/record
     AddDebtModal,
     ConfirmDialog,
     RecordPaymentModal,
+    LocaleNumberPipe,
   ],
 
   templateUrl: './debts.html',
@@ -39,6 +42,7 @@ import { RecordPaymentModal } from '../../components/record-payment-modal/record
 export class Debts {
   private readonly debtsService = inject(DebtsService);
   readonly paymentDebt = signal<Debt | null>(null);
+  private readonly toast = inject(ToastService);
 
   readonly Plus = Plus;
   readonly HandCoins = HandCoins;
@@ -50,7 +54,6 @@ export class Debts {
   readonly debtPendingDelete = signal<Debt | null>(null);
   readonly isAddDebtOpen = signal(false);
   readonly debts = this.debtsService.debts;
-
   readonly totalIOwe = this.debtsService.totalIOwe;
 
   readonly totalOwedToMe = this.debtsService.totalOwedToMe;

@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
+
 export const routes: Routes = [
+  /* =========================
+     Main Application
+  ========================= */
+
   {
     path: '',
     loadComponent: () => import('./layout/main-layout/main-layout').then((m) => m.MainLayout),
@@ -10,11 +15,13 @@ export const routes: Routes = [
         redirectTo: 'dashboard',
         pathMatch: 'full',
       },
+
       {
         path: 'dashboard',
         loadComponent: () =>
           import('./features/dashboard/pages/dashboard/dashboard').then((m) => m.Dashboard),
       },
+
       {
         path: 'accounts',
         loadComponent: () =>
@@ -28,6 +35,7 @@ export const routes: Routes = [
             (m) => m.Transactions,
           ),
       },
+
       {
         path: 'budgets',
         loadComponent: () =>
@@ -36,21 +44,22 @@ export const routes: Routes = [
 
       {
         path: 'recurring-payments',
-
         loadComponent: () =>
           import('./features/recurring-payments/pages/recurring-payments/recurring-payments').then(
             (m) => m.RecurringPayments,
           ),
       },
-      {
-        path: 'help',
 
-        loadComponent: () => import('./features/help/pages/help/help').then((m) => m.Help),
+      {
+        path: 'debts',
+        loadComponent: () => import('./features/debts/pages/debts/debts').then((m) => m.Debts),
       },
+
       {
         path: 'goals',
         loadComponent: () => import('./features/goals/pages/goals/goals').then((m) => m.Goals),
       },
+
       {
         path: 'notifications',
         loadComponent: () =>
@@ -58,15 +67,33 @@ export const routes: Routes = [
             (m) => m.Notifications,
           ),
       },
+
       {
         path: 'settings',
         loadComponent: () =>
           import('./features/settings/pages/settings/settings').then((m) => m.Settings),
       },
+
       {
-        path: 'debts',
-        loadComponent: () => import('./features/debts/pages/debts/debts').then((m) => m.Debts),
+        path: 'help',
+        loadComponent: () => import('./features/help/pages/help/help').then((m) => m.Help),
+      },
+
+      {
+        path: 'premium',
+        loadComponent: () =>
+          import('./features/premium/pages/premium/premium').then((m) => m.Premium),
       },
     ],
+  },
+
+  /* =========================
+     404 - OUTSIDE MainLayout
+  ========================= */
+
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./features/not-found/pages/not-found/not-found').then((m) => m.NotFound),
   },
 ];

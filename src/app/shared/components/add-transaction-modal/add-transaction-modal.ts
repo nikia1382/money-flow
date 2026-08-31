@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
@@ -6,7 +6,10 @@ import { LucideAngularModule, X } from 'lucide-angular';
 
 import { AccountsService } from '../../../features/accounts/services/accounts';
 
-import { TransactionType } from '../../../features/transactions/models/transaction.model';
+import {
+  Transaction,
+  TransactionType,
+} from '../../../features/transactions/models/transaction.model';
 
 export interface TransactionForm {
   title: string;
@@ -36,7 +39,8 @@ export class AddTransactionModal {
   /* =========================
      Outputs
   ========================= */
-
+  @Input()
+  transactionToEdit: Transaction | null = null;
   @Output()
   closeModal = new EventEmitter<void>();
 

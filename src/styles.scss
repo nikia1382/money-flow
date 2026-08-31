@@ -233,3 +233,49 @@ select {
 .summary-card__amount {
   font-variant-numeric: tabular-nums;
 }
+/* =========================
+   Global Form Validation
+========================= */
+
+.form-error {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--danger);
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+/* Input / Select / Textarea Error */
+
+input.input-error,
+select.input-error,
+textarea.input-error {
+  border-color: var(--danger) !important;
+
+  &:focus {
+    border-color: var(--danger) !important;
+
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+  }
+}
+
+/* Button Group / Segmented Control Error */
+
+.input-group-error,
+.account-types.input-error,
+.frequency-options.input-error,
+.debt-type-options.input-error {
+  border: 1px solid var(--danger);
+  border-radius: 10px;
+}
+
+/* Disabled Primary Actions */
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

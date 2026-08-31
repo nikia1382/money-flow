@@ -39,7 +39,7 @@
         </span>
 
         <strong>
-          {{ totalBudget.toLocaleString() }}
+          {{ totalBudget | localeNumber }}
         </strong>
 
         <small>
@@ -59,7 +59,7 @@
         </span>
 
         <strong class="spent-value">
-          {{ totalSpent.toLocaleString() }}
+          {{ totalSpent | localeNumber }}
         </strong>
 
         <small>
@@ -79,7 +79,7 @@
         </span>
 
         <strong class="remaining-value" [class.negative]="totalRemaining < 0">
-          {{ totalRemaining.toLocaleString() }}
+          {{ totalRemaining | localeNumber }}
         </strong>
 
         <small>
@@ -161,7 +161,7 @@
         />
       }
     </div>
-  } @else if (budgets.length) {
+  } @else if (budgets().length) {
     <app-state-view
       type="no-results"
       [icon]="SearchX"

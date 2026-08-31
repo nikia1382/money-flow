@@ -16,6 +16,7 @@ import {
 } from '../../../../shared/components/add-goal-modal/add-goal-modal';
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { StateView } from '../../../../shared/components/state-view/state-view';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 interface FinancialGoal {
   id: number;
@@ -36,6 +37,7 @@ interface FinancialGoal {
     AddGoalModal,
     ConfirmDialog,
     StateView,
+    LocaleNumberPipe,
   ],
   templateUrl: './goals.html',
   styleUrl: './goals.scss',
@@ -54,24 +56,24 @@ export class Goals {
   goals: FinancialGoal[] = [
     {
       id: 1,
-      title: 'Emergency Fund',
-      category: 'Savings',
+      title: 'goals.items.emergencyFund.title',
+      category: 'goals.categories.savings',
       targetAmount: 50_000_000,
       savedAmount: 32_500_000,
       deadline: '2026-12-20',
     },
     {
       id: 2,
-      title: 'New Laptop',
-      category: 'Technology',
+      title: 'goals.items.newLaptop.title',
+      category: 'goals.categories.technology',
       targetAmount: 80_000_000,
       savedAmount: 24_000_000,
       deadline: '2027-02-15',
     },
     {
       id: 3,
-      title: 'Summer Vacation',
-      category: 'Travel',
+      title: 'goals.items.summerVacation.title',
+      category: 'goals.categories.travel',
       targetAmount: 35_000_000,
       savedAmount: 28_000_000,
       deadline: '2026-10-01',

@@ -132,7 +132,12 @@
 
     "cancel": "Cancel",
     "add": "Add Account",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "errors": {
+  "nameRequired": "Account name is required.",
+  "typeRequired": "Please select an account type.",
+  "balanceInvalid": "Balance cannot be negative."
+}
   },
 
   "deleteDialog": {
@@ -340,13 +345,74 @@
       },
 
       "transactions": {
+"deleteDialog": {
+  "title": "Delete Transaction",
+  "message": "Are you sure you want to delete the transaction \"{{title}}\"?",
+  "confirm": "Delete",
+  "cancel": "Cancel"
+},
         "question": "How do I manage transactions?",
         "answer": "Open Transactions to search, filter, add and manage your financial activity.",
         "noResultsTitle": "No matching transactions",
 "noResultsDescription": "Try changing your search or filters.",
 "clearFilters": "Clear filters",
 "emptyTitle": "No transactions yet",
-"emptyDescription": "Add your first transaction to start tracking your money."
+"emptyDescription": "Add your first transaction to start tracking your money.",
+"transactions": {
+  "title": "تراکنش‌ها",
+  "subtitle": "تمام فعالیت‌های مالی خود را مشاهده و مدیریت کنید.",
+  "addTransaction": "افزودن تراکنش",
+
+  "summary": {
+    "totalIncome": "مجموع درآمد",
+    "totalExpenses": "مجموع هزینه‌ها",
+    "netFlow": "جریان خالص",
+    "transactions": "تراکنش‌ها"
+  },
+
+  "searchPlaceholder": "جستجو در تراکنش‌ها...",
+  "searchAria": "جستجوی تراکنش‌ها",
+
+  "sort": {
+    "label": "مرتب‌سازی تراکنش‌ها",
+    "newest": "جدیدترین",
+    "oldest": "قدیمی‌ترین",
+    "highest": "بیشترین مبلغ",
+    "lowest": "کمترین مبلغ"
+  },
+
+  "filters": {
+    "title": "فیلترها",
+    "clear": "پاک کردن",
+    "clearAll": "پاک کردن همه",
+    "type": "نوع تراکنش",
+    "all": "همه",
+    "account": "حساب",
+    "allAccounts": "همه حساب‌ها",
+    "category": "دسته‌بندی",
+    "allCategories": "همه دسته‌بندی‌ها",
+    "accountAria": "فیلتر تراکنش‌ها بر اساس حساب",
+    "categoryAria": "فیلتر تراکنش‌ها بر اساس دسته‌بندی"
+  },
+
+  "types": {
+    "income": "درآمد",
+    "expense": "هزینه",
+    "transfer": "انتقال"
+  },
+
+  "table": {
+    "transaction": "تراکنش",
+    "account": "حساب",
+    "date": "تاریخ",
+    "amount": "مبلغ"
+  },
+
+  "empty": {
+    "title": "تراکنشی پیدا نشد",
+    "subtitle": "جستجو یا فیلترهای خود را تغییر دهید."
+  }
+}
       },
 
       "budgets": {
@@ -412,7 +478,23 @@
 "deleteGoalTitle": "Delete Goal?",
 "deleteGoalMessage": "This goal will be permanently deleted.",
 "emptyTitle": "No goals yet",
-"emptyDescription": "Create your first financial goal and start building toward something that matters."
+"emptyDescription": "Create your first financial goal and start building toward something that matters.",
+"categories": {
+  "savings": "Savings",
+  "technology": "Technology",
+  "travel": "Travel"
+},
+"items": {
+  "emergencyFund": {
+    "title": "Emergency Fund"
+  },
+  "newLaptop": {
+    "title": "New Laptop"
+  },
+  "summerVacation": {
+    "title": "Summer Vacation"
+  }
+}
 },
 "notifications": {
   "title": "Notifications",
@@ -420,7 +502,21 @@
   "markAllRead": "Mark all as read",
   "unread": "unread notifications",
   "emptyTitle": "You're all caught up",
-  "emptyDescription": "You don't have any notifications right now."
+  "emptyDescription": "You don't have any notifications right now.",
+  "items": {
+  "upcomingPayment": {
+    "title": "Upcoming payment",
+    "description": "Your home rent payment is due soon."
+  },
+  "budgetWarning": {
+    "title": "Budget warning",
+    "description": "You have used more than 80% of your Food budget."
+  },
+  "accountUpdated": {
+    "title": "Account updated",
+    "description": "Your Main Bank Account balance was updated."
+  }
+}
 },
 "settings": {
   "title": "Settings",
@@ -501,5 +597,16 @@
 "paid": "Paid",
 "yourDebts": "Your Debts",
 "items": "items"
+},
+"premium": {
+  "title": "MoneyFlow Pro",
+  "description": "Advanced financial tools and premium features are coming soon."
+},
+"notFound": {
+  "badge": "Error 404",
+  "title": "Looks like you're off the money trail",
+  "description": "The page you're looking for doesn't exist, was moved, or is no longer available.",
+  "backHome": "Back to Dashboard",
+  "goBack": "Go Back"
 }
 }

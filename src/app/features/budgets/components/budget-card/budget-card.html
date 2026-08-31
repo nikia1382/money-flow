@@ -96,7 +96,7 @@
       </span>
 
       <strong>
-        {{ budget.spent.toLocaleString() }}
+        {{ budget.spent | localeNumber }}
       </strong>
 
       <small>
@@ -112,7 +112,7 @@
       </span>
 
       <strong>
-        {{ budget.limit.toLocaleString() }}
+        {{ budget.limit | localeNumber }}
       </strong>
 
       <small>
@@ -134,7 +134,7 @@
           'budgets.card.overBudget'
             | translate
               : {
-                  amount: (-remaining).toLocaleString(),
+                  amount: -remaining | localeNumber,
                 }
         }}
       </span>
@@ -146,7 +146,7 @@
           'budgets.card.remaining'
             | translate
               : {
-                  amount: remaining.toLocaleString(),
+                  amount: remaining | localeNumber,
                 }
         }}
       </span>

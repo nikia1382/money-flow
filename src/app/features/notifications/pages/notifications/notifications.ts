@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { StateView } from '../../../../shared/components/state-view/state-view';
 import { NotificationsService } from '../../services/notifications';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 interface NotificationItem {
   id: number;
@@ -19,7 +20,7 @@ interface NotificationItem {
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [DatePipe, LucideAngularModule, TranslatePipe, StateView],
+  imports: [DatePipe, LucideAngularModule, TranslatePipe, StateView, LocaleNumberPipe],
   templateUrl: './notifications.html',
   styleUrl: './notifications.scss',
 })

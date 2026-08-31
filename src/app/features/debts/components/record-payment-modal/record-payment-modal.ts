@@ -7,13 +7,14 @@ import { LucideAngularModule, X, WalletCards } from 'lucide-angular';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { Debt, DebtType } from '../../model/debt.model';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-record-payment-modal',
 
   standalone: true,
 
-  imports: [FormsModule, LucideAngularModule, TranslatePipe],
+  imports: [FormsModule, LucideAngularModule, TranslatePipe, LocaleNumberPipe],
 
   templateUrl: './record-payment-modal.html',
   styleUrl: './record-payment-modal.scss',

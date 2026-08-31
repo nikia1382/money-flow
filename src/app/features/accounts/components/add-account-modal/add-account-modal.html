@@ -1,9 +1,9 @@
 <div class="modal-backdrop" (click)="close()">
   <section class="account-modal" (click)="$event.stopPropagation()">
+    <!-- Header -->
     <div class="account-modal__header">
       <div>
         <h2>Add Account</h2>
-
         <p>Add a new account to MoneyFlow.</p>
       </div>
 
@@ -12,7 +12,9 @@
       </button>
     </div>
 
+    <!-- Form -->
     <form class="account-form" (ngSubmit)="save()">
+      <!-- Account Name -->
       <div class="form-group">
         <label for="account-name"> Account Name </label>
 
@@ -22,14 +24,22 @@
           name="name"
           [(ngModel)]="form.name"
           placeholder="Main Bank Account"
+          [class.input-error]="!form.name.trim()"
           required
         />
+
+        @if (!form.name.trim()) {
+          <small class="form-error">
+            {{ 'accounts.form.errors.nameRequired' | translate }}
+          </small>
+        }
       </div>
 
+      <!-- Account Type -->
       <div class="form-group">
         <label> Account Type </label>
 
-        <div class="account-types">
+        <div class="account-types" [class.input-error]="!form.type">
           <button type="button" [class.active]="form.type === 'bank'" (click)="form.type = 'bank'">
             Bank
           </button>
@@ -46,8 +56,15 @@
             Savings
           </button>
         </div>
+
+        @if (!form.type) {
+          <small class="form-error">
+            {{ 'accounts.form.errors.typeRequired' | translate }}
+          </small>
+        }
       </div>
 
+      <!-- Initial Balance -->
       <div class="form-group">
         <label for="balance"> Initial Balance </label>
 
@@ -57,10 +74,23 @@
           name="balance"
           [(ngModel)]="form.balance"
           placeholder="0"
+          min="0"
+          [class.input-error]="form.balance === null || form.balance < 0"
           required
         />
+
+        @if (form.balance === null) {
+          <small class="form-error">
+            {{ 'accounts.form.errors.balanceRequired' | translate }}
+          </small>
+        } @else if (form.balance < 0) {
+          <small class="form-error">
+            {{ 'accounts.form.errors.balanceInvalid' | translate }}
+          </small>
+        }
       </div>
 
+      <!-- Account Number -->
       @if (form.type !== 'cash') {
         <div class="form-group">
           <label for="account-number"> Account Number </label>
@@ -75,10 +105,13 @@
         </div>
       }
 
+      <!-- Actions -->
       <div class="account-modal__actions">
         <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
 
-        <button type="submit" class="save-btn">Add Account</button>
+        <button type="submit" class="save-btn" [disabled]="!isFormValid">
+          {{ 'common.save' | translate }}
+        </button>
       </div>
     </form>
   </section>

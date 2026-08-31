@@ -21,6 +21,7 @@ import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/conf
 import { PiggyBank, SearchX } from 'lucide-angular';
 
 import { StateView } from '../../../../shared/components/state-view/state-view';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 type BudgetStatusFilter = 'all' | 'active' | 'over';
 
@@ -36,6 +37,7 @@ type BudgetStatusFilter = 'all' | 'active' | 'over';
     MonthSelector,
     ConfirmDialog,
     StateView,
+    LocaleNumberPipe,
   ],
 
   templateUrl: './budgets.html',

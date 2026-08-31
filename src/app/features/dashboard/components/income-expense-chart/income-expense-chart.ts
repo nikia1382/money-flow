@@ -11,6 +11,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-income-expense-chart',
 
+  standalone: true,
+
   imports: [BaseChartDirective, TranslatePipe],
 
   templateUrl: './income-expense-chart.html',
@@ -70,9 +72,11 @@ export class IncomeExpenseChart {
           label: (context: TooltipItem<'line'>) => {
             const value = context.parsed.y ?? 0;
 
+            const formattedValue = this.formatNumber(value);
+
             const currency = this.translate.instant('dashboard.chart.currency');
 
-            return `${context.dataset.label}: ${value.toLocaleString()} ${currency}`;
+            return `${context.dataset.label ?? ''}: ${formattedValue} ${currency}`;
           },
         },
       },
@@ -96,6 +100,8 @@ export class IncomeExpenseChart {
       y: {
         ticks: {
           color: '#94a3b8',
+
+          callback: (value) => this.formatNumber(Number(value)),
         },
 
         grid: {
@@ -115,16 +121,16 @@ export class IncomeExpenseChart {
 
   constructor() {
     /*
-      اولین بار که کامپوننت باز می‌شود
-      نمودار ساخته می‌شود.
+      First chart render
     */
+
     this.updateChartData();
 
     /*
-      وقتی زبان تغییر کند،
-      عنوان‌ها و ماه‌های Chart
-      دوباره ساخته می‌شوند.
+      Rebuild translated labels
+      when language changes
     */
+
     this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.updateChartData();
     });
@@ -138,6 +144,16 @@ export class IncomeExpenseChart {
     this.selectedPeriod = period;
 
     this.updateChartData();
+  }
+
+  /* =========================
+     Number Formatter
+  ========================= */
+
+  private formatNumber(value: number): string {
+    const locale = this.translate.currentLang() === 'fa' ? 'fa-IR' : 'en-US';
+
+    return new Intl.NumberFormat(locale).format(value);
   }
 
   /* =========================

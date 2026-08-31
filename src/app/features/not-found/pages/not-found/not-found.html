@@ -1,0 +1,94 @@
+<main class="not-found">
+  <!-- Decorative Background -->
+
+  <div class="not-found__background">
+    <div class="orb orb--one"></div>
+    <div class="orb orb--two"></div>
+    <div class="orb orb--three"></div>
+
+    <div class="floating-card floating-card--one">
+      <lucide-icon [img]="WalletCards" [size]="24" />
+    </div>
+
+    <div class="floating-card floating-card--two">
+      <lucide-icon [img]="CircleDollarSign" [size]="22" />
+    </div>
+
+    <div class="floating-card floating-card--three">
+      <lucide-icon [img]="TrendingUp" [size]="22" />
+    </div>
+  </div>
+
+  <!-- Main Content -->
+
+  <section class="not-found__content">
+    <!-- Brand -->
+
+    <!--     <div class="not-found__brand">
+
+      <div class="not-found__logo">
+        M
+      </div>
+
+      <span>
+        MoneyFlow
+      </span>
+
+    </div>
+ -->
+
+    <!-- 404 -->
+
+    <div class="not-found__code">
+      <span>4</span>
+
+      <div class="not-found__zero">
+        <div class="zero-inner">
+          <lucide-icon [img]="CircleDollarSign" [size]="48" />
+        </div>
+      </div>
+
+      <span>4</span>
+    </div>
+
+    <!-- Text -->
+
+    <div class="not-found__text">
+      <span class="not-found__badge">
+        {{ 'notFound.badge' | translate }}
+      </span>
+
+      <h1>
+        {{ 'notFound.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'notFound.description' | translate }}
+      </p>
+    </div>
+
+    <!-- Actions -->
+
+    <div class="not-found__actions">
+      <button type="button" class="home-btn" (click)="goHome()">
+        <lucide-icon [img]="Home" [size]="17" />
+
+        <span>
+          {{ 'notFound.backHome' | translate }}
+        </span>
+      </button>
+
+      <button type="button" class="back-btn" (click)="goBack()">
+        <lucide-icon [img]="ArrowLeft" [size]="17" />
+
+        <span>
+          {{ 'notFound.goBack' | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+
+  <footer class="not-found__footer">MoneyFlow · Financial clarity, simplified.</footer>
+</main>

@@ -22,7 +22,7 @@
   @if (notifications().length) {
     <div class="notifications-summary">
       <span>
-        {{ unreadCount() }}
+        {{ unreadCount() | localeNumber }}
         {{ 'notifications.unread' | translate }}
       </span>
     </div>
@@ -41,7 +41,7 @@
           <div class="notification-content">
             <div class="notification-title">
               <strong>
-                {{ notification.title }}
+                {{ notification.title | translate }}
               </strong>
 
               @if (!notification.isRead) {
@@ -50,7 +50,7 @@
             </div>
 
             <p>
-              {{ notification.description }}
+              {{ notification.description | translate }}
             </p>
 
             <small>

@@ -5,11 +5,12 @@ import { LucideAngularModule, MoreHorizontal, Pencil, Trash2 } from 'lucide-angu
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { DataTableColumn } from './data-table.model';
+import { LocaleNumberPipe } from '../../pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-data-table',
 
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
 
   templateUrl: './data-table.html',
   styleUrl: './data-table.scss',
@@ -74,11 +75,8 @@ export class DataTable<T extends object> {
   }
 
   toggleActions(index: number): void {
-    console.log('MENU CLICKED:', index);
-
     this.openedMenuIndex = this.openedMenuIndex === index ? null : index;
 
-    console.log('OPENED MENU INDEX:', this.openedMenuIndex);
   }
 
   edit(row: T): void {

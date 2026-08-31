@@ -28,9 +28,9 @@
               </span>
 
               <span class="budget-item__amount">
-                {{ budget.spent.toLocaleString() }}
+                {{ budget.spent | localeNumber }}
                 /
-                {{ budget.limit.toLocaleString() }}
+                {{ budget.limit | localeNumber }}
               </span>
             </div>
 

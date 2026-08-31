@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, X } from 'lucide-angular';
 
 import { AccountType } from '../../models/account.model';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export interface NewAccount {
   name: string;
@@ -16,7 +17,7 @@ export interface NewAccount {
 @Component({
   selector: 'app-add-account-modal',
 
-  imports: [FormsModule, LucideAngularModule],
+  imports: [FormsModule, LucideAngularModule, TranslatePipe],
 
   templateUrl: './add-account-modal.html',
   styleUrl: './add-account-modal.scss',
@@ -62,24 +63,20 @@ export class AddAccountModal implements OnChanges {
   }
 
   save(): void {
-    console.log('SAVE CLICKED:', this.form);
-
-    if (!this.form.name.trim()) {
-      console.log('ACCOUNT NAME IS EMPTY');
-      return;
-    }
-
-    if (this.form.balance === null || this.form.balance === undefined) {
-      console.log('BALANCE IS EMPTY');
+    if (!this.isFormValid) {
       return;
     }
 
     this.saveAccount.emit({
       ...this.form,
     });
-
-    console.log('ACCOUNT EMITTED:', this.form);
-
-    this.close();
+  }
+  get isFormValid(): boolean {
+    return (
+      this.form.name.trim().length > 0 &&
+      this.form.type.length > 0 &&
+      this.form.balance !== null &&
+      this.form.balance >= 0
+    );
   }
 }

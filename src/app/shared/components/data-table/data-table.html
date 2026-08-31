@@ -33,7 +33,7 @@
               @case ('currency') {
                 @if (isNumber(value)) {
                   <strong>
-                    {{ value.toLocaleString() }}
+                    {{ value | localeNumber }}
                   </strong>
 
                   <small>

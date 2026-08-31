@@ -34,7 +34,7 @@
 
         <div class="payment-item__amount">
           <strong>
-            {{ payment.amount.toLocaleString() }}
+            {{ payment.amount | localeNumber }}
           </strong>
 
           <small>

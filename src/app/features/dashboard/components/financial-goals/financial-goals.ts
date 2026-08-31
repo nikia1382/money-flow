@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideAngularModule, Target, Plane, Car, ShieldCheck } from 'lucide-angular';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 interface FinancialGoal {
   id: number;
@@ -14,7 +15,7 @@ interface FinancialGoal {
 
 @Component({
   selector: 'app-financial-goals',
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
   templateUrl: './financial-goals.html',
   styleUrl: './financial-goals.scss',
 })

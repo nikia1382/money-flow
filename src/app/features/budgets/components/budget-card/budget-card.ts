@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Budget } from '../../models/budget.model';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, MoreHorizontal, Pencil, Trash2 } from 'lucide-angular';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-budget-card',
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
   templateUrl: './budget-card.html',
   styleUrl: './budget-card.scss',
 })

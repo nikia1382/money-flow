@@ -18,6 +18,11 @@ import {
   AddTransactionModal,
   TransactionForm,
 } from '../../../../shared/components/add-transaction-modal/add-transaction-modal';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
+import { translate, TranslatePipe } from '@ngx-translate/core';
+import { DataTable } from '../../../../shared/components/data-table/data-table';
+import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
+import { DataTableColumn } from '../../../../shared/components/data-table/data-table.model';
 
 type TransactionTypeFilter = 'all' | TransactionType;
 
@@ -26,7 +31,16 @@ type TransactionSort = 'newest' | 'oldest' | 'highest' | 'lowest';
 @Component({
   selector: 'app-transactions',
 
-  imports: [LucideAngularModule, FormsModule, TransactionRow, Pagination, AddTransactionModal],
+  imports: [
+    LucideAngularModule,
+    FormsModule,
+    Pagination,
+    AddTransactionModal,
+    LocaleNumberPipe,
+    TranslatePipe,
+    DataTable,
+    ConfirmDialog,
+  ],
 
   templateUrl: './transactions.html',
   styleUrl: './transactions.scss',
@@ -43,11 +57,49 @@ export class Transactions {
   /* =========================
      Data
   ========================= */
-
+  readonly transactionColumns: DataTableColumn<Transaction>[] = [
+    {
+      key: 'title',
+      labelKey: 'transactions.table.transaction',
+      width: '2fr',
+    },
+    {
+      key: 'category',
+      labelKey: 'transactions.filters.category',
+      width: '1fr',
+    },
+    {
+      key: 'account',
+      labelKey: 'transactions.table.account',
+      width: '1.4fr',
+    },
+    {
+      key: 'date',
+      labelKey: 'transactions.table.date',
+      type: 'date',
+      width: '1fr',
+    },
+    {
+      key: 'amount',
+      labelKey: 'transactions.table.amount',
+      type: 'currency',
+      align: 'end',
+      width: '1fr',
+    },
+    {
+      key: 'actions',
+      labelKey: '',
+      type: 'actions',
+      align: 'end',
+      width: '50px',
+    },
+  ];
   readonly transactions = this.transactionsService.transactions;
 
   readonly accounts = this.accountsService.accounts;
+  readonly editingTransaction = signal<Transaction | null>(null);
 
+  readonly transactionPendingDelete = signal<Transaction | null>(null);
   readonly categories = [
     'Income',
     'Food',
@@ -281,11 +333,9 @@ export class Transactions {
   readonly isAddTransactionOpen = signal(false);
 
   openAddTransaction(): void {
-    console.log('1 - BUTTON CLICKED');
 
     this.isAddTransactionOpen.set(true);
 
-    console.log('2 - MODAL STATE:', this.isAddTransactionOpen());
   }
 
   closeAddTransaction(): void {
@@ -312,6 +362,56 @@ export class Transactions {
     });
 
     this.closeAddTransaction();
+
+    this.resetPagination();
+  }
+
+  openEditTransaction(transaction: Transaction): void {
+    this.editingTransaction.set(transaction);
+  }
+
+  closeEditTransaction(): void {
+    this.editingTransaction.set(null);
+  }
+  updateTransaction(form: TransactionForm): void {
+    const transaction = this.editingTransaction();
+
+    if (!transaction || form.amount === null) {
+      return;
+    }
+
+    this.transactionsService.updateTransaction({
+      ...transaction,
+
+      title: form.title,
+      category: form.category,
+      account: form.account,
+      date: form.date,
+      amount: form.amount,
+      type: form.type,
+    });
+
+    this.closeEditTransaction();
+    this.resetPagination();
+  }
+  requestDeleteTransaction(transaction: Transaction): void {
+    this.transactionPendingDelete.set(transaction);
+  }
+
+  cancelDeleteTransaction(): void {
+    this.transactionPendingDelete.set(null);
+  }
+
+  confirmDeleteTransaction(): void {
+    const transaction = this.transactionPendingDelete();
+
+    if (!transaction) {
+      return;
+    }
+
+    this.transactionsService.deleteTransaction(transaction.id);
+
+    this.transactionPendingDelete.set(null);
 
     this.resetPagination();
   }

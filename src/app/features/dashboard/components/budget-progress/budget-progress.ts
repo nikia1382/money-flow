@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { LucideAngularModule, Utensils, House, Car, ShoppingBag, Gamepad2 } from 'lucide-angular';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 interface BudgetItem {
   id: number;
@@ -14,7 +15,7 @@ interface BudgetItem {
 
 @Component({
   selector: 'app-budget-progress',
-  imports: [TranslatePipe, LucideAngularModule],
+  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
   templateUrl: './budget-progress.html',
   styleUrl: './budget-progress.scss',
 })

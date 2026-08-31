@@ -5,15 +5,21 @@
 
   <div class="transactions-page__header">
     <div class="transactions-page__title">
-      <h1>Transactions</h1>
+      <h1>
+        {{ 'transactions.title' | translate }}
+      </h1>
 
-      <p>Track and manage all your financial activity.</p>
+      <p>
+        {{ 'transactions.subtitle' | translate }}
+      </p>
     </div>
 
     <button type="button" class="add-transaction-btn" (click)="openAddTransaction()">
       <lucide-icon [img]="Plus" [size]="17" />
 
-      <span> Add Transaction </span>
+      <span>
+        {{ 'transactions.addTransaction' | translate }}
+      </span>
     </button>
   </div>
 
@@ -25,24 +31,32 @@
     <!-- Income -->
 
     <article class="transactions-summary__card income">
-      <span> Total Income </span>
+      <span>
+        {{ 'transactions.summary.totalIncome' | translate }}
+      </span>
 
       <strong>
-        {{ totalIncome.toLocaleString() }}
+        {{ totalIncome | localeNumber }}
 
-        <small> Toman </small>
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
       </strong>
     </article>
 
     <!-- Expenses -->
 
     <article class="transactions-summary__card expense">
-      <span> Total Expenses </span>
+      <span>
+        {{ 'transactions.summary.totalExpenses' | translate }}
+      </span>
 
       <strong>
-        {{ totalExpenses.toLocaleString() }}
+        {{ totalExpenses | localeNumber }}
 
-        <small> Toman </small>
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
       </strong>
     </article>
 
@@ -53,22 +67,28 @@
       [class.positive]="netFlow >= 0"
       [class.negative]="netFlow < 0"
     >
-      <span> Net Flow </span>
+      <span>
+        {{ 'transactions.summary.netFlow' | translate }}
+      </span>
 
       <strong>
-        {{ netFlow.toLocaleString() }}
+        {{ netFlow | localeNumber }}
 
-        <small> Toman </small>
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
       </strong>
     </article>
 
     <!-- Count -->
 
     <article class="transactions-summary__card">
-      <span> Transactions </span>
+      <span>
+        {{ 'transactions.summary.transactions' | translate }}
+      </span>
 
       <strong>
-        {{ transactions().length }}
+        {{ transactions().length | localeNumber }}
       </strong>
     </article>
   </div>
@@ -85,8 +105,8 @@
 
       <input
         type="search"
-        placeholder="Search transactions..."
-        aria-label="Search transactions"
+        [placeholder]="'transactions.searchPlaceholder' | translate"
+        [attr.aria-label]="'transactions.searchAria' | translate"
         [(ngModel)]="searchTerm"
         (ngModelChange)="resetPagination()"
       />
@@ -102,16 +122,24 @@
         class="sort-select"
         [(ngModel)]="selectedSort"
         (ngModelChange)="resetPagination()"
-        aria-label="Sort transactions"
-        title="Sort transactions"
+        [attr.aria-label]="'transactions.sort.label' | translate"
+        [attr.title]="'transactions.sort.label' | translate"
       >
-        <option value="newest">Newest first</option>
+        <option value="newest">
+          {{ 'transactions.sort.newest' | translate }}
+        </option>
 
-        <option value="oldest">Oldest first</option>
+        <option value="oldest">
+          {{ 'transactions.sort.oldest' | translate }}
+        </option>
 
-        <option value="highest">Highest amount</option>
+        <option value="highest">
+          {{ 'transactions.sort.highest' | translate }}
+        </option>
 
-        <option value="lowest">Lowest amount</option>
+        <option value="lowest">
+          {{ 'transactions.sort.lowest' | translate }}
+        </option>
       </select>
     </div>
 
@@ -126,35 +154,41 @@
       >
         <lucide-icon [img]="SlidersHorizontal" [size]="17" />
 
-        <span> Filters </span>
+        <span>
+          {{ 'transactions.filters.title' | translate }}
+        </span>
 
         @if (activeFiltersCount > 0) {
           <span class="filter-count">
-            {{ activeFiltersCount }}
+            {{ activeFiltersCount | localeNumber }}
           </span>
         }
       </button>
 
-      <!-- =========================
-           Filter Panel
-      ========================== -->
+      <!-- Filter Panel -->
 
       @if (isFilterOpen) {
         <div class="filter-panel">
           <!-- Header -->
 
           <div class="filter-panel__header">
-            <strong> Filters </strong>
+            <strong>
+              {{ 'transactions.filters.title' | translate }}
+            </strong>
 
             @if (activeFiltersCount > 0) {
-              <button type="button" class="clear-filter-btn" (click)="clearFilters()">Clear</button>
+              <button type="button" class="clear-filter-btn" (click)="clearFilters()">
+                {{ 'transactions.filters.clear' | translate }}
+              </button>
             }
           </div>
 
           <!-- Type -->
 
           <div class="filter-section">
-            <span class="filter-section__title"> Transaction Type </span>
+            <span class="filter-section__title">
+              {{ 'transactions.filters.type' | translate }}
+            </span>
 
             <div class="type-filter">
               <button
@@ -162,7 +196,7 @@
                 [class.active]="selectedType === 'all'"
                 (click)="selectType('all')"
               >
-                All
+                {{ 'transactions.filters.all' | translate }}
               </button>
 
               <button
@@ -170,7 +204,7 @@
                 [class.active]="selectedType === 'income'"
                 (click)="selectType('income')"
               >
-                Income
+                {{ 'transactions.types.income' | translate }}
               </button>
 
               <button
@@ -178,7 +212,7 @@
                 [class.active]="selectedType === 'expense'"
                 (click)="selectType('expense')"
               >
-                Expense
+                {{ 'transactions.types.expense' | translate }}
               </button>
 
               <button
@@ -186,7 +220,7 @@
                 [class.active]="selectedType === 'transfer'"
                 (click)="selectType('transfer')"
               >
-                Transfer
+                {{ 'transactions.types.transfer' | translate }}
               </button>
             </div>
           </div>
@@ -196,17 +230,21 @@
           <!-- Account -->
 
           <div class="filter-section">
-            <label class="filter-section__title" for="account-filter"> Account </label>
+            <label class="filter-section__title" for="account-filter">
+              {{ 'transactions.filters.account' | translate }}
+            </label>
 
             <select
               id="account-filter"
               class="filter-select"
               [(ngModel)]="selectedAccount"
               (ngModelChange)="resetPagination()"
-              aria-label="Filter transactions by account"
-              title="Filter by account"
+              [attr.aria-label]="'transactions.filters.accountAria' | translate"
+              [attr.title]="'transactions.filters.account' | translate"
             >
-              <option value="all">All Accounts</option>
+              <option value="all">
+                {{ 'transactions.filters.allAccounts' | translate }}
+              </option>
 
               @for (account of accounts(); track account.id) {
                 <option [value]="account.name">
@@ -221,17 +259,21 @@
           <!-- Category -->
 
           <div class="filter-section">
-            <label class="filter-section__title" for="category-filter"> Category </label>
+            <label class="filter-section__title" for="category-filter">
+              {{ 'transactions.filters.category' | translate }}
+            </label>
 
             <select
               id="category-filter"
               class="filter-select"
               [(ngModel)]="selectedCategory"
               (ngModelChange)="resetPagination()"
-              aria-label="Filter transactions by category"
-              title="Filter by category"
+              [attr.aria-label]="'transactions.filters.categoryAria' | translate"
+              [attr.title]="'transactions.filters.category' | translate"
             >
-              <option value="all">All Categories</option>
+              <option value="all">
+                {{ 'transactions.filters.allCategories' | translate }}
+              </option>
 
               @for (category of categories; track category) {
                 <option [value]="category">
@@ -257,7 +299,7 @@
         @if (selectedType !== 'all') {
           <button type="button" class="filter-chip" (click)="clearTypeFilter()">
             <span>
-              {{ selectedType }}
+              {{ 'transactions.types.' + selectedType | translate }}
             </span>
 
             <span class="filter-chip__close"> × </span>
@@ -289,7 +331,9 @@
         }
       </div>
 
-      <button type="button" class="clear-all-filters" (click)="clearFilters()">Clear all</button>
+      <button type="button" class="clear-all-filters" (click)="clearFilters()">
+        {{ 'transactions.filters.clearAll' | translate }}
+      </button>
     </div>
   }
 
@@ -297,69 +341,62 @@
        Transactions Table
   ========================== -->
 
-  <section class="transactions-card">
-    <!-- Header -->
+  <!-- =========================
+     Transactions Table
+========================== -->
 
-    <div class="transactions-card__header">
-      <span class="column-transaction"> Transaction </span>
-
-      <span class="column-account"> Account </span>
-
-      <span class="column-date"> Date </span>
-
-      <span class="column-amount"> Amount </span>
-
-      <span class="column-actions"></span>
-    </div>
-
-    <!-- Rows -->
-
-    <div class="transactions-list">
-      @for (transaction of paginatedTransactions; track transaction.id) {
-        <app-transaction-row [transaction]="transaction" />
-      } @empty {
-        <div class="transactions-empty">
-          <div class="transactions-empty__icon">
-            <lucide-icon [img]="Search" [size]="22" />
-          </div>
-
-          <strong> No transactions found </strong>
-
-          <span> Try changing your search or filters. </span>
-        </div>
-      }
-    </div>
-
-    <!-- Pagination -->
-
-    <app-pagination
-      [currentPage]="currentPage"
-      [totalItems]="filteredTransactions.length"
-      [pageSize]="pageSize"
-      (pageChange)="goToPage($event)"
-    />
-  </section>
+  <app-data-table
+    [columns]="transactionColumns"
+    [rows]="paginatedTransactions"
+    emptyTitleKey="transactions.empty.title"
+    emptySubtitleKey="transactions.empty.subtitle"
+    (editRow)="openEditTransaction($event)"
+    (deleteRow)="requestDeleteTransaction($event)"
+  />
 
   <!-- =========================
-       DEBUG
-       بعد از حل مشکل حذفش کن
-  ========================== -->
+     Pagination
+========================== -->
 
-  <p>
-    Modal state:
-    {{ isAddTransactionOpen() }}
-  </p>
+  <app-pagination
+    [currentPage]="currentPage"
+    [totalItems]="filteredTransactions.length"
+    [pageSize]="pageSize"
+    (pageChange)="goToPage($event)"
+  />
 
   <!-- =========================
        Add Transaction Modal
   ========================== -->
 
   @if (isAddTransactionOpen()) {
-    <p>Modal block entered</p>
-
     <app-add-transaction-modal
       (closeModal)="closeAddTransaction()"
       (saveTransaction)="addTransaction($event)"
     />
   }
+  @if (editingTransaction(); as transaction) {
+    <app-add-transaction-modal
+      [transactionToEdit]="transaction"
+      (closeModal)="closeEditTransaction()"
+      (saveTransaction)="updateTransaction($event)"
+    />
+  }
 </section>
+@if (transactionPendingDelete(); as transaction) {
+  <app-confirm-dialog
+    [title]="'transactions.deleteDialog.title' | translate"
+    [message]="
+      'transactions.deleteDialog.message'
+        | translate
+          : {
+              title: transaction.title,
+            }
+    "
+    [confirmText]="'transactions.deleteDialog.confirm' | translate"
+    [cancelText]="'transactions.deleteDialog.cancel' | translate"
+    variant="danger"
+    (confirm)="confirmDeleteTransaction()"
+    (cancel)="cancelDeleteTransaction()"
+  />
+}

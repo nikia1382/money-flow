@@ -91,22 +91,7 @@ export class Header {
 
     localStorage.setItem('theme', nextMode ? 'dark' : 'light');
   }
-  /*   openTransactionModal(): void {
-  this.isTransactionModalOpen.set(true);
-}
 
-closeTransactionModal(): void {
-  this.isTransactionModalOpen.set(false);
-} */
-  /* onTransactionSaved(transaction: unknown): void {
-
-  console.log(
-    'NEW TRANSACTION:',
-    transaction
-  );
-
-  this.closeTransactionModal();
-} */
   readonly isTransactionModalOpen = signal(false);
 
   openTransactionModal(): void {
@@ -118,8 +103,6 @@ closeTransactionModal(): void {
   }
 
   onTransactionSaved(transaction: unknown): void {
-    console.log('NEW TRANSACTION:', transaction);
-
     this.closeTransactionModal();
   }
   onSearch(event: Event): void {

@@ -5,13 +5,14 @@ import { LucideAngularModule, MoreHorizontal, CalendarDays, Repeat2 } from 'luci
 import { TranslatePipe } from '@ngx-translate/core';
 
 import { RecurringPayment } from '../../models/recurring-payment.model';
+import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
 
 @Component({
   selector: 'app-recurring-payment-card',
 
   standalone: true,
 
-  imports: [LucideAngularModule, TranslatePipe],
+  imports: [LucideAngularModule, TranslatePipe, LocaleNumberPipe],
 
   templateUrl: './recurring-payment-card.html',
 

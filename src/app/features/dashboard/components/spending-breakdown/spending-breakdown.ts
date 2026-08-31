@@ -43,15 +43,21 @@ export class SpendingBreakdown {
           label: (context: TooltipItem<'doughnut'>) => {
             const value = Number(context.raw ?? 0);
 
+            const formattedValue = this.formatNumber(value);
+
             const currency = this.translate.instant('dashboard.chart.currency');
 
-            return `${context.label}: ${value.toLocaleString()} ${currency}`;
+            return `${context.label}: ${formattedValue} ${currency}`;
           },
         },
       },
     },
   };
+  private formatNumber(value: number): string {
+    const locale = this.translate.currentLang() === 'fa' ? 'fa-IR-u-nu-arabext' : 'en-US';
 
+    return new Intl.NumberFormat(locale).format(value);
+  }
   constructor() {
     this.updateTranslations();
 

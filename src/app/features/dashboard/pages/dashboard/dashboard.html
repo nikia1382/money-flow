@@ -1,26 +1,18 @@
 <section class="dashboard">
-  <!-- Heading -->
-  <!--   <div class="dashboard__heading">
-    <h2>
-      {{ 'dashboard.welcome' | translate }}
-    </h2>
+  <!-- =========================
+       Summary Cards
+  ========================== -->
 
-    <p>
-      {{ 'dashboard.subtitle' | translate }}
-    </p>
-  </div>
- -->
-
-  <!-- Summary Cards -->
   <div class="summary-grid">
     <!-- Total Balance -->
+
     <article class="summary-card">
       <div class="summary-card__top">
         <div class="summary-card__icon">
-          <lucide-icon [img]="Wallet" [size]="22"> </lucide-icon>
+          <lucide-icon [img]="Wallet" [size]="22" />
         </div>
 
-        <span class="summary-card__trend positive"> +8.2% </span>
+        <span class="summary-card__trend positive"> +{{ totalBalanceTrend | localeNumber }}% </span>
       </div>
 
       <p class="summary-card__title">
@@ -28,7 +20,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        86,500,000
+        {{ totalBalance | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -41,13 +33,14 @@
     </article>
 
     <!-- Monthly Income -->
+
     <article class="summary-card">
       <div class="summary-card__top">
         <div class="summary-card__icon">
-          <lucide-icon [img]="TrendingUp" [size]="22"> </lucide-icon>
+          <lucide-icon [img]="TrendingUp" [size]="22" />
         </div>
 
-        <span class="summary-card__trend positive"> +12.5% </span>
+        <span class="summary-card__trend positive"> +{{ incomeTrend | localeNumber }}% </span>
       </div>
 
       <p class="summary-card__title">
@@ -55,7 +48,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        35,000,000
+        {{ monthlyIncome | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -68,13 +61,14 @@
     </article>
 
     <!-- Monthly Expenses -->
+
     <article class="summary-card">
       <div class="summary-card__top">
         <div class="summary-card__icon">
-          <lucide-icon [img]="TrendingDown" [size]="22"> </lucide-icon>
+          <lucide-icon [img]="TrendingDown" [size]="22" />
         </div>
 
-        <span class="summary-card__trend negative"> -4.3% </span>
+        <span class="summary-card__trend negative"> -{{ expenseTrend | localeNumber }}% </span>
       </div>
 
       <p class="summary-card__title">
@@ -82,7 +76,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        21,300,000
+        {{ monthlyExpenses | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -95,13 +89,14 @@
     </article>
 
     <!-- Monthly Savings -->
+
     <article class="summary-card">
       <div class="summary-card__top">
         <div class="summary-card__icon">
-          <lucide-icon [img]="PiggyBank" [size]="22"> </lucide-icon>
+          <lucide-icon [img]="PiggyBank" [size]="22" />
         </div>
 
-        <span class="summary-card__trend positive"> +18.7% </span>
+        <span class="summary-card__trend positive"> +{{ savingsTrend | localeNumber }}% </span>
       </div>
 
       <p class="summary-card__title">
@@ -109,7 +104,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        13,700,000
+        {{ monthlySavings | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -122,38 +117,49 @@
     </article>
   </div>
 
-  <!-- Analytics Row -->
+  <!-- =========================
+       Analytics Row
+  ========================== -->
+
   <div class="dashboard__analytics">
     <!-- Cash Flow -->
+
     <div class="dashboard__chart">
       <app-income-expense-chart />
     </div>
 
     <!-- Spending Breakdown -->
+
     <div class="dashboard__spending">
       <app-spending-breakdown />
     </div>
 
     <!-- Budget Overview -->
+
     <div class="dashboard__budget">
       <app-budget-progress />
     </div>
   </div>
 
-  <!-- Recent Transactions -->
-  <!-- Bottom Dashboard Row -->
+  <!-- =========================
+       Bottom Dashboard Row
+  ========================== -->
+
   <div class="dashboard__bottom-grid">
     <!-- Recent Transactions -->
+
     <div class="dashboard__transactions">
       <app-recent-transactions />
     </div>
 
     <!-- Upcoming Payments -->
+
     <div class="dashboard__upcoming-payments">
       <app-upcoming-payments />
     </div>
 
     <!-- Financial Goals -->
+
     <div class="dashboard__financial-goals">
       <app-financial-goals />
     </div>
