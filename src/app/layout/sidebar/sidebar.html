@@ -66,67 +66,54 @@
   </nav>
 
   <!-- Secondary Navigation -->
-<!-- Secondary Navigation -->
+  <!-- Secondary Navigation -->
 
-<div class="sidebar__secondary">
+  <div class="sidebar__secondary">
+    <a
+      routerLink="/notifications"
+      routerLinkActive="active"
+      class="sidebar__item secondary-item"
+      (click)="close()"
+    >
+      <lucide-icon [img]="Bell" [size]="18" />
 
-  <a
-    routerLink="/notifications"
-    routerLinkActive="active"
-    class="sidebar__item secondary-item"
-    (click)="close()"
-  >
-    <lucide-icon
-      [img]="Bell"
-      [size]="18"
-    />
-
-    <span>
-      {{ 'sidebar.notifications' | translate }}
-    </span>
-
-    @if (unreadNotifications() > 0) {
-      <span class="sidebar__badge">
-        {{ unreadNotifications() }}
+      <span>
+        {{ 'sidebar.notifications' | translate }}
       </span>
-    }
-  </a>
 
+      @if (unreadNotifications() > 0) {
+        <span class="sidebar__badge">
+          {{ unreadNotifications() }}
+        </span>
+      }
+    </a>
 
-  <a
-    routerLink="/settings"
-    routerLinkActive="active"
-    class="sidebar__item secondary-item"
-    (click)="close()"
-  >
-    <lucide-icon
-      [img]="Settings"
-      [size]="18"
-    />
+    <a
+      routerLink="/settings"
+      routerLinkActive="active"
+      class="sidebar__item secondary-item"
+      (click)="close()"
+    >
+      <lucide-icon [img]="Settings" [size]="18" />
 
-    <span>
-      {{ 'sidebar.settings' | translate }}
-    </span>
-  </a>
+      <span>
+        {{ 'sidebar.settings' | translate }}
+      </span>
+    </a>
 
+    <a
+      routerLink="/help"
+      routerLinkActive="active"
+      class="sidebar__item secondary-item"
+      (click)="close()"
+    >
+      <lucide-icon [img]="CircleHelp" [size]="18" />
 
-  <a
-    routerLink="/help"
-    routerLinkActive="active"
-    class="sidebar__item secondary-item"
-    (click)="close()"
-  >
-    <lucide-icon
-      [img]="CircleHelp"
-      [size]="18"
-    />
-
-    <span>
-      {{ 'sidebar.help' | translate }}
-    </span>
-  </a>
-
-</div>
+      <span>
+        {{ 'sidebar.help' | translate }}
+      </span>
+    </a>
+  </div>
   <!-- Premium Card -->
   <div class="premium-card">
     <div class="premium-card__icon">
