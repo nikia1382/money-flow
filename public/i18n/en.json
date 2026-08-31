@@ -442,5 +442,64 @@
     "title": "Currency",
     "description": "Choose your preferred display currency."
   }
+},
+"debts": {
+  "title": "Debts",
+  "subtitle": "Track money you owe and money others owe you.",
+  "addDebt": "Add Debt",
+
+  "summary": {
+    "iOwe": "I Owe",
+    "owedToMe": "Owed to Me",
+    "active": "Active Debts",
+    "overdue": "Overdue",
+    "debts": "debts"
+  },
+  "types": {
+  "iOwe": "I owe",
+  "owedToMe": "Owed to me"
+},
+"status": {
+  "active": "Active",
+  "paid": "Paid",
+  "overdue": "Overdue"
+},
+"form": {
+  "title": "Add Debt",
+  "subtitle": "Add money you owe or money someone owes you.",
+  "person": "Person",
+  "personPlaceholder": "Enter a name",
+  "type": "Debt type",
+  "totalAmount": "Total amount",
+  "paidAmount": "Already paid",
+  "dueDate": "Due date",
+  "note": "Note",
+  "notePlaceholder": "Optional note...",
+  "editTitle": "Edit Debt"
+
+
+},
+"payment": {
+  "title": "Record Payment",
+  "total": "Total",
+  "alreadyPaid": "Paid",
+  "remaining": "Remaining",
+  "amount": "Payment amount",
+  "payRemaining": "Pay remaining",
+  "record": "Record Payment",
+  "exceedsRemaining": "Payment cannot be greater than the remaining amount."
+},
+"deleteDialog": {
+  "title": "Delete Debt",
+  "message": "Are you sure you want to delete the debt with {{person}}?",
+  "confirm": "Delete",
+  "cancel": "Cancel"
+},
+"remaining": "Remaining",
+"repaymentProgress": "Repayment progress",
+"total": "Total",
+"paid": "Paid",
+"yourDebts": "Your Debts",
+"items": "items"
 }
 }

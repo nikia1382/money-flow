@@ -1,0 +1,103 @@
+<div class="modal-backdrop" (click)="close()">
+  <section class="payment-modal" (click)="$event.stopPropagation()">
+    <header class="payment-modal__header">
+      <div class="payment-modal__heading">
+        <div class="payment-modal__icon">
+          <lucide-icon [img]="WalletCards" [size]="20" />
+        </div>
+
+        <div>
+          <h2>
+            {{ 'debts.payment.title' | translate }}
+          </h2>
+
+          <p>
+            {{ debt.personName }}
+          </p>
+        </div>
+      </div>
+
+      <button type="button" class="payment-modal__close" title="Close" (click)="close()">
+        <lucide-icon [img]="X" [size]="18" />
+      </button>
+    </header>
+
+    <div class="payment-summary">
+      <div>
+        <span>
+          {{ 'debts.payment.total' | translate }}
+        </span>
+
+        <strong>
+          {{ debt.totalAmount.toLocaleString() }}
+        </strong>
+      </div>
+
+      <div>
+        <span>
+          {{ 'debts.payment.alreadyPaid' | translate }}
+        </span>
+
+        <strong>
+          {{ debt.paidAmount.toLocaleString() }}
+        </strong>
+      </div>
+
+      <div class="remaining">
+        <span>
+          {{ 'debts.payment.remaining' | translate }}
+        </span>
+
+        <strong>
+          {{ remainingAmount.toLocaleString() }}
+        </strong>
+      </div>
+    </div>
+
+    <form class="payment-form" (ngSubmit)="save()">
+      <div class="form-field">
+        <div class="form-field__label">
+          <label for="payment-amount">
+            {{ 'debts.payment.amount' | translate }}
+          </label>
+
+          <button type="button" (click)="payRemaining()">
+            {{ 'debts.payment.payRemaining' | translate }}
+          </button>
+        </div>
+
+        <div class="amount-input">
+          <input
+            id="payment-amount"
+            type="number"
+            name="amount"
+            [(ngModel)]="amount"
+            min="1"
+            [max]="remainingAmount"
+            required
+          />
+
+          <span>
+            {{ 'common.currency' | translate }}
+          </span>
+        </div>
+
+        @if (amount !== null && amount > remainingAmount) {
+          <small class="form-error">
+            {{ 'debts.payment.exceedsRemaining' | translate }}
+          </small>
+        }
+      </div>
+
+      <footer class="payment-modal__actions">
+        <button type="button" class="cancel-btn" (click)="close()">
+          {{ 'common.cancel' | translate }}
+        </button>
+
+        <button type="submit" class="payment-btn" [disabled]="!isValid">
+          {{ 'debts.payment.record' | translate }}
+        </button>
+      </footer>
+    </form>
+  </section>
+</div>

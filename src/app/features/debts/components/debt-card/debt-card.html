@@ -1,0 +1,119 @@
+<article class="debt-card" [class.debt-card--owe]="isIOwe" [class.debt-card--receive]="!isIOwe">
+  <!-- Header -->
+
+  <header class="debt-card__header">
+    <div class="debt-card__person">
+      <div class="debt-card__type-icon" [class.owe]="isIOwe" [class.receive]="!isIOwe">
+        <lucide-icon [img]="isIOwe ? ArrowUpRight : ArrowDownLeft" [size]="18" />
+      </div>
+
+      <div>
+        <h3>
+          {{ debt.personName }}
+        </h3>
+
+        <span>
+          {{ (isIOwe ? 'debts.types.iOwe' : 'debts.types.owedToMe') | translate }}
+        </span>
+      </div>
+    </div>
+
+    <div class="debt-card__menu-wrapper">
+      <button type="button" class="debt-card__menu" title="Debt actions" (click)="toggleMenu()">
+        <lucide-icon [img]="MoreHorizontal" [size]="18" />
+      </button>
+
+      @if (menuOpen) {
+        <div class="debt-card__actions">
+          @if (debt.status !== 'paid') {
+            <button type="button" (click)="onRecordPayment()">
+              {{ 'debts.payment.record' | translate }}
+            </button>
+          }
+          <button type="button" (click)="onEdit()">
+            {{ 'common.edit' | translate }}
+          </button>
+
+          <button type="button" class="delete" (click)="onDelete()">
+            {{ 'common.delete' | translate }}
+          </button>
+        </div>
+      }
+    </div>
+  </header>
+
+  <!-- Amount -->
+
+  <div class="debt-card__main">
+    <span>
+      {{ 'debts.remaining' | translate }}
+    </span>
+
+    <strong>
+      {{ remainingAmount.toLocaleString() }}
+    </strong>
+
+    <small>
+      {{ 'common.currency' | translate }}
+    </small>
+  </div>
+
+  <!-- Progress -->
+
+  <div class="debt-card__progress-info">
+    <span>
+      {{ 'debts.repaymentProgress' | translate }}
+    </span>
+
+    <strong> {{ progress }}% </strong>
+  </div>
+
+  <div class="debt-card__progress">
+    <div class="debt-card__progress-value" [style.width.%]="progress"></div>
+  </div>
+
+  <!-- Amount Details -->
+
+  <div class="debt-card__stats">
+    <div>
+      <span>
+        {{ 'debts.total' | translate }}
+      </span>
+
+      <strong>
+        {{ debt.totalAmount.toLocaleString() }}
+      </strong>
+    </div>
+
+    <div class="align-end">
+      <span>
+        {{ 'debts.paid' | translate }}
+      </span>
+
+      <strong>
+        {{ debt.paidAmount.toLocaleString() }}
+      </strong>
+    </div>
+  </div>
+
+  <!-- Footer -->
+
+  <footer class="debt-card__footer">
+    <div class="debt-card__date">
+      <lucide-icon [img]="CalendarDays" [size]="14" />
+
+      <span>
+        {{ debt.dueDate }}
+      </span>
+    </div>
+
+    <span
+      class="debt-card__status"
+      [class.active]="displayStatus === 'active'"
+      [class.paid]="displayStatus === 'paid'"
+      [class.overdue]="displayStatus === 'overdue'"
+    >
+      {{ 'debts.status.' + displayStatus | translate }}
+    </span>
+  </footer>
+</article>

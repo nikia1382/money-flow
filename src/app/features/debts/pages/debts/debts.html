@@ -1,0 +1,162 @@
+<section class="debts-page">
+  <header class="debts-page__header">
+    <div>
+      <h1>
+        {{ 'debts.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'debts.subtitle' | translate }}
+      </p>
+    </div>
+
+    <button type="button" class="add-debt-btn" (click)="openAddDebt()">
+      <lucide-icon [img]="Plus" [size]="17" />
+
+      <span>
+        {{ 'debts.addDebt' | translate }}
+      </span>
+    </button>
+  </header>
+
+  <div class="debts-summary">
+    <article class="debt-summary-card">
+      <div class="debt-summary-card__icon owe">
+        <lucide-icon [img]="ArrowUpRight" [size]="19" />
+      </div>
+
+      <div>
+        <span>
+          {{ 'debts.summary.iOwe' | translate }}
+        </span>
+
+        <strong>
+          {{ totalIOwe().toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+      </div>
+    </article>
+
+    <article class="debt-summary-card">
+      <div class="debt-summary-card__icon receive">
+        <lucide-icon [img]="ArrowDownLeft" [size]="19" />
+      </div>
+
+      <div>
+        <span>
+          {{ 'debts.summary.owedToMe' | translate }}
+        </span>
+
+        <strong>
+          {{ totalOwedToMe().toLocaleString() }}
+        </strong>
+
+        <small>
+          {{ 'common.currency' | translate }}
+        </small>
+      </div>
+    </article>
+
+    <article class="debt-summary-card">
+      <div class="debt-summary-card__icon active">
+        <lucide-icon [img]="HandCoins" [size]="19" />
+      </div>
+
+      <div>
+        <span>
+          {{ 'debts.summary.active' | translate }}
+        </span>
+
+        <strong>
+          {{ activeCount() }}
+        </strong>
+
+        <small>
+          {{ 'debts.summary.debts' | translate }}
+        </small>
+      </div>
+    </article>
+
+    <article class="debt-summary-card">
+      <div class="debt-summary-card__icon overdue">
+        <lucide-icon [img]="TriangleAlert" [size]="19" />
+      </div>
+
+      <div>
+        <span>
+          {{ 'debts.summary.overdue' | translate }}
+        </span>
+
+        <strong>
+          {{ overdueCount() }}
+        </strong>
+
+        <small>
+          {{ 'debts.summary.debts' | translate }}
+        </small>
+      </div>
+    </article>
+  </div>
+  <section class="debts-list">
+    <div class="debts-list__header">
+      <div>
+        <h2>
+          {{ 'debts.yourDebts' | translate }}
+        </h2>
+
+        <p>
+          {{ debts().length }}
+          {{ 'debts.items' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="debts-grid">
+      @for (debt of debts(); track debt.id) {
+        <app-debt-card
+          [debt]="debt"
+          (recordPayment)="openRecordPayment($event)"
+          (editDebt)="openEditDebt($event)"
+          (deleteDebt)="openDeleteDebt($event)"
+        />
+      }
+    </div>
+  </section>
+</section>
+@if (isAddDebtOpen()) {
+  <app-add-debt-modal (closeModal)="closeAddDebt()" (saveDebt)="addDebt($event)" />
+}
+@if (editingDebt()) {
+  <app-add-debt-modal
+    [debtToEdit]="editingDebt()"
+    (closeModal)="closeEditDebt()"
+    (saveDebt)="updateDebt($event)"
+  />
+}
+@if (debtPendingDelete(); as debt) {
+  <app-confirm-dialog
+    [title]="'debts.deleteDialog.title' | translate"
+    [message]="
+      'debts.deleteDialog.message'
+        | translate
+          : {
+              person: debt.personName,
+            }
+    "
+    [confirmText]="'debts.deleteDialog.confirm' | translate"
+    [cancelText]="'debts.deleteDialog.cancel' | translate"
+    variant="danger"
+    (confirm)="confirmDeleteDebt()"
+    (cancel)="cancelDeleteDebt()"
+  />
+}
+@if (paymentDebt(); as debt) {
+  <app-record-payment-modal
+    [debt]="debt"
+    (closeModal)="closeRecordPayment()"
+    (recordPayment)="recordPayment($event)"
+  />
+}
