@@ -15,33 +15,48 @@
     </button>
   </div>
 
-  <div class="payments-list">
-    @for (payment of payments; track payment.id) {
-      <div class="payment-item">
-        <div class="payment-item__icon" [class]="payment.iconClass">
-          <lucide-icon [img]="payment.icon" [size]="17" />
-        </div>
-
-        <div class="payment-item__info">
-          <strong>
-            {{ payment.titleKey | translate }}
-          </strong>
-
-          <span>
-            {{ payment.dateKey | translate }}
-          </span>
-        </div>
-
-        <div class="payment-item__amount">
-          <strong>
-            {{ payment.amount | localeNumber }}
-          </strong>
-
-          <small>
-            {{ 'dashboard.chart.currency' | translate }}
-          </small>
-        </div>
+<div class="payments-list">
+  @for (payment of payments(); track payment.id) {
+    <div class="payment-item">
+      <div
+        class="payment-item__icon"
+        [class]="payment.iconClass"
+      >
+        <lucide-icon
+          [img]="payment.icon"
+          [size]="17"
+        />
       </div>
-    }
-  </div>
+
+      <div class="payment-item__info">
+        <strong>
+          {{ payment.title }}
+        </strong>
+
+        <span>
+          {{ payment.dueDate | localeDate }}
+        </span>
+      </div>
+
+      <div class="payment-item__amount">
+        <strong>
+          {{ payment.amount | localeNumber }}
+        </strong>
+
+        <small>
+          {{ 'dashboard.chart.currency' | translate }}
+        </small>
+      </div>
+    </div>
+  } @empty {
+    <app-state-view
+      type="empty"
+      [icon]="EmptyPaymentIcon"
+      [compact]="true"
+      [title]="'dashboard.upcomingPayments.empty.title' | translate"
+      [description]="'dashboard.upcomingPayments.empty.description' | translate"
+      [actionLabel]="'dashboard.upcomingPayments.empty.action' | translate"
+    />
+  }
+</div>
 </section>

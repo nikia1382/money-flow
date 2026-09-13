@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostListener, Output, inject, signal } from '@angular/core';
-import { AddTransactionModal } from '../../shared/components/add-transaction-modal/add-transaction-modal';
+import { AddTransactionModal, TransactionForm } from '../../shared/components/add-transaction-modal/add-transaction-modal';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 
 import {
@@ -15,6 +15,8 @@ import {
 } from 'lucide-angular';
 import { DateRangeService, DashboardDateRange } from '../../core/services/date-range.service';
 import { DashboardSearchService } from '../../core/services/dashboard-search.service';
+import { TransactionsService } from '../../features/transactions/services/transactions';
+
 @Component({
   selector: 'app-header',
 
@@ -27,6 +29,8 @@ export class Header {
   private readonly translate = inject(TranslateService);
   private readonly dashboardSearch = inject(DashboardSearchService);
   private readonly dateRangeService = inject(DateRangeService);
+  private readonly transactionsService =
+  inject(TransactionsService);
   @Output()
   menuClick = new EventEmitter<void>();
 
@@ -102,9 +106,22 @@ export class Header {
     this.isTransactionModalOpen.set(false);
   }
 
-  onTransactionSaved(transaction: unknown): void {
-    this.closeTransactionModal();
+onTransactionSaved(transaction: TransactionForm): void {
+  if (transaction.amount === null) {
+    return;
   }
+
+  this.transactionsService.addTransaction({
+    title: transaction.title,
+    category: transaction.category,
+    account: transaction.account,
+    date: transaction.date,
+    amount: transaction.amount,
+    type: transaction.type,
+  });
+
+  this.closeTransactionModal();
+}
   onSearch(event: Event): void {
     const input = event.target as HTMLInputElement;
 

@@ -1,94 +1,243 @@
 @if (isOpen) {
-  <div class="modal-backdrop" (click)="closeModal()">
-    <section class="goal-modal" (click)="$event.stopPropagation()">
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+  >
+    <section
+      class="goal-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- Header -->
+
       <header class="goal-modal__header">
         <div>
           <h2>
-            {{ (mode === 'edit' ? 'goals.editGoal' : 'goals.addGoal') | translate }}
+            {{
+              (
+                mode === 'edit'
+                  ? 'goals.form.editTitle'
+                  : 'goals.form.addTitle'
+              ) | translate
+            }}
           </h2>
+
           <p>
-            {{ 'goals.addGoalDescription' | translate }}
+            {{
+              (
+                mode === 'edit'
+                  ? 'goals.form.editSubtitle'
+                  : 'goals.form.addSubtitle'
+              ) | translate
+            }}
           </p>
         </div>
 
-        <button type="button" class="goal-modal__close" title="Close" (click)="closeModal()">
-          <lucide-icon [img]="X" [size]="18" />
+        <button
+          type="button"
+          class="goal-modal__close"
+          [attr.aria-label]="'common.actions.close' | translate"
+          [title]="'common.actions.close' | translate"
+          (click)="closeModal()"
+        >
+          <lucide-icon
+            [img]="X"
+            [size]="18"
+            aria-hidden="true"
+          />
         </button>
       </header>
 
-      <form class="goal-modal__form" [formGroup]="goalForm" (ngSubmit)="submit()">
+
+      <!-- Form -->
+
+      <form
+        class="goal-modal__form"
+        [formGroup]="goalForm"
+        (ngSubmit)="submit()"
+      >
+
+        <!-- Name -->
+
         <div class="form-field">
-          <label>
-            {{ 'goals.goalName' | translate }}
+          <label for="goal-title">
+            {{ 'goals.form.name' | translate }}
           </label>
 
           <input
+            id="goal-title"
             type="text"
             formControlName="title"
-            [placeholder]="'goals.goalNamePlaceholder' | translate"
+            [placeholder]="'goals.form.namePlaceholder' | translate"
           />
 
-          @if (goalForm.get('title')?.touched && goalForm.get('title')?.invalid) {
+          @if (
+            goalForm.get('title')?.touched &&
+            goalForm.get('title')?.hasError('required')
+          ) {
             <small class="form-error">
-              {{ 'goals.requiredField' | translate }}
+              {{ 'goals.form.errors.nameRequired' | translate }}
             </small>
           }
         </div>
 
+
+        <!-- Category -->
+
         <div class="form-field">
-          <label>
-            {{ 'goals.category' | translate }}
+          <label for="goal-category">
+            {{ 'goals.form.category' | translate }}
           </label>
 
-          <select formControlName="category">
+          <select
+            id="goal-category"
+            formControlName="category"
+          >
             <option value="">
-              {{ 'goals.selectCategory' | translate }}
+              {{ 'goals.form.selectCategory' | translate }}
             </option>
 
-            @for (category of categories; track category) {
+            @for (
+              category of categories;
+              track category
+            ) {
               <option [value]="category">
-                {{ category }}
+                {{
+                  'goals.categories.' +
+                    category
+                    | translate
+                }}
               </option>
             }
           </select>
+
+          @if (
+            goalForm.get('category')?.touched &&
+            goalForm.get('category')?.invalid
+          ) {
+            <small class="form-error">
+              {{ 'goals.form.errors.categoryRequired' | translate }}
+            </small>
+          }
         </div>
+
+
+        <!-- Amounts -->
 
         <div class="form-row">
-          <div class="form-field">
-            <label>
-              {{ 'goals.targetAmount' | translate }}
-            </label>
-
-            <input type="number" formControlName="targetAmount" min="1" />
-          </div>
 
           <div class="form-field">
-            <label>
-              {{ 'goals.savedAmount' | translate }}
+            <label for="target-amount">
+              {{ 'goals.form.targetAmount' | translate }}
             </label>
 
-            <input type="number" formControlName="savedAmount" min="0" />
+            <input
+              id="target-amount"
+              type="number"
+              formControlName="targetAmount"
+              min="1"
+            />
+
+            @if (
+              goalForm.get('targetAmount')?.touched &&
+              goalForm.get('targetAmount')?.invalid
+            ) {
+              <small class="form-error">
+                {{ 'goals.form.errors.targetAmountInvalid' | translate }}
+              </small>
+            }
           </div>
+
+
+          <div class="form-field">
+            <label for="saved-amount">
+              {{ 'goals.form.savedAmount' | translate }}
+            </label>
+
+            <input
+              id="saved-amount"
+              type="number"
+              formControlName="savedAmount"
+              min="0"
+            />
+
+            @if (
+              goalForm.get('savedAmount')?.touched &&
+              goalForm.get('savedAmount')?.invalid
+            ) {
+              <small class="form-error">
+                {{ 'goals.form.errors.savedAmountInvalid' | translate }}
+              </small>
+            }
+
+            @if (
+              goalForm.get('savedAmount')?.touched &&
+              !goalForm.get('savedAmount')?.invalid &&
+              !isFormValid
+            ) {
+              <small class="form-error">
+                {{ 'goals.form.errors.savedExceedsTarget' | translate }}
+              </small>
+            }
+          </div>
+
         </div>
+
+
+        <!-- Deadline -->
 
         <div class="form-field">
-          <label>
-            {{ 'goals.deadline' | translate }}
+          <label for="goal-deadline">
+            {{ 'goals.form.deadline' | translate }}
           </label>
 
-          <input type="date" formControlName="deadline" />
+          <input
+            id="goal-deadline"
+            type="date"
+            formControlName="deadline"
+          />
+
+          @if (
+            goalForm.get('deadline')?.touched &&
+            goalForm.get('deadline')?.invalid
+          ) {
+            <small class="form-error">
+              {{ 'goals.form.errors.deadlineRequired' | translate }}
+            </small>
+          }
         </div>
 
+
+        <!-- Actions -->
+
         <footer class="goal-modal__actions">
-          <button type="button" class="goal-modal__cancel" (click)="closeModal()">
-            {{ 'common.cancel' | translate }}
+
+          <button
+            type="button"
+            class="goal-modal__cancel"
+            (click)="closeModal()"
+          >
+            {{ 'common.actions.cancel' | translate }}
           </button>
 
-          <button type="submit" class="goal-modal__save">
-            {{ 'common.save' | translate }}
+          <button
+            type="submit"
+            class="goal-modal__save"
+            [disabled]="!isFormValid"
+          >
+            {{
+              (
+                mode === 'edit'
+                  ? 'goals.form.saveChanges'
+                  : 'goals.form.save'
+              ) | translate
+            }}
           </button>
+
         </footer>
+
       </form>
+
     </section>
   </div>
 }

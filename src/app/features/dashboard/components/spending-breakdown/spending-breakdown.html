@@ -1,6 +1,9 @@
 <section class="spending-card">
+
   <div class="spending-card__header">
+
     <div>
+
       <h3>
         {{ 'dashboard.spending.title' | translate }}
       </h3>
@@ -8,38 +11,75 @@
       <p>
         {{ 'dashboard.spending.subtitle' | translate }}
       </p>
+
     </div>
+
   </div>
 
   <div class="spending-card__body">
+
     <div class="chart-wrapper">
-      <canvas baseChart [data]="chartData" [options]="chartOptions" [type]="'doughnut'"> </canvas>
+
+      <canvas
+        baseChart
+        [data]="chartData"
+        [options]="chartOptions"
+        [type]="'doughnut'"
+        role="img"
+        [attr.aria-label]="'dashboard.spending.title' | translate"
+      >
+      </canvas>
 
       <div class="chart-center">
-        <strong> 20M </strong>
 
+<strong>
+  {{ totalSpending() | localeNumber }}
+</strong>
         <span>
           {{ 'dashboard.spending.total' | translate }}
         </span>
+
       </div>
+
     </div>
 
     <div class="spending-list">
-      @for (item of chartData.labels; track $index) {
+
+      @for (
+        item of chartData.labels;
+        track $index
+      ) {
+
         <div class="spending-item">
+
           <div class="spending-item__left">
-            <span class="spending-item__dot"> </span>
+
+            <span
+              class="spending-item__dot"
+            >
+            </span>
 
             <span>
               {{ item }}
             </span>
+
           </div>
 
           <strong>
-            {{ chartData.datasets[0].data[$index] | number: '1.0-0' }}
+            {{
+              chartData
+                .datasets[0]
+                .data[$index]
+                | localeNumber
+            }}
           </strong>
+
         </div>
+
       }
+
     </div>
+
   </div>
+
 </section>

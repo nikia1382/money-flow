@@ -19,7 +19,7 @@ describe('TransactionRow', () => {
       id: 1,
       title: 'Test Transaction',
       category: 'Food',
-      account: 'Main Bank Account',
+      account: 'accounts.items.mainBankAccount',
       date: '2026-08-23',
       amount: 1_000_000,
       type: 'expense',

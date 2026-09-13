@@ -1,74 +1,322 @@
-import { Injectable, signal } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  signal,
+} from '@angular/core';
 
-import { Budget } from '../models/budget.model';
+import {
+  HttpClient,
+} from '@angular/common/http';
+
+import {
+  Budget,
+} from '../models/budget.model';
+
+/* =========================
+   API Models
+========================= */
+
+
+export interface CategoryApiResponse {
+  id: number;
+  name: string;
+  type: string;
+  icon: string | null;
+}
+interface BudgetApiResponse {
+  id: number;
+  categoryId: number;
+  categoryName: string;
+  limitAmount: number;
+  spent: number;
+  month: string;
+}
+/* =========================
+   Service
+========================= */
 
 @Injectable({
   providedIn: 'root',
 })
 export class BudgetsService {
-  private readonly storageKey = 'moneyflow_budgets';
 
-  readonly editingBudget = signal<Budget | null>(null);
-  readonly budgets = signal<Budget[]>(this.loadBudgets());
+  /* =========================
+     API
+  ========================= */
 
-  private loadBudgets(): Budget[] {
-    const saved = localStorage.getItem(this.storageKey);
+  private readonly http =
+    inject(HttpClient);
 
-    if (saved) {
-      return JSON.parse(saved);
+  private readonly apiUrl =
+    'http://localhost:8080/api/budgets';
+
+  private readonly categoriesApiUrl =
+    'http://localhost:8080/api/categories';
+
+  /* =========================
+     State
+  ========================= */
+
+  readonly editingBudget =
+    signal<Budget | null>(null);
+
+  readonly budgets =
+    signal<Budget[]>([]);
+
+readonly categories =
+  signal<CategoryApiResponse[]>([]);
+  /* =========================
+     Constructor
+  ========================= */
+
+  constructor() {
+    this.loadCategories();
+    this.loadBudgets();
+  }
+
+  /* =========================
+     Categories
+  ========================= */
+
+  private loadCategories(): void {
+    this.http
+      .get<CategoryApiResponse[]>(
+        this.categoriesApiUrl,
+      )
+      .subscribe({
+        next: (categories) => {
+          this.categories.set(
+            categories,
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load categories',
+            error,
+          );
+        },
+      });
+  }
+
+  private getCategoryId(
+    categoryName: string,
+  ): number | null {
+
+    const normalizedName =
+      categoryName
+        .trim()
+        .toLowerCase();
+
+    const category =
+      this.categories().find(
+        (item) =>
+          item.name
+            .trim()
+            .toLowerCase() ===
+          normalizedName,
+      );
+
+    return category?.id ?? null;
+  }
+
+  /* =========================
+     GET
+  ========================= */
+
+  private loadBudgets(): void {
+    this.http
+      .get<BudgetApiResponse[]>(
+        this.apiUrl,
+      )
+      .subscribe({
+        next: (budgets) => {
+          this.budgets.set(
+            budgets.map(
+              (budget) =>
+                this.mapBudget(
+                  budget,
+                ),
+            ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load budgets',
+            error,
+          );
+        },
+      });
+  }
+
+  /* =========================
+     POST
+  ========================= */
+
+  addBudget(
+    budget: Omit<Budget, 'id'>,
+  ): void {
+
+    const categoryId =
+      this.getCategoryId(
+        budget.category,
+      );
+
+    if (categoryId === null) {
+      console.error(
+        'Category not found:',
+        budget.category,
+      );
+
+      return;
     }
 
-    return [
-      {
-        id: 1,
-        category: 'Food',
-        limit: 8_000_000,
-        spent: 5_400_000,
-        month: 'August 2026',
-      },
-      {
-        id: 2,
-        category: 'Transportation',
-        limit: 4_000_000,
-        spent: 2_900_000,
-        month: 'August 2026',
-      },
-      {
-        id: 3,
-        category: 'Shopping',
-        limit: 6_000_000,
-        spent: 6_800_000,
-        month: 'August 2026',
-      },
-    ];
-  }
+    const payload = {
+      categoryId,
 
-  private saveBudgets(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.budgets()));
-  }
+      limitAmount:
+        budget.limit,
 
-  addBudget(budget: Omit<Budget, 'id'>): void {
-    const newBudget: Budget = {
-      id: Date.now(),
-      ...budget,
+      month:
+        budget.month,
     };
 
-    this.budgets.update((budgets) => [...budgets, newBudget]);
+    this.http
+      .post<BudgetApiResponse>(
+        this.apiUrl,
+        payload,
+      )
+      .subscribe({
+        next: (createdBudget) => {
+          this.budgets.update(
+            (budgets) => [
+              ...budgets,
 
-    this.saveBudgets();
+              this.mapBudget(
+                createdBudget,
+              ),
+            ],
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to add budget',
+            error,
+          );
+        },
+      });
   }
 
-  updateBudget(updatedBudget: Budget): void {
-    this.budgets.update((budgets) =>
-      budgets.map((budget) => (budget.id === updatedBudget.id ? updatedBudget : budget)),
-    );
+  /* =========================
+     PUT
+  ========================= */
 
-    this.saveBudgets();
+  updateBudget(
+    updatedBudget: Budget,
+  ): void {
+
+    const categoryId =
+      this.getCategoryId(
+        updatedBudget.category,
+      );
+
+    if (categoryId === null) {
+      console.error(
+        'Category not found:',
+        updatedBudget.category,
+      );
+
+      return;
+    }
+
+    const payload = {
+      categoryId,
+
+      limitAmount:
+        updatedBudget.limit,
+
+      month:
+        updatedBudget.month,
+    };
+
+    this.http
+      .put<BudgetApiResponse>(
+        `${this.apiUrl}/${updatedBudget.id}`,
+        payload,
+      )
+      .subscribe({
+        next: (savedBudget) => {
+          this.budgets.update(
+            (budgets) =>
+              budgets.map(
+                (budget) =>
+                  budget.id ===
+                  savedBudget.id
+                    ? this.mapBudget(
+                        savedBudget,
+                      )
+                    : budget,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to update budget',
+            error,
+          );
+        },
+      });
   }
 
-  deleteBudget(budgetId: number): void {
-    this.budgets.update((budgets) => budgets.filter((budget) => budget.id !== budgetId));
+  /* =========================
+     DELETE
+  ========================= */
 
-    this.saveBudgets();
+  deleteBudget(
+    budgetId: number,
+  ): void {
+
+    this.http
+      .delete<void>(
+        `${this.apiUrl}/${budgetId}`,
+      )
+      .subscribe({
+        next: () => {
+          this.budgets.update(
+            (budgets) =>
+              budgets.filter(
+                (budget) =>
+                  budget.id !==
+                  budgetId,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to delete budget',
+            error,
+          );
+        },
+      });
   }
+
+  /* =========================
+     Mapper
+  ========================= */
+
+private mapBudget(
+  budget: BudgetApiResponse,
+): Budget {
+  return {
+    id: budget.id,
+    category: budget.categoryName,
+    limit: budget.limitAmount,
+    spent: budget.spent,
+    month: budget.month,
+  };
+}
 }

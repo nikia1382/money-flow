@@ -1,0 +1,130 @@
+@if (isOpen) {
+
+  <div
+    class="modal-backdrop"
+    (click)="closeModal()"
+  >
+
+    <section
+      class="contribute-modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- Header -->
+
+      <header class="contribute-modal__header">
+
+        <div>
+          <h2>
+            Add money
+          </h2>
+
+          <p>
+            {{ goalTitle }}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <lucide-icon
+            [img]="X"
+            [size]="18"
+          />
+        </button>
+
+      </header>
+
+      <!-- Information -->
+
+      <div class="contribute-modal__summary">
+
+        <div>
+          <span>
+            Saved
+          </span>
+
+          <strong>
+            {{ currentAmount }}
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            Remaining
+          </span>
+
+          <strong>
+            {{ remainingAmount }}
+          </strong>
+        </div>
+
+      </div>
+
+      <!-- Form -->
+
+      <form
+        class="contribute-modal__form"
+        (ngSubmit)="submit()"
+      >
+
+        <div class="form-field">
+
+          <label for="contribution-amount">
+            Amount
+          </label>
+
+          <input
+            id="contribution-amount"
+            type="number"
+            name="amount"
+            [(ngModel)]="amount"
+            min="1"
+            [max]="remainingAmount"
+            placeholder="0"
+            required
+          />
+
+          @if (
+            amount !== null &&
+            amount > remainingAmount
+          ) {
+            <small class="form-error">
+              Amount cannot exceed the remaining amount.
+            </small>
+          }
+
+        </div>
+
+        <!-- Actions -->
+
+        <footer class="contribute-modal__actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeModal()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="save-btn"
+            [disabled]="!isValid"
+          >
+            Add money
+          </button>
+
+        </footer>
+
+      </form>
+
+    </section>
+
+  </div>
+
+}

@@ -1,12 +1,34 @@
-import { Component } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 
-import { LucideAngularModule, Utensils, House, Car, ShoppingBag, Gamepad2 } from 'lucide-angular';
-import { LocaleNumberPipe } from '../../../../shared/pipes/locale-number-pipe';
+import {
+  TranslatePipe,
+} from '@ngx-translate/core';
+
+import {
+  LucideAngularModule,
+  Utensils,
+  House,
+  Car,
+  ShoppingBag,
+  Gamepad2,
+  Wallet,
+} from 'lucide-angular';
+
+import {
+  LocaleNumberPipe,
+} from '../../../../shared/pipes/locale-number-pipe';
+
+import {
+  BudgetsService,
+} from '../../../budgets/services/budgets';
 
 interface BudgetItem {
   id: number;
-  nameKey: string;
+  category: string;
   spent: number;
   limit: number;
   icon: any;
@@ -15,63 +37,94 @@ interface BudgetItem {
 
 @Component({
   selector: 'app-budget-progress',
-  imports: [TranslatePipe, LucideAngularModule, LocaleNumberPipe],
+
+  imports: [
+    TranslatePipe,
+    LucideAngularModule,
+    LocaleNumberPipe,
+  ],
+
   templateUrl: './budget-progress.html',
   styleUrl: './budget-progress.scss',
 })
 export class BudgetProgress {
-  readonly budgets: BudgetItem[] = [
-    {
-      id: 1,
-      nameKey: 'dashboard.budget.food',
-      spent: 4_200_000,
-      limit: 6_000_000,
-      icon: Utensils,
-      iconClass: 'food',
-    },
-    {
-      id: 2,
-      nameKey: 'dashboard.budget.housing',
-      spent: 5_200_000,
-      limit: 7_000_000,
-      icon: House,
-      iconClass: 'housing',
-    },
-    {
-      id: 3,
-      nameKey: 'dashboard.budget.transportation',
-      spent: 2_100_000,
-      limit: 3_000_000,
-      icon: Car,
-      iconClass: 'transportation',
-    },
-    {
-      id: 4,
-      nameKey: 'dashboard.budget.shopping',
-      spent: 1_850_000,
-      limit: 2_500_000,
-      icon: ShoppingBag,
-      iconClass: 'shopping',
-    },
-    {
-      id: 5,
-      nameKey: 'dashboard.budget.entertainment',
-      spent: 1_300_000,
-      limit: 1_500_000,
-      icon: Gamepad2,
-      iconClass: 'entertainment',
-    },
-  ];
+  /* =========================
+     Service
+  ========================= */
 
-  getPercentage(spent: number, limit: number): number {
+  private readonly budgetsService =
+    inject(BudgetsService);
+
+  /* =========================
+     Budget Data
+  ========================= */
+
+  readonly budgets =
+  computed<BudgetItem[]>(() => {
+    const currentMonth =
+      this.getCurrentMonth();
+
+    return this.budgetsService
+      .budgets()
+      .filter(
+        (budget) =>
+          budget.month ===
+          currentMonth,
+      )
+      .map((budget) => ({
+        id: budget.id,
+
+        category:
+          budget.category,
+
+        limit:
+          budget.limit,
+
+        spent:
+          budget.spent,
+
+        icon:
+          this.getCategoryIcon(
+            budget.category,
+          ),
+
+        iconClass:
+          budget.category
+            .toLowerCase(),
+      }));
+  });
+
+  /* =========================
+     Percentage
+  ========================= */
+
+  getPercentage(
+    spent: number,
+    limit: number,
+  ): number {
     if (limit <= 0) {
       return 0;
     }
 
-    return Math.min(Math.round((spent / limit) * 100), 100);
+    return Math.min(
+      Math.round(
+        (spent / limit) * 100,
+      ),
+      100,
+    );
   }
 
-  getProgressStatus(percentage: number): string {
+  /* =========================
+     Progress Status
+  ========================= */
+
+  getProgressStatus(
+    percentage: number,
+  ):
+    | 'safe'
+    | 'warning'
+    | 'danger' {
+
     if (percentage >= 90) {
       return 'danger';
     }
@@ -82,4 +135,49 @@ export class BudgetProgress {
 
     return 'safe';
   }
+
+  /* =========================
+     Category Icon
+  ========================= */
+
+  private getCategoryIcon(
+    category: string,
+  ) {
+    switch (
+      category
+        .trim()
+        .toLowerCase()
+    ) {
+      case 'food':
+        return Utensils;
+
+      case 'housing':
+        return House;
+
+      case 'transportation':
+        return Car;
+
+      case 'shopping':
+        return ShoppingBag;
+
+      case 'entertainment':
+        return Gamepad2;
+
+      default:
+        return Wallet;
+    }
+  }
+  private getCurrentMonth(): string {
+  const now = new Date();
+
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1,
+    ).padStart(2, '0');
+
+  return `${year}-${month}`;
+}
 }

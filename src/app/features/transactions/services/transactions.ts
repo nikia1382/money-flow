@@ -1,85 +1,471 @@
-import { Injectable, signal } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  signal,
+} from '@angular/core';
 
-import { Transaction } from '../models/transaction.model';
+import {
+  HttpClient,
+} from '@angular/common/http';
+
+import {
+  Transaction,
+} from '../models/transaction.model';
+
+/* =========================
+   API Models
+========================= */
+
+export interface CategoryApiResponse {
+  id: number;
+  name: string;
+  type: string;
+  icon: string | null;
+}
+
+export interface AccountApiResponse {
+  id: number;
+  name: string;
+  type: string;
+  balance: number;
+  number?: string | null;
+}
+
+interface TransactionApiResponse {
+  id: number;
+  title: string;
+  category: CategoryApiResponse;
+  account: AccountApiResponse;
+  amount: number;
+  type: Transaction['type'];
+  date: string;
+  description?: string | null;
+}
+
+interface TransactionRequest {
+  title: string;
+  categoryId: number;
+  accountId: number;
+  amount: number;
+  type: Transaction['type'];
+  date: string;
+  description?: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionsService {
-  private readonly storageKey = 'moneyflow_transactions';
+  /* =========================
+     API
+  ========================= */
 
-  readonly transactions = signal<Transaction[]>(this.loadTransactions());
+  private readonly http =
+    inject(HttpClient);
 
-  private loadTransactions(): Transaction[] {
-    const saved = localStorage.getItem(this.storageKey);
+  private readonly apiUrl =
+    'http://localhost:8080/api/transactions';
 
-    if (saved) {
-      return JSON.parse(saved);
+  private readonly categoriesApiUrl =
+    'http://localhost:8080/api/categories';
+
+  private readonly accountsApiUrl =
+    'http://localhost:8080/api/accounts';
+
+  /* =========================
+     State
+  ========================= */
+
+  readonly transactions =
+    signal<Transaction[]>([]);
+
+  /*
+   * این دو قبلاً private بودن.
+   * چون Modal باید ازشون استفاده کنه،
+   * باید public باشن.
+   */
+  readonly categories =
+    signal<CategoryApiResponse[]>([]);
+
+  readonly accounts =
+    signal<AccountApiResponse[]>([]);
+
+  /* =========================
+     Constructor
+  ========================= */
+
+  constructor() {
+    this.refreshReferenceData();
+    this.loadTransactions();
+  }
+
+  /* =========================
+     Reference Data
+  ========================= */
+
+  refreshReferenceData(): void {
+    this.loadCategories();
+    this.loadAccounts();
+  }
+
+  /* =========================
+     Categories
+  ========================= */
+
+  private loadCategories(): void {
+    this.http
+      .get<CategoryApiResponse[]>(
+        this.categoriesApiUrl,
+      )
+      .subscribe({
+        next: (categories) => {
+          this.categories.set(
+            categories,
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load categories',
+            error,
+          );
+        },
+      });
+  }
+
+  private getCategoryId(
+    categoryName: string,
+  ): number | null {
+    const normalizedName =
+      categoryName
+        .trim()
+        .toLowerCase();
+
+    const category =
+      this.categories().find(
+        (item) =>
+          item.name
+            .trim()
+            .toLowerCase() ===
+          normalizedName,
+      );
+
+    return category?.id ?? null;
+  }
+
+  /* =========================
+     Accounts
+  ========================= */
+
+  private loadAccounts(): void {
+    this.http
+      .get<AccountApiResponse[]>(
+        this.accountsApiUrl,
+      )
+      .subscribe({
+        next: (accounts) => {
+          this.accounts.set(
+            accounts,
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load accounts',
+            error,
+          );
+        },
+      });
+  }
+
+  private getAccountId(
+    accountName: string,
+  ): number | null {
+    const normalizedName =
+      accountName
+        .trim()
+        .toLowerCase();
+
+    const account =
+      this.accounts().find(
+        (item) =>
+          item.name
+            .trim()
+            .toLowerCase() ===
+          normalizedName,
+      );
+
+    return account?.id ?? null;
+  }
+
+  /* =========================
+     GET
+  ========================= */
+
+  private loadTransactions(): void {
+    this.http
+      .get<TransactionApiResponse[]>(
+        this.apiUrl,
+      )
+      .subscribe({
+        next: (transactions) => {
+          this.transactions.set(
+            transactions.map(
+              (transaction) =>
+                this.mapTransaction(
+                  transaction,
+                ),
+            ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load transactions',
+            error,
+          );
+        },
+      });
+  }
+
+  /* =========================
+     POST
+  ========================= */
+
+  addTransaction(
+    transaction: Omit<
+      Transaction,
+      'id'
+    >,
+  ): void {
+    const categoryId =
+      this.getCategoryId(
+        transaction.category,
+      );
+
+    const accountId =
+      this.getAccountId(
+        transaction.account,
+      );
+
+    if (categoryId === null) {
+      console.error(
+        'Category not found:',
+        transaction.category,
+      );
+
+      return;
     }
 
-    return [
-      {
-        id: 1,
-        title: 'Salary',
-        category: 'Income',
-        account: 'Main Bank Account',
-        date: 'Aug 19, 2026',
-        amount: 35_000_000,
-        type: 'income',
-      },
+    if (accountId === null) {
+      console.error(
+        'Account not found:',
+        transaction.account,
+      );
 
-      {
-        id: 2,
-        title: 'Grocery Shopping',
-        category: 'Food',
-        account: 'Main Bank Account',
-        date: 'Aug 18, 2026',
-        amount: 1_850_000,
-        type: 'expense',
-      },
+      return;
+    }
 
-      {
-        id: 3,
-        title: 'Transfer to Savings',
-        category: 'Transfer',
-        account: 'Savings Account',
-        date: 'Aug 17, 2026',
-        amount: 5_000_000,
-        type: 'transfer',
-      },
-    ];
-  }
+    const payload: TransactionRequest = {
+      title:
+        transaction.title,
 
-  private saveTransactions(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.transactions()));
-  }
+      categoryId,
 
-  addTransaction(transaction: Omit<Transaction, 'id'>): void {
-    const newTransaction: Transaction = {
-      id: Date.now(),
-      ...transaction,
+      accountId,
+
+      amount:
+        transaction.amount,
+
+      type:
+        transaction.type,
+
+      date:
+        transaction.date,
+
+      description:
+        transaction.description ?? '',
     };
 
-    this.transactions.update((transactions) => [...transactions, newTransaction]);
+    this.http
+      .post<TransactionApiResponse>(
+        this.apiUrl,
+        payload,
+      )
+      .subscribe({
+        next: (createdTransaction) => {
+          this.transactions.update(
+            (transactions) => [
+              ...transactions,
+              this.mapTransaction(
+                createdTransaction,
+              ),
+            ],
+          );
+        },
 
-    this.saveTransactions();
+        error: (error) => {
+          console.error(
+            'Failed to add transaction',
+            error,
+          );
+        },
+      });
   }
 
-  updateTransaction(updatedTransaction: Transaction): void {
-    this.transactions.update((transactions) =>
-      transactions.map((transaction) =>
-        transaction.id === updatedTransaction.id ? updatedTransaction : transaction,
-      ),
-    );
+  /* =========================
+     PUT
+  ========================= */
 
-    this.saveTransactions();
+  updateTransaction(
+    updatedTransaction: Transaction,
+  ): void {
+    const categoryId =
+      this.getCategoryId(
+        updatedTransaction.category,
+      );
+
+    const accountId =
+      this.getAccountId(
+        updatedTransaction.account,
+      );
+
+    if (categoryId === null) {
+      console.error(
+        'Category not found:',
+        updatedTransaction.category,
+      );
+
+      return;
+    }
+
+    if (accountId === null) {
+      console.error(
+        'Account not found:',
+        updatedTransaction.account,
+      );
+
+      return;
+    }
+
+    const payload: TransactionRequest = {
+      title:
+        updatedTransaction.title,
+
+      categoryId,
+
+      accountId,
+
+      amount:
+        updatedTransaction.amount,
+
+      type:
+        updatedTransaction.type,
+
+      date:
+        updatedTransaction.date,
+
+      description:
+        updatedTransaction.description ?? '',
+    };
+
+    this.http
+      .put<TransactionApiResponse>(
+        `${this.apiUrl}/${updatedTransaction.id}`,
+        payload,
+      )
+      .subscribe({
+        next: (savedTransaction) => {
+          const mappedTransaction =
+            this.mapTransaction(
+              savedTransaction,
+            );
+
+          this.transactions.update(
+            (transactions) =>
+              transactions.map(
+                (transaction) =>
+                  transaction.id ===
+                  mappedTransaction.id
+                    ? mappedTransaction
+                    : transaction,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to update transaction',
+            error,
+          );
+        },
+      });
   }
 
-  deleteTransaction(transactionId: number): void {
-    this.transactions.update((transactions) =>
-      transactions.filter((transaction) => transaction.id !== transactionId),
-    );
+  /* =========================
+     DELETE
+  ========================= */
 
-    this.saveTransactions();
+  deleteTransaction(
+    id: number,
+  ): void {
+    this.http
+      .delete<void>(
+        `${this.apiUrl}/${id}`,
+      )
+      .subscribe({
+        next: () => {
+          this.transactions.update(
+            (transactions) =>
+              transactions.filter(
+                (transaction) =>
+                  transaction.id !== id,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to delete transaction',
+            error,
+          );
+        },
+      });
+  }
+
+  /* =========================
+     Mapper
+  ========================= */
+
+  private mapTransaction(
+    transaction: TransactionApiResponse,
+  ): Transaction {
+    return {
+      id:
+        transaction.id,
+
+      title:
+        transaction.title,
+
+      category:
+        transaction.category?.name ??
+        'Unknown',
+
+      account:
+        transaction.account?.name ??
+        'Unknown',
+
+      amount:
+        transaction.amount,
+
+      type:
+        transaction.type,
+
+      date:
+        transaction.date,
+
+      description:
+        transaction.description ?? '',
+    };
   }
 }

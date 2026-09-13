@@ -1,15 +1,32 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
-import { LucideAngularModule, X } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  X,
+} from 'lucide-angular';
 
-import { AccountsService } from '../../../features/accounts/services/accounts';
+import { TranslatePipe } from '@ngx-translate/core';
 
 import {
   Transaction,
   TransactionType,
 } from '../../../features/transactions/models/transaction.model';
+
+import {
+  TransactionsService,
+  CategoryApiResponse,
+} from '../../../features/transactions/services/transactions';
 
 export interface TransactionForm {
   title: string;
@@ -24,51 +41,59 @@ export interface TransactionForm {
 @Component({
   selector: 'app-add-transaction-modal',
 
-  imports: [FormsModule, LucideAngularModule],
+  imports: [
+    FormsModule,
+    LucideAngularModule,
+    TranslatePipe,
+  ],
 
   templateUrl: './add-transaction-modal.html',
   styleUrl: './add-transaction-modal.scss',
 })
-export class AddTransactionModal {
+export class AddTransactionModal
+  implements OnInit, OnChanges {
+
   /* =========================
      Service
   ========================= */
 
-  private readonly accountsService = inject(AccountsService);
+  private transactionsService =
+    inject(TransactionsService);
+
+  /* =========================
+     Input
+  ========================= */
+
+  @Input()
+  transactionToEdit: Transaction | null = null;
 
   /* =========================
      Outputs
   ========================= */
-  @Input()
-  transactionToEdit: Transaction | null = null;
-  @Output()
-  closeModal = new EventEmitter<void>();
 
   @Output()
-  saveTransaction = new EventEmitter<TransactionForm>();
+  closeModal =
+    new EventEmitter<void>();
+
+  @Output()
+  saveTransaction =
+    new EventEmitter<TransactionForm>();
 
   /* =========================
-     Data
+     API Data
   ========================= */
 
-  readonly accounts = this.accountsService.accounts;
+  accounts =
+    this.transactionsService.accounts;
 
-  readonly categories = [
-    'Food',
-    'Bills',
-    'Shopping',
-    'Transportation',
-    'Entertainment',
-    'Salary',
-    'Transfer',
-    'Other',
-  ];
+  categories =
+    this.transactionsService.categories;
 
   /* =========================
      Icons
   ========================= */
 
-  readonly X = X;
+  X = X;
 
   /* =========================
      Form
@@ -85,6 +110,89 @@ export class AddTransactionModal {
   };
 
   /* =========================
+     Lifecycle
+  ========================= */
+
+  ngOnInit(): void {
+    this.transactionsService
+      .refreshReferenceData();
+  }
+
+  ngOnChanges(
+    changes: SimpleChanges,
+  ): void {
+    if (
+      changes['transactionToEdit'] &&
+      this.transactionToEdit
+    ) {
+      this.form = {
+        title:
+          this.transactionToEdit.title,
+
+        type:
+          this.transactionToEdit.type,
+
+        amount:
+          this.transactionToEdit.amount,
+
+        category:
+          this.transactionToEdit.category,
+
+        account:
+          this.transactionToEdit.account,
+
+        date:
+          this.transactionToEdit.date,
+
+        description:
+          this.transactionToEdit.description ?? '',
+      };
+    }
+  }
+
+  /* =========================
+     Mode
+  ========================= */
+
+  get isEditMode(): boolean {
+    return this.transactionToEdit !== null;
+  }
+
+  /* =========================
+     Type
+  ========================= */
+
+  selectType(
+    type: TransactionType,
+  ): void {
+    this.form.type = type;
+
+    // Category قبلی ممکن است
+    // با type جدید سازگار نباشد.
+    this.form.category = '';
+  }
+
+  /* =========================
+     Categories
+  ========================= */
+
+  get availableCategories():
+    CategoryApiResponse[] {
+
+    if (
+      this.form.type === 'transfer'
+    ) {
+      return this.categories();
+    }
+
+    return this.categories().filter(
+      (category) =>
+        category.type ===
+        this.form.type,
+    );
+  }
+
+  /* =========================
      Close
   ========================= */
 
@@ -97,21 +205,8 @@ export class AddTransactionModal {
   ========================= */
 
   save(): void {
-    if (
-      !this.form.title.trim() ||
-      this.form.amount === null ||
-      this.form.amount <= 0 ||
-      !this.form.category ||
-      !this.form.account ||
-      !this.form.date
-    ) {
-      return;
-    }
-
     this.saveTransaction.emit({
       ...this.form,
     });
-
-    this.close();
   }
 }

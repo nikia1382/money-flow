@@ -12,7 +12,7 @@
 
   <!-- Items -->
   <div class="budget-list">
-    @for (budget of budgets; track budget.id) {
+    @for (budget of budgets(); track budget.id) {
       <div class="budget-item">
         <!-- Icon -->
         <div class="budget-item__icon" [class]="budget.iconClass">
@@ -24,7 +24,7 @@
           <div class="budget-item__top">
             <div class="budget-item__info">
               <span class="budget-item__name">
-                {{ budget.nameKey | translate }}
+                {{ budget.category | translate }}
               </span>
 
               <span class="budget-item__amount">
@@ -43,23 +43,34 @@
                 getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'danger'
               "
             >
-              {{ getPercentage(budget.spent, budget.limit) }}%
+              {{ getPercentage(budget.spent, budget.limit) | localeNumber }}%
             </span>
           </div>
 
           <!-- Progress -->
-          <div class="budget-progress">
-            <div
-              class="budget-progress__bar"
-              [style.width.%]="getPercentage(budget.spent, budget.limit)"
-              [class.warning]="
-                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'warning'
-              "
-              [class.danger]="
-                getProgressStatus(getPercentage(budget.spent, budget.limit)) === 'danger'
-              "
-            ></div>
-          </div>
+<div
+  class="budget-progress"
+  role="progressbar"
+  [attr.aria-valuenow]="getPercentage(budget.spent, budget.limit)"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  [attr.aria-label]="budget.category | translate"
+>
+  <div
+    class="budget-progress__bar"
+    [style.width.%]="getPercentage(budget.spent, budget.limit)"
+    [class.warning]="
+      getProgressStatus(
+        getPercentage(budget.spent, budget.limit)
+      ) === 'warning'
+    "
+    [class.danger]="
+      getProgressStatus(
+        getPercentage(budget.spent, budget.limit)
+      ) === 'danger'
+    "
+  ></div>
+</div>
         </div>
       </div>
     }

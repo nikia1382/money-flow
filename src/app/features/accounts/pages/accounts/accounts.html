@@ -1,44 +1,75 @@
 <section class="accounts-page">
+
   <!-- Header -->
+
   <div class="accounts-page__header">
     <div>
-      <h1>Accounts</h1>
+      <h1>
+        {{ 'accounts.title' | translate }}
+      </h1>
 
-      <p>Manage your bank accounts, wallets and savings.</p>
+      <p>
+        {{ 'accounts.subtitle' | translate }}
+      </p>
     </div>
 
-    <button type="button" class="add-account-btn" (click)="openAddAccount()">+ Add Account</button>
+    <button
+      type="button"
+      class="add-account-btn"
+      (click)="openAddAccount()"
+    >
+      + {{ 'accounts.addAccount' | translate }}
+    </button>
   </div>
 
-  <!-- Balance -->
+
+  <!-- Balance Summary -->
+
   <section class="balance-summary">
-    <span> Total Balance </span>
+    <span>
+      {{ 'accounts.totalBalance' | translate }}
+    </span>
 
     <strong>
       {{ totalBalance | localeNumber }}
 
-      <small> Toman </small>
+      <small>
+        {{ 'common.currency' | translate }}
+      </small>
     </strong>
 
-    <p>Across {{ accounts().length }} accounts</p>
+    <p>
+      {{
+        'accounts.accountCount'
+          | translate: { count: accounts().length }
+      }}
+    </p>
   </section>
 
-  <!-- Accounts -->
-  <!-- Accounts -->
 
   <!-- Accounts -->
 
   @if (accounts().length > 0) {
+
     <div class="accounts-grid">
-      @for (account of accounts(); track account.id) {
+
+      @for (
+        account of accounts();
+        track account.id
+      ) {
+
         <app-account-card
           [account]="account"
           (editAccount)="openEditAccount($event)"
           (deleteAccount)="requestDeleteAccount($event)"
         />
+
       }
+
     </div>
+
   } @else {
+
     <app-state-view
       type="empty"
       [icon]="Landmark"
@@ -47,15 +78,28 @@
       [actionLabel]="'accounts.addAccount' | translate"
       (action)="openAddAccount()"
     />
+
   }
+
 </section>
 
-<!-- Add Account Modal -->
+
+<!-- Add Account -->
 
 @if (isAddAccountOpen()) {
-  <app-add-account-modal (closeModal)="closeAddAccount()" (saveAccount)="addAccount($event)" />
+
+  <app-add-account-modal
+    (closeModal)="closeAddAccount()"
+    (saveAccount)="addAccount($event)"
+  />
+
 }
+
+
+<!-- Edit Account -->
+
 @if (editingAccount()) {
+
   <app-add-account-modal
     [accountToEdit]="editingAccount()"
     (closeModal)="closeEditAccount()"
@@ -65,16 +109,28 @@
         name: $event.name,
         type: $event.type,
         balance: $event.balance ?? 0,
-        number: $event.number || undefined,
+        number: $event.number || undefined
       })
     "
   />
+
 }
+
+
+<!-- Delete Confirmation -->
+
 @if (accountPendingDelete()) {
+
   <app-confirm-dialog
-    title="Delete Account"
-    [message]="'Are you sure you want to delete ' + accountPendingDelete()!.name + '?'"
+    [title]="'accounts.deleteDialog.title' | translate"
+    [message]="
+      'accounts.deleteDialog.message'
+        | translate: {
+            name: accountPendingDelete()!.name
+          }
+    "
     (cancel)="cancelDeleteAccount()"
     (confirm)="confirmDeleteAccount()"
   />
+
 }

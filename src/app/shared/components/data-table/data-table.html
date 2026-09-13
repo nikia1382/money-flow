@@ -1,8 +1,15 @@
 <div class="data-table">
+
   <!-- Header -->
 
-  <div class="data-table__header" [style.grid-template-columns]="gridTemplateColumns">
-    @for (column of columns; track column.labelKey) {
+  <div
+    class="data-table__header"
+    [style.grid-template-columns]="gridTemplateColumns"
+  >
+    @for (
+      column of columns;
+      track $index
+    ) {
       <span
         [class.align-center]="column.align === 'center'"
         [class.align-end]="column.align === 'end'"
@@ -14,20 +21,39 @@
     }
   </div>
 
+
   <!-- Body -->
 
   <div class="data-table__body">
-    @for (row of rows; track $index; let rowIndex = $index) {
-      <div class="data-table__row" [style.grid-template-columns]="gridTemplateColumns">
-        @for (column of columns; track column.labelKey) {
-          @let value = getCellValue(row, column);
+
+    @for (
+      row of rows;
+      track $index;
+      let rowIndex = $index
+    ) {
+      <div
+        class="data-table__row"
+        [style.grid-template-columns]="gridTemplateColumns"
+      >
+
+        @for (
+          column of columns;
+          track $index
+        ) {
+          @let value =
+            getCellValue(
+              row,
+              column
+            );
 
           <div
             class="data-table__cell"
             [class.align-center]="column.align === 'center'"
             [class.align-end]="column.align === 'end'"
           >
+
             @switch (column.type) {
+
               <!-- Currency -->
 
               @case ('currency') {
@@ -42,6 +68,7 @@
                 }
               }
 
+
               <!-- Badge -->
 
               @case ('badge') {
@@ -52,8 +79,18 @@
                     [class.warning]="value === 'dueSoon'"
                     [class.danger]="value === 'overdue'"
                   >
-                    @if (column.valueKeyPrefix) {
-                      {{ getTranslatedValueKey(column, value) | translate }}
+                    @if (
+                      getDisplayValueKey(
+                        column,
+                        value
+                      )
+                    ) {
+                      {{
+                        getDisplayValueKey(
+                          column,
+                          value
+                        ) | translate
+                      }}
                     } @else {
                       {{ value }}
                     }
@@ -61,42 +98,70 @@
                 }
               }
 
+
               <!-- Date -->
 
               @case ('date') {
                 @if (isString(value)) {
                   <span>
-                    {{ value }}
+                    {{ value | localeDate }}
                   </span>
                 }
               }
+
 
               <!-- Actions -->
 
               @case ('actions') {
                 <div class="data-table__actions">
+
                   <button
                     type="button"
                     class="data-table__menu-btn"
-                    aria-label="Row actions"
-                    title="Row actions"
-                    (click)="toggleActions(rowIndex)"
+                    [attr.aria-label]="'common.table.rowActions' | translate"
+                    [title]="'common.table.rowActions' | translate"
+                    (click)="toggleActions(rowIndex, $event)"
                   >
-                    <lucide-icon [img]="MoreHorizontal" [size]="17" aria-hidden="true" />
+                    <lucide-icon
+                      [img]="MoreHorizontal"
+                      [size]="17"
+                      aria-hidden="true"
+                    />
                   </button>
 
-                  @if (openedMenuIndex === rowIndex) {
-                    <div class="data-table__menu">
-                      <button type="button" (click)="edit(row)">
-                        <lucide-icon [img]="Pencil" [size]="14" />
+                  @if (
+                    openedMenuIndex ===
+                    rowIndex
+                  ) {
+                    <div
+                      class="data-table__menu"
+                      (click)="$event.stopPropagation()"
+                    >
+                      <button
+                        type="button"
+                        (click)="edit(row)"
+                      >
+                        <lucide-icon
+                          [img]="Pencil"
+                          [size]="14"
+                          aria-hidden="true"
+                        />
 
                         <span>
                           {{ 'common.actions.edit' | translate }}
                         </span>
                       </button>
 
-                      <button type="button" class="danger" (click)="delete(row)">
-                        <lucide-icon [img]="Trash2" [size]="14" />
+                      <button
+                        type="button"
+                        class="danger"
+                        (click)="delete(row)"
+                      >
+                        <lucide-icon
+                          [img]="Trash2"
+                          [size]="14"
+                          aria-hidden="true"
+                        />
 
                         <span>
                           {{ 'common.actions.delete' | translate }}
@@ -104,24 +169,42 @@
                       </button>
                     </div>
                   }
+
                 </div>
               }
+
 
               <!-- Default -->
 
               @default {
-                @if (isString(value) && column.valueKeyPrefix) {
-                  {{ getTranslatedValueKey(column, value) | translate }}
+                @if (
+                  isString(value) &&
+                  getDisplayValueKey(
+                    column,
+                    value
+                  )
+                ) {
+                  {{
+                    getDisplayValueKey(
+                      column,
+                      value
+                    ) | translate
+                  }}
                 } @else {
                   {{ value }}
                 }
               }
+
             }
+
           </div>
         }
+
       </div>
     } @empty {
+
       <div class="data-table__empty">
+
         <strong>
           {{ emptyTitleKey | translate }}
         </strong>
@@ -129,7 +212,10 @@
         <span>
           {{ emptySubtitleKey | translate }}
         </span>
+
       </div>
+
     }
+
   </div>
 </div>

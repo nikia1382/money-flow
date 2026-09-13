@@ -1,56 +1,155 @@
 <section class="goals-card">
+
+  <!-- Header -->
+
   <div class="goals-card__header">
     <div>
       <h3>
-        {{ 'dashboard.goals.title' | translate }}
+        {{
+          'dashboard.goals.title'
+            | translate
+        }}
       </h3>
 
       <p>
-        {{ 'dashboard.goals.subtitle' | translate }}
+        {{
+          'dashboard.goals.subtitle'
+            | translate
+        }}
       </p>
     </div>
 
-    <button type="button" class="view-all-btn">
-      {{ 'dashboard.goals.viewAll' | translate }}
+    <button
+      type="button"
+      class="view-all-btn"
+      (click)="openAddGoal()"
+    >
+      {{
+        'dashboard.goals.viewAll'
+          | translate
+      }}
     </button>
   </div>
 
+  <!-- Goals -->
+
   <div class="goals-list">
-    @for (goal of goals; track goal.id) {
+
+    @for (
+      goal of goals();
+      track goal.id
+    ) {
+
       <div class="goal-item">
-        <div class="goal-item__icon" [class]="goal.iconClass">
-          <lucide-icon [img]="goal.icon" [size]="17" />
+
+        <!-- Icon -->
+
+        <div
+          class="goal-item__icon"
+          [class]="goal.iconClass"
+        >
+          <lucide-icon
+            [img]="goal.icon"
+            [size]="17"
+          />
         </div>
 
+        <!-- Content -->
+
         <div class="goal-item__content">
+
           <div class="goal-item__top">
+
             <div class="goal-item__info">
+
               <strong>
-                {{ goal.titleKey | translate }}
+                {{ goal.title }}
               </strong>
 
               <span>
-                {{ goal.current | localeNumber }}
-                /
-                {{ goal.target | localeNumber }}
+                {{
+                  goal.current
+                    | localeNumber
+                }}
 
-                {{ 'dashboard.chart.currency' | translate }}
+                /
+
+                {{
+                  goal.target
+                    | localeNumber
+                }}
+
+                {{
+                  'dashboard.chart.currency'
+                    | translate
+                }}
               </span>
+
             </div>
 
-            <span class="goal-item__percentage">
-              {{ getPercentage(goal.current, goal.target) }}%
+            <span
+              class="goal-item__percentage"
+            >
+              {{
+                getPercentage(
+                  goal.current,
+                  goal.target
+                )
+              }}%
             </span>
+
           </div>
+
+          <!-- Progress -->
 
           <div class="goal-progress">
             <div
               class="goal-progress__bar"
-              [style.width.%]="getPercentage(goal.current, goal.target)"
+              [style.width.%]="
+                getPercentage(
+                  goal.current,
+                  goal.target
+                )
+              "
             ></div>
           </div>
+
         </div>
+
       </div>
+
+    } @empty {
+
+      <app-state-view
+        type="empty"
+        [icon]="Target"
+        [compact]="true"
+        [title]="
+          'dashboard.goals.empty.title'
+            | translate
+        "
+        [description]="
+          'dashboard.goals.empty.description'
+            | translate
+        "
+        [actionLabel]="
+          'dashboard.goals.empty.action'
+            | translate
+        "
+        (action)="openAddGoal()"
+      />
+
     }
+
   </div>
+
 </section>
+
+<!-- Add Goal Modal -->
+
+<app-add-goal-modal
+  [isOpen]="isAddGoalOpen()"
+  mode="add"
+  (close)="closeAddGoal()"
+  (save)="addGoal($event)"
+/>

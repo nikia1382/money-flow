@@ -98,13 +98,13 @@
           {{ 'budgets.summary.overBudget' | translate }}
         </span>
 
-        <strong class="danger-value">
-          {{ overBudgetCount }}
-        </strong>
+<strong class="danger-value">
+  {{ overBudgetCount | localeNumber }}
+</strong>
 
-        <small>
-          {{ 'budgets.summary.categories' | translate }}
-        </small>
+<small>
+  {{ 'budgets.summary.categories' | translate }}
+</small>
       </div>
     </article>
   </div>
@@ -165,9 +165,9 @@
     <app-state-view
       type="no-results"
       [icon]="SearchX"
-      [title]="'budgets.noResultsTitle' | translate"
-      [description]="'budgets.noResultsDescription' | translate"
-      [actionLabel]="'budgets.clearFilters' | translate"
+    [title]="'budgets.noResults.title' | translate"
+[description]="'budgets.noResults.subtitle' | translate"
+[actionLabel]="'budgets.filters.clear' | translate"
       (action)="clearFilters()"
     />
   } @else {

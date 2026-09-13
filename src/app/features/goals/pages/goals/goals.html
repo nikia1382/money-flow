@@ -29,7 +29,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalSaved | localeNumber }}
+          {{ totalSaved() | localeNumber }}
           <small>
             {{ 'common.currency' | translate }}
           </small>
@@ -48,7 +48,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalTarget | localeNumber }}
+          {{ totalTarget() | localeNumber }}
           <small>
             {{ 'common.currency' | translate }}
           </small>
@@ -66,7 +66,7 @@
           {{ 'goals.overallProgress' | translate }}
         </span>
 
-        <h2 class="summary-card__amount">{{ overallProgress | localeNumber }}%</h2>
+        <h2 class="summary-card__amount">{{ overallProgress() | localeNumber }}%</h2>
       </div>
     </article>
 
@@ -81,7 +81,7 @@
         </span>
 
         <h2 class="summary-card__amount">
-          {{ completedGoals | localeNumber }}
+          {{ completedGoals() | localeNumber }}
         </h2>
       </div>
     </article>
@@ -101,9 +101,9 @@
       </div>
     </div>
 
-    @if (goals.length) {
+   @if (goals().length) {
       <div class="goals-grid">
-        @for (goal of goals; track goal.id) {
+       @for (goal of goals(); track goal.id)  {
           <article class="goal-card">
             <header class="goal-card__header">
               <div class="goal-card__icon">
@@ -119,14 +119,14 @@
                 <lucide-icon [img]="MoreHorizontal" [size]="19" />
               </button>
 
-              @if (selectedGoal?.id === goal.id) {
+              @if (selectedGoal()?.id === goal.id) {
                 <div class="goal-card__actions">
                   <button type="button" (click)="editGoal(goal)">
-                    {{ 'common.edit' | translate }}
+                    {{ 'common.actions.edit' | translate }}
                   </button>
 
                   <button type="button" class="delete" (click)="requestDelete(goal)">
-                    {{ 'common.delete' | translate }}
+                    {{ 'common.actions.delete' | translate }}
                   </button>
                 </div>
               }
@@ -172,7 +172,20 @@
               <div class="goal-card__progress">
                 <div class="goal-card__progress-value" [style.width.%]="getProgress(goal)"></div>
               </div>
+<button
+  type="button"
+  class="goal-card__contribute"
+  (click)="openContribution(goal)"
+>
+  <lucide-icon
+    [img]="Plus"
+    [size]="15"
+  />
 
+  <span>
+    Add Money
+  </span>
+</button>
               <footer class="goal-card__footer">
                 <div>
                   <lucide-icon [img]="CalendarDays" [size]="14" />
@@ -203,26 +216,37 @@
       />
     }
   </section>
-  <app-add-goal-modal
-    [isOpen]="isAddGoalOpen"
-    mode="add"
-    (close)="closeAddGoal()"
-    (save)="saveGoal($event)"
+<app-add-goal-modal
+  [isOpen]="isAddGoalOpen()"
+  mode="add"
+  (close)="closeAddGoal()"
+  (save)="saveGoal($event)"
+/>
+<app-add-goal-modal
+  [isOpen]="isEditGoalOpen()"
+  mode="edit"
+  [goal]="selectedGoal()"
+  (close)="closeEditGoal()"
+  (save)="updateGoal($event)"
+/>
+@if (goalToDelete(); as goal) {
+  <app-confirm-dialog
+    [title]="'goals.deleteGoalTitle' | translate"
+    [message]="'goals.deleteGoalMessage' | translate"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()"
   />
-  <app-add-goal-modal
-    [isOpen]="isEditGoalOpen"
-    mode="edit"
-    [goal]="selectedGoal"
-    (close)="closeEditGoal()"
-    (save)="updateGoal($event)"
+}
+@if (contributionGoal(); as goal) {
+
+  <app-contribute-goal-modal
+    [isOpen]="true"
+    [goalTitle]="goal.title"
+    [currentAmount]="goal.savedAmount"
+    [targetAmount]="goal.targetAmount"
+    (close)="closeContribution()"
+    (contribute)="contributeToGoal($event)"
   />
 
-  @if (goalToDelete) {
-    <app-confirm-dialog
-      [title]="'goals.deleteGoalTitle' | translate"
-      [message]="'goals.deleteGoalMessage' | translate"
-      (confirm)="confirmDelete()"
-      (cancel)="cancelDelete()"
-    />
-  }
+}
 </section>

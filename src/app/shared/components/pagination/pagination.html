@@ -1,48 +1,66 @@
 @if (totalItems > 0) {
   <div class="pagination">
+
     <!-- Info -->
 
     <div class="pagination__info">
-      <span> Showing </span>
+      <span>
+        {{ 'common.pagination.showing' | translate }}
+      </span>
 
       <strong>
-        {{ startItem }}
+        {{ startItem | localeNumber }}
       </strong>
 
       <span> - </span>
 
       <strong>
-        {{ endItem }}
+        {{ endItem | localeNumber }}
       </strong>
 
-      <span> of </span>
+      <span>
+        {{ 'common.pagination.of' | translate }}
+      </span>
 
       <strong>
-        {{ totalItems }}
+        {{ totalItems | localeNumber }}
       </strong>
     </div>
 
+
     <!-- Controls -->
 
-    <div class="pagination__controls">
+    <nav
+      class="pagination__controls"
+      [attr.aria-label]="'common.pagination.navigation' | translate"
+    >
+
       <button
         type="button"
         class="pagination__button pagination__arrow"
         [disabled]="currentPage === 1"
         (click)="previousPage()"
-        aria-label="Previous page"
+        [attr.aria-label]="'common.pagination.previous' | translate"
+        [title]="'common.pagination.previous' | translate"
       >
         ‹
       </button>
 
-      @for (page of pages; track page) {
+      @for (
+        page of pages;
+        track page
+      ) {
         <button
           type="button"
           class="pagination__button"
           [class.active]="currentPage === page"
+          [attr.aria-current]="currentPage === page ? 'page' : null"
+          [attr.aria-label]="
+            ('common.pagination.page' | translate: { page: page })
+          "
           (click)="goToPage(page)"
         >
-          {{ page }}
+          {{ page | localeNumber }}
         </button>
       }
 
@@ -51,10 +69,13 @@
         class="pagination__button pagination__arrow"
         [disabled]="currentPage === totalPages"
         (click)="nextPage()"
-        aria-label="Next page"
+        [attr.aria-label]="'common.pagination.next' | translate"
+        [title]="'common.pagination.next' | translate"
       >
         ›
       </button>
-    </div>
+
+    </nav>
+
   </div>
 }

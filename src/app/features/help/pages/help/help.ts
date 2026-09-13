@@ -13,6 +13,7 @@ import {
   CircleHelp,
   Mail,
   ChevronDown,
+  LucideIconData,
 } from 'lucide-angular';
 
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,8 +22,7 @@ interface HelpTopic {
   id: number;
   titleKey: string;
   descriptionKey: string;
-  icon: any;
-}
+icon: LucideIconData;}
 
 interface HelpFaq {
   id: number;

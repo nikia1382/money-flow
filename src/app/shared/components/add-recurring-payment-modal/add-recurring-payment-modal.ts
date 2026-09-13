@@ -4,71 +4,158 @@ import {
   inject,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule,
+} from '@angular/forms';
 
-import { LucideAngularModule, X } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  X,
+} from 'lucide-angular';
 
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  TranslatePipe,
+} from '@ngx-translate/core';
 
-import { AccountsService } from '../../../features/accounts/services/accounts';
-import { RecurringPayment } from '../../../features/recurring-payments/models/recurring-payment.model';
+import {
+  RecurringPayment,
+} from '../../../features/recurring-payments/models/recurring-payment.model';
+
+import {
+  RecurringPaymentsService,
+} from '../../../features/recurring-payments/services/recurring-payments';
 
 export interface RecurringPaymentForm {
   title: string;
   category: string;
   amount: number | null;
   account: string;
-  frequency: 'weekly' | 'monthly' | 'yearly';
+  frequency:
+    | 'weekly'
+    | 'monthly'
+    | 'yearly';
   nextPaymentDate: string;
 }
 
 @Component({
-  selector: 'app-add-recurring-payment-modal',
+  selector:
+    'app-add-recurring-payment-modal',
 
-  imports: [FormsModule, LucideAngularModule, TranslatePipe],
+  imports: [
+    FormsModule,
+    LucideAngularModule,
+    TranslatePipe,
+  ],
 
-  templateUrl: './add-recurring-payment-modal.html',
+  templateUrl:
+    './add-recurring-payment-modal.html',
 
-  styleUrl: './add-recurring-payment-modal.scss',
+  styleUrl:
+    './add-recurring-payment-modal.scss',
 })
-export class AddRecurringPaymentModal implements OnChanges {
-  private readonly accountsService = inject(AccountsService);
+export class AddRecurringPaymentModal
+  implements OnInit, OnChanges {
+
+  /* =========================
+     Service
+  ========================= */
+
+  private readonly service =
+    inject(
+      RecurringPaymentsService,
+    );
+
+  /* =========================
+     Input
+  ========================= */
+
   @Input()
-  paymentToEdit: RecurringPayment | null = null;
+  paymentToEdit:
+    RecurringPayment | null = null;
+
+  /* =========================
+     Outputs
+  ========================= */
 
   @Output()
-  closeModal = new EventEmitter<void>();
+  closeModal =
+    new EventEmitter<void>();
 
   @Output()
-  savePayment = new EventEmitter<RecurringPaymentForm>();
+  savePayment =
+    new EventEmitter<RecurringPaymentForm>();
+
+  /* =========================
+     API Data
+  ========================= */
+
+  readonly accounts =
+    this.service.accounts;
+
+  readonly categories =
+    this.service.categories;
+
+  /* =========================
+     Icons
+  ========================= */
 
   readonly X = X;
 
-  readonly accounts = this.accountsService.accounts;
+  /* =========================
+     Form
+  ========================= */
 
-  readonly categories = [
-    'Housing',
-    'Bills',
-    'Health',
-    'Entertainment',
-    'Education',
-    'Subscriptions',
-    'Insurance',
-    'Other',
-  ];
+  form: RecurringPaymentForm =
+    this.createEmptyForm();
 
-  form: RecurringPaymentForm = {
-    title: '',
-    category: '',
-    amount: null,
-    account: '',
-    frequency: 'monthly',
-    nextPaymentDate: '',
-  };
+  /* =========================
+     Lifecycle
+  ========================= */
+
+  ngOnInit(): void {
+    this.service
+      .refreshReferenceData();
+  }
+
+  ngOnChanges(
+    changes: SimpleChanges,
+  ): void {
+    if (
+      changes['paymentToEdit']
+    ) {
+      this.setFormData();
+    }
+  }
+
+  /* =========================
+     Mode
+  ========================= */
+
+  get isEditMode(): boolean {
+    return !!this.paymentToEdit;
+  }
+
+  /* =========================
+     Categories
+  ========================= */
+
+  get availableCategories() {
+    return this.categories()
+      .filter(
+        (category) =>
+          category.type ===
+          'expense',
+      );
+  }
+
+  /* =========================
+     Validation
+  ========================= */
 
   get isFormValid(): boolean {
     return (
@@ -82,9 +169,17 @@ export class AddRecurringPaymentModal implements OnChanges {
     );
   }
 
+  /* =========================
+     Close
+  ========================= */
+
   close(): void {
     this.closeModal.emit();
   }
+
+  /* =========================
+     Save
+  ========================= */
 
   save(): void {
     if (!this.isFormValid) {
@@ -95,40 +190,51 @@ export class AddRecurringPaymentModal implements OnChanges {
       ...this.form,
     });
   }
-  get isEditMode(): boolean {
-    return !!this.paymentToEdit;
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['paymentToEdit']) {
-      this.setFormData();
-    }
-  }
+
+  /* =========================
+     Helpers
+  ========================= */
+
   private setFormData(): void {
     if (!this.paymentToEdit) {
-      this.form = {
-        title: '',
-        category: '',
-        amount: null,
-        account: '',
-        frequency: 'monthly',
-        nextPaymentDate: '',
-      };
+      this.form =
+        this.createEmptyForm();
 
       return;
     }
 
     this.form = {
-      title: this.paymentToEdit.title,
+      title:
+        this.paymentToEdit.title,
 
-      category: this.paymentToEdit.category,
+      category:
+        this.paymentToEdit.category,
 
-      amount: this.paymentToEdit.amount,
+      amount:
+        this.paymentToEdit.amount,
 
-      account: this.paymentToEdit.account,
+      account:
+        this.paymentToEdit.account,
 
-      frequency: this.paymentToEdit.frequency,
+      frequency:
+        this.paymentToEdit.frequency,
 
-      nextPaymentDate: this.paymentToEdit.nextPaymentDate,
+      nextPaymentDate:
+        this.paymentToEdit
+          .nextPaymentDate,
+    };
+  }
+
+  private createEmptyForm():
+    RecurringPaymentForm {
+
+    return {
+      title: '',
+      category: '',
+      amount: null,
+      account: '',
+      frequency: 'monthly',
+      nextPaymentDate: '',
     };
   }
 }

@@ -1,27 +1,44 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-
-import { FormsModule } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 
 import {
-  LucideAngularModule,
-  X,
-  Utensils,
+  FormsModule,
+} from '@angular/forms';
+
+import {
   Car,
-  ShoppingBag,
-  ReceiptText,
   Gamepad2,
-  HeartPulse,
   GraduationCap,
+  HeartPulse,
+  LucideAngularModule,
+  ReceiptText,
   Shapes,
+  ShoppingBag,
+  Utensils,
+  X,
 } from 'lucide-angular';
 
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  TranslatePipe,
+} from '@ngx-translate/core';
 
-import { Budget } from '../../../features/budgets/models/budget.model';
+import {
+  Budget,
+} from '../../../features/budgets/models/budget.model';
 
-import { MonthSelector } from '../month-selector/month-selector';
+import {
+  BudgetsService,
+} from '../../../features/budgets/services/budgets';
 
-import { MonthOption } from '../month-selector/month-option.model';
+import {
+  MonthOption,
+} from '../month-selector/month-option.model';
 
 export interface BudgetForm {
   category: string;
@@ -32,28 +49,54 @@ export interface BudgetForm {
 @Component({
   selector: 'app-add-budget-modal',
 
-  imports: [FormsModule, LucideAngularModule, TranslatePipe, MonthSelector],
+  imports: [
+    FormsModule,
+    LucideAngularModule,
+    TranslatePipe,
+  ],
 
-  templateUrl: './add-budget-modal.html',
-  styleUrl: './add-budget-modal.scss',
+  templateUrl:
+    './add-budget-modal.html',
+
+  styleUrl:
+    './add-budget-modal.scss',
 })
-export class AddBudgetModal implements OnChanges {
+export class AddBudgetModal
+  implements OnChanges {
+
+  /* =========================
+     Service
+  ========================= */
+
+  private readonly budgetsService =
+    inject(BudgetsService);
+
   /* =========================
      Inputs
   ========================= */
 
   @Input()
-  budgetToEdit: Budget | null = null;
+  budgetToEdit:
+    Budget | null = null;
 
   /* =========================
      Outputs
   ========================= */
 
   @Output()
-  closeModal = new EventEmitter<void>();
+  closeModal =
+    new EventEmitter<void>();
 
   @Output()
-  saveBudget = new EventEmitter<BudgetForm>();
+  saveBudget =
+    new EventEmitter<BudgetForm>();
+
+  /* =========================
+     Data
+  ========================= */
+
+  readonly categories =
+    this.budgetsService.categories;
 
   /* =========================
      Icons
@@ -62,68 +105,39 @@ export class AddBudgetModal implements OnChanges {
   readonly X = X;
 
   /* =========================
-     Categories
-  ========================= */
-
-  readonly categories = [
-    {
-      value: 'Food',
-      icon: Utensils,
-    },
-    {
-      value: 'Transportation',
-      icon: Car,
-    },
-    {
-      value: 'Shopping',
-      icon: ShoppingBag,
-    },
-    {
-      value: 'Bills',
-      icon: ReceiptText,
-    },
-    {
-      value: 'Entertainment',
-      icon: Gamepad2,
-    },
-    {
-      value: 'Health',
-      icon: HeartPulse,
-    },
-    {
-      value: 'Education',
-      icon: GraduationCap,
-    },
-    {
-      value: 'Other',
-      icon: Shapes,
-    },
-  ];
-
-  /* =========================
      Months
   ========================= */
 
-  readonly months: MonthOption[] = [
-    {
-      value: '2026-08',
-      labelKey: 'budgets.months.august2026',
-    },
-    {
-      value: '2026-07',
-      labelKey: 'budgets.months.july2026',
-    },
-    {
-      value: '2026-06',
-      labelKey: 'budgets.months.june2026',
-    },
-  ];
+  readonly months:
+    MonthOption[] = [
+      {
+        value: '2026-09',
+        labelKey:
+          'budgets.months.september2026',
+      },
+      {
+        value: '2026-08',
+        labelKey:
+          'budgets.months.august2026',
+      },
+      {
+        value: '2026-07',
+        labelKey:
+          'budgets.months.july2026',
+      },
+      {
+        value: '2026-06',
+        labelKey:
+          'budgets.months.june2026',
+      },
+    ];
 
   /* =========================
      Form
   ========================= */
 
-  form: BudgetForm = this.createEmptyForm();
+  form: BudgetForm =
+    this.createEmptyForm();
 
   /* =========================
      Mode
@@ -139,7 +153,10 @@ export class AddBudgetModal implements OnChanges {
 
   get isFormValid(): boolean {
     return (
-      !!this.form.category && this.form.limit !== null && this.form.limit > 0 && !!this.form.month
+      !!this.form.category &&
+      this.form.limit !== null &&
+      this.form.limit > 0 &&
+      !!this.form.month
     );
   }
 
@@ -148,17 +165,7 @@ export class AddBudgetModal implements OnChanges {
   ========================= */
 
   ngOnChanges(): void {
-    if (!this.budgetToEdit) {
-      return;
-    }
-
-    this.form = {
-      category: this.budgetToEdit.category,
-
-      limit: this.budgetToEdit.limit,
-
-      month: this.budgetToEdit.month,
-    };
+    this.setFormData();
   }
 
   /* =========================
@@ -180,30 +187,76 @@ export class AddBudgetModal implements OnChanges {
   }
 
   /* =========================
+     Category Icon
+  ========================= */
+
+  getCategoryIcon(
+    categoryName: string,
+  ) {
+    switch (
+      categoryName
+        .trim()
+        .toLowerCase()
+    ) {
+      case 'food':
+        return Utensils;
+
+      case 'transportation':
+        return Car;
+
+      case 'shopping':
+        return ShoppingBag;
+
+      case 'bills':
+        return ReceiptText;
+
+      case 'entertainment':
+        return Gamepad2;
+
+      case 'health':
+        return HeartPulse;
+
+      case 'education':
+        return GraduationCap;
+
+      default:
+        return Shapes;
+    }
+  }
+
+  /* =========================
      Helpers
   ========================= */
 
   private setFormData(): void {
     if (!this.budgetToEdit) {
-      this.form = this.createEmptyForm();
+      this.form =
+        this.createEmptyForm();
 
       return;
     }
 
     this.form = {
-      category: this.budgetToEdit.category,
+      category:
+        this.budgetToEdit
+          .category,
 
-      limit: this.budgetToEdit.limit,
+      limit:
+        this.budgetToEdit
+          .limit,
 
-      month: this.budgetToEdit.month,
+      month:
+        this.budgetToEdit
+          .month,
     };
   }
 
-  private createEmptyForm(): BudgetForm {
+  private createEmptyForm():
+    BudgetForm {
     return {
       category: '',
       limit: null,
-      month: '2026-08',
+      month: '2026-09',
     };
   }
 }

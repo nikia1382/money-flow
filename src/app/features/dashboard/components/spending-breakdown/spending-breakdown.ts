@@ -1,88 +1,182 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  effect,
+  inject,
+} from '@angular/core';
 
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import {
+  TranslatePipe,
+  TranslateService,
+} from '@ngx-translate/core';
 
-import { BaseChartDirective } from 'ng2-charts';
+import {
+  BaseChartDirective,
+} from 'ng2-charts';
 
-import { ChartConfiguration, TooltipItem } from 'chart.js';
+import {
+  ChartConfiguration,
+  TooltipItem,
+} from 'chart.js';
 
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DecimalPipe } from '@angular/common';
+import {
+  takeUntilDestroyed,
+} from '@angular/core/rxjs-interop';
+
+import {
+  LocaleNumberPipe,
+} from '../../../../shared/pipes/locale-number-pipe';
+
+import {
+  DashboardSpendingService,
+} from '../../services/dashboard-spending.service';
+
 @Component({
   selector: 'app-spending-breakdown',
 
-  imports: [BaseChartDirective, TranslatePipe, DecimalPipe],
+  imports: [
+    BaseChartDirective,
+    TranslatePipe,
+    LocaleNumberPipe,
+  ],
 
-  templateUrl: './spending-breakdown.html',
-  styleUrl: './spending-breakdown.scss',
+  templateUrl:
+    './spending-breakdown.html',
+
+  styleUrl:
+    './spending-breakdown.scss',
 })
 export class SpendingBreakdown {
-  private readonly translate = inject(TranslateService);
+  /* =========================
+     Services
+  ========================= */
 
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly translate =
+    inject(TranslateService);
 
-  chartData: ChartConfiguration<'doughnut'>['data'] = {
-    labels: [],
-    datasets: [],
-  };
+  private readonly destroyRef =
+    inject(DestroyRef);
 
-  readonly chartOptions: ChartConfiguration<'doughnut'>['options'] = {
-    responsive: true,
+  private readonly spendingService =
+    inject(DashboardSpendingService);
 
-    maintainAspectRatio: false,
+  /* =========================
+     Data
+  ========================= */
 
-    cutout: '68%',
+  readonly totalSpending =
+    this.spendingService.totalSpending;
 
-    plugins: {
-      legend: {
-        display: false,
-      },
+  chartData:
+    ChartConfiguration<'doughnut'>['data'] =
+    {
+      labels: [],
+      datasets: [],
+    };
 
-      tooltip: {
-        callbacks: {
-          label: (context: TooltipItem<'doughnut'>) => {
-            const value = Number(context.raw ?? 0);
+  /* =========================
+     Chart Options
+  ========================= */
 
-            const formattedValue = this.formatNumber(value);
+  readonly chartOptions:
+    ChartConfiguration<'doughnut'>['options'] =
+    {
+      responsive: true,
 
-            const currency = this.translate.instant('dashboard.chart.currency');
+      maintainAspectRatio: false,
 
-            return `${context.label}: ${formattedValue} ${currency}`;
+      cutout: '68%',
+
+      plugins: {
+        legend: {
+          display: false,
+        },
+
+        tooltip: {
+          callbacks: {
+            label: (
+              context:
+                TooltipItem<'doughnut'>,
+            ) => {
+              const value =
+                Number(
+                  context.raw ?? 0,
+                );
+
+              const formattedValue =
+                this.formatNumber(
+                  value,
+                );
+
+              const currency =
+                this.translate.instant(
+                  'common.currency',
+                );
+
+              return `${
+                context.label ?? ''
+              }: ${formattedValue} ${currency}`;
+            },
           },
         },
       },
-    },
-  };
-  private formatNumber(value: number): string {
-    const locale = this.translate.currentLang() === 'fa' ? 'fa-IR-u-nu-arabext' : 'en-US';
+    };
 
-    return new Intl.NumberFormat(locale).format(value);
-  }
+  /* =========================
+     Constructor
+  ========================= */
+
   constructor() {
-    this.updateTranslations();
+    /*
+      وقتی تراکنش‌های واقعی تغییر کنند،
+      نمودار دوباره ساخته می‌شود.
+    */
 
-    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      this.updateTranslations();
+    effect(() => {
+      this.spendingService
+        .categoryTotals();
+
+      this.updateChartData();
     });
+
+    /*
+      وقتی زبان تغییر کند،
+      labelهای نمودار ترجمه می‌شوند.
+    */
+
+    this.translate.onLangChange
+      .pipe(
+        takeUntilDestroyed(
+          this.destroyRef,
+        ),
+      )
+      .subscribe(() => {
+        this.updateChartData();
+      });
   }
 
-  private updateTranslations(): void {
+  /* =========================
+     Chart Data
+  ========================= */
+
+  private updateChartData(): void {
+    const categories =
+      this.spendingService
+        .categoryTotals();
+
     this.chartData = {
-      labels: [
-        this.translate.instant('dashboard.spending.food'),
-
-        this.translate.instant('dashboard.spending.housing'),
-
-        this.translate.instant('dashboard.spending.transport'),
-
-        this.translate.instant('dashboard.spending.shopping'),
-
-        this.translate.instant('dashboard.spending.other'),
-      ],
+      labels: categories.map(
+        (item) =>
+          this.getCategoryLabel(
+            item.category,
+          ),
+      ),
 
       datasets: [
         {
-          data: [6_000_000, 5_000_000, 3_000_000, 2_000_000, 4_000_000],
+          data: categories.map(
+            (item) => item.amount,
+          ),
 
           borderWidth: 0,
 
@@ -90,5 +184,41 @@ export class SpendingBreakdown {
         },
       ],
     };
+  }
+
+  /* =========================
+     Category Translation
+  ========================= */
+
+  private getCategoryLabel(
+    category: string,
+  ): string {
+    const key =
+      `transactions.categories.${category}`;
+
+    const translated =
+      this.translate.instant(key);
+
+    return translated === key
+      ? category
+      : translated;
+  }
+
+  /* =========================
+     Number Formatter
+  ========================= */
+
+  private formatNumber(
+    value: number,
+  ): string {
+    const locale =
+      this.translate.currentLang() ===
+      'fa'
+        ? 'fa-IR-u-nu-arabext'
+        : 'en-US';
+
+    return new Intl.NumberFormat(
+      locale,
+    ).format(value);
   }
 }

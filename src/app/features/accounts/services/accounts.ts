@@ -1,85 +1,174 @@
-import { Injectable, signal } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  signal,
+} from '@angular/core';
 
-import { Account } from '../models/account.model';
+import {
+  HttpClient,
+} from '@angular/common/http';
 
-import { NewAccount } from '../components/add-account-modal/add-account-modal';
+import {
+  Account,
+} from '../models/account.model';
+
+import {
+  NewAccount,
+} from '../components/add-account-modal/add-account-modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountsService {
-  private readonly storageKey = 'moneyflow_accounts';
+  private readonly http =
+    inject(HttpClient);
 
-  readonly accounts = signal<Account[]>(this.loadAccounts());
+  private readonly apiUrl =
+    'http://localhost:8080/api/accounts';
 
-  private loadAccounts(): Account[] {
-    const saved = localStorage.getItem(this.storageKey);
+  readonly accounts =
+    signal<Account[]>([]);
 
-    if (saved) {
-      return JSON.parse(saved);
-    }
-
-    return [
-      {
-        id: 1,
-        name: 'Main Bank Account',
-        type: 'bank',
-        balance: 48_500_000,
-        number: '**** 4821',
-      },
-      {
-        id: 2,
-        name: 'Cash Wallet',
-        type: 'cash',
-        balance: 8_000_000,
-      },
-      {
-        id: 3,
-        name: 'Savings Account',
-        type: 'savings',
-        balance: 30_000_000,
-        number: '**** 9145',
-      },
-    ];
+  constructor() {
+    this.loadAccounts();
   }
 
-  private saveAccounts(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.accounts()));
+  /* =========================
+     GET
+  ========================= */
+
+  private loadAccounts(): void {
+    this.http
+      .get<Account[]>(
+        this.apiUrl,
+      )
+      .subscribe({
+        next: (accounts) => {
+          this.accounts.set(
+            accounts,
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load accounts',
+            error,
+          );
+        },
+      });
   }
 
-  addAccount(newAccount: NewAccount): void {
-    if (newAccount.balance === null) {
+  /* =========================
+     POST
+  ========================= */
+
+  addAccount(
+    newAccount: NewAccount,
+  ): void {
+    if (
+      newAccount.balance === null
+    ) {
       return;
     }
 
-    const account: Account = {
-      id: Date.now(),
-
+    const payload = {
       name: newAccount.name,
-
       type: newAccount.type,
-
-      balance: newAccount.balance,
-
-      number: newAccount.number || undefined,
+      balance:
+        newAccount.balance,
+      number:
+        newAccount.number ||
+        null,
     };
 
-    this.accounts.update((accounts) => [...accounts, account]);
+    this.http
+      .post<Account>(
+        this.apiUrl,
+        payload,
+      )
+      .subscribe({
+        next: (createdAccount) => {
+          this.accounts.update(
+            (accounts) => [
+              ...accounts,
+              createdAccount,
+            ],
+          );
+        },
 
-    this.saveAccounts();
+        error: (error) => {
+          console.error(
+            'Failed to add account',
+            error,
+          );
+        },
+      });
   }
 
-  updateAccount(updatedAccount: Account): void {
-    this.accounts.update((accounts) =>
-      accounts.map((account) => (account.id === updatedAccount.id ? updatedAccount : account)),
-    );
+  /* =========================
+     PUT
+  ========================= */
 
-    this.saveAccounts();
+  updateAccount(
+    updatedAccount: Account,
+  ): void {
+    this.http
+      .put<Account>(
+        `${this.apiUrl}/${updatedAccount.id}`,
+        updatedAccount,
+      )
+      .subscribe({
+        next: (savedAccount) => {
+          this.accounts.update(
+            (accounts) =>
+              accounts.map(
+                (account) =>
+                  account.id ===
+                  savedAccount.id
+                    ? savedAccount
+                    : account,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to update account',
+            error,
+          );
+        },
+      });
   }
 
-  deleteAccount(accountId: number): void {
-    this.accounts.update((accounts) => accounts.filter((account) => account.id !== accountId));
+  /* =========================
+     DELETE
+  ========================= */
 
-    this.saveAccounts();
+  deleteAccount(
+    accountId: number,
+  ): void {
+    this.http
+      .delete<void>(
+        `${this.apiUrl}/${accountId}`,
+      )
+      .subscribe({
+        next: () => {
+          this.accounts.update(
+            (accounts) =>
+              accounts.filter(
+                (account) =>
+                  account.id !==
+                  accountId,
+              ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to delete account',
+            error,
+          );
+        },
+      });
   }
 }

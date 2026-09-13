@@ -20,7 +20,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        {{ totalBalance | localeNumber }}
+        {{ totalBalance() | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -48,7 +48,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        {{ monthlyIncome | localeNumber }}
+        {{ monthlyIncome() | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -76,7 +76,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        {{ monthlyExpenses | localeNumber }}
+        {{ monthlyExpenses() | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}
@@ -104,7 +104,7 @@
       </p>
 
       <h3 class="summary-card__amount">
-        {{ monthlySavings | localeNumber }}
+        {{ monthlySavings() | localeNumber }}
 
         <small>
           {{ 'dashboard.chart.currency' | translate }}

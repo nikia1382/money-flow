@@ -1,13 +1,29 @@
-import { TestBed } from '@angular/core/testing';
+import {
+  TestBed,
+} from '@angular/core/testing';
 
-import { RecurringPayments } from './recurring-payments';
+import {
+  RecurringPaymentsService,
+} from './recurring-payments';
 
-describe('RecurringPayments', () => {
-  let service: RecurringPayments;
+import {
+  TEST_PROVIDERS,
+} from '../../../testing/test-providers';
+
+describe('RecurringPaymentsService', () => {
+  let service: RecurringPaymentsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RecurringPayments);
+    TestBed.configureTestingModule({
+      providers: [
+        ...TEST_PROVIDERS,
+      ],
+    });
+
+    service =
+      TestBed.inject(
+        RecurringPaymentsService,
+      );
   });
 
   it('should be created', () => {

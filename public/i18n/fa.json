@@ -15,82 +15,175 @@
     "upgrade": "ارتقا حساب"
   },
 
-  "header": {
-    "dashboard": "داشبورد",
-    "overview": "نمای کلی وضعیت مالی شما"
+"header": {
+  "dashboard": "داشبورد",
+  "overview": "نمای کلی وضعیت مالی شما",
+
+  "addTransaction": "افزودن تراکنش",
+
+  "openMenu": "باز کردن منوی ناوبری",
+  "menu": "منو",
+
+  "notifications": "اعلان‌ها",
+  "markAllRead": "خواندن همه",
+
+  "notificationItems": {
+    "foodBudget": "۸۵٪ از بودجه خوراک مصرف شده است",
+    "internetBill": "سررسید قبض اینترنت نزدیک است",
+    "emergencyFund": "صندوق اضطراری به ۶۰٪ رسیده است"
   },
 
-  "dashboard": {
-    "welcome": "خوش اومدی نیکیا",
-    "subtitle": "این ماه ۱۲٪ کمتر از ماه قبل خرج کردی.",
+  "time": {
+    "tenMinutesAgo": "۱۰ دقیقه پیش",
+    "tomorrow": "فردا",
+    "today": "امروز"
+  },
 
-    "totalBalance": "موجودی کل",
-    "monthlyIncome": "درآمد ماهانه",
-    "monthlyExpenses": "هزینه ماهانه",
-    "monthlySavings": "پس‌انداز ماهانه",
-    "comparedToLastMonth": "نسبت به ماه قبل",
+  "theme": {
+    "switchToLight": "تغییر به حالت روشن",
+    "switchToDark": "تغییر به حالت تیره",
+    "lightMode": "حالت روشن",
+    "darkMode": "حالت تیره"
+  },
 
-    "chart": {
-      "title": "درآمد و هزینه",
-      "subtitle": "جریان مالی شما در ۶ ماه اخیر",
-      "income": "درآمد",
-      "expenses": "هزینه",
-      "last6Months": "۶ ماه اخیر",
-      "currency": "تومان",
-      "threeMonths": "۳ ماه",
-"sixMonths": "۶ ماه",
-"oneYear": "۱ سال"
+  "language": {
+    "change": "تغییر زبان"
+  },
+
+  "profile": {
+    "openMenu": "باز کردن منوی پروفایل",
+    "title": "پروفایل",
+    "myProfile": "پروفایل من",
+    "settings": "تنظیمات",
+    "subscription": "اشتراک",
+    "signOut": "خروج"
+  }
+},
+
+"dashboard": {
+  "welcome": "خوش اومدی نیکیا",
+  "subtitle": "این ماه ۱۲٪ کمتر از ماه قبل خرج کردی.",
+
+  "totalBalance": "موجودی کل",
+  "monthlyIncome": "درآمد ماهانه",
+  "monthlyExpenses": "هزینه ماهانه",
+  "monthlySavings": "پس‌انداز ماهانه",
+  "comparedToLastMonth": "نسبت به ماه قبل",
+
+  "chart": {
+    "title": "درآمد و هزینه",
+    "subtitle": "جریان مالی شما در ۶ ماه اخیر",
+    "income": "درآمد",
+    "expenses": "هزینه",
+    "last6Months": "۶ ماه اخیر",
+    "currency": "تومان",
+    "threeMonths": "۳ ماه",
+    "sixMonths": "۶ ماه",
+    "oneYear": "۱ سال",
+
+    "months": {
+      "sep": "شهریور",
+      "oct": "مهر",
+      "nov": "آبان",
+      "dec": "آذر",
+      "jan": "دی",
+      "feb": "بهمن",
+      "mar": "اسفند",
+      "apr": "فروردین",
+      "may": "اردیبهشت",
+      "jun": "خرداد",
+      "jul": "تیر",
+      "aug": "مرداد"
     }
-,
-      "transactions": {
-  "title": "آخرین تراکنش‌ها",
-  "subtitle": "آخرین فعالیت‌های مالی شما",
-  "viewAll": "مشاهده همه"
-},
-"budget": {
-  "title": "وضعیت بودجه",
-  "subtitle": "میزان مصرف بودجه ماهانه‌ات را دنبال کن",
+  },
+
+  "transactions": {
+    "title": "آخرین تراکنش‌ها",
+    "subtitle": "آخرین فعالیت‌های مالی شما",
+    "viewAll": "مشاهده همه",
+    "categories": {
+  "income": "درآمد",
   "food": "خوراک",
-  "transportation": "حمل‌ونقل",
-  "entertainment": "تفریح",
-  "used": "مصرف شده"
+  "bills": "قبوض",
+  "transfer": "انتقال"
 },
-"spending": {
-  "title": "تفکیک هزینه‌ها",
-  "subtitle": "این ماه پولت بیشتر کجا خرج شده",
-  "total": "کل هزینه",
-  "food": "خوراک",
-  "housing": "مسکن",
-  "transport": "حمل‌ونقل",
-  "shopping": "خرید",
-  "other": "سایر"
-},
-"upcomingPayments": {
-  "title": "پرداخت‌های پیش‌رو",
-  "subtitle": "پرداخت‌هایی که به‌زودی سررسید می‌شوند",
-  "viewAll": "مشاهده همه",
-
-  "rent": "اجاره ماهانه",
-  "internet": "قبض اینترنت",
-  "mobile": "قبض موبایل",
-  "creditCard": "کارت اعتباری",
-
-  "tomorrow": "سررسید فردا",
-  "inThreeDays": "سررسید تا ۳ روز دیگر",
-  "inFiveDays": "سررسید تا ۵ روز دیگر",
-  "nextWeek": "سررسید هفته آینده"
-},
-"goals": {
-  "title": "اهداف مالی",
-  "subtitle": "پیشرفتت را برای رسیدن به اهداف مالی دنبال کن",
-  "viewAll": "مشاهده همه",
-
-  "emergencyFund": "صندوق اضطراری",
-  "travel": "سفر",
-  "car": "خرید خودرو"
+"items": {
+  "salary": {
+    "title": "حقوق"
+  },
+  "restaurant": {
+    "title": "رستوران"
+  },
+  "internetBill": {
+    "title": "قبض اینترنت"
+  },
+  "transferToSavings": {
+    "title": "انتقال به پس‌انداز"
+  }
 }
   },
-  "accounts": {
+
+  "budget": {
+    "title": "وضعیت بودجه",
+    "viewAll": "مشاهده همه",
+    "food": "خوراک",
+    "housing": "مسکن",
+    "transportation": "حمل‌ونقل",
+    "shopping": "خرید",
+    "entertainment": "تفریح"
+  },
+
+  "spending": {
+    "title": "تفکیک هزینه‌ها",
+    "subtitle": "این ماه پولت بیشتر کجا خرج شده",
+    "total": "کل هزینه",
+    "food": "خوراک",
+    "housing": "مسکن",
+    "transport": "حمل‌ونقل",
+    "shopping": "خرید",
+    "other": "سایر"
+  },
+
+  "upcomingPayments": {
+    "empty": {
+  "title": "پرداختی در پیش نداری",
+  "description": "هنوز هیچ پرداختی برای آینده ثبت نکرده‌ای.",
+  "action": "افزودن پرداخت"
+},
+    "title": "پرداخت‌های پیش‌رو",
+    "subtitle": "پرداخت‌هایی که به‌زودی سررسید می‌شوند",
+    "viewAll": "مشاهده همه",
+
+    "rent": "اجاره ماهانه",
+    "internet": "قبض اینترنت",
+    "mobile": "قبض موبایل",
+    "creditCard": "کارت اعتباری",
+
+    "tomorrow": "سررسید فردا",
+    "inThreeDays": "سررسید تا ۳ روز دیگر",
+    "inFiveDays": "سررسید تا ۵ روز دیگر",
+    "nextWeek": "سررسید هفته آینده"
+  },
+
+  "goals": {
+     "empty": {
+        "title": "هنوز هدف مالی نداری",
+        "description": "یک هدف بساز و پیشرفتت را از اینجا دنبال کن.",
+        "action": "افزودن هدف"
+      },
+    "title": "اهداف مالی",
+    "subtitle": "پیشرفتت را برای رسیدن به اهداف مالی دنبال کن",
+    "viewAll": "مشاهده همه",
+
+    "emergencyFund": "صندوق اضطراری",
+    "travel": "سفر",
+    "car": "خرید خودرو"
+  }
+},
+"accounts": {
+  "accountCount": "در مجموع {{count}} حساب",
+"emptyTitle": "هنوز حسابی ثبت نشده",
+"emptyDescription": "اولین حساب خود را اضافه کنید تا مدیریت مالی خود را شروع کنید.",
   "title": "حساب‌ها",
   "subtitle": "حساب‌های بانکی، کیف پول و پس‌اندازهای خود را مدیریت کنید.",
 
@@ -132,11 +225,13 @@
     "cancel": "انصراف",
     "add": "افزودن حساب",
     "save": "ذخیره تغییرات",
+
     "errors": {
-  "nameRequired": "نام حساب الزامی است.",
-  "typeRequired": "نوع حساب را انتخاب کنید.",
-  "balanceInvalid": "موجودی نمی‌تواند منفی باشد."
-}
+      "nameRequired": "نام حساب الزامی است.",
+      "typeRequired": "نوع حساب را انتخاب کنید.",
+      "balanceRequired": "وارد کردن موجودی اولیه الزامی است.",
+      "balanceInvalid": "موجودی نمی‌تواند منفی باشد."
+    }
   },
 
   "deleteDialog": {
@@ -145,10 +240,21 @@
     "cancel": "انصراف",
     "confirm": "حذف"
   }
-
 },
 "budgets": {
-  "title": "بودجه‌ها",
+  "noResults": {
+  "title": "بودجه‌ای پیدا نشد",
+  "subtitle": "ماه یا فیلتر وضعیت را تغییر دهید."
+},
+
+
+   "title": "وضعیت بودجه",
+  "viewAll": "مشاهده همه",
+  "food": "خوراک",
+  "housing": "مسکن",
+  "transportation": "حمل‌ونقل",
+  "shopping": "خرید",
+  "entertainment": "تفریح",
   "subtitle": "هزینه‌های ماهانه خود را برنامه‌ریزی و مدیریت کنید.",
   "addBudget": "افزودن بودجه",
   "summary": {
@@ -220,29 +326,18 @@
 "filters": {
   "all": "همه",
   "active": "در محدوده بودجه",
-  "overBudget": "بیش از بودجه"
+  "overBudget": "بیش از بودجه",
+    "clear": "پاک کردن فیلترها"
+
 }
 },
 "transactions": {
-  "deleteDialog": {
-  "title": "حذف تراکنش",
-  "message": "آیا مطمئن هستید که می‌خواهید تراکنش «{{title}}» را حذف کنید؟",
-  "confirm": "حذف",
-  "cancel": "انصراف"
-},
-  "question": "چطور تراکنش‌ها را مدیریت کنم؟",
-  "answer": "در صفحه تراکنش‌ها می‌توانید فعالیت‌های مالی خود را جستجو، فیلتر، اضافه و مدیریت کنید.",
-
   "title": "تراکنش‌ها",
   "subtitle": "تمام فعالیت‌های مالی خود را مشاهده و مدیریت کنید.",
   "addTransaction": "افزودن تراکنش",
 
-  "noResultsTitle": "تراکنشی پیدا نشد",
-  "noResultsDescription": "جستجو یا فیلترها را تغییر دهید.",
-  "clearFilters": "پاک کردن فیلترها",
-
-  "emptyTitle": "هنوز تراکنشی ثبت نشده",
-  "emptyDescription": "اولین تراکنش خود را اضافه کنید تا مدیریت مالی را شروع کنید.",
+  "question": "چطور تراکنش‌ها را مدیریت کنم؟",
+  "answer": "در صفحه تراکنش‌ها می‌توانید فعالیت‌های مالی خود را جستجو، فیلتر، اضافه و مدیریت کنید.",
 
   "summary": {
     "totalIncome": "مجموع درآمد",
@@ -282,6 +377,17 @@
     "transfer": "انتقال"
   },
 
+  "categories": {
+    "Income": "درآمد",
+    "Food": "خوراک",
+    "Transfer": "انتقال",
+    "Bills": "قبوض",
+    "Shopping": "خرید",
+    "Transportation": "حمل‌ونقل",
+    "Entertainment": "تفریح",
+    "Other": "سایر"
+  },
+
   "table": {
     "transaction": "تراکنش",
     "account": "حساب",
@@ -289,21 +395,85 @@
     "amount": "مبلغ"
   },
 
+  "form": {
+    "addTitle": "افزودن تراکنش",
+    "addSubtitle": "یک تراکنش مالی جدید اضافه کنید.",
+
+    "editTitle": "ویرایش تراکنش",
+    "editSubtitle": "اطلاعات تراکنش انتخاب‌شده را ویرایش کنید.",
+
+    "type": "نوع",
+    "title": "عنوان",
+    "titlePlaceholder": "مثلاً خرید روزانه",
+
+    "amount": "مبلغ",
+
+    "category": "دسته‌بندی",
+    "selectCategory": "انتخاب دسته‌بندی",
+
+    "account": "حساب",
+    "selectAccount": "انتخاب حساب",
+
+    "date": "تاریخ",
+
+    "description": "توضیحات",
+    "descriptionPlaceholder": "توضیحات اختیاری",
+
+    "cancel": "انصراف",
+    "save": "ذخیره تراکنش",
+    "saveChanges": "ذخیره تغییرات",
+
+    "errors": {
+      "titleRequired": "عنوان تراکنش الزامی است.",
+      "amountRequired": "مبلغ تراکنش الزامی است.",
+      "amountInvalid": "مبلغ تراکنش باید بیشتر از صفر باشد.",
+      "categoryRequired": "انتخاب دسته‌بندی الزامی است.",
+      "accountRequired": "انتخاب حساب الزامی است.",
+      "dateRequired": "انتخاب تاریخ الزامی است."
+    }
+  },
+
+  "deleteDialog": {
+    "title": "حذف تراکنش",
+    "message": "آیا مطمئن هستید که می‌خواهید تراکنش «{{title}}» را حذف کنید؟",
+    "confirm": "حذف",
+    "cancel": "انصراف"
+  },
+
   "empty": {
+    "title": "هنوز تراکنشی ثبت نشده",
+    "subtitle": "اولین تراکنش خود را اضافه کنید تا مدیریت مالی را شروع کنید."
+  },
+
+  "noResults": {
     "title": "تراکنشی پیدا نشد",
     "subtitle": "جستجو یا فیلترهای خود را تغییر دهید."
   }
 },
 "common": {
   "currency": "تومان",
-  "common": {
-  "currency": "تومان",
+  "save": "ذخیره",
 
   "actions": {
     "edit": "ویرایش",
-    "delete": "حذف"
+    "delete": "حذف",
+    "cancel": "انصراف",
+    "close": "بستن"
+  },
+
+  "pagination": {
+    "showing": "نمایش",
+    "of": "از",
+    "navigation": "صفحه‌بندی",
+    "previous": "صفحه قبل",
+    "next": "صفحه بعد",
+    "page": "صفحه {{page}}"
+  },
+
+  "table": {
+    "emptyTitle": "داده‌ای پیدا نشد",
+    "emptySubtitle": "در حال حاضر چیزی برای نمایش وجود ندارد."
   }
-}
 },
 "recurringPayments": {
   "title": "پرداخت‌های دوره‌ای",
@@ -366,6 +536,7 @@
   "subtitle": "اولین پرداخت دوره‌ای خود را اضافه کنید."
 },
 "help": {
+  "searchAria": "جستجو در راهنما",
   "title": "راهنما و پشتیبانی",
   "subtitle": "پاسخ سوالات خود را پیدا کنید و با MoneyFlow بهتر آشنا شوید.",
 
@@ -610,5 +781,13 @@
   "description": "صفحه‌ای که دنبالش هستی وجود ندارد، جابه‌جا شده یا دیگر در دسترس نیست.",
   "backHome": "بازگشت به داشبورد",
   "goBack": "بازگشت"
+},
+"pagination": {
+  "showing": "نمایش",
+  "of": "از",
+  "navigation": "صفحه‌بندی",
+  "previous": "صفحه قبل",
+  "next": "صفحه بعد",
+  "page": "صفحه {{page}}"
 }
 }

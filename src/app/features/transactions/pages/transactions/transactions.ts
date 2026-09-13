@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { LucideAngularModule, Plus, Search, SlidersHorizontal, ArrowUpDown } from 'lucide-angular';
 
-import { TransactionRow } from '../../components/transaction-row/transaction-row';
-
 import { TransactionsService } from '../../services/transactions';
 
 import { Transaction, TransactionType } from '../../models/transaction.model';
@@ -23,7 +21,6 @@ import { translate, TranslatePipe } from '@ngx-translate/core';
 import { DataTable } from '../../../../shared/components/data-table/data-table';
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 import { DataTableColumn } from '../../../../shared/components/data-table/data-table.model';
-
 type TransactionTypeFilter = 'all' | TransactionType;
 
 type TransactionSort = 'newest' | 'oldest' | 'highest' | 'lowest';
@@ -63,11 +60,12 @@ export class Transactions {
       labelKey: 'transactions.table.transaction',
       width: '2fr',
     },
-    {
-      key: 'category',
-      labelKey: 'transactions.filters.category',
-      width: '1fr',
-    },
+{
+  key: 'category',
+  labelKey: 'transactions.filters.category',
+  valueKeyPrefix: 'transactions.categories',
+  width: '1fr',
+},
     {
       key: 'account',
       labelKey: 'transactions.table.account',
@@ -333,38 +331,33 @@ export class Transactions {
   readonly isAddTransactionOpen = signal(false);
 
   openAddTransaction(): void {
-
     this.isAddTransactionOpen.set(true);
-
   }
 
   closeAddTransaction(): void {
     this.isAddTransactionOpen.set(false);
   }
 
-  addTransaction(newTransaction: TransactionForm): void {
-    if (newTransaction.amount === null) {
-      return;
-    }
-
-    this.transactionsService.addTransaction({
-      title: newTransaction.title,
-
-      category: newTransaction.category,
-
-      account: newTransaction.account,
-
-      date: newTransaction.date,
-
-      amount: newTransaction.amount,
-
-      type: newTransaction.type,
-    });
-
-    this.closeAddTransaction();
-
-    this.resetPagination();
+addTransaction(
+  newTransaction: TransactionForm,
+): void {
+  if (newTransaction.amount === null) {
+    return;
   }
+
+  this.transactionsService.addTransaction({
+    title: newTransaction.title,
+    category: newTransaction.category,
+    account: newTransaction.account,
+    date: newTransaction.date,
+    amount: newTransaction.amount,
+    type: newTransaction.type,
+    description: newTransaction.description,
+  });
+
+  this.closeAddTransaction();
+  this.resetPagination();
+}
 
   openEditTransaction(transaction: Transaction): void {
     this.editingTransaction.set(transaction);
@@ -373,27 +366,34 @@ export class Transactions {
   closeEditTransaction(): void {
     this.editingTransaction.set(null);
   }
-  updateTransaction(form: TransactionForm): void {
-    const transaction = this.editingTransaction();
+updateTransaction(
+  form: TransactionForm,
+): void {
+  const transaction =
+    this.editingTransaction();
 
-    if (!transaction || form.amount === null) {
-      return;
-    }
-
-    this.transactionsService.updateTransaction({
-      ...transaction,
-
-      title: form.title,
-      category: form.category,
-      account: form.account,
-      date: form.date,
-      amount: form.amount,
-      type: form.type,
-    });
-
-    this.closeEditTransaction();
-    this.resetPagination();
+  if (
+    !transaction ||
+    form.amount === null
+  ) {
+    return;
   }
+
+  this.transactionsService.updateTransaction({
+    ...transaction,
+
+    title: form.title,
+    category: form.category,
+    account: form.account,
+    date: form.date,
+    amount: form.amount,
+    type: form.type,
+    description: form.description,
+  });
+
+  this.closeEditTransaction();
+  this.resetPagination();
+}
   requestDeleteTransaction(transaction: Transaction): void {
     this.transactionPendingDelete.set(transaction);
   }
@@ -415,4 +415,15 @@ export class Transactions {
 
     this.resetPagination();
   }
+  /*   deleteTransaction(
+  id: number,
+): void {
+  this.transactions.update(
+    (transactions) =>
+      transactions.filter(
+        (transaction) =>
+          transaction.id !== id,
+      ),
+  );
+} */
 }

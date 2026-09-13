@@ -60,24 +60,26 @@ export class Budgets {
   readonly budgetPendingDelete = signal<Budget | null>(null);
   selectedStatus: BudgetStatusFilter = 'all';
 
-  selectedMonth = '2026-08';
+selectedMonth = '2026-09';
 
-  readonly months: MonthOption[] = [
-    {
-      value: '2026-08',
-      labelKey: 'budgets.months.august2026',
-    },
-
-    {
-      value: '2026-07',
-      labelKey: 'budgets.months.july2026',
-    },
-
-    {
-      value: '2026-06',
-      labelKey: 'budgets.months.june2026',
-    },
-  ];
+readonly months: MonthOption[] = [
+  {
+    value: '2026-09',
+    labelKey: 'budgets.months.september2026',
+  },
+  {
+    value: '2026-08',
+    labelKey: 'budgets.months.august2026',
+  },
+  {
+    value: '2026-07',
+    labelKey: 'budgets.months.july2026',
+  },
+  {
+    value: '2026-06',
+    labelKey: 'budgets.months.june2026',
+  },
+];
 
   get budgetsForSelectedMonth(): Budget[] {
     return this.budgets().filter((budget) => budget.month === this.selectedMonth);

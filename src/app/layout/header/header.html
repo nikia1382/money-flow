@@ -108,8 +108,9 @@
     <button type="button" class="add-transaction-btn" (click)="openTransactionModal()">
       <lucide-icon [img]="Plus" [size]="17" />
 
-      <span class="add-transaction-btn__text"> Add Transaction </span>
-
+<span class="add-transaction-btn__text">
+  {{ 'header.addTransaction' | translate }}
+</span>
       <lucide-icon class="add-transaction-btn__arrow" [img]="ChevronDown" [size]="14" />
     </button>
 

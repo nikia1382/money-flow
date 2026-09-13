@@ -36,7 +36,7 @@
           type="search"
           [(ngModel)]="searchTerm"
           [placeholder]="'help.searchPlaceholder' | translate"
-          aria-label="Search help"
+          [attr.aria-label]="'help.searchAria' | translate"
         />
       </div>
     </div>
@@ -106,7 +106,12 @@
               {{ faq.questionKey | translate }}
             </span>
 
-            <lucide-icon class="faq-chevron" [img]="ChevronDown" [size]="17" />
+          <lucide-icon
+  class="faq-chevron"
+  [img]="ChevronDown"
+  [size]="17"
+  aria-hidden="true"
+/>
           </button>
 
           @if (openedFaqId === faq.id) {
@@ -135,23 +140,5 @@
        Support
   ========================== -->
 
-  <section class="support-card">
-    <div class="support-card__icon">
-      <lucide-icon [img]="Mail" [size]="21" />
-    </div>
 
-    <div class="support-card__content">
-      <h2>
-        {{ 'help.support.title' | translate }}
-      </h2>
-
-      <p>
-        {{ 'help.support.subtitle' | translate }}
-      </p>
-    </div>
-
-    <button type="button" class="support-btn">
-      {{ 'help.support.button' | translate }}
-    </button>
-  </section>
 </section>

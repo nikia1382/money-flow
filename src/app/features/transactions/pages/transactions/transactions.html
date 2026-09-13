@@ -276,9 +276,9 @@
               </option>
 
               @for (category of categories; track category) {
-                <option [value]="category">
-                  {{ category }}
-                </option>
+<option [value]="category">
+  {{ 'transactions.categories.' + category | translate }}
+</option>
               }
             </select>
           </div>
@@ -323,7 +323,7 @@
         @if (selectedCategory !== 'all') {
           <button type="button" class="filter-chip" (click)="clearCategoryFilter()">
             <span>
-              {{ selectedCategory }}
+              {{ 'transactions.categories.' + selectedCategory | translate }}
             </span>
 
             <span class="filter-chip__close"> × </span>
@@ -336,10 +336,6 @@
       </button>
     </div>
   }
-
-  <!-- =========================
-       Transactions Table
-  ========================== -->
 
   <!-- =========================
      Transactions Table

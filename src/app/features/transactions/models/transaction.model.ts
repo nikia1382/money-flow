@@ -8,4 +8,5 @@ export interface Transaction {
   date: string;
   amount: number;
   type: TransactionType;
+  description?: string;
 }

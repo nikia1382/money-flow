@@ -1,29 +1,54 @@
 <div class="modal-backdrop" (click)="close()">
   <section class="account-modal" (click)="$event.stopPropagation()">
+
     <!-- Header -->
     <div class="account-modal__header">
       <div>
-        <h2>Add Account</h2>
-        <p>Add a new account to MoneyFlow.</p>
+        <h2>
+          {{
+            (accountToEdit
+              ? 'accounts.form.editTitle'
+              : 'accounts.form.addTitle'
+            ) | translate
+          }}
+        </h2>
+
+        <p>
+          {{
+            (accountToEdit
+              ? 'accounts.form.editSubtitle'
+              : 'accounts.form.addSubtitle'
+            ) | translate
+          }}
+        </p>
       </div>
 
-      <button type="button" class="close-btn" aria-label="Close" title="Close" (click)="close()">
+      <button
+        type="button"
+        class="close-btn"
+        [attr.aria-label]="'common.actions.close' | translate"
+        [title]="'common.actions.close' | translate"
+        (click)="close()"
+      >
         <lucide-icon [img]="X" [size]="18" />
       </button>
     </div>
 
     <!-- Form -->
     <form class="account-form" (ngSubmit)="save()">
+
       <!-- Account Name -->
       <div class="form-group">
-        <label for="account-name"> Account Name </label>
+        <label for="account-name">
+          {{ 'accounts.form.name' | translate }}
+        </label>
 
         <input
           id="account-name"
           type="text"
           name="name"
           [(ngModel)]="form.name"
-          placeholder="Main Bank Account"
+          [placeholder]="'accounts.form.namePlaceholder' | translate"
           [class.input-error]="!form.name.trim()"
           required
         />
@@ -37,15 +62,28 @@
 
       <!-- Account Type -->
       <div class="form-group">
-        <label> Account Type </label>
+        <label>
+          {{ 'accounts.form.type' | translate }}
+        </label>
 
-        <div class="account-types" [class.input-error]="!form.type">
-          <button type="button" [class.active]="form.type === 'bank'" (click)="form.type = 'bank'">
-            Bank
+        <div
+          class="account-types"
+          [class.input-error]="!form.type"
+        >
+          <button
+            type="button"
+            [class.active]="form.type === 'bank'"
+            (click)="form.type = 'bank'"
+          >
+            {{ 'accounts.types.bank' | translate }}
           </button>
 
-          <button type="button" [class.active]="form.type === 'cash'" (click)="form.type = 'cash'">
-            Cash
+          <button
+            type="button"
+            [class.active]="form.type === 'cash'"
+            (click)="form.type = 'cash'"
+          >
+            {{ 'accounts.types.cash' | translate }}
           </button>
 
           <button
@@ -53,7 +91,7 @@
             [class.active]="form.type === 'savings'"
             (click)="form.type = 'savings'"
           >
-            Savings
+            {{ 'accounts.types.savings' | translate }}
           </button>
         </div>
 
@@ -64,16 +102,18 @@
         }
       </div>
 
-      <!-- Initial Balance -->
+      <!-- Balance -->
       <div class="form-group">
-        <label for="balance"> Initial Balance </label>
+        <label for="balance">
+          {{ 'accounts.form.balance' | translate }}
+        </label>
 
         <input
           id="balance"
           type="number"
           name="balance"
           [(ngModel)]="form.balance"
-          placeholder="0"
+          [placeholder]="'accounts.form.balancePlaceholder' | translate"
           min="0"
           [class.input-error]="form.balance === null || form.balance < 0"
           required
@@ -93,26 +133,44 @@
       <!-- Account Number -->
       @if (form.type !== 'cash') {
         <div class="form-group">
-          <label for="account-number"> Account Number </label>
+          <label for="account-number">
+            {{ 'accounts.form.number' | translate }}
+          </label>
 
           <input
             id="account-number"
             type="text"
             name="number"
             [(ngModel)]="form.number"
-            placeholder="**** 4821"
+            [placeholder]="'accounts.form.numberPlaceholder' | translate"
           />
         </div>
       }
 
       <!-- Actions -->
       <div class="account-modal__actions">
-        <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="close()"
+        >
+          {{ 'accounts.form.cancel' | translate }}
+        </button>
 
-        <button type="submit" class="save-btn" [disabled]="!isFormValid">
-          {{ 'common.save' | translate }}
+        <button
+          type="submit"
+          class="save-btn"
+          [disabled]="!isFormValid"
+        >
+          {{
+            (accountToEdit
+              ? 'accounts.form.save'
+              : 'accounts.form.add'
+            ) | translate
+          }}
         </button>
       </div>
+
     </form>
   </section>
 </div>

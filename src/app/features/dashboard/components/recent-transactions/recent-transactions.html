@@ -1,6 +1,9 @@
 <section class="transactions-card">
+
   <!-- Header -->
+
   <div class="transactions-card__header">
+
     <div>
       <h3>
         {{ 'dashboard.transactions.title' | translate }}
@@ -11,59 +14,99 @@
       </p>
     </div>
 
-    <button type="button" class="view-all-btn">
+    <button
+      type="button"
+      class="view-all-btn"
+    >
       {{ 'dashboard.transactions.viewAll' | translate }}
     </button>
+
   </div>
 
+
   <!-- Transactions List -->
+
   <div class="transactions-list">
-    @for (transaction of transactions; track transaction.id) {
+
+    @for (
+transaction of recentTransactions(); track transaction.id
+    ) {
+
       <div class="transaction-row">
-        <!-- Transaction Icon -->
+
+        <!-- Icon -->
+
         <div
           class="transaction-icon"
           [class.income]="transaction.type === 'income'"
           [class.expense]="transaction.type === 'expense'"
           [class.transfer]="transaction.type === 'transfer'"
         >
-          @if (transaction.type === 'income') {
-            <lucide-icon [img]="ArrowDownLeft" [size]="18" />
+
+          @if (
+            transaction.type === 'income'
+          ) {
+            <lucide-icon
+              [img]="ArrowDownLeft"
+              [size]="18"
+            />
           }
 
-          @if (transaction.type === 'expense') {
-            <lucide-icon [img]="ArrowUpRight" [size]="18" />
+          @if (
+            transaction.type === 'expense'
+          ) {
+            <lucide-icon
+              [img]="ArrowUpRight"
+              [size]="18"
+            />
           }
 
-          @if (transaction.type === 'transfer') {
-            <lucide-icon [img]="ArrowLeftRight" [size]="18" />
+          @if (
+            transaction.type === 'transfer'
+          ) {
+            <lucide-icon
+              [img]="ArrowLeftRight"
+              [size]="18"
+            />
           }
+
         </div>
+
 
         <!-- Transaction Information -->
-        <div class="transaction-info">
-          <strong>
-            {{ transaction.title }}
-          </strong>
 
-          <span>
-            {{ transaction.category }}
-            •
-            {{ transaction.date }}
-          </span>
+        <div class="transaction-info">
+
+<strong>
+  {{ transaction.title }}
+</strong>
+
+<span>
+  {{ transaction.category }}
+  •
+  {{ transaction.date | localeDate }}
+</span>
+
         </div>
 
+
         <!-- Amount -->
+
         <div
           class="transaction-amount"
           [class.income]="transaction.type === 'income'"
           [class.expense]="transaction.type === 'expense'"
         >
-          @if (transaction.type === 'income') {
+
+          @if (
+            transaction.type === 'income'
+          ) {
             +
           }
 
-          @if (transaction.type === 'expense') {
+          @if (
+            transaction.type === 'expense'
+          ) {
             -
           }
 
@@ -72,8 +115,13 @@
           <small>
             {{ 'dashboard.chart.currency' | translate }}
           </small>
+
         </div>
+
       </div>
+
     }
+
   </div>
+
 </section>

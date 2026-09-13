@@ -15,90 +15,180 @@
     "upgrade": "Upgrade Now"
   },
 
-  "header": {
-    "dashboard": "Dashboard",
-    "overview": "Your financial overview"
+"header": {
+  "dashboard": "Dashboard",
+  "overview": "Your financial overview",
+
+  "addTransaction": "Add Transaction",
+
+  "openMenu": "Open navigation menu",
+  "menu": "Menu",
+
+  "notifications": "Notifications",
+  "markAllRead": "Mark all as read",
+
+  "notificationItems": {
+    "foodBudget": "Food budget reached 85%",
+    "internetBill": "Internet bill is due soon",
+    "emergencyFund": "Emergency Fund reached 60%"
   },
 
-  "dashboard": {
-    "welcome": "Welcome back, Nikia",
-    "subtitle": "You've spent 12% less than last month.",
+  "time": {
+    "tenMinutesAgo": "10 minutes ago",
+    "tomorrow": "Tomorrow",
+    "today": "Today"
+  },
 
-    "totalBalance": "Total Balance",
-    "monthlyIncome": "Monthly Income",
-    "monthlyExpenses": "Monthly Expenses",
-    "monthlySavings": "Monthly Savings",
-    "comparedToLastMonth": "vs last month",
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
 
-    "chart": {
-      "title": "Income vs Expenses",
-      "subtitle": "Your cash flow over the last 6 months",
-      "income": "Income",
-      "expenses": "Expenses",
-      "last6Months": "Last 6 months",
-      "currency": "Toman",
-      "threeMonths": "3 Months",
-      "sixMonths": "6 Months",
-      "oneYear": "1 Year"
-    },
+  "language": {
+    "change": "Change language"
+  },
 
-    "transactions": {
-      "title": "Recent Transactions",
-      "subtitle": "Your latest financial activity",
-      "viewAll": "View all"
-    },
-    "budget": {
-      "title": "وضعیت بودجه",
-      "viewAll": "مشاهده همه",
-      "food": "خوراک",
-      "housing": "مسکن",
-      "transportation": "حمل‌ونقل",
-      "shopping": "خرید",
-      "entertainment": "تفریح"
-    },
-    "spending": {
-      "title": "Spending Breakdown",
-      "subtitle": "Where your money went this month",
-      "total": "Total spent",
-      "food": "Food",
-      "housing": "Housing",
-      "transport": "Transport",
-      "shopping": "Shopping",
-      "other": "Other"
-    },
-    "upcomingPayments": {
-      "title": "Upcoming Payments",
-      "subtitle": "Payments due soon",
-      "viewAll": "View all",
+  "profile": {
+    "openMenu": "Open profile menu",
+    "title": "Profile",
+    "myProfile": "My Profile",
+    "settings": "Settings",
+    "subscription": "Subscription",
+    "signOut": "Sign Out"
+  }
+},
 
-      "rent": "Monthly Rent",
-      "internet": "Internet Bill",
-      "mobile": "Mobile Bill",
-      "creditCard": "Credit Card",
+"dashboard": {
+  "welcome": "Welcome back, Nikia",
+  "subtitle": "You've spent 12% less than last month.",
 
-      "tomorrow": "Due tomorrow",
-      "inThreeDays": "Due in 3 days",
-      "inFiveDays": "Due in 5 days",
-      "nextWeek": "Due next week"
-    },
-    "goals": {
-      "title": "Financial Goals",
-      "subtitle": "Track your progress toward your goals",
-      "viewAll": "View all",
+  "totalBalance": "Total Balance",
+  "monthlyIncome": "Monthly Income",
+  "monthlyExpenses": "Monthly Expenses",
+  "monthlySavings": "Monthly Savings",
+  "comparedToLastMonth": "vs last month",
 
-      "emergencyFund": "Emergency Fund",
-      "travel": "Travel",
-      "car": "New Car"
+  "chart": {
+    "title": "Income vs Expenses",
+    "subtitle": "Your cash flow over the last 6 months",
+    "income": "Income",
+    "expenses": "Expenses",
+    "last6Months": "Last 6 months",
+    "currency": "Toman",
+    "threeMonths": "3 Months",
+    "sixMonths": "6 Months",
+    "oneYear": "1 Year",
+
+    "months": {
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec",
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug"
     }
   },
-  "accounts": {
+
+  "transactions": {
+    "title": "Recent Transactions",
+    "subtitle": "Your latest financial activity",
+    "viewAll": "View all",
+    "categories": {
+  "income": "Income",
+  "food": "Food",
+  "bills": "Bills",
+  "transfer": "Transfer"
+},
+"items": {
+  "salary": {
+    "title": "Salary"
+  },
+  "restaurant": {
+    "title": "Restaurant"
+  },
+  "internetBill": {
+    "title": "Internet Bill"
+  },
+  "transferToSavings": {
+    "title": "Transfer to Savings"
+  }
+}
+  },
+
+  "budget": {
+    "title": "Budget Overview",
+    "viewAll": "View all",
+    "food": "Food",
+    "housing": "Housing",
+    "transportation": "Transportation",
+    "shopping": "Shopping",
+    "entertainment": "Entertainment"
+  },
+
+  "spending": {
+    "title": "Spending Breakdown",
+    "subtitle": "Where your money went this month",
+    "total": "Total spent",
+    "food": "Food",
+    "housing": "Housing",
+    "transport": "Transport",
+    "shopping": "Shopping",
+    "other": "Other"
+  },
+
+  "upcomingPayments": {
+    "title": "Upcoming Payments",
+    "subtitle": "Payments due soon",
+    "viewAll": "View all",
+
+    "rent": "Monthly Rent",
+    "internet": "Internet Bill",
+    "mobile": "Mobile Bill",
+    "creditCard": "Credit Card",
+
+    "tomorrow": "Due tomorrow",
+    "inThreeDays": "Due in 3 days",
+    "inFiveDays": "Due in 5 days",
+    "nextWeek": "Due next week"
+  },
+
+  "goals": {
+    "empty": {
+        "title": "No financial goals yet",
+        "description": "Create a goal to start tracking your progress.",
+        "action": "Add goal"
+      },
+    "title": "Financial Goals",
+    "subtitle": "Track your progress toward your goals",
+    "viewAll": "View all",
+
+    "emergencyFund": "Emergency Fund",
+    "travel": "Travel",
+    "car": "New Car"
+  },
+  "empty": {
+  "title": "No upcoming payments",
+  "description": "You don't have any scheduled payments yet.",
+  "action": "Add payment"
+}
+},
+"accounts": {
+  "accountCount": "Across {{count}} accounts",
+"emptyTitle": "No accounts yet",
+"emptyDescription": "Add your first account to start managing your finances.",
   "title": "Accounts",
   "subtitle": "Manage your bank accounts, wallets and savings.",
 
   "totalBalance": "Total Balance",
   "acrossAccounts": "Across {{count}} accounts",
-  "currency": "Toman",
-
   "addAccount": "Add Account",
 
   "types": {
@@ -133,11 +223,13 @@
     "cancel": "Cancel",
     "add": "Add Account",
     "save": "Save Changes",
+
     "errors": {
-  "nameRequired": "Account name is required.",
-  "typeRequired": "Please select an account type.",
-  "balanceInvalid": "Balance cannot be negative."
-}
+      "nameRequired": "Account name is required.",
+      "typeRequired": "Please select an account type.",
+      "balanceRequired": "Initial balance is required.",
+      "balanceInvalid": "Balance cannot be negative."
+    }
   },
 
   "deleteDialog": {
@@ -145,18 +237,141 @@
     "message": "Are you sure you want to delete {{name}}?",
     "cancel": "Cancel",
     "confirm": "Delete"
+  }
+},
+"transactions": {
+  "title": "Transactions",
+  "subtitle": "Track and manage all your financial activity.",
+  "addTransaction": "Add Transaction",
+
+  "question": "How do I manage transactions?",
+  "answer": "Open Transactions to search, filter, add and manage your financial activity.",
+
+  "summary": {
+    "totalIncome": "Total Income",
+    "totalExpenses": "Total Expenses",
+    "netFlow": "Net Flow",
+    "transactions": "Transactions"
   },
 
-"common": {
-  "currency": "Toman",
-  "actions": {
-  "edit": "Edit",
-  "delete": "Delete"
-}
-}
+  "searchPlaceholder": "Search transactions...",
+  "searchAria": "Search transactions",
+
+  "sort": {
+    "label": "Sort transactions",
+    "newest": "Newest first",
+    "oldest": "Oldest first",
+    "highest": "Highest amount",
+    "lowest": "Lowest amount"
+  },
+
+  "filters": {
+    "title": "Filters",
+    "clear": "Clear",
+    "clearAll": "Clear all",
+    "type": "Transaction Type",
+    "all": "All",
+    "account": "Account",
+    "allAccounts": "All Accounts",
+    "category": "Category",
+    "allCategories": "All Categories",
+    "accountAria": "Filter transactions by account",
+    "categoryAria": "Filter transactions by category"
+  },
+
+  "types": {
+    "income": "Income",
+    "expense": "Expense",
+    "transfer": "Transfer"
+  },
+
+  "categories": {
+    "Income": "Income",
+    "Food": "Food",
+    "Transfer": "Transfer",
+    "Bills": "Bills",
+    "Shopping": "Shopping",
+    "Transportation": "Transportation",
+    "Entertainment": "Entertainment",
+    "Other": "Other"
+  },
+
+  "table": {
+    "transaction": "Transaction",
+    "account": "Account",
+    "date": "Date",
+    "amount": "Amount"
+  },
+
+  "form": {
+    "addTitle": "Add Transaction",
+    "addSubtitle": "Add a new financial transaction.",
+
+    "editTitle": "Edit Transaction",
+    "editSubtitle": "Update the selected transaction.",
+
+    "type": "Type",
+    "title": "Title",
+    "titlePlaceholder": "Grocery Shopping",
+
+    "amount": "Amount",
+
+    "category": "Category",
+    "selectCategory": "Select category",
+
+    "account": "Account",
+    "selectAccount": "Select account",
+
+    "date": "Date",
+
+    "description": "Description",
+    "descriptionPlaceholder": "Optional description",
+
+    "cancel": "Cancel",
+    "save": "Save Transaction",
+    "saveChanges": "Save Changes",
+
+    "errors": {
+      "titleRequired": "Transaction title is required.",
+      "amountRequired": "Transaction amount is required.",
+      "amountInvalid": "Transaction amount must be greater than zero.",
+      "categoryRequired": "Please select a category.",
+      "accountRequired": "Please select an account.",
+      "dateRequired": "Please select a date."
+    }
+  },
+
+  "deleteDialog": {
+    "title": "Delete Transaction",
+    "message": "Are you sure you want to delete the transaction \"{{title}}\"?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+
+  "empty": {
+    "title": "No transactions yet",
+    "subtitle": "Add your first transaction to start tracking your money."
+  },
+
+  "noResults": {
+    "title": "No matching transactions",
+    "subtitle": "Try changing your search or filters."
+  }
 },
   "budgets": {
-  "title": "Budgets",
+    "noResults": {
+  "title": "No matching budgets",
+  "subtitle": "Try changing the month or status filter."
+},
+
+
+     "title": "Budget Overview",
+  "viewAll": "View All",
+  "food": "Food",
+  "housing": "Housing",
+  "transportation": "Transportation",
+  "shopping": "Shopping",
+  "entertainment": "Entertainment",
   "subtitle": "Plan and track your monthly spending.",
   "addBudget": "Add Budget",
   "summary": {
@@ -208,7 +423,8 @@
 "filters": {
   "all": "All",
   "active": "Active",
-  "overBudget": "Over Budget"
+  "overBudget": "Over Budget",
+   "clear": "Clear filters"
 },
 "months": {
   "august2026": "August 2026",
@@ -238,43 +454,70 @@
     "overdue": "Overdue",
     "payments": "Payments"
   },
-  "editTitle": "Edit Recurring Payment",
-"editSubtitle": "Update the recurring payment details.",
-"saveChanges": "Save Changes",
-  "filters": {
-  "all": "All",
-  "status": "Status",
-  "frequency": "Frequency"
-},
-"searchPlaceholder": "Search recurring payments...",
-  "status": {
-  "active": "Active",
-  "dueSoon": "Due Soon",
-  "overdue": "Overdue"
-},
-"frequency": {
-  "weekly": "Weekly",
-  "monthly": "Monthly",
-  "yearly": "Yearly"
-},
-"card": {
-  "account": "Account",
-  "frequency": "Frequency"
-},
-"table": {
-  "payment": "Payment",
-  "amount": "Amount",
-  "account": "Account",
-  "frequency": "Frequency",
-  "nextPayment": "Next Payment",
-    "status": "وضعیت"
 
-},
-"emptyTitle": "No recurring payments yet",
-"emptyDescription": "Add recurring expenses like rent, subscriptions, or bills and never lose track of upcoming payments.",
-"noResultsTitle": "No matching payments",
-"noResultsDescription": "No recurring payments match your current filters.",
-"clearFilters": "Clear filters"
+  "items": {
+    "homeRent": {
+      "title": "Home Rent"
+    },
+    "internet": {
+      "title": "Internet"
+    },
+    "gymMembership": {
+      "title": "Gym Membership"
+    }
+  },
+
+  "editTitle": "Edit Recurring Payment",
+  "editSubtitle": "Update the recurring payment details.",
+  "saveChanges": "Save Changes",
+
+  "searchPlaceholder": "Search recurring payments...",
+
+  "filters": {
+    "all": "All",
+    "status": "Status",
+    "frequency": "Frequency"
+  },
+
+  "status": {
+    "active": "Active",
+    "dueSoon": "Due Soon",
+    "overdue": "Overdue"
+  },
+
+  "frequency": {
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  },
+
+  "card": {
+    "account": "Account",
+    "frequency": "Frequency"
+  },
+
+  "table": {
+    "payment": "Payment",
+    "amount": "Amount",
+    "account": "Account",
+    "frequency": "Frequency",
+    "nextPayment": "Next Payment",
+    "status": "Status"
+  },
+
+  "emptyTitle": "No recurring payments yet",
+  "emptyDescription": "Add recurring expenses like rent, subscriptions, or bills and never lose track of upcoming payments.",
+
+  "noResultsTitle": "No matching payments",
+  "noResultsDescription": "No recurring payments match your current filters.",
+  "clearFilters": "Clear filters",
+
+  "deleteDialog": {
+    "title": "Delete Recurring Payment",
+    "message": "Are you sure you want to delete \"{{title}}\"? This action cannot be undone.",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  }
 },
 "table": {
   "payment": "Payment",
@@ -289,6 +532,7 @@
   "subtitle": "Add your first recurring payment to get started."
 },
 "help": {
+  "searchAria": "Search help",
   "title": "Help & Support",
   "subtitle": "Find answers and learn how to use MoneyFlow.",
 
@@ -344,76 +588,7 @@
         "answer": "Go to Accounts and select Add Account. Enter the account name, type and initial balance, then save it."
       },
 
-      "transactions": {
-"deleteDialog": {
-  "title": "Delete Transaction",
-  "message": "Are you sure you want to delete the transaction \"{{title}}\"?",
-  "confirm": "Delete",
-  "cancel": "Cancel"
-},
-        "question": "How do I manage transactions?",
-        "answer": "Open Transactions to search, filter, add and manage your financial activity.",
-        "noResultsTitle": "No matching transactions",
-"noResultsDescription": "Try changing your search or filters.",
-"clearFilters": "Clear filters",
-"emptyTitle": "No transactions yet",
-"emptyDescription": "Add your first transaction to start tracking your money.",
-"transactions": {
-  "title": "تراکنش‌ها",
-  "subtitle": "تمام فعالیت‌های مالی خود را مشاهده و مدیریت کنید.",
-  "addTransaction": "افزودن تراکنش",
 
-  "summary": {
-    "totalIncome": "مجموع درآمد",
-    "totalExpenses": "مجموع هزینه‌ها",
-    "netFlow": "جریان خالص",
-    "transactions": "تراکنش‌ها"
-  },
-
-  "searchPlaceholder": "جستجو در تراکنش‌ها...",
-  "searchAria": "جستجوی تراکنش‌ها",
-
-  "sort": {
-    "label": "مرتب‌سازی تراکنش‌ها",
-    "newest": "جدیدترین",
-    "oldest": "قدیمی‌ترین",
-    "highest": "بیشترین مبلغ",
-    "lowest": "کمترین مبلغ"
-  },
-
-  "filters": {
-    "title": "فیلترها",
-    "clear": "پاک کردن",
-    "clearAll": "پاک کردن همه",
-    "type": "نوع تراکنش",
-    "all": "همه",
-    "account": "حساب",
-    "allAccounts": "همه حساب‌ها",
-    "category": "دسته‌بندی",
-    "allCategories": "همه دسته‌بندی‌ها",
-    "accountAria": "فیلتر تراکنش‌ها بر اساس حساب",
-    "categoryAria": "فیلتر تراکنش‌ها بر اساس دسته‌بندی"
-  },
-
-  "types": {
-    "income": "درآمد",
-    "expense": "هزینه",
-    "transfer": "انتقال"
-  },
-
-  "table": {
-    "transaction": "تراکنش",
-    "account": "حساب",
-    "date": "تاریخ",
-    "amount": "مبلغ"
-  },
-
-  "empty": {
-    "title": "تراکنشی پیدا نشد",
-    "subtitle": "جستجو یا فیلترهای خود را تغییر دهید."
-  }
-}
-      },
 
       "budgets": {
         "question": "How are budgets calculated?",
@@ -608,5 +783,29 @@
   "description": "The page you're looking for doesn't exist, was moved, or is no longer available.",
   "backHome": "Back to Dashboard",
   "goBack": "Go Back"
+},
+"common": {
+  "currency": "Toman",
+  "save": "Save",
+
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+
+  "table": {
+    "emptyTitle": "No data found",
+    "emptySubtitle": "There is nothing to display yet."
+  }
+},
+"pagination": {
+  "showing": "Showing",
+  "of": "of",
+  "navigation": "Pagination navigation",
+  "previous": "Previous page",
+  "next": "Next page",
+  "page": "Page {{page}}"
 }
 }

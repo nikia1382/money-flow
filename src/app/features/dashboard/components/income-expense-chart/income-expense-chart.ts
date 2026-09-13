@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, effect, inject } from '@angular/core';
 
 import { BaseChartDirective } from 'ng2-charts';
 
@@ -7,6 +7,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ChartConfiguration, TooltipItem } from 'chart.js';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DashboardChartService } from '../../services/dashboard-chart.service';
 
 @Component({
   selector: 'app-income-expense-chart',
@@ -22,7 +23,8 @@ export class IncomeExpenseChart {
   /* =========================
      Services
   ========================= */
-
+private readonly DashboardChartService =
+  inject(DashboardChartService);
   private readonly translate = inject(TranslateService);
 
   private readonly destroyRef = inject(DestroyRef);
@@ -118,23 +120,22 @@ export class IncomeExpenseChart {
   /* =========================
      Constructor
   ========================= */
-
-  constructor() {
-    /*
-      First chart render
-    */
+constructor() {
+  effect(() => {
+    this.DashboardChartService.monthlyCashFlow();
 
     this.updateChartData();
+  });
 
-    /*
-      Rebuild translated labels
-      when language changes
-    */
-
-    this.translate.onLangChange.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
+  this.translate.onLangChange
+    .pipe(
+      takeUntilDestroyed(this.destroyRef),
+    )
+    .subscribe(() => {
       this.updateChartData();
     });
-  }
+}
+
 
   /* =========================
      Change Period
@@ -150,131 +151,107 @@ export class IncomeExpenseChart {
      Number Formatter
   ========================= */
 
-  private formatNumber(value: number): string {
-    const locale = this.translate.currentLang() === 'fa' ? 'fa-IR' : 'en-US';
+private formatNumber(
+  value: number
+): string {
+  const locale =
+    this.translate.currentLang() === 'fa'
+      ? 'fa-IR-u-nu-arabext'
+      : 'en-US';
 
-    return new Intl.NumberFormat(locale).format(value);
-  }
+  return new Intl.NumberFormat(
+    locale
+  ).format(value);
+}
 
   /* =========================
      Update Chart
   ========================= */
 
-  private updateChartData(): void {
-    const isPersian = this.translate.currentLang() === 'fa';
+private updateChartData(): void {
+  const data =
+    this.DashboardChartService
+      .monthlyCashFlow();
 
-    /* =========================
-       Labels
-    ========================= */
+  let count = 6;
 
-    const allLabelsEn = [
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-    ];
-
-    const allLabelsFa = [
-      'شهریور',
-      'مهر',
-      'آبان',
-      'آذر',
-      'دی',
-      'بهمن',
-      'اسفند',
-      'فروردین',
-      'اردیبهشت',
-      'خرداد',
-      'تیر',
-      'مرداد',
-    ];
-
-    /* =========================
-       Income Data
-    ========================= */
-
-    const incomeData = [
-      25_000_000, 27_000_000, 26_000_000, 29_000_000, 30_000_000, 31_000_000, 28_000_000,
-      32_000_000, 30_000_000, 34_000_000, 33_000_000, 35_000_000,
-    ];
-
-    /* =========================
-       Expense Data
-    ========================= */
-
-    const expenseData = [
-      16_000_000, 17_000_000, 18_000_000, 20_000_000, 19_000_000, 20_500_000, 18_000_000,
-      21_000_000, 19_000_000, 24_000_000, 22_000_000, 21_300_000,
-    ];
-
-    /* =========================
-       Period Count
-    ========================= */
-
-    let count = 6;
-
-    if (this.selectedPeriod === '3m') {
-      count = 3;
-    }
-
-    if (this.selectedPeriod === '1y') {
-      count = 12;
-    }
-
-    /* =========================
-       Visible Data
-    ========================= */
-
-    const labels = (isPersian ? allLabelsFa : allLabelsEn).slice(-count);
-
-    const incomes = incomeData.slice(-count);
-
-    const expenses = expenseData.slice(-count);
-
-    /* =========================
-       Update Chart
-    ========================= */
-
-    this.lineChartData = {
-      labels,
-
-      datasets: [
-        {
-          label: this.translate.instant('dashboard.chart.income'),
-
-          data: incomes,
-
-          tension: 0.4,
-
-          borderWidth: 2,
-
-          pointRadius: 3,
-
-          pointHoverRadius: 6,
-        },
-
-        {
-          label: this.translate.instant('dashboard.chart.expenses'),
-
-          data: expenses,
-
-          tension: 0.4,
-
-          borderWidth: 2,
-
-          pointRadius: 3,
-
-          pointHoverRadius: 6,
-        },
-      ],
-    };
+  if (
+    this.selectedPeriod === '3m'
+  ) {
+    count = 3;
   }
+
+  if (
+    this.selectedPeriod === '1y'
+  ) {
+    count = 12;
+  }
+
+  const visibleData =
+    data.slice(-count);
+
+  const locale =
+    this.translate.currentLang() ===
+    'fa'
+      ? 'fa-IR-u-ca-persian'
+      : 'en-US';
+
+  const labels =
+    visibleData.map((item) => {
+      const date = new Date(
+        item.year,
+        item.month,
+        1,
+      );
+
+      return new Intl.DateTimeFormat(
+        locale,
+        {
+          month: 'short',
+        },
+      ).format(date);
+    });
+
+  this.lineChartData = {
+    labels,
+
+    datasets: [
+      {
+        label:
+          this.translate.instant(
+            'dashboard.chart.income',
+          ),
+
+        data:
+          visibleData.map(
+            (item) =>
+              item.income,
+          ),
+
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+      },
+
+      {
+        label:
+          this.translate.instant(
+            'dashboard.chart.expenses',
+          ),
+
+        data:
+          visibleData.map(
+            (item) =>
+              item.expenses,
+          ),
+
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 3,
+        pointHoverRadius: 6,
+      },
+    ],
+  };
+}
 }

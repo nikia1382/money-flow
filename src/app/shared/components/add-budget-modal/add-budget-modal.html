@@ -1,14 +1,33 @@
-<p>add-budget-modal works!</p>
-<div class="modal-backdrop" (click)="close()">
-  <section class="budget-modal" (click)="$event.stopPropagation()">
+<div
+  class="modal-backdrop"
+  (click)="close()"
+>
+  <section
+    class="budget-modal"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Header -->
+
     <div class="budget-modal__header">
       <div>
         <h2>
-          {{ (isEditMode ? 'budgets.form.editTitle' : 'budgets.form.title') | translate }}
+          {{
+            (
+              isEditMode
+                ? 'budgets.form.editTitle'
+                : 'budgets.form.title'
+            ) | translate
+          }}
         </h2>
 
         <p>
-          {{ (isEditMode ? 'budgets.form.editSubtitle' : 'budgets.form.subtitle') | translate }}
+          {{
+            (
+              isEditMode
+                ? 'budgets.form.editSubtitle'
+                : 'budgets.form.subtitle'
+            ) | translate
+          }}
         </p>
       </div>
 
@@ -19,42 +38,84 @@
         title="Close"
         (click)="close()"
       >
-        <lucide-icon [img]="X" [size]="18" />
+        <lucide-icon
+          [img]="X"
+          [size]="18"
+        />
       </button>
     </div>
 
-    <form class="budget-form" (ngSubmit)="save()">
+    <!-- Form -->
+
+    <form
+      class="budget-form"
+      (ngSubmit)="save()"
+    >
+      <!-- Category -->
+
       <div class="form-group">
         <label>
-          {{ 'budgets.form.category' | translate }}
+          {{
+            'budgets.form.category'
+              | translate
+          }}
         </label>
 
         <div class="category-grid">
-          @for (category of categories; track category.value) {
+          @for (
+            category of categories();
+            track category.id
+          ) {
             <button
               type="button"
               class="category-option"
-              [class.active]="form.category === category.value"
-              (click)="form.category = category.value"
+              [class.active]="
+                form.category ===
+                category.name
+              "
+              (click)="
+                form.category =
+                  category.name
+              "
             >
-              <span class="category-option__icon">
-                <lucide-icon [img]="category.icon" [size]="17" />
+              <span
+                class="category-option__icon"
+              >
+                <lucide-icon
+                  [img]="
+                    getCategoryIcon(
+                      category.name
+                    )
+                  "
+                  [size]="17"
+                />
               </span>
 
               <span>
-                {{ 'budgets.categories.' + category.value | translate }}
+                {{ category.name }}
               </span>
             </button>
           }
         </div>
       </div>
 
+      <!-- Limit -->
+
       <div class="form-group">
         <label for="budget-limit">
-          {{ 'budgets.form.limit' | translate }}
+          {{
+            'budgets.form.limit'
+              | translate
+          }}
         </label>
 
-        <div class="amount-input" [class.invalid]="form.limit !== null && form.limit <= 0">
+        <div
+          class="amount-input"
+          [class.invalid]="
+            form.limit !== null &&
+            form.limit <= 0
+          "
+        >
           <input
             id="budget-limit"
             type="number"
@@ -65,21 +126,37 @@
             required
           />
 
-          <span class="amount-input__currency">
-            {{ 'common.currency' | translate }}
+          <span
+            class="amount-input__currency"
+          >
+            {{
+              'common.currency'
+                | translate
+            }}
           </span>
         </div>
 
-        @if (form.limit !== null && form.limit <= 0) {
+        @if (
+          form.limit !== null &&
+          form.limit <= 0
+        ) {
           <span class="form-error">
-            {{ 'budgets.form.limitError' | translate }}
+            {{
+              'budgets.form.limitError'
+                | translate
+            }}
           </span>
         }
       </div>
 
+      <!-- Month -->
+
       <div class="form-group">
         <label for="budget-month">
-          {{ 'budgets.form.month' | translate }}
+          {{
+            'budgets.form.month'
+              | translate
+          }}
         </label>
 
         <select
@@ -90,21 +167,48 @@
           aria-label="Select budget month"
           title="Select budget month"
         >
-          @for (month of months; track month.value) {
-            <option [value]="month.value">
-              {{ month.labelKey | translate }}
+          @for (
+            month of months;
+            track month.value
+          ) {
+            <option
+              [value]="month.value"
+            >
+              {{
+                month.labelKey
+                  | translate
+              }}
             </option>
           }
         </select>
       </div>
 
+      <!-- Actions -->
+
       <div class="budget-modal__actions">
-        <button type="button" class="cancel-btn" (click)="close()">
-          {{ 'budgets.form.cancel' | translate }}
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="close()"
+        >
+          {{
+            'budgets.form.cancel'
+              | translate
+          }}
         </button>
 
-        <button type="submit" class="save-btn" [disabled]="!isFormValid">
-          {{ (isEditMode ? 'budgets.form.saveChanges' : 'budgets.form.save') | translate }}
+        <button
+          type="submit"
+          class="save-btn"
+          [disabled]="!isFormValid"
+        >
+          {{
+            (
+              isEditMode
+                ? 'budgets.form.saveChanges'
+                : 'budgets.form.save'
+            ) | translate
+          }}
         </button>
       </div>
     </form>
