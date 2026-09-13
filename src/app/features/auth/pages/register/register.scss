@@ -1,0 +1,46 @@
+@use '../login/login.scss';
+
+.auth-panel {
+  padding-block: 32px;
+}
+
+.auth-brand {
+  margin-bottom: 34px;
+}
+
+.auth-header {
+  margin-bottom: 24px;
+}
+
+.auth-form {
+  gap: 15px;
+}
+
+.auth-success {
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  color: #267447;
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px solid #bfe3cc;
+  border-radius: 12px;
+  background: #effaf3;
+}
+
+.auth-switch {
+  margin: 22px 0 0;
+  color: #777c87;
+  font-size: 13px;
+  text-align: center;
+
+  a {
+    margin-inline-start: 5px;
+    color: #dc5f36;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

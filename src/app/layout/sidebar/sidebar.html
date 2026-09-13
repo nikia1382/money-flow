@@ -134,15 +134,40 @@
   </div>
 
   <!-- Profile -->
-  <div class="sidebar-profile">
-    <div class="sidebar-profile__avatar">N</div>
+<!-- Profile -->
 
-    <div class="sidebar-profile__info">
-      <strong> Nikia </strong>
-
-      <span> nikia@example.com </span>
-    </div>
-
-    <lucide-icon [img]="ChevronRight" [size]="16" class="sidebar-profile__arrow" />
+<div class="sidebar-profile">
+  <div class="sidebar-profile__avatar">
+    {{ userInitial() }}
   </div>
+
+  <div class="sidebar-profile__info">
+    <strong>
+      {{ user()?.name || 'MoneyFlow User' }}
+    </strong>
+
+    <span>
+      {{ user()?.email || '' }}
+    </span>
+  </div>
+
+  <button
+    type="button"
+    class="sidebar-profile__logout"
+    [attr.aria-label]="
+      'auth.logout.button'
+        | translate
+    "
+    [title]="
+      'auth.logout.button'
+        | translate
+    "
+    (click)="requestLogout()"
+  >
+    <lucide-icon
+      [img]="LogOut"
+      [size]="17"
+    />
+  </button>
+</div>
 </aside>

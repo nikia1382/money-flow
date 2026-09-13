@@ -1,6 +1,13 @@
 <app-toast />
+
 <div class="main-layout">
-  <app-sidebar [class.sidebar-open]="isSidebarOpen()" (closeSidebar)="closeSidebar()" />
+  <app-sidebar
+    [class.sidebar-open]="
+      isSidebarOpen()
+    "
+    (closeSidebar)="closeSidebar()"
+    (logoutRequested)="openLogoutDialog()"
+  />
 
   @if (isSidebarOpen()) {
     <button
@@ -12,10 +19,41 @@
   }
 
   <div class="main-layout__content">
-    <app-header (menuClick)="toggleSidebar()" />
+    <app-header
+      (menuClick)="toggleSidebar()"
+    />
 
     <main class="main-layout__page">
       <router-outlet />
     </main>
   </div>
 </div>
+
+<!-- Logout Confirmation -->
+
+@if (isLogoutDialogOpen()) {
+  <app-confirm-dialog
+    variant="danger"
+    [title]="
+      'auth.logout.title'
+        | translate
+    "
+    [message]="
+      'auth.logout.message'
+        | translate
+    "
+    [confirmText]="
+      (
+        isLoggingOut()
+          ? 'auth.logout.loggingOut'
+          : 'auth.logout.confirm'
+      ) | translate
+    "
+    [cancelText]="
+      'auth.logout.cancel'
+        | translate
+    "
+    (cancel)="cancelLogout()"
+    (confirm)="confirmLogout()"
+  />
+}

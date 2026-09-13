@@ -1,8 +1,21 @@
-import { Component, EventEmitter, HostBinding, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  HostBinding,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  TranslatePipe,
+} from '@ngx-translate/core';
 
 import {
   LucideAngularModule,
@@ -10,7 +23,6 @@ import {
   WalletCards,
   ArrowLeftRight,
   ChartPie,
-  ChartNoAxesCombined,
   Settings,
   Target,
   HandCoins,
@@ -18,48 +30,137 @@ import {
   Bell,
   CircleHelp,
   Crown,
-  ChevronRight,
+  LogOut,
 } from 'lucide-angular';
-import { NotificationsService } from '../../features/notifications/services/notifications';
+
+import {
+  NotificationsService,
+} from '../../features/notifications/services/notifications';
+
+import {
+  AuthService,
+} from '../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
 
-  imports: [RouterLink, RouterLinkActive, TranslatePipe, LucideAngularModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    TranslatePipe,
+    LucideAngularModule,
+  ],
 
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
 export class Sidebar {
+  /* =========================
+     Inputs & Outputs
+  ========================= */
+
   @Input()
   isOpen = false;
 
   @Output()
-  closeSidebar = new EventEmitter<void>();
+  closeSidebar =
+    new EventEmitter<void>();
 
-  @HostBinding('class.sidebar-host--open')
+  @Output()
+  logoutRequested =
+    new EventEmitter<void>();
+
+  /* =========================
+     Services
+  ========================= */
+
+  private readonly notificationsService =
+    inject(NotificationsService);
+
+  private readonly authService =
+    inject(AuthService);
+
+  /* =========================
+     State
+  ========================= */
+
+  readonly unreadNotifications =
+    this.notificationsService.unreadCount;
+
+  readonly user =
+    this.authService.user;
+
+  readonly userInitial =
+    computed(() => {
+      const name =
+        this.user()?.name.trim();
+
+      return name
+        ? name.charAt(0).toUpperCase()
+        : 'U';
+    });
+
+  /* =========================
+     Host
+  ========================= */
+
+  @HostBinding(
+    'class.sidebar-host--open',
+  )
   get opened(): boolean {
     return this.isOpen;
   }
-  private readonly notificationsService = inject(NotificationsService);
 
-  readonly unreadNotifications = this.notificationsService.unreadCount;
+  /* =========================
+     Icons
+  ========================= */
 
-  readonly LayoutDashboard = LayoutDashboard;
-  readonly WalletCards = WalletCards;
-  readonly ArrowLeftRight = ArrowLeftRight;
-  readonly ChartPie = ChartPie;
-  readonly ChartNoAxesCombined = ChartNoAxesCombined;
-  readonly Settings = Settings;
-  readonly Target = Target;
-  readonly HandCoins = HandCoins;
-  readonly CalendarClock = CalendarClock;
-  readonly Bell = Bell;
-  readonly CircleHelp = CircleHelp;
-  readonly Crown = Crown;
-  readonly ChevronRight = ChevronRight;
+  readonly LayoutDashboard =
+    LayoutDashboard;
+
+  readonly WalletCards =
+    WalletCards;
+
+  readonly ArrowLeftRight =
+    ArrowLeftRight;
+
+  readonly ChartPie =
+    ChartPie;
+
+  readonly Settings =
+    Settings;
+
+  readonly Target =
+    Target;
+
+  readonly HandCoins =
+    HandCoins;
+
+  readonly CalendarClock =
+    CalendarClock;
+
+  readonly Bell =
+    Bell;
+
+  readonly CircleHelp =
+    CircleHelp;
+
+  readonly Crown =
+    Crown;
+
+  readonly LogOut =
+    LogOut;
+
+  /* =========================
+     Actions
+  ========================= */
 
   close(): void {
     this.closeSidebar.emit();
+  }
+
+  requestLogout(): void {
+    this.logoutRequested.emit();
+    this.close();
   }
 }
