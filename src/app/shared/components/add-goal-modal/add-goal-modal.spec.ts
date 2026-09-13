@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddGoalModal } from './add-goal-modal';
@@ -8,6 +9,7 @@ describe('AddGoalModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [AddGoalModal],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('AddGoalModal', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionRow } from './transaction-row';
@@ -10,6 +11,7 @@ describe('TransactionRow', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [TransactionRow],
     }).compileComponents();
 
@@ -36,3 +38,4 @@ describe('TransactionRow', () => {
     expect(component).toBeTruthy();
   });
 });
+

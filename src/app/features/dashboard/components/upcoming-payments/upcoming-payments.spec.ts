@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
@@ -47,6 +48,7 @@ describe('UpcomingPayments', () => {
       imports: [UpcomingPayments],
 
       providers: [
+         ...TEST_PROVIDERS,
         provideTranslateService({
           loader: provideTranslateLoader(FakeLoader),
         }),
@@ -64,3 +66,4 @@ describe('UpcomingPayments', () => {
     expect(component).toBeTruthy();
   });
 });
+

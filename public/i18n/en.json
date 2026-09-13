@@ -181,6 +181,12 @@
 }
 },
 "accounts": {
+  "notifications": {
+  "deleteSuccess": "Account deleted successfully.",
+  "deleteConflict": "This account has transactions and cannot be deleted.",
+  "notFound": "Account not found.",
+  "deleteFailed": "Failed to delete account."
+},
   "accountCount": "Across {{count}} accounts",
 "emptyTitle": "No accounts yet",
 "emptyDescription": "Add your first account to start managing your finances.",
@@ -588,16 +594,14 @@
         "answer": "Go to Accounts and select Add Account. Enter the account name, type and initial balance, then save it."
       },
 
-
+      "transactions": {
+        "question": "How do I manage transactions?",
+        "answer": "Open Transactions to search, filter, add, edit or delete your financial activity."
+      },
 
       "budgets": {
         "question": "How are budgets calculated?",
-        "answer": "Each budget compares the spending amount with the spending limit you set for that category.",
-        "emptyTitle": "No budgets yet",
-"emptyDescription": "Create your first budget and start keeping your spending under control.",
-"noResultsTitle": "No matching budgets",
-"noResultsDescription": "Try changing the month or status filter.",
-"clearFilters": "Clear filters"
+        "answer": "Each budget compares the amount spent with the spending limit you set for that category."
       },
 
       "recurring": {
@@ -624,8 +628,33 @@
 
   "support": {
     "title": "Still need help?",
-    "subtitle": "Contact our support team if you couldn't find the answer you need.",
-    "button": "Contact Support"
+    "subtitle": "Send us a message and we will review your request.",
+    "button": "Send request",
+    "sending": "Sending...",
+
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message"
+    },
+
+    "placeholders": {
+      "name": "Enter your name",
+      "email": "Enter your email address",
+      "subject": "What do you need help with?",
+      "message": "Describe your problem..."
+    },
+
+    "validation": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address."
+    },
+
+    "toast": {
+      "success": "Your support request was submitted successfully.",
+      "error": "Failed to submit your support request."
+    }
   }
 },
 "goals": {

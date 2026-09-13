@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MonthSelector } from './month-selector';
@@ -8,6 +9,7 @@ describe('MonthSelector', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [MonthSelector],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('MonthSelector', () => {
     expect(component).toBeTruthy();
   });
 });
+

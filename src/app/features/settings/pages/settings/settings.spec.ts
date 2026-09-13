@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Settings } from './settings';
@@ -8,6 +9,7 @@ describe('Settings', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Settings],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Settings', () => {
     expect(component).toBeTruthy();
   });
 });
+

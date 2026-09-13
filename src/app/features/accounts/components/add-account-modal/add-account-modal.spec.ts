@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddAccountModal } from './add-account-modal';
@@ -8,6 +9,7 @@ describe('AddAccountModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [AddAccountModal],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('AddAccountModal', () => {
     expect(component).toBeTruthy();
   });
 });
+

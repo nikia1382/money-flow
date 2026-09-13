@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Accounts } from './accounts';
@@ -8,6 +9,7 @@ describe('Accounts', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Accounts],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Accounts', () => {
     expect(component).toBeTruthy();
   });
 });
+

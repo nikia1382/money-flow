@@ -1,13 +1,25 @@
-import { TestBed } from '@angular/core/testing';
-import { Debts } from '../pages/debts/debts';
+﻿import { TestBed } from '@angular/core/testing';
 
+import { TEST_PROVIDERS } from '@testing/test-providers';
 
-describe('Debts', () => {
-  let service: Debts;
+import {
+  DebtsService,
+} from './debts';
+
+describe('DebtsService', () => {
+  let service: DebtsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(Debts);
+    TestBed.configureTestingModule({
+      providers: [
+        ...TEST_PROVIDERS,
+      ],
+    });
+
+    service =
+      TestBed.inject(
+        DebtsService,
+      );
   });
 
   it('should be created', () => {

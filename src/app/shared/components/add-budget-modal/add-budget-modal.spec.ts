@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddBudgetModal } from './add-budget-modal';
@@ -8,6 +9,7 @@ describe('AddBudgetModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [AddBudgetModal],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('AddBudgetModal', () => {
     expect(component).toBeTruthy();
   });
 });
+

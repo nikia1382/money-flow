@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
@@ -38,9 +39,11 @@ describe('FinancialGoals', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+     
       imports: [FinancialGoals],
 
       providers: [
+         ...TEST_PROVIDERS,
         provideTranslateService({
           loader: provideTranslateLoader(FakeLoader),
         }),
@@ -58,3 +61,4 @@ describe('FinancialGoals', () => {
     expect(component).toBeTruthy();
   });
 });
+

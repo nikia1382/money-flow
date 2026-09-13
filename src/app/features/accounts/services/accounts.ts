@@ -6,6 +6,7 @@ import {
 
 import {
   HttpClient,
+  HttpErrorResponse,
 } from '@angular/common/http';
 
 import {
@@ -15,6 +16,8 @@ import {
 import {
   NewAccount,
 } from '../components/add-account-modal/add-account-modal';
+import { ToastService } from '../../../shared/services/toast';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +26,11 @@ export class AccountsService {
   private readonly http =
     inject(HttpClient);
 
+
+private readonly toastService =
+  inject(ToastService);
+private readonly translate =
+  inject(TranslateService);
   private readonly apiUrl =
     'http://localhost:8080/api/accounts';
 
@@ -144,31 +152,71 @@ export class AccountsService {
      DELETE
   ========================= */
 
-  deleteAccount(
-    accountId: number,
-  ): void {
-    this.http
-      .delete<void>(
-        `${this.apiUrl}/${accountId}`,
-      )
-      .subscribe({
-        next: () => {
-          this.accounts.update(
-            (accounts) =>
-              accounts.filter(
-                (account) =>
-                  account.id !==
-                  accountId,
-              ),
-          );
-        },
+deleteAccount(
+  accountId: number,
+): void {
+  this.http
+    .delete<void>(
+      `${this.apiUrl}/${accountId}`,
+    )
+    .subscribe({
+      next: () => {
+        this.accounts.update(
+          (accounts) =>
+            accounts.filter(
+              (account) =>
+                account.id !==
+                accountId,
+            ),
+        );
 
-        error: (error) => {
-          console.error(
-            'Failed to delete account',
-            error,
+        this.toastService.show(
+          this.translate.instant(
+            'accounts.notifications.deleteSuccess',
+          ),
+          'success',
+        );
+      },
+
+      error: (
+        error: HttpErrorResponse,
+      ) => {
+        if (error.status === 409) {
+          this.toastService.show(
+            this.translate.instant(
+              'accounts.notifications.deleteConflict',
+            ),
+            'error',
           );
-        },
-      });
-  }
+
+          return;
+        }
+
+        if (error.status === 404) {
+          this.toastService.show(
+            this.translate.instant(
+              'accounts.notifications.notFound',
+            ),
+            'error',
+          );
+
+          this.loadAccounts();
+
+          return;
+        }
+
+        this.toastService.show(
+          this.translate.instant(
+            'accounts.notifications.deleteFailed',
+          ),
+          'error',
+        );
+
+        console.error(
+          'Failed to delete account',
+          error,
+        );
+      },
+    });
+}
 }

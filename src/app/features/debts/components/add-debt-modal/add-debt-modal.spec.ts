@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddDebtModal } from './add-debt-modal';
@@ -8,6 +9,7 @@ describe('AddDebtModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [AddDebtModal],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('AddDebtModal', () => {
     expect(component).toBeTruthy();
   });
 });
+

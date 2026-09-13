@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecurringPayments } from './recurring-payments';
@@ -8,6 +9,7 @@ describe('RecurringPayments', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [RecurringPayments],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('RecurringPayments', () => {
     expect(component).toBeTruthy();
   });
 });
+

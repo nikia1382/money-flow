@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Toast } from './toast';
@@ -8,6 +9,7 @@ describe('Toast', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Toast],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Toast', () => {
     expect(component).toBeTruthy();
   });
 });
+

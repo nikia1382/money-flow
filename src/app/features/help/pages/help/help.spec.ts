@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Help } from './help';
@@ -8,6 +9,7 @@ describe('Help', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Help],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Help', () => {
     expect(component).toBeTruthy();
   });
 });
+

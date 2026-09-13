@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmDialog } from './confirm-dialog';
@@ -8,6 +9,7 @@ describe('ConfirmDialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [ConfirmDialog],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('ConfirmDialog', () => {
     expect(component).toBeTruthy();
   });
 });
+

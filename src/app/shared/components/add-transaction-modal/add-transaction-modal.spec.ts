@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddTransactionModal } from './add-transaction-modal';
@@ -8,6 +9,7 @@ describe('AddTransactionModal', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [AddTransactionModal],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('AddTransactionModal', () => {
     expect(component).toBeTruthy();
   });
 });
+

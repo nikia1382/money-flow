@@ -502,10 +502,7 @@ confirmDeletePayment(): void {
   const payment =
     this.paymentPendingDelete();
 
-  console.log(
-    'PAYMENT TO DELETE:',
-    payment,
-  );
+
 
   if (!payment) {
     console.error(
@@ -515,10 +512,7 @@ confirmDeletePayment(): void {
     return;
   }
 
-  console.log(
-    'DELETE ID:',
-    payment.id,
-  );
+
 
   this.service.deletePayment(
     payment.id,

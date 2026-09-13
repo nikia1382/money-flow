@@ -139,6 +139,170 @@
   <!-- =========================
        Support
   ========================== -->
+<section class="help-section support-section">
+  <div class="help-section__header">
+    <h2>
+      {{ 'help.support.title' | translate }}
+    </h2>
 
+    <p>
+      {{ 'help.support.subtitle' | translate }}
+    </p>
+  </div>
+
+  <form
+    #supportForm="ngForm"
+    class="support-form"
+    novalidate
+    (ngSubmit)="submitSupportRequest(supportForm)"
+  >
+    <!-- Name -->
+
+    <label>
+      {{ 'help.support.fields.name' | translate }}
+
+      <input
+        #nameField="ngModel"
+        type="text"
+        name="name"
+        [(ngModel)]="supportRequest.name"
+        [placeholder]="
+          'help.support.placeholders.name' | translate
+        "
+        maxlength="100"
+        required
+      />
+
+      @if (
+        nameField.invalid &&
+        nameField.touched
+      ) {
+        <small class="field-error">
+          {{
+            'help.support.validation.required'
+              | translate
+          }}
+        </small>
+      }
+    </label>
+
+    <!-- Email -->
+
+    <label>
+      {{ 'help.support.fields.email' | translate }}
+
+      <input
+        #emailField="ngModel"
+        type="email"
+        name="email"
+        [(ngModel)]="supportRequest.email"
+        [placeholder]="
+          'help.support.placeholders.email' | translate
+        "
+        maxlength="150"
+        email
+        required
+      />
+
+      @if (
+        emailField.invalid &&
+        emailField.touched
+      ) {
+        <small class="field-error">
+          @if (emailField.errors?.['required']) {
+            {{
+              'help.support.validation.required'
+                | translate
+            }}
+          } @else {
+            {{
+              'help.support.validation.email'
+                | translate
+            }}
+          }
+        </small>
+      }
+    </label>
+
+    <!-- Subject -->
+
+    <label>
+      {{ 'help.support.fields.subject' | translate }}
+
+      <input
+        #subjectField="ngModel"
+        type="text"
+        name="subject"
+        [(ngModel)]="supportRequest.subject"
+        [placeholder]="
+          'help.support.placeholders.subject' | translate
+        "
+        maxlength="150"
+        required
+      />
+
+      @if (
+        subjectField.invalid &&
+        subjectField.touched
+      ) {
+        <small class="field-error">
+          {{
+            'help.support.validation.required'
+              | translate
+          }}
+        </small>
+      }
+    </label>
+
+    <!-- Message -->
+
+    <label>
+      {{ 'help.support.fields.message' | translate }}
+
+      <textarea
+        #messageField="ngModel"
+        name="message"
+        [(ngModel)]="supportRequest.message"
+        [placeholder]="
+          'help.support.placeholders.message' | translate
+        "
+        maxlength="2000"
+        rows="6"
+        required
+      ></textarea>
+
+      @if (
+        messageField.invalid &&
+        messageField.touched
+      ) {
+        <small class="field-error">
+          {{
+            'help.support.validation.required'
+              | translate
+          }}
+        </small>
+      }
+    </label>
+
+    <button
+      type="submit"
+      class="support-submit-btn"
+      [disabled]="isSubmittingSupport"
+    >
+      <lucide-icon
+        [img]="Mail"
+        [size]="17"
+      />
+
+      {{
+        (
+          isSubmittingSupport
+            ? 'help.support.sending'
+            : 'help.support.button'
+        ) | translate
+      }}
+    </button>
+  </form>
+</section>
 
 </section>

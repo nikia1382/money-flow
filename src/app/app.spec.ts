@@ -1,9 +1,11 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [App],
     }).compileComponents();
   });
@@ -21,3 +23,4 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 });
+

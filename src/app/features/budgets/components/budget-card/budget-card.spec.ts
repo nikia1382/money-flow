@@ -4,53 +4,27 @@ import {
 } from '@angular/core/testing';
 
 import {
-  provideTranslateService,
-  provideTranslateLoader,
-  TranslateLoader,
-  TranslationObject,
-} from '@ngx-translate/core';
-
-import {
-  Observable,
-  of,
-} from 'rxjs';
-
-import {
   BudgetCard,
 } from './budget-card';
 
-
-class FakeLoader implements TranslateLoader {
-  getTranslation(
-    lang: string,
-  ): Observable<TranslationObject> {
-    return of({});
-  }
-}
-
+import {
+  TEST_PROVIDERS,
+} from '@testing/test-providers';
 
 describe('BudgetCard', () => {
   let component: BudgetCard;
-  let fixture:
-    ComponentFixture<BudgetCard>;
+  let fixture: ComponentFixture<BudgetCard>;
 
   beforeEach(async () => {
-    await TestBed
-      .configureTestingModule({
-        imports: [
-          BudgetCard,
-        ],
+    await TestBed.configureTestingModule({
+      imports: [
+        BudgetCard,
+      ],
 
-        providers: [
-          provideTranslateService({
-            loader:
-              provideTranslateLoader(
-                FakeLoader,
-              ),
-          }),
-        ],
-      })
-      .compileComponents();
+      providers: [
+        ...TEST_PROVIDERS,
+      ],
+    }).compileComponents();
 
     fixture =
       TestBed.createComponent(
@@ -60,12 +34,18 @@ describe('BudgetCard', () => {
     component =
       fixture.componentInstance;
 
+    component.budget = {
+      id: 1,
+      category: 'Bills',
+      limit: 2_000_000,
+      spent: 500_000,
+      month: '2026-09',
+    };
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(
-      component,
-    ).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });

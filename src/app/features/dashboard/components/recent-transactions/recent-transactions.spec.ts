@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
@@ -34,9 +35,11 @@ describe('RecentTransactions', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+    
       imports: [RecentTransactions],
 
       providers: [
+         ...TEST_PROVIDERS,
         provideTranslateService({
           loader: provideTranslateLoader(FakeLoader),
         }),
@@ -54,3 +57,4 @@ describe('RecentTransactions', () => {
     expect(component).toBeTruthy();
   });
 });
+

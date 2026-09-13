@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Premium } from './premium';
@@ -8,6 +9,7 @@ describe('Premium', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Premium],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Premium', () => {
     expect(component).toBeTruthy();
   });
 });
+

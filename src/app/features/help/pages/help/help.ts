@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 import {
   LucideAngularModule,
@@ -16,7 +16,11 @@ import {
   LucideIconData,
 } from 'lucide-angular';
 
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SupportRequestService } from '../../services/support-request';
+import { ToastService } from '../../../../shared/services/toast';
+import { CreateSupportRequest } from '../../models/support-request.model';
 
 interface HelpTopic {
   id: number;
@@ -45,7 +49,80 @@ export class Help {
   /* =========================
      Icons
   ========================= */
+private readonly supportRequestService =
+  inject(SupportRequestService);
 
+private readonly toastService =
+  inject(ToastService);
+
+private readonly translate =
+  inject(TranslateService);
+
+supportRequest: CreateSupportRequest = {
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
+};
+
+isSubmittingSupport = false;
+
+submitSupportRequest(
+  form: NgForm,
+): void {
+  if (
+    form.invalid ||
+    this.isSubmittingSupport
+  ) {
+    form.control.markAllAsTouched();
+
+    return;
+  }
+
+  this.isSubmittingSupport = true;
+
+  this.supportRequestService
+    .createRequest(
+      this.supportRequest,
+    )
+    .subscribe({
+      next: () => {
+this.toastService.show(
+  this.translate.instant(
+    'help.support.toast.success',
+  ),
+  'success',
+);
+
+        form.resetForm({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+
+        this.isSubmittingSupport = false;
+      },
+
+      error: (
+        error: HttpErrorResponse,
+      ) => {
+        console.error(
+          'Failed to submit support request',
+          error,
+        );
+
+this.toastService.show(
+  this.translate.instant(
+    'help.support.toast.error',
+  ),
+  'error',
+);
+
+        this.isSubmittingSupport = false;
+      },
+    });
+}
   readonly Search = Search;
 
   readonly Mail = Mail;

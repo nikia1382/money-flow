@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
@@ -42,13 +43,16 @@ describe('SpendingBreakdown', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+    
       imports: [SpendingBreakdown],
 
-      providers: [
-        provideTranslateService({
-          loader: provideTranslateLoader(FakeLoader),
-        }),
-      ],
+    providers: [
+  ...TEST_PROVIDERS,
+
+  provideTranslateService({
+    loader: provideTranslateLoader(FakeLoader),
+  }),
+],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SpendingBreakdown);
@@ -62,3 +66,4 @@ describe('SpendingBreakdown', () => {
     expect(component).toBeTruthy();
   });
 });
+

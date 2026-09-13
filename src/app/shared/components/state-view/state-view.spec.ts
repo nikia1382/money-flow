@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StateView } from './state-view';
@@ -8,6 +9,7 @@ describe('StateView', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [StateView],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('StateView', () => {
     expect(component).toBeTruthy();
   });
 });
+

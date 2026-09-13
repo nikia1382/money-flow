@@ -1,13 +1,12 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-
+import { provideRouter } from '@angular/router';
 import {
   provideTranslateLoader,
   provideTranslateService,
   TranslateLoader,
   TranslationObject,
 } from '@ngx-translate/core';
-
 import { Observable, of } from 'rxjs';
 
 class FakeLoader implements TranslateLoader {
@@ -17,10 +16,12 @@ class FakeLoader implements TranslateLoader {
 }
 
 export const TEST_PROVIDERS = [
-  provideHttpClient(),
-  provideHttpClientTesting(),
+  provideRouter([]),
 
   provideTranslateService({
     loader: provideTranslateLoader(FakeLoader),
   }),
+
+  provideHttpClient(),
+  provideHttpClientTesting(),
 ];

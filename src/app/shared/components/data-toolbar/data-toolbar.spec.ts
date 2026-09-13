@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DataToolbar } from './data-toolbar';
@@ -8,6 +9,7 @@ describe('DataToolbar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [DataToolbar],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('DataToolbar', () => {
     expect(component).toBeTruthy();
   });
 });
+

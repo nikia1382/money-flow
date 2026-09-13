@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import {
@@ -42,6 +43,7 @@ describe('BudgetProgress', () => {
       imports: [BudgetProgress],
 
       providers: [
+         ...TEST_PROVIDERS,
         provideTranslateService({
           loader: provideTranslateLoader(FakeLoader),
         }),
@@ -59,3 +61,4 @@ describe('BudgetProgress', () => {
     expect(component).toBeTruthy();
   });
 });
+

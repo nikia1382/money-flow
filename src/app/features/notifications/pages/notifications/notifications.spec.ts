@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Notifications } from './notifications';
@@ -8,6 +9,7 @@ describe('Notifications', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [...TEST_PROVIDERS],
       imports: [Notifications],
     }).compileComponents();
 
@@ -20,3 +22,4 @@ describe('Notifications', () => {
     expect(component).toBeTruthy();
   });
 });
+

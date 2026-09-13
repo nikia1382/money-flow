@@ -1,3 +1,4 @@
+﻿import { TEST_PROVIDERS } from '@testing/test-providers';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
@@ -10,9 +11,14 @@ describe('MainLayout', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      
       imports: [MainLayout],
 
-      providers: [provideRouter([]), provideTranslateService()],
+      providers: [
+  ...TEST_PROVIDERS,
+  provideRouter([]),
+  provideTranslateService(),
+],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainLayout);
@@ -25,3 +31,4 @@ describe('MainLayout', () => {
     expect(component).toBeTruthy();
   });
 });
+
