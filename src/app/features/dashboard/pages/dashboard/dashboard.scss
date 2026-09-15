@@ -354,3 +354,42 @@
     }
   }
 }
+/* =========================
+   Accessible contrast
+========================= */
+
+.summary-card__trend.positive,
+.summary-card__trend.positive * {
+  color: #166534 !important;
+}
+
+.summary-card__trend.negative,
+.summary-card__trend.negative *,
+.negative {
+  color: #b91c1c !important;
+}
+
+.summary-card__comparison {
+  color: #475569 !important;
+}
+
+/* =========================
+   Dark mode
+========================= */
+
+:host-context(html.dark) {
+  .summary-card__trend.positive,
+  .summary-card__trend.positive * {
+    color: #86efac !important;
+  }
+
+  .summary-card__trend.negative,
+  .summary-card__trend.negative *,
+  .negative {
+    color: #fca5a5 !important;
+  }
+
+  .summary-card__comparison {
+    color: #cbd5e1 !important;
+  }
+}

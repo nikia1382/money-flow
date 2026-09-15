@@ -31,6 +31,7 @@ import {
 import {
   authInterceptor,
 } from './core/interceptors/auth.interceptor';
+import { notificationSyncInterceptor } from './core/interceptors/notification-sync.interceptor';
 
 export const appConfig:
   ApplicationConfig = {
@@ -41,11 +42,12 @@ export const appConfig:
 
       provideRouter(routes),
 
-      provideHttpClient(
-        withInterceptors([
-          authInterceptor,
-        ]),
-      ),
+provideHttpClient(
+  withInterceptors([
+    authInterceptor,
+    notificationSyncInterceptor,
+  ]),
+),
 
       provideTranslateService({
         fallbackLang: 'en',

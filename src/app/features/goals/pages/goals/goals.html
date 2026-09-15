@@ -1,205 +1,517 @@
 <section class="goals">
+
+  <!-- =========================
+       Page Header
+  ========================== -->
+
   <header class="goals__header">
     <div class="goals__heading">
-      <h1>{{ 'goals.title' | translate }}</h1>
+      <h1>
+        {{ 'goals.title' | translate }}
+      </h1>
 
       <p>
-        {{ 'goals.subtitle' | translate }}
+        {{
+          'goals.subtitle'
+            | translate
+        }}
       </p>
     </div>
 
-    <button type="button" class="goals__add-btn" (click)="addGoal()">
-      <lucide-icon [img]="Plus" [size]="17" />
+    <button
+      type="button"
+      class="goals__add-btn"
+      (click)="addGoal()"
+    >
+      <lucide-icon
+        [img]="Plus"
+        [size]="17"
+      />
 
       <span>
-        {{ 'goals.addGoal' | translate }}
+        {{
+          'goals.addGoal'
+            | translate
+        }}
       </span>
     </button>
   </header>
 
+  <!-- =========================
+       Summary
+  ========================== -->
+
   <section class="goals-summary">
-    <article class="summary-card">
-      <div class="summary-card__icon">
-        <lucide-icon [img]="CircleDollarSign" [size]="20" />
-      </div>
 
-      <div>
+    <!-- Total Saved -->
+
+    <article class="summary-card">
+
+      <div class="summary-icon summary-icon--emerald">
+  <lucide-icon
+    [img]="PiggyBank"
+    [size]="21"
+    [strokeWidth]="2.2"
+    color="#149777"
+  />
+</div>
+  
+
+      <div class="summary-card__content">
         <span class="summary-card__label">
-          {{ 'goals.totalSaved' | translate }}
+          {{
+            'goals.totalSaved'
+              | translate
+          }}
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalSaved() | localeNumber }}
+          {{
+            totalSaved()
+              | localeNumber
+          }}
+
           <small>
-            {{ 'common.currency' | translate }}
+            {{
+              'common.currency'
+                | translate
+            }}
           </small>
         </h2>
       </div>
     </article>
 
-    <article class="summary-card">
-      <div class="summary-card__icon">
-        <lucide-icon [img]="Target" [size]="20" />
-      </div>
+    <!-- Total Target -->
 
-      <div>
+    <article class="summary-card">
+<div class="summary-icon summary-icon--violet">
+  <lucide-icon
+    [img]="Target"
+    [size]="21"
+    [strokeWidth]="2.2"
+    color="#7158e8"
+  />
+</div>
+
+      <div class="summary-card__content">
         <span class="summary-card__label">
-          {{ 'goals.totalTarget' | translate }}
+          {{
+            'goals.totalTarget'
+              | translate
+          }}
         </span>
 
         <h2 class="summary-card__amount">
-          {{ totalTarget() | localeNumber }}
+          {{
+            totalTarget()
+              | localeNumber
+          }}
+
           <small>
-            {{ 'common.currency' | translate }}
+            {{
+              'common.currency'
+                | translate
+            }}
           </small>
         </h2>
       </div>
     </article>
 
-    <article class="summary-card">
-      <div class="summary-card__icon">
-        <lucide-icon [img]="TrendingUp" [size]="20" />
-      </div>
-
-      <div>
-        <span class="summary-card__label">
-          {{ 'goals.overallProgress' | translate }}
-        </span>
-
-        <h2 class="summary-card__amount">{{ overallProgress() | localeNumber }}%</h2>
-      </div>
-    </article>
+    <!-- Overall Progress -->
 
     <article class="summary-card">
-      <div class="summary-card__icon">
-        <lucide-icon [img]="Target" [size]="20" />
-      </div>
+<div class="summary-icon summary-icon--blue">
+  <lucide-icon
+    [img]="TrendingUp"
+    [size]="21"
+    [strokeWidth]="2.2"
+    color="#2783d9"
+  />
+</div>
 
-      <div>
+      <div class="summary-card__content">
         <span class="summary-card__label">
-          {{ 'goals.completedGoals' | translate }}
+          {{
+            'goals.overallProgress'
+              | translate
+          }}
         </span>
 
         <h2 class="summary-card__amount">
-          {{ completedGoals() | localeNumber }}
+          {{
+            overallProgress()
+              | localeNumber
+          }}%
+        </h2>
+      </div>
+    </article>
+
+    <!-- Completed Goals -->
+
+    <article class="summary-card">
+<div class="summary-icon summary-icon--amber">
+  <lucide-icon
+    [img]="CircleCheckBig"
+    [size]="21"
+    [strokeWidth]="2.2"
+    color="#c88913"
+  />
+</div>
+
+      <div class="summary-card__content">
+        <span class="summary-card__label">
+          {{
+            'goals.completedGoals'
+              | translate
+          }}
+        </span>
+
+        <h2 class="summary-card__amount">
+          {{
+            completedGoals()
+              | localeNumber
+          }}
         </h2>
       </div>
     </article>
   </section>
 
+  <!-- =========================
+       Goals List
+  ========================== -->
+
   <section class="goals-list">
-    <div class="goals-list__header">
+    <header class="goals-list__header">
       <div>
         <h2>
-          {{ 'goals.yourGoals' | translate }}
+          {{
+            'goals.yourGoals'
+              | translate
+          }}
         </h2>
 
         <p>
-          {{ goals.length | localeNumber }}
-          {{ 'goals.activeGoals' | translate }}
+          {{
+            goals().length
+              | localeNumber
+          }}
+
+          {{
+            'goals.totalGoals'
+              | translate
+          }}
         </p>
       </div>
-    </div>
+    </header>
 
-   @if (goals().length) {
+    @if (goals().length > 0) {
       <div class="goals-grid">
-       @for (goal of goals(); track goal.id)  {
-          <article class="goal-card">
+        @for (
+          goal of goals();
+          track goal.id
+        ) {
+          <article
+            class="goal-card"
+            [attr.data-theme]="
+              getGoalTheme(goal)
+            "
+            [class.goal-card--completed]="
+              getRemaining(goal) === 0
+            "
+          >
+
+            <!-- Card Header -->
+
             <header class="goal-card__header">
-              <div class="goal-card__icon">
-                <lucide-icon [img]="Target" [size]="20" />
-              </div>
+              <div class="goal-card__heading">
 
-              <button
-                type="button"
-                class="goal-card__menu"
-                title="Goal actions"
-                (click)="openGoalMenu(goal)"
-              >
-                <lucide-icon [img]="MoreHorizontal" [size]="19" />
-              </button>
+                <!-- Dynamic Icon -->
 
-              @if (selectedGoal()?.id === goal.id) {
-                <div class="goal-card__actions">
-                  <button type="button" (click)="editGoal(goal)">
-                    {{ 'common.actions.edit' | translate }}
-                  </button>
-
-                  <button type="button" class="delete" (click)="requestDelete(goal)">
-                    {{ 'common.actions.delete' | translate }}
-                  </button>
+                <div
+                  class="goal-card__icon"
+                  [attr.data-theme]="
+                    getGoalTheme(goal)
+                  "
+                >
+<lucide-icon
+  [img]="getGoalIcon(goal)"
+  [size]="22"
+  [strokeWidth]="2.2"
+  [color]="getGoalColor(goal)"
+/>
                 </div>
-              }
-            </header>
 
-            <div class="goal-card__content">
-              <div class="goal-card__title-row">
-                <div>
+                <!-- Title -->
+
+                <div class="goal-card__heading-content">
                   <span class="goal-card__category">
-                    {{ goal.category | translate }}
+                    {{ goal.category }}
                   </span>
 
                   <h3>
-                    {{ goal.title | translate }}
+                    {{ goal.title }}
                   </h3>
                 </div>
-
-                <strong> {{ getProgress(goal) | localeNumber }}% </strong>
               </div>
+
+              <!-- Actions -->
+
+              <div class="goal-card__menu-wrapper">
+                <button
+                  type="button"
+                  class="goal-card__menu"
+                  [attr.aria-label]="
+                    'goals.actions'
+                      | translate
+                  "
+                  [attr.aria-expanded]="
+                    selectedGoal()?.id ===
+                    goal.id
+                  "
+                  (click)="
+                    openGoalMenu(goal)
+                  "
+                >
+                  <lucide-icon
+                    [img]="MoreHorizontal"
+                    [size]="19"
+                  />
+                </button>
+
+                @if (
+                  selectedGoal()?.id ===
+                  goal.id
+                ) {
+                  <div class="goal-card__actions">
+                    <button
+                      type="button"
+                      (click)="editGoal(goal)"
+                    >
+<lucide-icon
+  [img]="Pencil"
+  [size]="15"
+  color="#64748b"
+/>
+
+                      <span>
+                        {{
+                          'common.actions.edit'
+                            | translate
+                        }}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      class="delete"
+                      (click)="
+                        requestDelete(goal)
+                      "
+                    >
+                    <lucide-icon
+  [img]="Trash2"
+  [size]="15"
+  color="#e04f5f"
+/>
+                      <span>
+                        {{
+                          'common.actions.delete'
+                            | translate
+                        }}
+                      </span>
+                    </button>
+                  </div>
+                }
+              </div>
+            </header>
+
+            <!-- Card Content -->
+
+            <div class="goal-card__content">
+
+              <!-- Progress Heading -->
+
+              <div class="goal-card__progress-heading">
+                <span>
+                  {{
+                    'goals.overallProgress'
+                      | translate
+                  }}
+                </span>
+
+                <strong>
+                  {{
+                    getProgress(goal)
+                      | localeNumber
+                  }}%
+                </strong>
+              </div>
+
+              <!-- Progress Bar -->
+
+              <div
+                class="goal-card__progress"
+                role="progressbar"
+                [attr.aria-valuenow]="
+                  getProgress(goal)
+                "
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  class="goal-card__progress-value"
+                  [attr.data-theme]="
+                    getGoalTheme(goal)
+                  "
+                  [style.width.%]="
+                    getProgress(goal)
+                  "
+                ></div>
+              </div>
+
+              <!-- Amounts -->
 
               <div class="goal-card__amounts">
                 <div>
                   <span>
-                    {{ 'goals.saved' | translate }}
+                    {{
+                      'goals.saved'
+                        | translate
+                    }}
                   </span>
 
                   <strong>
-                    {{ goal.savedAmount | localeNumber }}
+                    {{
+                      goal.savedAmount
+                        | localeNumber
+                    }}
+
+                    <small>
+                      {{
+                        'common.currency'
+                          | translate
+                      }}
+                    </small>
                   </strong>
                 </div>
 
                 <div class="goal-card__target">
                   <span>
-                    {{ 'goals.target' | translate }}
+                    {{
+                      'goals.target'
+                        | translate
+                    }}
                   </span>
 
                   <strong>
-                    {{ goal.targetAmount | localeNumber }}
+                    {{
+                      goal.targetAmount
+                        | localeNumber
+                    }}
+
+                    <small>
+                      {{
+                        'common.currency'
+                          | translate
+                      }}
+                    </small>
                   </strong>
                 </div>
               </div>
 
-              <div class="goal-card__progress">
-                <div class="goal-card__progress-value" [style.width.%]="getProgress(goal)"></div>
-              </div>
-<button
-  type="button"
-  class="goal-card__contribute"
-  (click)="openContribution(goal)"
->
-  <lucide-icon
-    [img]="Plus"
-    [size]="15"
-  />
+              <!-- Contribution Button -->
 
-  <span>
-    Add Money
-  </span>
-</button>
-              <footer class="goal-card__footer">
-                <div>
-                  <lucide-icon [img]="CalendarDays" [size]="14" />
+              <button
+                type="button"
+                class="goal-card__contribute"
+                [disabled]="
+                  getRemaining(goal) === 0
+                "
+                (click)="
+                  openContribution(goal)
+                "
+              >
+                @if (
+                  getRemaining(goal) === 0
+                ) {
+                  <lucide-icon
+                    [img]="CircleCheckBig"
+                    [size]="16"
+                  />
 
                   <span>
-                    {{ goal.deadline }}
+                    {{
+                      'goals.completed'
+                        | translate
+                    }}
+                  </span>
+                } @else {
+                 <lucide-icon
+  [img]="Coins"
+  [size]="16"
+  color="currentColor"
+/>
+
+                  <span>
+                    {{
+                      'goals.addMoney'
+                        | translate
+                    }}
+                  </span>
+                }
+              </button>
+
+              <!-- Footer -->
+
+              <footer class="goal-card__footer">
+                <div class="goal-card__deadline">
+                  <lucide-icon
+                    [img]="CalendarDays"
+                    [size]="15"
+                  />
+
+                  <span>
+                    {{
+                      goal.deadline
+                        | date: 'mediumDate'
+                    }}
                   </span>
                 </div>
 
-                <span>
-                  {{ getRemaining(goal) | localeNumber }}
-                  {{ 'common.currency' | translate }}
-                  {{ 'goals.remaining' | translate }}
-                </span>
+                @if (
+                  getRemaining(goal) > 0
+                ) {
+                  <span class="goal-card__remaining">
+                    {{
+                      getRemaining(goal)
+                        | localeNumber
+                    }}
+
+                    {{
+                      'common.currency'
+                        | translate
+                    }}
+
+                    {{
+                      'goals.remaining'
+                        | translate
+                    }}
+                  </span>
+                } @else {
+                  <span
+                    class="goal-card__completed"
+                  >
+                    <lucide-icon
+                      [img]="CircleCheckBig"
+                      [size]="14"
+                    />
+
+                    {{
+                      'goals.completed'
+                        | translate
+                    }}
+                  </span>
+                }
               </footer>
             </div>
           </article>
@@ -209,44 +521,88 @@
       <app-state-view
         type="empty"
         [icon]="Target"
-        [title]="'goals.emptyTitle' | translate"
-        [description]="'goals.emptyDescription' | translate"
-        [actionLabel]="'goals.addGoal' | translate"
+        [title]="
+          'goals.emptyTitle'
+            | translate
+        "
+        [description]="
+          'goals.emptyDescription'
+            | translate
+        "
+        [actionLabel]="
+          'goals.addGoal'
+            | translate
+        "
         (action)="addGoal()"
       />
     }
   </section>
-<app-add-goal-modal
-  [isOpen]="isAddGoalOpen()"
-  mode="add"
-  (close)="closeAddGoal()"
-  (save)="saveGoal($event)"
-/>
-<app-add-goal-modal
-  [isOpen]="isEditGoalOpen()"
-  mode="edit"
-  [goal]="selectedGoal()"
-  (close)="closeEditGoal()"
-  (save)="updateGoal($event)"
-/>
-@if (goalToDelete(); as goal) {
-  <app-confirm-dialog
-    [title]="'goals.deleteGoalTitle' | translate"
-    [message]="'goals.deleteGoalMessage' | translate"
-    (confirm)="confirmDelete()"
-    (cancel)="cancelDelete()"
-  />
-}
-@if (contributionGoal(); as goal) {
 
-  <app-contribute-goal-modal
-    [isOpen]="true"
-    [goalTitle]="goal.title"
-    [currentAmount]="goal.savedAmount"
-    [targetAmount]="goal.targetAmount"
-    (close)="closeContribution()"
-    (contribute)="contributeToGoal($event)"
+  <!-- =========================
+       Add Modal
+  ========================== -->
+
+  <app-add-goal-modal
+    [isOpen]="isAddGoalOpen()"
+    mode="add"
+    (close)="closeAddGoal()"
+    (save)="saveGoal($event)"
   />
 
-}
+  <!-- =========================
+       Edit Modal
+  ========================== -->
+
+  <app-add-goal-modal
+    [isOpen]="isEditGoalOpen()"
+    mode="edit"
+    [goal]="selectedGoal()"
+    (close)="closeEditGoal()"
+    (save)="updateGoal($event)"
+  />
+
+  <!-- =========================
+       Delete Confirmation
+  ========================== -->
+
+  @if (goalToDelete(); as goal) {
+    <app-confirm-dialog
+      [title]="
+        'goals.deleteGoalTitle'
+          | translate
+      "
+      [message]="
+        'goals.deleteGoalMessage'
+          | translate
+      "
+      (confirm)="confirmDelete()"
+      (cancel)="cancelDelete()"
+    />
+  }
+
+  <!-- =========================
+       Contribution Modal
+  ========================== -->
+
+  @if (
+    contributionGoal();
+    as goal
+  ) {
+    <app-contribute-goal-modal
+      [isOpen]="true"
+      [goalTitle]="goal.title"
+      [currentAmount]="
+        goal.savedAmount
+      "
+      [targetAmount]="
+        goal.targetAmount
+      "
+      (close)="
+        closeContribution()
+      "
+      (contribute)="
+        contributeToGoal($event)
+      "
+    />
+  }
 </section>

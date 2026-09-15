@@ -279,3 +279,225 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.main-layout .view-all-btn {
+  color: #4338ca !important;
+}
+
+.main-layout .view-all-btn:hover {
+  color: #312e81 !important;
+  background: rgba(67, 56, 202, 0.08);
+}
+
+html.dark .main-layout .view-all-btn {
+  color: #c4b5fd !important;
+}
+
+html.dark .main-layout .view-all-btn:hover {
+  color: #ffffff !important;
+  background: rgba(196, 181, 253, 0.12);
+}
+.premium-card__button:focus-visible,
+.add-transaction-btn:focus-visible,
+.chart-card__period button:focus-visible,
+.view-all-btn:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 3px;
+}
+html.dark .summary-card__trend.positive {
+  color: #86efac !important;
+}
+
+html.dark .summary-card__trend.negative,
+html.dark .negative {
+  color: #fca5a5 !important;
+}
+
+html.dark .summary-card__comparison {
+  color: #cbd5e1 !important;
+}
+/* =========================
+   Accounts accessibility
+========================= */
+
+html:not(.dark) app-accounts div > p,
+html:not(.dark) app-accounts .balance-summary > p {
+  color: #475569 !important;
+}
+
+html.dark app-accounts div > p,
+html.dark app-accounts .balance-summary > p {
+  color: #cbd5e1 !important;
+}
+/* =========================
+   Transactions accessibility
+========================= */
+
+.transactions-page__header .add-transaction-btn {
+  color: #ffffff !important;
+  background-color: #b93815 !important;
+}
+
+.transactions-page__header .add-transaction-btn > span {
+  color: inherit !important;
+}
+
+.transactions-page__header .add-transaction-btn:hover {
+  background-color: #9a3412 !important;
+}
+
+.transactions-page__header .add-transaction-btn:focus-visible {
+  outline: 3px solid rgba(185, 56, 21, 0.35);
+  outline-offset: 3px;
+}
+/* =========================
+   Budgets accessibility
+========================= */
+
+/* Add Budget button */
+
+app-budgets .add-budget-btn {
+  color: #ffffff !important;
+  background-color: #b93815 !important;
+}
+
+app-budgets .add-budget-btn > span {
+  color: inherit !important;
+}
+
+app-budgets .add-budget-btn:hover {
+  background-color: #9a3412 !important;
+}
+
+/* Active status filter */
+
+app-budgets .status-filter > .active {
+  color: #9a3412 !important;
+  border-color: #fdba74 !important;
+  background-color: #ffedd5 !important;
+}
+
+/* Dark mode */
+
+html.dark app-budgets .status-filter > .active {
+  color: #fed7aa !important;
+  border-color: #c2410c !important;
+  background-color: #431407 !important;
+}
+
+/* Keyboard focus */
+
+app-budgets .add-budget-btn:focus-visible,
+app-budgets .status-filter > button:focus-visible {
+  outline: 3px solid rgba(185, 56, 21, 0.35);
+  outline-offset: 3px;
+}
+/* =========================
+   Accessible primary buttons
+========================= */
+
+.transactions-page__header .add-transaction-btn,
+app-budgets .add-budget-btn,
+app-recurring-payments .add-payment-btn {
+  color: #ffffff !important;
+  background-color: #b93815 !important;
+}
+
+.transactions-page__header .add-transaction-btn > span,
+app-budgets .add-budget-btn > span,
+app-recurring-payments .add-payment-btn > span {
+  color: inherit !important;
+}
+
+.transactions-page__header .add-transaction-btn:hover,
+app-budgets .add-budget-btn:hover,
+app-recurring-payments .add-payment-btn:hover {
+  background-color: #9a3412 !important;
+}
+
+.transactions-page__header .add-transaction-btn:focus-visible,
+app-budgets .add-budget-btn:focus-visible,
+app-recurring-payments .add-payment-btn:focus-visible {
+  outline: 3px solid rgba(185, 56, 21, 0.4);
+  outline-offset: 3px;
+}
+/* =========================
+   Remaining accessibility fixes
+========================= */
+
+/* Debts and Goals primary buttons */
+
+.add-debt-btn,
+.goals__add-btn {
+  color: #ffffff !important;
+  background-color: var(
+    --accessible-primary,
+    #b93815
+  ) !important;
+}
+
+.add-debt-btn > span,
+.goals__add-btn > span {
+  color: inherit !important;
+}
+
+.add-debt-btn:hover,
+.goals__add-btn:hover {
+  background-color: var(
+    --accessible-primary-hover,
+    #9a3412
+  ) !important;
+}
+
+.add-debt-btn:focus-visible,
+.goals__add-btn:focus-visible {
+  outline: 3px solid
+    rgba(185, 56, 21, 0.4);
+
+  outline-offset: 3px;
+}
+
+/* Profile joined date */
+
+.profile-joined > div > span {
+  color: var(
+    --accessible-muted,
+    #475569
+  ) !important;
+}
+
+html.dark
+  .profile-joined
+  > div
+  > span {
+  color: #cbd5e1 !important;
+}
+/* =========================
+   Accounts primary button
+========================= */
+
+app-accounts .add-account-btn {
+  color: #ffffff !important;
+  background-color: var(
+    --accessible-primary,
+    #b93815
+  ) !important;
+}
+
+app-accounts .add-account-btn,
+app-accounts .add-account-btn * {
+  color: #ffffff !important;
+}
+
+app-accounts .add-account-btn:hover {
+  background-color: var(
+    --accessible-primary-hover,
+    #9a3412
+  ) !important;
+}
+
+app-accounts .add-account-btn:focus-visible {
+  outline: 3px solid
+    rgba(185, 56, 21, 0.4);
+
+  outline-offset: 3px;
+}

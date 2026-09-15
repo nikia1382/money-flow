@@ -1,0 +1,284 @@
+<section class="profile-page">
+  <header class="profile-header">
+    <div>
+      <h1>
+        {{ 'profile.title' | translate }}
+      </h1>
+
+      <p>
+        {{ 'profile.subtitle' | translate }}
+      </p>
+    </div>
+  </header>
+
+  @if (isLoading()) {
+    <div class="profile-loading">
+      {{ 'profile.loading' | translate }}
+    </div>
+  } @else if (profile()) {
+    <div class="profile-layout">
+
+      <aside class="profile-summary">
+        <div class="profile-summary__glow"></div>
+
+        <div class="profile-avatar">
+          {{ userInitial() }}
+        </div>
+
+        <h2>
+          {{ profile()?.name }}
+        </h2>
+
+        <span class="profile-email">
+          {{ profile()?.email }}
+        </span>
+
+        <div class="profile-role">
+          <lucide-icon
+            [img]="ShieldCheck"
+            [size]="16"
+          />
+
+          <span>
+            {{ profile()?.role }}
+          </span>
+        </div>
+
+        <div class="profile-joined">
+          <lucide-icon
+            [img]="CalendarDays"
+            [size]="17"
+          />
+
+          <div>
+            <span>
+              {{
+                'profile.memberSince'
+                  | translate
+              }}
+            </span>
+
+            <strong>
+              {{
+                profile()?.createdAt
+                  | date: 'mediumDate'
+              }}
+            </strong>
+          </div>
+        </div>
+      </aside>
+
+      <div class="profile-content">
+
+        <form
+          class="profile-card"
+          (ngSubmit)="updateProfile()"
+        >
+          <div class="profile-card__header">
+            <div class="profile-card__icon">
+              <lucide-icon
+                [img]="UserRound"
+                [size]="20"
+              />
+            </div>
+
+            <div>
+              <h2>
+                {{
+                  'profile.personal.title'
+                    | translate
+                }}
+              </h2>
+
+              <p>
+                {{
+                  'profile.personal.subtitle'
+                    | translate
+                }}
+              </p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-field">
+              <span>
+                {{
+                  'profile.fields.name'
+                    | translate
+                }}
+              </span>
+
+              <div class="input-wrapper">
+                <lucide-icon
+                  [img]="UserRound"
+                  [size]="17"
+                />
+
+                <input
+                  type="text"
+                  name="name"
+                  [(ngModel)]="name"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+            </label>
+
+            <label class="form-field">
+              <span>
+                {{
+                  'profile.fields.email'
+                    | translate
+                }}
+              </span>
+
+              <div
+                class="input-wrapper input-wrapper--disabled"
+              >
+                <lucide-icon
+                  [img]="Mail"
+                  [size]="17"
+                />
+
+                <input
+                  type="email"
+                  [value]="profile()?.email"
+                  disabled
+                />
+              </div>
+
+              <small>
+                {{
+                  'profile.emailReadonly'
+                    | translate
+                }}
+              </small>
+            </label>
+          </div>
+
+          <div class="profile-card__actions">
+            <button
+              type="submit"
+              class="primary-button"
+              [disabled]="isSavingProfile()"
+            >
+              <lucide-icon
+                [img]="Save"
+                [size]="17"
+              />
+
+              {{
+                (
+                  isSavingProfile()
+                    ? 'profile.actions.saving'
+                    : 'profile.actions.save'
+                ) | translate
+              }}
+            </button>
+          </div>
+        </form>
+
+        <form
+          class="profile-card"
+          (ngSubmit)="changePassword()"
+        >
+          <div class="profile-card__header">
+            <div class="profile-card__icon profile-card__icon--password">
+              <lucide-icon
+                [img]="KeyRound"
+                [size]="20"
+              />
+            </div>
+
+            <div>
+              <h2>
+                {{
+                  'profile.password.title'
+                    | translate
+                }}
+              </h2>
+
+              <p>
+                {{
+                  'profile.password.subtitle'
+                    | translate
+                }}
+              </p>
+            </div>
+          </div>
+
+          <div class="password-grid">
+            <label class="form-field">
+              <span>
+                {{
+                  'profile.fields.currentPassword'
+                    | translate
+                }}
+              </span>
+
+              <input
+                type="password"
+                name="currentPassword"
+                [(ngModel)]="currentPassword"
+                autocomplete="current-password"
+              />
+            </label>
+
+            <label class="form-field">
+              <span>
+                {{
+                  'profile.fields.newPassword'
+                    | translate
+                }}
+              </span>
+
+              <input
+                type="password"
+                name="newPassword"
+                [(ngModel)]="newPassword"
+                autocomplete="new-password"
+              />
+            </label>
+
+            <label class="form-field">
+              <span>
+                {{
+                  'profile.fields.confirmPassword'
+                    | translate
+                }}
+              </span>
+
+              <input
+                type="password"
+                name="confirmPassword"
+                [(ngModel)]="confirmPassword"
+                autocomplete="new-password"
+              />
+            </label>
+          </div>
+
+          <div class="profile-card__actions">
+            <button
+              type="submit"
+              class="secondary-button"
+              [disabled]="isChangingPassword()"
+            >
+              <lucide-icon
+                [img]="KeyRound"
+                [size]="17"
+              />
+
+              {{
+                (
+                  isChangingPassword()
+                    ? 'profile.actions.changingPassword'
+                    : 'profile.actions.changePassword'
+                ) | translate
+              }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</section>

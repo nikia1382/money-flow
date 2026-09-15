@@ -37,6 +37,7 @@ import {
 import {
   AuthService,
 } from '../../features/auth/services/auth.service';
+import { SettingsService } from '../../features/settings/services/settings';
 
 @Component({
   selector: 'app-main-layout',
@@ -69,6 +70,8 @@ export class MainLayout {
 
   private readonly router =
     inject(Router);
+    private readonly settingsService =
+  inject(SettingsService);
 
   /* =========================
      State
@@ -86,7 +89,10 @@ export class MainLayout {
   /* =========================
      Sidebar
   ========================= */
-
+constructor() {
+  this.settingsService
+    .loadSettings();
+}
   openSidebar(): void {
     this.isSidebarOpen.set(true);
   }

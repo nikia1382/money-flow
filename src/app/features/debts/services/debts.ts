@@ -5,11 +5,38 @@ import {
   signal,
 } from '@angular/core';
 
-import { TranslateService } from '@ngx-translate/core';
+import {
+  HttpClient,
+} from '@angular/common/http';
 
-import { Debt } from '../model/debt.model';
+import {
+  TranslateService,
+} from '@ngx-translate/core';
 
-import { ToastService } from '../../../shared/services/toast';
+import {
+  Debt,
+} from '../model/debt.model';
+
+import {
+  ToastService,
+} from '../../../shared/services/toast';
+
+/* =========================
+   API Payloads
+========================= */
+
+interface DebtPayload {
+  personName: string;
+  type: Debt['type'];
+  totalAmount: number;
+  paidAmount: number;
+  dueDate: string;
+  note: string | null;
+}
+
+interface PaymentPayload {
+  amount: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +46,9 @@ export class DebtsService {
      Services
   ========================= */
 
+  private readonly http =
+    inject(HttpClient);
+
   private readonly toast =
     inject(ToastService);
 
@@ -26,19 +56,21 @@ export class DebtsService {
     inject(TranslateService);
 
   /* =========================
-     Storage
+     API
   ========================= */
 
-  private readonly storageKey =
-    'moneyflow_debts';
+  private readonly apiUrl =
+    'http://localhost:8080/api/debts';
 
   /* =========================
-     Data
+     State
   ========================= */
 
-  readonly debts = signal<Debt[]>(
-    this.loadDebts(),
-  );
+  readonly debts =
+    signal<Debt[]>([]);
+
+  readonly isLoading =
+    signal(false);
 
   /* =========================
      Summary
@@ -64,7 +96,8 @@ export class DebtsService {
     this.debts()
       .filter(
         (debt) =>
-          debt.type === 'owed-to-me' &&
+          debt.type ===
+            'owed-to-me' &&
           this.getDebtStatus(debt) !==
             'paid',
       )
@@ -76,93 +109,72 @@ export class DebtsService {
       ),
   );
 
-  readonly activeCount = computed(
-    () =>
-      this.debts().filter(
-        (debt) =>
-          this.getDebtStatus(debt) ===
-          'active',
-      ).length,
-  );
+  readonly activeCount =
+    computed(
+      () =>
+        this.debts().filter(
+          (debt) =>
+            this.getDebtStatus(
+              debt,
+            ) === 'active',
+        ).length,
+    );
 
-  readonly overdueCount = computed(
-    () =>
-      this.debts().filter(
-        (debt) =>
-          this.getDebtStatus(debt) ===
-          'overdue',
-      ).length,
-  );
+  readonly overdueCount =
+    computed(
+      () =>
+        this.debts().filter(
+          (debt) =>
+            this.getDebtStatus(
+              debt,
+            ) ===
+            'overdue',
+        ).length,
+    );
 
   /* =========================
-     Storage Helpers
+     Constructor
   ========================= */
 
-  private loadDebts(): Debt[] {
-    const saved =
-      localStorage.getItem(
-        this.storageKey,
-      );
-
-    if (saved) {
-      try {
-        const debts =
-          JSON.parse(saved) as Debt[];
-
-        return debts.map((debt) => ({
-          ...debt,
-          status:
-            this.getDebtStatus(debt),
-        }));
-      } catch {
-        localStorage.removeItem(
-          this.storageKey,
-        );
-      }
-    }
-
-    return this.getInitialDebts();
+  constructor() {
+    this.loadDebts();
   }
 
-  private saveDebts(): void {
-    localStorage.setItem(
-      this.storageKey,
-      JSON.stringify(this.debts()),
-    );
-  }
+  /* =========================
+     GET
+  ========================= */
 
-  private getInitialDebts(): Debt[] {
-    return [
-      {
-        id: 1,
-        personName: 'Ali',
-        type: 'i-owe',
-        totalAmount: 20_000_000,
-        paidAmount: 5_000_000,
-        dueDate: '2026-09-15',
-        status: 'active',
-        note: 'debts.items.ali.note',
-      },
-      {
-        id: 2,
-        personName: 'Sara',
-        type: 'owed-to-me',
-        totalAmount: 12_000_000,
-        paidAmount: 0,
-        dueDate: '2026-09-05',
-        status: 'active',
-        note: 'debts.items.sara.note',
-      },
-      {
-        id: 3,
-        personName: 'Reza',
-        type: 'owed-to-me',
-        totalAmount: 8_000_000,
-        paidAmount: 8_000_000,
-        dueDate: '2026-08-20',
-        status: 'paid',
-      },
-    ];
+  loadDebts(): void {
+    this.isLoading.set(true);
+
+    this.http
+      .get<Debt[]>(
+        this.apiUrl,
+      )
+      .subscribe({
+        next: (debts) => {
+          this.debts.set(
+            debts,
+          );
+
+          this.isLoading.set(
+            false,
+          );
+        },
+
+        error: (error) => {
+          this.isLoading.set(
+            false,
+          );
+
+          console.error(
+            'Failed to load debts',
+            error,
+          );
+
+          this.showRequestError();
+        },
+      });
   }
 
   /* =========================
@@ -182,6 +194,11 @@ export class DebtsService {
   getDebtStatus(
     debt: Debt,
   ): 'active' | 'paid' | 'overdue' {
+    /*
+     * وضعیت اصلی از Backend می‌آید.
+     * این محاسبه باعث می‌شود تغییر روز
+     * بدون Reload نیز درست نمایش داده شود.
+     */
     if (
       debt.paidAmount >=
       debt.totalAmount
@@ -208,15 +225,17 @@ export class DebtsService {
 
     const today = new Date();
 
-    today.setHours(0, 0, 0, 0);
-
-    const dueDate = new Date(
-      /^\d{4}-\d{2}-\d{2}$/.test(
-        debt.dueDate,
-      )
-        ? `${debt.dueDate}T00:00:00`
-        : debt.dueDate,
+    today.setHours(
+      0,
+      0,
+      0,
+      0,
     );
+
+    const dueDate =
+      new Date(
+        `${debt.dueDate}T00:00:00`,
+      );
 
     if (
       Number.isNaN(
@@ -230,97 +249,136 @@ export class DebtsService {
   }
 
   /* =========================
-     Add
+     POST
   ========================= */
 
   addDebt(
     debt: Debt,
   ): void {
-    const newDebt: Debt = {
-      ...debt,
+    const payload =
+      this.toPayload(debt);
 
-      status:
-        this.getDebtStatus(debt),
-    };
+    this.http
+      .post<Debt>(
+        this.apiUrl,
+        payload,
+      )
+      .subscribe({
+        next: (createdDebt) => {
+          this.debts.update(
+            (debts) => [
+              ...debts,
+              createdDebt,
+            ],
+          );
 
-    this.debts.update(
-      (debts) => [
-        ...debts,
-        newDebt,
-      ],
-    );
+          this.toast.success(
+            this.translate.instant(
+              'debts.toast.added',
+            ),
+          );
+        },
 
-    this.saveDebts();
+        error: (error) => {
+          console.error(
+            'Failed to add debt',
+            error,
+          );
 
-    this.toast.success(
-      this.translate.instant(
-        'debts.toast.added',
-      ),
-    );
+          this.showRequestError();
+        },
+      });
   }
 
   /* =========================
-     Update
+     PUT
   ========================= */
 
   updateDebt(
     updatedDebt: Debt,
   ): void {
-    const debtWithStatus: Debt = {
-      ...updatedDebt,
+    const payload =
+      this.toPayload(
+        updatedDebt,
+      );
 
-      status:
-        this.getDebtStatus(
-          updatedDebt,
-        ),
-    };
+    this.http
+      .put<Debt>(
+        `${this.apiUrl}/${updatedDebt.id}`,
+        payload,
+      )
+      .subscribe({
+        next: (savedDebt) => {
+          this.debts.update(
+            (debts) =>
+              debts.map(
+                (debt) =>
+                  debt.id ===
+                  savedDebt.id
+                    ? savedDebt
+                    : debt,
+              ),
+          );
 
-    this.debts.update(
-      (debts) =>
-        debts.map(
-          (debt) =>
-            debt.id ===
-            updatedDebt.id
-              ? debtWithStatus
-              : debt,
-        ),
-    );
+          this.toast.success(
+            this.translate.instant(
+              'debts.toast.updated',
+            ),
+          );
+        },
 
-    this.saveDebts();
+        error: (error) => {
+          console.error(
+            'Failed to update debt',
+            error,
+          );
 
-    this.toast.success(
-      this.translate.instant(
-        'debts.toast.updated',
-      ),
-    );
+          this.showRequestError();
+        },
+      });
   }
 
   /* =========================
-     Delete
+     DELETE
   ========================= */
 
   deleteDebt(
     id: number,
   ): void {
-    this.debts.update(
-      (debts) =>
-        debts.filter(
-          (debt) =>
-            debt.id !== id,
-        ),
-    );
+    this.http
+      .delete<void>(
+        `${this.apiUrl}/${id}`,
+      )
+      .subscribe({
+        next: () => {
+          this.debts.update(
+            (debts) =>
+              debts.filter(
+                (debt) =>
+                  debt.id !== id,
+              ),
+          );
 
-    this.saveDebts();
+          this.toast.success(
+            this.translate.instant(
+              'debts.toast.deleted',
+            ),
+          );
+        },
 
-    this.toast.success(
-      this.translate.instant(
-        'debts.toast.deleted',
-      ),
-    );
+        error: (error) => {
+          console.error(
+            'Failed to delete debt',
+            error,
+          );
+
+          this.showRequestError();
+        },
+      });
   }
 
   /* =========================
-     Record Payment
+     RECORD PAYMENT
   ========================= */
 
   recordPayment(
@@ -362,36 +420,86 @@ export class DebtsService {
       return;
     }
 
-    const updatedDebt: Debt = {
-      ...debt,
+    const payload:
+      PaymentPayload = {
+        amount,
+      };
+
+    this.http
+      .post<Debt>(
+        `${this.apiUrl}/${debtId}/payments`,
+        payload,
+      )
+      .subscribe({
+        next: (updatedDebt) => {
+          this.debts.update(
+            (debts) =>
+              debts.map(
+                (item) =>
+                  item.id ===
+                  updatedDebt.id
+                    ? updatedDebt
+                    : item,
+              ),
+          );
+
+          this.toast.success(
+            this.translate.instant(
+              updatedDebt.status ===
+                'paid'
+                ? 'debts.toast.fullyPaid'
+                : 'debts.toast.paymentRecorded',
+            ),
+          );
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to record payment',
+            error,
+          );
+
+          this.showRequestError();
+        },
+      });
+  }
+
+  /* =========================
+     Payload
+  ========================= */
+
+  private toPayload(
+    debt: Debt,
+  ): DebtPayload {
+    return {
+      personName:
+        debt.personName.trim(),
+
+      type: debt.type,
+
+      totalAmount:
+        debt.totalAmount,
 
       paidAmount:
-        debt.paidAmount + amount,
+        debt.paidAmount,
+
+      dueDate:
+        debt.dueDate,
+
+      note:
+        debt.note?.trim() ||
+        null,
     };
+  }
 
-    updatedDebt.status =
-      this.getDebtStatus(
-        updatedDebt,
-      );
+  /* =========================
+     Request Error
+  ========================= */
 
-    this.debts.update(
-      (debts) =>
-        debts.map(
-          (item) =>
-            item.id === debtId
-              ? updatedDebt
-              : item,
-        ),
-    );
-
-    this.saveDebts();
-
-    this.toast.success(
+  private showRequestError(): void {
+    this.toast.error(
       this.translate.instant(
-        updatedDebt.status ===
-          'paid'
-          ? 'debts.toast.fullyPaid'
-          : 'debts.toast.paymentRecorded',
+        'debts.toast.requestFailed',
       ),
     );
   }

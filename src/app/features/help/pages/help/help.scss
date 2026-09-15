@@ -620,3 +620,249 @@
   font-size: 12px;
   font-weight: 500;
 }
+/* =========================
+   Support Theme Variables
+========================= */
+
+:host {
+  --support-bg: #ffffff;
+  --support-border: #e3e8f0;
+  --support-text: #182033;
+  --support-muted: #718096;
+
+  --support-input-bg: #ffffff;
+  --support-input-border: #dce3ed;
+  --support-input-text: #182033;
+  --support-placeholder: #98a2b3;
+
+  --support-focus: #7158e8;
+  --support-focus-ring:
+    rgba(113, 88, 232, 0.12);
+
+  --support-error: #dc4c64;
+}
+
+/* =========================
+   Support Section
+========================= */
+
+.support-section {
+  padding: 26px;
+  border: 1px solid
+    var(--support-border);
+  border-radius: 20px;
+  background:
+    var(--support-bg);
+  box-shadow:
+    0 10px 30px
+    rgba(15, 23, 42, 0.05);
+  color:
+    var(--support-text);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.support-section
+.help-section__header {
+  margin-bottom: 24px;
+}
+
+.support-section
+.help-section__header h2 {
+  margin: 0 0 7px;
+  color:
+    var(--support-text);
+}
+
+.support-section
+.help-section__header p {
+  margin: 0;
+  color:
+    var(--support-muted);
+}
+
+.support-form {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.support-form label {
+  display: grid;
+  gap: 8px;
+  color:
+    var(--support-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/*
+ * فیلد پیام تمام عرض فرم باشد.
+ */
+
+.support-form label:has(textarea) {
+  grid-column: 1 / -1;
+}
+
+.support-form input,
+.support-form textarea {
+  width: 100%;
+  border: 1px solid
+    var(--support-input-border);
+  border-radius: 12px;
+  outline: none;
+  background:
+    var(--support-input-bg);
+  color:
+    var(--support-input-text);
+  font: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.support-form input {
+  height: 47px;
+  padding-inline: 14px;
+}
+
+.support-form textarea {
+  min-height: 135px;
+  padding: 13px 14px;
+  line-height: 1.8;
+  resize: vertical;
+}
+
+.support-form input::placeholder,
+.support-form textarea::placeholder {
+  color:
+    var(--support-placeholder);
+}
+
+.support-form input:focus,
+.support-form textarea:focus {
+  border-color:
+    var(--support-focus);
+  box-shadow:
+    0 0 0 4px
+    var(--support-focus-ring);
+}
+
+.support-form input.ng-invalid.ng-touched,
+.support-form textarea.ng-invalid.ng-touched {
+  border-color:
+    var(--support-error);
+}
+
+.field-error {
+  color:
+    var(--support-error);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.support-submit-btn {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  width: fit-content;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-inline-start: auto;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      135deg,
+      #7867ec,
+      #5c49d3
+    );
+  box-shadow:
+    0 10px 22px
+    rgba(92, 73, 211, 0.22);
+  color: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.support-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 27px
+    rgba(92, 73, 211, 0.28);
+}
+
+.support-submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* =========================
+   Dark Mode
+========================= */
+
+:host-context(.dark) {
+  --support-bg: #111c2e;
+  --support-border: #29374d;
+  --support-text: #edf2f8;
+  --support-muted: #91a0b5;
+
+  --support-input-bg: #17243a;
+  --support-input-border: #31425d;
+  --support-input-text: #f1f5f9;
+  --support-placeholder: #74849b;
+
+  --support-focus: #9b8cff;
+  --support-focus-ring:
+    rgba(155, 140, 255, 0.15);
+
+  --support-error: #ff8295;
+
+  .support-section {
+    box-shadow:
+      0 14px 34px
+      rgba(0, 0, 0, 0.18);
+  }
+
+  .support-form input,
+  .support-form textarea {
+    color-scheme: dark;
+  }
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 700px) {
+  .support-section {
+    padding: 19px;
+  }
+
+  .support-form {
+    grid-template-columns: 1fr;
+  }
+
+  .support-form label,
+  .support-form label:has(textarea) {
+    grid-column: 1;
+  }
+
+  .support-submit-btn {
+    width: 100%;
+  }
+}

@@ -218,6 +218,8 @@
       padding-inline: 6px;
 
       font-size: var(--font-size-xs);
+        color: #475569;
+
     }
   }
 
@@ -225,5 +227,24 @@
     height: 230px;
     min-height: 230px;
     max-height: 230px;
+  }
+}
+.chart-card__period button {
+  color: #475569;
+}
+
+.chart-card__period button.active {
+  color: #ffffff;
+  background: #4f46e5;
+}
+
+:host-context(.dark) {
+  .chart-card__period button {
+    color: #cbd5e1;
+  }
+
+  .chart-card__period button.active {
+    color: #ffffff;
+    background: #4f46e5;
   }
 }

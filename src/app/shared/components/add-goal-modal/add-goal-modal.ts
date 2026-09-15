@@ -60,15 +60,19 @@ export class AddGoalModal implements OnChanges {
 
   readonly X = X;
 
-  readonly categories = [
-    'savings',
-    'travel',
-    'technology',
-    'education',
-    'home',
-    'health',
-    'other',
-  ];
+readonly categories = [
+  'savings',
+  'technology',
+  'travel',
+  'home',
+  'car',
+  'education',
+  'health',
+  'emergency',
+  'gift',
+  'gold',
+  'other',
+];
 
   readonly goalForm: FormGroup;
 

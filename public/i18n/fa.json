@@ -61,8 +61,16 @@
 },
 
 "dashboard": {
-  "welcome": "خوش اومدی نیکیا",
-  "subtitle": "این ماه ۱۲٪ کمتر از ماه قبل خرج کردی.",
+"welcome": "خوش اومدی، {{name}}",
+"defaultUser": "کاربر عزیز",
+
+"header": {
+  "spendingLess": "این ماه {{percentage}}٪ کمتر از ماه قبل هزینه کردی.",
+  "spendingMore": "این ماه {{percentage}}٪ بیشتر از ماه قبل هزینه کردی.",
+  "spendingEqual": "هزینه این ماهت با ماه قبل برابر است.",
+  "currentSpending": "فعالیت‌های مالی این ماهت در حال ثبت و بررسی است.",
+  "noActivity": "هنوز فعالیت مالی‌ای برای این ماه ثبت نکردی."
+},
 
   "totalBalance": "موجودی کل",
   "monthlyIncome": "درآمد ماهانه",
@@ -71,6 +79,9 @@
   "comparedToLastMonth": "نسبت به ماه قبل",
 
   "chart": {
+    "subtitle3m": "جریان مالی شما در ۳ ماه گذشته",
+"subtitle6m": "جریان مالی شما در ۶ ماه گذشته",
+"subtitle1y": "جریان مالی شما در یک سال گذشته",
     "title": "درآمد و هزینه",
     "subtitle": "جریان مالی شما در ۶ ماه اخیر",
     "income": "درآمد",
@@ -327,7 +338,9 @@
 "months": {
   "august2026": "مرداد ۱۴۰۵",
   "july2026": "تیر ۱۴۰۵",
-  "june2026": "خرداد ۱۴۰۵"
+  "june2026": "خرداد ۱۴۰۵",
+    "september2026": "سپتامبر ۲۰۲۶"
+
 },
 "filters": {
   "all": "همه",
@@ -665,68 +678,120 @@
   "title": "اهداف مالی",
   "subtitle": "پس‌اندازهای خود را مدیریت کنید و به اهداف مالی‌تان برسید.",
   "addGoal": "افزودن هدف",
+
   "totalSaved": "مجموع پس‌انداز",
   "totalTarget": "مجموع اهداف",
   "overallProgress": "پیشرفت کلی",
   "completedGoals": "اهداف تکمیل‌شده",
+
   "yourGoals": "اهداف شما",
   "activeGoals": "هدف فعال",
+  "totalGoals": "هدف ثبت‌شده",
+
   "saved": "پس‌انداز شده",
-  "target": "هدف",
+  "target": "مبلغ هدف",
   "remaining": "باقی‌مانده",
-  "addGoalDescription": "یک هدف پس‌انداز جدید بسازید و پیشرفت آن را دنبال کنید.",
-"goalName": "نام هدف",
-"goalNamePlaceholder": "مثلاً خرید خودرو",
-"category": "دسته‌بندی",
-"selectCategory": "انتخاب دسته‌بندی",
-"targetAmount": "مبلغ هدف",
-"savedAmount": "مبلغ پس‌انداز شده",
-"deadline": "تاریخ هدف",
-"requiredField": "تکمیل این فیلد الزامی است.",
-"deleteGoalTitle": "حذف هدف؟",
-"deleteGoalMessage": "این هدف برای همیشه حذف خواهد شد.",
-"emptyTitle": "هنوز هدفی نداری",
-"emptyDescription": "اولین هدف مالی خودت را بساز و قدم‌به‌قدم میزان پیشرفتت را دنبال کن.",
-"categories": {
-  "savings": "پس‌انداز",
-  "technology": "فناوری",
-  "travel": "سفر"
-},
-"items": {
-  "emergencyFund": {
-    "title": "صندوق اضطراری"
+  "addMoney": "افزودن مبلغ",
+  "completed": "تکمیل‌شده",
+  "actions": "عملیات هدف",
+
+  "deleteGoalTitle": "حذف هدف؟",
+  "deleteGoalMessage": "این هدف برای همیشه حذف خواهد شد و امکان بازگردانی آن وجود ندارد.",
+
+  "emptyTitle": "هنوز هدفی ندارید",
+  "emptyDescription": "اولین هدف مالی خود را ایجاد کنید و قدم‌به‌قدم پیشرفتتان را دنبال کنید.",
+
+  "form": {
+    "addTitle": "افزودن هدف مالی",
+    "addSubtitle": "یک هدف پس‌انداز جدید ایجاد کنید و پیشرفت آن را دنبال کنید.",
+
+    "editTitle": "ویرایش هدف مالی",
+    "editSubtitle": "اطلاعات هدف مالی انتخاب‌شده را ویرایش کنید.",
+
+    "name": "نام هدف",
+    "namePlaceholder": "مثلاً خرید خودرو",
+
+    "category": "دسته‌بندی",
+    "selectCategory": "انتخاب دسته‌بندی",
+
+    "targetAmount": "مبلغ هدف",
+    "savedAmount": "مبلغ پس‌اندازشده",
+
+    "deadline": "تاریخ هدف",
+
+    "save": "ذخیره هدف",
+    "saveChanges": "ذخیره تغییرات",
+
+    "errors": {
+      "nameRequired": "واردکردن نام هدف الزامی است.",
+      "categoryRequired": "انتخاب دسته‌بندی الزامی است.",
+      "targetAmountInvalid": "مبلغ هدف باید بیشتر از صفر باشد.",
+      "savedAmountInvalid": "مبلغ پس‌اندازشده نمی‌تواند منفی باشد.",
+      "savedExceedsTarget": "مبلغ پس‌اندازشده نمی‌تواند بیشتر از مبلغ هدف باشد.",
+      "deadlineRequired": "انتخاب تاریخ هدف الزامی است."
+    }
   },
-  "newLaptop": {
-    "title": "لپ‌تاپ جدید"
+
+  "categories": {
+    "savings": "پس‌انداز",
+    "technology": "فناوری",
+    "travel": "سفر",
+    "home": "خانه و مسکن",
+    "car": "خودرو",
+    "education": "آموزش",
+    "health": "سلامت",
+    "emergency": "صندوق اضطراری",
+    "gift": "هدیه",
+    "gold": "طلا و سرمایه‌گذاری",
+    "other": "سایر"
   },
-  "summerVacation": {
-    "title": "سفر تابستانی"
+
+  "items": {
+    "emergencyFund": {
+      "title": "صندوق اضطراری"
+    },
+
+    "newLaptop": {
+      "title": "لپ‌تاپ جدید"
+    },
+
+    "summerVacation": {
+      "title": "سفر تابستانی"
+    }
   }
-}
 },
 "notifications": {
   "title": "اعلان‌ها",
   "subtitle": "از وضعیت پرداخت‌ها، بودجه‌ها و حساب‌هایت باخبر باش.",
   "markAllRead": "خواندن همه",
+  "viewAll": "مشاهده همه اعلان‌ها",
   "unread": "اعلان خوانده‌نشده",
   "emptyTitle": "همه‌چیز مرتبه",
   "emptyDescription": "در حال حاضر اعلان جدیدی نداری.",
+
   "items": {
-  "upcomingPayment": {
-    "title": "پرداخت پیش رو",
-    "description": "موعد پرداخت اجاره خانه شما نزدیک است."
-  },
-  "budgetWarning": {
-    "title": "هشدار بودجه",
-    "description": "بیش از ۸۰٪ از بودجه خوراک خود را مصرف کرده‌اید."
-  },
-  "accountUpdated": {
-    "title": "حساب به‌روزرسانی شد",
-    "description": "موجودی حساب بانکی اصلی شما به‌روزرسانی شد."
+    "upcomingPayment": {
+      "title": "پرداخت پیش رو",
+      "description": "موعد پرداخت اجاره خانه شما نزدیک است."
+    },
+
+    "budgetWarning": {
+      "title": "هشدار بودجه",
+      "description": "بیش از ۸۰٪ از بودجه خوراک خود را مصرف کرده‌اید."
+    },
+
+    "accountUpdated": {
+      "title": "حساب به‌روزرسانی شد",
+      "description": "موجودی حساب بانکی اصلی شما به‌روزرسانی شد."
+    }
   }
-}
 },
 "settings": {
+  "toast": {
+  "saved": "تنظیمات با موفقیت ذخیره شد.",
+  "loadFailed": "دریافت تنظیمات انجام نشد.",
+  "saveFailed": "ذخیره تنظیمات انجام نشد."
+},
   "title": "تنظیمات",
   "subtitle": "تجربه کار با MoneyFlow را شخصی‌سازی کن.",
 
@@ -891,6 +956,48 @@
     "title": "پولت را بهتر ببین، بهتر مدیریت کن.",
     "description": "حساب‌ها، تراکنش‌ها و بودجه‌های خود را در یک فضای ساده مدیریت کنید.",
     "balance": "موجودی کل"
+  }
+},
+"profile": {
+  "menuLabel": "پروفایل من",
+  "title": "پروفایل من",
+  "subtitle": "اطلاعات شخصی و امنیت حساب خود را مدیریت کنید.",
+  "loading": "در حال دریافت اطلاعات پروفایل...",
+  "memberSince": "عضو از تاریخ",
+  "personal": {
+    "title": "اطلاعات شخصی",
+    "subtitle": "اطلاعاتی را که در MoneyFlow نمایش داده می‌شود ویرایش کنید."
+  },
+  "password": {
+    "title": "امنیت حساب",
+    "subtitle": "برای محافظت از حساب خود از یک رمز عبور قوی استفاده کنید."
+  },
+  "fields": {
+    "name": "نام و نام خانوادگی",
+    "email": "آدرس ایمیل",
+    "currentPassword": "رمز عبور فعلی",
+    "newPassword": "رمز عبور جدید",
+    "confirmPassword": "تکرار رمز عبور جدید"
+  },
+  "emailReadonly": "در حال حاضر امکان تغییر آدرس ایمیل وجود ندارد.",
+  "actions": {
+    "save": "ذخیره تغییرات",
+    "saving": "در حال ذخیره...",
+    "changePassword": "تغییر رمز عبور",
+    "changingPassword": "در حال تغییر رمز..."
+  },
+  "validation": {
+    "name": "نام باید حداقل ۲ کاراکتر داشته باشد.",
+    "password": "رمز عبور جدید باید حداقل ۸ کاراکتر داشته باشد.",
+    "passwordMatch": "رمزهای عبور جدید با یکدیگر مطابقت ندارند."
+  },
+  "toast": {
+    "updated": "پروفایل شما با موفقیت به‌روزرسانی شد.",
+    "updateError": "به‌روزرسانی پروفایل انجام نشد.",
+    "loadError": "دریافت اطلاعات پروفایل انجام نشد.",
+    "passwordChanged": "رمز عبور شما با موفقیت تغییر کرد.",
+    "passwordError": "تغییر رمز عبور انجام نشد.",
+    "currentPasswordError": "رمز عبور فعلی نادرست است."
   }
 }
 }

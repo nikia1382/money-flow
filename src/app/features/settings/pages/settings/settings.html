@@ -10,87 +10,181 @@
   </header>
 
   <div class="settings-list">
-    <!-- Language -->
+
+    <!-- =========================
+         Language
+    ========================== -->
 
     <article class="setting-card">
       <div class="setting-card__info">
-        <div class="setting-card__icon">
-          <lucide-icon [img]="Languages" [size]="20" />
+        <div
+          class="setting-card__icon"
+          aria-hidden="true"
+        >
+          <lucide-icon
+            [img]="Languages"
+            [size]="20"
+          />
         </div>
 
         <div>
-          <strong>
-            {{ 'settings.language.title' | translate }}
+          <strong id="language-setting-label">
+            {{
+              'settings.language.title'
+                | translate
+            }}
           </strong>
 
-          <p>
-            {{ 'settings.language.description' | translate }}
+          <p id="language-setting-description">
+            {{
+              'settings.language.description'
+                | translate
+            }}
           </p>
         </div>
       </div>
 
-      <select [value]="language()" (change)="setLanguage($any($event.target).value)">
-        <option value="en">English</option>
-        <option value="fa">فارسی</option>
+      <select
+        id="language-setting"
+        [value]="language()"
+        [disabled]="isSaving()"
+        aria-labelledby="language-setting-label"
+        aria-describedby="language-setting-description"
+        (change)="
+          setLanguage(
+            $any($event.target).value
+          )
+        "
+      >
+        <option value="en">
+          English
+        </option>
+
+        <option value="fa">
+          فارسی
+        </option>
       </select>
     </article>
 
-    <!-- Appearance -->
+    <!-- =========================
+         Appearance
+    ========================== -->
 
     <article class="setting-card">
       <div class="setting-card__info">
-        <div class="setting-card__icon">
-          <lucide-icon [img]="Moon" [size]="20" />
+        <div
+          class="setting-card__icon"
+          aria-hidden="true"
+        >
+          <lucide-icon
+            [img]="Moon"
+            [size]="20"
+          />
         </div>
 
         <div>
-          <strong>
-            {{ 'settings.appearance.title' | translate }}
+          <strong id="appearance-setting-label">
+            {{
+              'settings.appearance.title'
+                | translate
+            }}
           </strong>
 
-          <p>
-            {{ 'settings.appearance.description' | translate }}
+          <p id="appearance-setting-description">
+            {{
+              'settings.appearance.description'
+                | translate
+            }}
           </p>
         </div>
       </div>
 
-      <select [value]="appearance()" (change)="setAppearance($any($event.target).value)">
+      <select
+        id="appearance-setting"
+        [value]="appearance()"
+        [disabled]="isSaving()"
+        aria-labelledby="appearance-setting-label"
+        aria-describedby="appearance-setting-description"
+        (change)="
+          setAppearance(
+            $any($event.target).value
+          )
+        "
+      >
         <option value="light">
-          {{ 'settings.appearance.light' | translate }}
+          {{
+            'settings.appearance.light'
+              | translate
+          }}
         </option>
 
         <option value="dark">
-          {{ 'settings.appearance.dark' | translate }}
+          {{
+            'settings.appearance.dark'
+              | translate
+          }}
         </option>
       </select>
     </article>
 
-    <!-- Currency -->
+    <!-- =========================
+         Currency
+    ========================== -->
 
     <article class="setting-card">
       <div class="setting-card__info">
-        <div class="setting-card__icon">
-          <lucide-icon [img]="WalletCards" [size]="20" />
+        <div
+          class="setting-card__icon"
+          aria-hidden="true"
+        >
+          <lucide-icon
+            [img]="WalletCards"
+            [size]="20"
+          />
         </div>
 
         <div>
-          <strong>
-            {{ 'settings.currency.title' | translate }}
+          <strong id="currency-setting-label">
+            {{
+              'settings.currency.title'
+                | translate
+            }}
           </strong>
 
-          <p>
-            {{ 'settings.currency.description' | translate }}
+          <p id="currency-setting-description">
+            {{
+              'settings.currency.description'
+                | translate
+            }}
           </p>
         </div>
       </div>
 
-      <select [value]="currency()" (change)="setCurrency($any($event.target).value)">
-        <option value="Toman">Toman</option>
+      <select
+        id="currency-setting"
+        [value]="currency()"
+        [disabled]="isSaving()"
+        aria-labelledby="currency-setting-label"
+        aria-describedby="currency-setting-description"
+        (change)="
+          setCurrency(
+            $any($event.target).value
+          )
+        "
+      >
+        <option value="Toman">
+          Toman
+        </option>
 
-        <option value="USD">USD</option>
+        <option value="USD">
+          USD
+        </option>
 
-        <option value="EUR">EUR</option>
+        <option value="EUR">
+          EUR
+        </option>
       </select>
     </article>
+
   </div>
 </section>

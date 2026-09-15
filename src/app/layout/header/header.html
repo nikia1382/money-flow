@@ -1,18 +1,40 @@
 <header class="top-header">
-  <!-- Welcome -->
-  <div class="top-header__left">
-    <h1>
-      {{ 'dashboard.welcome' | translate }}
-    </h1>
 
-    <p>
-      {{ 'dashboard.subtitle' | translate }}
-    </p>
+  <!-- =========================
+       Welcome
+  ========================== -->
+
+  <div class="top-header__left">
+<h1>
+  {{
+    'dashboard.welcome'
+      | translate
+        : {
+            name:
+              user()?.name ||
+              ('dashboard.defaultUser'
+                | translate)
+          }
+  }}
+</h1>
+
+<p>
+  {{
+    dashboardSubtitle().key
+      | translate
+        : dashboardSubtitle().params
+  }}
+</p>
   </div>
 
-  <!-- Actions -->
+  <!-- =========================
+       Actions
+  ========================== -->
+
   <div class="top-header__right">
+
     <!-- Mobile Menu -->
+
     <button
       type="button"
       class="mobile-menu-btn"
@@ -20,225 +42,438 @@
       title="Menu"
       (click)="openMenu()"
     >
-      <lucide-icon [img]="Menu" [size]="19" />
-    </button>
-
-    <!-- Search -->
-    <!--     <div class="search-box">
-      <lucide-icon [img]="Search" [size]="17" />
-
-      <input
-        type="search"
-        placeholder="Search transactions, accounts, categories..."
-        aria-label="Search"
-        [value]="searchTerm()"
-        (input)="onSearch($event)"
+      <lucide-icon
+        [img]="Menu"
+        [size]="19"
       />
-
-      <span class="search-shortcut"> / </span>
-    </div> -->
-
-    <!-- Date -->
-    <!-- <div class="date-filter">
-
-  <button
-    type="button"
-    class="date-range-btn"
-    (click)="toggleDateMenu()"
-    aria-label="Select date range"
-  >
-
-    <lucide-icon
-      [img]="CalendarDays"
-      [size]="16"
-    />
-
-<span class="date-range-btn__text">
-  {{ getDateRangeLabel() }}
-</span>
-
-    <lucide-icon
-      class="date-range-btn__arrow"
-      [img]="ChevronDown"
-      [size]="14"
-    />
-
-  </button>
-
-
-  @if (isDateMenuOpen()) {
-
-    <div class="date-filter__menu">
-
-<button
-  type="button"
-  (click)="selectDateRange('thisMonth')"
->
-  This Month
-</button>
-
-<button
-  type="button"
-  (click)="selectDateRange('lastMonth')"
->
-  Last Month
-</button>
-
-<button
-  type="button"
-  (click)="selectDateRange('last3Months')"
->
-  Last 3 Months
-</button>
-
-<button
-  type="button"
-  (click)="selectDateRange('thisYear')"
->
-  This Year
-</button>
-
-    </div>
-
-  }
-
-</div> -->
+    </button>
 
     <!-- Add Transaction -->
-    <button type="button" class="add-transaction-btn" (click)="openTransactionModal()">
-      <lucide-icon [img]="Plus" [size]="17" />
 
-<span class="add-transaction-btn__text">
-  {{ 'header.addTransaction' | translate }}
-</span>
-      <lucide-icon class="add-transaction-btn__arrow" [img]="ChevronDown" [size]="14" />
-    </button>
+<button
+  type="button"
+  class="add-transaction-btn"
+  [attr.aria-label]="
+    'header.addTransaction'
+      | translate
+  "
+  [attr.title]="
+    'header.addTransaction'
+      | translate
+  "
+  (click)="openTransactionModal()"
+>
+  <lucide-icon
+    [img]="Plus"
+    [size]="17"
+    aria-hidden="true"
+  />
 
-    <!-- Notifications -->
-    <div class="notification-wrapper">
+  <span class="add-transaction-btn__text">
+    {{
+      'header.addTransaction'
+        | translate
+    }}
+  </span>
+</button>
+
+    <!-- =========================
+         Notifications
+    ========================== -->
+
+    <div
+      class="notification-wrapper"
+      (click)="$event.stopPropagation()"
+    >
       <button
         type="button"
         class="icon-btn notification-btn"
-        aria-label="Notifications"
-        title="Notifications"
-        (click)="$event.stopPropagation(); toggleNotifications()"
+        [attr.aria-label]="
+          'notifications.title'
+            | translate
+        "
+        [attr.title]="
+          'notifications.title'
+            | translate
+        "
+        [attr.aria-expanded]="
+          isNotificationOpen()
+        "
+        (click)="toggleNotifications()"
       >
-        <lucide-icon [img]="Bell" [size]="18" />
+        <lucide-icon
+          [img]="Bell"
+          [size]="18"
+        />
 
-        <span class="notification-badge"> 3 </span>
+        @if (
+          unreadNotifications() > 0
+        ) {
+          <span
+            class="notification-badge"
+          >
+            {{
+              unreadNotifications() > 99
+                ? '99+'
+                : unreadNotifications()
+            }}
+          </span>
+        }
       </button>
 
       @if (isNotificationOpen()) {
-        <div class="notification-menu">
-          <div class="notification-menu__header">
-            <strong> Notifications </strong>
 
-            <button type="button">Mark all as read</button>
-          </div>
+        <div
+          class="notification-menu"
+          role="menu"
+        >
 
-          <div class="notification-item">
-            <div class="notification-dot"></div>
+          <!-- Notification Header -->
 
+          <div
+            class="notification-menu__header"
+          >
             <div>
-              <strong> Food budget reached 85% </strong>
+              <strong>
+                {{
+                  'notifications.title'
+                    | translate
+                }}
+              </strong>
 
-              <span> 10 minutes ago </span>
+              @if (
+                unreadNotifications() > 0
+              ) {
+                <span
+                  class="notification-menu__count"
+                >
+                  {{
+                    unreadNotifications()
+                  }}
+
+                  {{
+                    'notifications.unread'
+                      | translate
+                  }}
+                </span>
+              }
             </div>
+
+            @if (
+              unreadNotifications() > 0
+            ) {
+              <button
+                type="button"
+                (click)="
+                  markAllNotificationsAsRead()
+                "
+              >
+                {{
+                  'notifications.markAllRead'
+                    | translate
+                }}
+              </button>
+            }
           </div>
 
-          <div class="notification-item">
-            <div class="notification-dot"></div>
+          <!-- Notification Items -->
 
-            <div>
-              <strong> Internet bill is due soon </strong>
+          <div
+            class="notification-menu__list"
+          >
+            @for (
+              notification of
+                headerNotifications();
+              track notification.id
+            ) {
+              <button
+                type="button"
+                class="notification-item"
+                [class.notification-item--unread]="
+                  !notification.isRead
+                "
+                (click)="
+                  markNotificationAsRead(
+                    notification.id
+                  )
+                "
+              >
+                @if (
+                  !notification.isRead
+                ) {
+                  <span
+                    class="notification-dot"
+                    aria-hidden="true"
+                  ></span>
+                }
 
-              <span> Tomorrow </span>
-            </div>
+                <span
+                  class="notification-item__content"
+                >
+                  <strong>
+                    {{
+                      notification.title
+                        | translate
+                    }}
+                  </strong>
+
+                  <small>
+                    {{
+                      notification.description
+                        | translate
+                    }}
+                  </small>
+
+                  <span
+                    class="notification-item__date"
+                  >
+                    {{
+                      notification.date
+                        | date: 'mediumDate'
+                    }}
+                  </span>
+                </span>
+              </button>
+            } @empty {
+              <div
+                class="notification-menu__empty"
+              >
+                <strong>
+                  {{
+                    'notifications.emptyTitle'
+                      | translate
+                  }}
+                </strong>
+
+                <span>
+                  {{
+                    'notifications.emptyDescription'
+                      | translate
+                  }}
+                </span>
+              </div>
+            }
           </div>
 
-          <div class="notification-item">
-            <div class="notification-dot"></div>
+          <!-- View All -->
 
-            <div>
-              <strong> Emergency Fund reached 60% </strong>
+          <button
+            type="button"
+            class="notification-menu__view-all"
+            (click)="
+              openNotificationsPage()
+            "
+          >
+            {{
+              'notifications.viewAll'
+                | translate
+            }}
+          </button>
 
-              <span> Today </span>
-            </div>
-          </div>
         </div>
       }
     </div>
 
-    <!-- Theme -->
+    <!-- =========================
+         Theme
+    ========================== -->
+
     <button
       type="button"
       class="icon-btn"
       (click)="toggleDarkMode()"
-      [attr.aria-label]="isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
-      [attr.title]="isDarkMode() ? 'Light mode' : 'Dark mode'"
+      [attr.aria-label]="
+        isDarkMode()
+          ? (
+              'header.lightMode'
+                | translate
+            )
+          : (
+              'header.darkMode'
+                | translate
+            )
+      "
+      [attr.title]="
+        isDarkMode()
+          ? (
+              'header.lightMode'
+                | translate
+            )
+          : (
+              'header.darkMode'
+                | translate
+            )
+      "
     >
       @if (isDarkMode()) {
-        <lucide-icon [img]="Sun" [size]="18" />
+        <lucide-icon
+          [img]="Sun"
+          [size]="18"
+        />
       } @else {
-        <lucide-icon [img]="Moon" [size]="18" />
+        <lucide-icon
+          [img]="Moon"
+          [size]="18"
+        />
       }
     </button>
 
-    <!-- Language -->
+    <!-- =========================
+         Language
+    ========================== -->
+
     <button
       type="button"
       class="language-btn"
       (click)="changeLanguage()"
-      aria-label="Change language"
-      title="Change language"
+      [attr.aria-label]="
+        'header.changeLanguage'
+          | translate
+      "
+      [attr.title]="
+        'header.changeLanguage'
+          | translate
+      "
     >
-      {{ currentLang === 'en' ? 'FA' : 'EN' }}
+      {{
+        currentLang() === 'en'
+          ? 'FA'
+          : 'EN'
+      }}
     </button>
 
-    <!-- Profile -->
-    <div class="profile-wrapper">
+    <!-- =========================
+         Profile
+    ========================== -->
+
+    <div
+      class="profile-wrapper"
+      (click)="$event.stopPropagation()"
+    >
       <button
         type="button"
         class="profile-btn"
         aria-label="Open profile menu"
         title="Profile"
-        (click)="$event.stopPropagation(); toggleProfileMenu()"
+        [attr.aria-expanded]="
+          isProfileOpen()
+        "
+        (click)="toggleProfileMenu()"
       >
-        <div class="profile-avatar">N</div>
+        <div class="profile-avatar">
+          {{ userInitial() }}
+        </div>
 
-        <lucide-icon [img]="ChevronDown" [size]="14" />
+        <lucide-icon
+          [img]="ChevronDown"
+          [size]="14"
+        />
       </button>
 
       @if (isProfileOpen()) {
+
         <div class="profile-menu">
+
+          <!-- User Information -->
+
           <div class="profile-menu__user">
-            <div class="profile-menu__avatar">N</div>
+
+            <div
+              class="profile-menu__avatar"
+            >
+              {{ userInitial() }}
+            </div>
 
             <div>
-              <strong>Nikia</strong>
-              <span>nikia@example.com</span>
+              <strong>
+                {{
+                  user()?.name ||
+                  'MoneyFlow User'
+                }}
+              </strong>
+
+              <span>
+                {{ user()?.email || '' }}
+              </span>
             </div>
+
           </div>
 
-          <div class="profile-menu__divider"></div>
+          <div
+            class="profile-menu__divider"
+          ></div>
+<button
+  type="button"
+  (click)="openProfile()"
+>
+  {{
+    'profile.menuLabel'
+      | translate
+  }}
+</button>
+          <!-- Settings -->
 
-          <button type="button">My Profile</button>
+          <button
+            type="button"
+            (click)="openSettings()"
+          >
+            {{
+              'sidebar.settings'
+                | translate
+            }}
+          </button>
 
-          <button type="button">Settings</button>
+          <!-- Premium -->
 
-          <button type="button">Subscription</button>
+          <button
+            type="button"
+            (click)="openPremium()"
+          >
+            MoneyFlow Pro
+          </button>
 
-          <div class="profile-menu__divider"></div>
+          <div
+            class="profile-menu__divider"
+          ></div>
 
-          <button type="button" class="logout-btn">Sign Out</button>
+          <!-- Logout -->
+
+          <button
+            type="button"
+            class="logout-btn"
+            (click)="requestLogout()"
+          >
+            <lucide-icon
+              [img]="LogOutIcon"
+              [size]="16"
+            />
+
+            <span>
+              {{
+                'auth.logout.button'
+                  | translate
+              }}
+            </span>
+          </button>
+
         </div>
       }
     </div>
+
   </div>
 </header>
+
+<!-- =========================
+     Add Transaction Modal
+========================== -->
+
 @if (isTransactionModalOpen()) {
   <app-add-transaction-modal
-    (closeModal)="closeTransactionModal()"
-    (saveTransaction)="onTransactionSaved($event)"
+    (closeModal)="
+      closeTransactionModal()
+    "
+    (saveTransaction)="
+      onTransactionSaved($event)
+    "
   />
 }

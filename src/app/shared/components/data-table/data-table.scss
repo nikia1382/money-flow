@@ -298,3 +298,16 @@
     min-width: 760px;
   }
 }
+.data-table {
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 3px solid
+      rgba(79, 70, 229, 0.35);
+
+    outline-offset: 3px;
+    border-radius: 14px;
+  }
+}

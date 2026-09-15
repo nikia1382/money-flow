@@ -61,8 +61,16 @@
 },
 
 "dashboard": {
-  "welcome": "Welcome back, Nikia",
-  "subtitle": "You've spent 12% less than last month.",
+"welcome": "خوش اومدی، {{name}}",
+"defaultUser": "کاربر عزیز",
+
+"header": {
+  "spendingLess": "این ماه {{percentage}}٪ کمتر از ماه قبل هزینه کردی.",
+  "spendingMore": "این ماه {{percentage}}٪ بیشتر از ماه قبل هزینه کردی.",
+  "spendingEqual": "هزینه این ماهت با ماه قبل برابر است.",
+  "currentSpending": "فعالیت‌های مالی این ماهت در حال ثبت و بررسی است.",
+  "noActivity": "هنوز فعالیت مالی‌ای برای این ماه ثبت نکردی."
+},
 
   "totalBalance": "Total Balance",
   "monthlyIncome": "Monthly Income",
@@ -71,6 +79,9 @@
   "comparedToLastMonth": "vs last month",
 
   "chart": {
+   "subtitle3m": "Your cash flow over the last 3 months",
+"subtitle6m": "Your cash flow over the last 6 months",
+"subtitle1y": "Your cash flow over the last year",
     "title": "Income vs Expenses",
     "subtitle": "Your cash flow over the last 6 months",
     "income": "Income",
@@ -144,21 +155,27 @@
     "other": "Other"
   },
 
-  "upcomingPayments": {
-    "title": "Upcoming Payments",
-    "subtitle": "Payments due soon",
-    "viewAll": "View all",
+"upcomingPayments": {
+  "title": "Upcoming Payments",
+  "subtitle": "Payments due soon",
+  "viewAll": "View all",
 
-    "rent": "Monthly Rent",
-    "internet": "Internet Bill",
-    "mobile": "Mobile Bill",
-    "creditCard": "Credit Card",
+  "rent": "Monthly Rent",
+  "internet": "Internet Bill",
+  "mobile": "Mobile Bill",
+  "creditCard": "Credit Card",
 
-    "tomorrow": "Due tomorrow",
-    "inThreeDays": "Due in 3 days",
-    "inFiveDays": "Due in 5 days",
-    "nextWeek": "Due next week"
-  },
+  "tomorrow": "Due tomorrow",
+  "inThreeDays": "Due in 3 days",
+  "inFiveDays": "Due in 5 days",
+  "nextWeek": "Due next week",
+
+  "empty": {
+    "title": "No upcoming payments",
+    "description": "You don't have any payments due soon.",
+    "action": "Add recurring payment"
+  }
+},
 
   "goals": {
     "empty": {
@@ -365,6 +382,8 @@
   }
 },
   "budgets": {
+    "emptyTitle": "No budgets yet",
+"emptyDescription": "Create your first budget and start keeping your spending under control.",
     "noResults": {
   "title": "No matching budgets",
   "subtitle": "Try changing the month or status filter."
@@ -433,6 +452,8 @@
    "clear": "Clear filters"
 },
 "months": {
+        "september2026": "September 2026"
+,
   "august2026": "August 2026",
   "july2026": "July 2026",
   "june2026": "June 2026"
@@ -661,68 +682,120 @@
   "title": "Financial Goals",
   "subtitle": "Track your savings and reach your financial goals.",
   "addGoal": "Add Goal",
+
   "totalSaved": "Total Saved",
   "totalTarget": "Total Target",
   "overallProgress": "Overall Progress",
   "completedGoals": "Completed Goals",
+
   "yourGoals": "Your Goals",
   "activeGoals": "active goals",
+  "totalGoals": "goals in total",
+
   "saved": "Saved",
   "target": "Target",
   "remaining": "remaining",
-  "addGoalDescription": "Create a new savings goal and track your progress.",
-"goalName": "Goal name",
-"goalNamePlaceholder": "e.g. New car",
-"category": "Category",
-"selectCategory": "Select category",
-"targetAmount": "Target amount",
-"savedAmount": "Already saved",
-"deadline": "Deadline",
-"requiredField": "This field is required.",
-"deleteGoalTitle": "Delete Goal?",
-"deleteGoalMessage": "This goal will be permanently deleted.",
-"emptyTitle": "No goals yet",
-"emptyDescription": "Create your first financial goal and start building toward something that matters.",
-"categories": {
-  "savings": "Savings",
-  "technology": "Technology",
-  "travel": "Travel"
-},
-"items": {
-  "emergencyFund": {
-    "title": "Emergency Fund"
+  "addMoney": "Add money",
+  "completed": "Completed",
+  "actions": "Goal actions",
+
+  "deleteGoalTitle": "Delete Goal?",
+  "deleteGoalMessage": "This goal will be permanently deleted and cannot be restored.",
+
+  "emptyTitle": "No goals yet",
+  "emptyDescription": "Create your first financial goal and start building toward something that matters.",
+
+  "form": {
+    "addTitle": "Add Financial Goal",
+    "addSubtitle": "Create a new savings goal and track your progress.",
+
+    "editTitle": "Edit Financial Goal",
+    "editSubtitle": "Update the selected financial goal details.",
+
+    "name": "Goal name",
+    "namePlaceholder": "e.g. New car",
+
+    "category": "Category",
+    "selectCategory": "Select category",
+
+    "targetAmount": "Target amount",
+    "savedAmount": "Already saved",
+
+    "deadline": "Deadline",
+
+    "save": "Save Goal",
+    "saveChanges": "Save Changes",
+
+    "errors": {
+      "nameRequired": "Goal name is required.",
+      "categoryRequired": "Please select a category.",
+      "targetAmountInvalid": "Target amount must be greater than zero.",
+      "savedAmountInvalid": "Saved amount cannot be negative.",
+      "savedExceedsTarget": "Saved amount cannot be greater than the target amount.",
+      "deadlineRequired": "Please select a deadline."
+    }
   },
-  "newLaptop": {
-    "title": "New Laptop"
+
+  "categories": {
+    "savings": "Savings",
+    "technology": "Technology",
+    "travel": "Travel",
+    "home": "Home",
+    "car": "Car",
+    "education": "Education",
+    "health": "Health",
+    "emergency": "Emergency Fund",
+    "gift": "Gift",
+    "gold": "Gold & Investment",
+    "other": "Other"
   },
-  "summerVacation": {
-    "title": "Summer Vacation"
+
+  "items": {
+    "emergencyFund": {
+      "title": "Emergency Fund"
+    },
+
+    "newLaptop": {
+      "title": "New Laptop"
+    },
+
+    "summerVacation": {
+      "title": "Summer Vacation"
+    }
   }
-}
 },
 "notifications": {
   "title": "Notifications",
   "subtitle": "Stay updated on your payments, budgets and accounts.",
   "markAllRead": "Mark all as read",
+  "viewAll": "View all notifications",
   "unread": "unread notifications",
   "emptyTitle": "You're all caught up",
   "emptyDescription": "You don't have any notifications right now.",
+
   "items": {
-  "upcomingPayment": {
-    "title": "Upcoming payment",
-    "description": "Your home rent payment is due soon."
-  },
-  "budgetWarning": {
-    "title": "Budget warning",
-    "description": "You have used more than 80% of your Food budget."
-  },
-  "accountUpdated": {
-    "title": "Account updated",
-    "description": "Your Main Bank Account balance was updated."
+    "upcomingPayment": {
+      "title": "Upcoming payment",
+      "description": "Your home rent payment is due soon."
+    },
+
+    "budgetWarning": {
+      "title": "Budget warning",
+      "description": "You have used more than 80% of your Food budget."
+    },
+
+    "accountUpdated": {
+      "title": "Account updated",
+      "description": "Your Main Bank Account balance was updated."
+    }
   }
-}
 },
 "settings": {
+  "toast": {
+  "saved": "Settings saved successfully.",
+  "loadFailed": "Failed to load settings.",
+  "saveFailed": "Failed to save settings."
+},
   "title": "Settings",
   "subtitle": "Customize your MoneyFlow experience.",
 
@@ -903,6 +976,48 @@
     "title": "See your money clearly. Manage it better.",
     "description": "Manage your accounts, transactions and budgets in one simple workspace.",
     "balance": "Total balance"
+  }
+},
+"profile": {
+  "menuLabel": "My Profile",
+  "title": "My Profile",
+  "subtitle": "Manage your personal information and account security.",
+  "loading": "Loading your profile...",
+  "memberSince": "Member since",
+  "personal": {
+    "title": "Personal information",
+    "subtitle": "Update the information displayed across MoneyFlow."
+  },
+  "password": {
+    "title": "Account security",
+    "subtitle": "Use a strong and unique password to protect your account."
+  },
+  "fields": {
+    "name": "Full name",
+    "email": "Email address",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password"
+  },
+  "emailReadonly": "Your email address cannot currently be changed.",
+  "actions": {
+    "save": "Save changes",
+    "saving": "Saving...",
+    "changePassword": "Change password",
+    "changingPassword": "Changing password..."
+  },
+  "validation": {
+    "name": "Name must contain at least 2 characters.",
+    "password": "The new password must contain at least 8 characters.",
+    "passwordMatch": "The new passwords do not match."
+  },
+  "toast": {
+    "updated": "Your profile was updated successfully.",
+    "updateError": "Failed to update your profile.",
+    "loadError": "Failed to load your profile.",
+    "passwordChanged": "Your password was changed successfully.",
+    "passwordError": "Failed to change your password.",
+    "currentPasswordError": "Your current password is incorrect."
   }
 }
 }

@@ -121,6 +121,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/premium/pages/premium/premium').then((m) => m.Premium),
       },
+      {
+  path: 'profile',
+
+  loadComponent: () =>
+    import(
+      './features/profile/pages/profile/profile'
+    ).then(
+      (m) => m.Profile,
+    ),
+},
     ],
   },
 

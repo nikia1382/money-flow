@@ -1,67 +1,98 @@
-import { Component, inject, signal } from '@angular/core';
-import { Languages, Moon, WalletCards } from 'lucide-angular';
-import { LucideAngularModule } from 'lucide-angular';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import {
+  Component,
+  inject,
+} from '@angular/core';
+
+import {
+  Languages,
+  Moon,
+  WalletCards,
+  LucideAngularModule,
+} from 'lucide-angular';
+
+import {
+  TranslatePipe,
+} from '@ngx-translate/core';
+
+import {
+  AppAppearance,
+  AppCurrency,
+  AppLanguage,
+  SettingsService,
+} from '../../services/settings';
 
 @Component({
   selector: 'app-settings',
+
   standalone: true,
-  imports: [LucideAngularModule, TranslatePipe],
+
+  imports: [
+    LucideAngularModule,
+    TranslatePipe,
+  ],
+
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })
 export class Settings {
-  private readonly translate = inject(TranslateService);
+  /* =========================
+     Service
+  ========================= */
 
-  readonly Languages = Languages;
-  readonly Moon = Moon;
-  readonly WalletCards = WalletCards;
+  private readonly settingsService =
+    inject(SettingsService);
 
-  readonly language = signal<'en' | 'fa'>(localStorage.getItem('language') === 'fa' ? 'fa' : 'en');
+  /* =========================
+     Icons
+  ========================= */
 
-  readonly appearance = signal<'light' | 'dark'>(
-    localStorage.getItem('appearance') === 'dark' ? 'dark' : 'light',
-  );
+  readonly Languages =
+    Languages;
 
-  readonly currency = signal(localStorage.getItem('currency') || 'Toman');
+  readonly Moon =
+    Moon;
 
-  constructor() {
-    const language = this.language();
+  readonly WalletCards =
+    WalletCards;
 
-    this.translate.use(language);
+  /* =========================
+     State
+  ========================= */
 
-    document.documentElement.lang = language;
+  readonly language =
+    this.settingsService.language;
 
-    document.documentElement.dir = language === 'fa' ? 'rtl' : 'ltr';
+  readonly appearance =
+    this.settingsService.appearance;
 
-    const appearance = this.appearance();
+  readonly currency =
+    this.settingsService.currency;
 
-    document.documentElement.classList.toggle('dark', appearance === 'dark');
+  readonly isSaving =
+    this.settingsService.isSaving;
+
+  /* =========================
+     Actions
+  ========================= */
+
+  setLanguage(
+    value: AppLanguage,
+  ): void {
+    this.settingsService
+      .setLanguage(value);
   }
 
-  setLanguage(value: 'en' | 'fa'): void {
-    this.language.set(value);
-
-    this.translate.use(value);
-
-    document.documentElement.lang = value;
-
-    document.documentElement.dir = value === 'fa' ? 'rtl' : 'ltr';
-
-    localStorage.setItem('language', value);
+  setAppearance(
+    value: AppAppearance,
+  ): void {
+    this.settingsService
+      .setAppearance(value);
   }
 
-  setAppearance(value: 'light' | 'dark'): void {
-    this.appearance.set(value);
-
-    document.documentElement.classList.toggle('dark', value === 'dark');
-
-    localStorage.setItem('appearance', value);
-  }
-
-  setCurrency(value: string): void {
-    this.currency.set(value);
-
-    localStorage.setItem('currency', value);
+  setCurrency(
+    value: AppCurrency,
+  ): void {
+    this.settingsService
+      .setCurrency(value);
   }
 }

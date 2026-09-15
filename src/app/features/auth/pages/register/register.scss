@@ -1,46 +1,170 @@
 @use '../login/login.scss';
 
+/*
+ * فرم Register بلندتر از Login است؛
+ * بنابراین فاصله‌ها کمی جمع‌وجورتر هستند.
+ */
+
 .auth-panel {
-  padding-block: 32px;
+  padding-block: 28px;
+}
+
+.auth-panel__inner {
+  width: min(100%, 440px);
 }
 
 .auth-brand {
-  margin-bottom: 34px;
+  margin-bottom: 30px;
 }
 
 .auth-header {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+}
+
+.auth-header h1 {
+  font-size: clamp(
+    29px,
+    3vw,
+    38px
+  );
+}
+
+.auth-header p {
+  line-height: 1.75;
 }
 
 .auth-form {
-  gap: 15px;
+  gap: 14px;
+}
+
+.form-field {
+  gap: 6px;
+}
+
+.form-control {
+  height: 48px;
+  border-radius: 13px;
+}
+
+.submit-button {
+  height: 49px;
+  margin-top: 3px;
+}
+
+.auth-error,
+.auth-success {
+  margin-bottom: 16px;
 }
 
 .auth-success {
-  margin-bottom: 20px;
-  padding: 13px 15px;
-  color: #267447;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 14px;
+  border: 1px solid
+    rgba(34, 199, 169, 0.25);
+  border-radius: 12px;
+  background:
+    rgba(34, 199, 169, 0.08);
+  color: #12816d;
   font-size: 13px;
   line-height: 1.6;
-  border: 1px solid #bfe3cc;
-  border-radius: 12px;
-  background: #effaf3;
+}
+
+.auth-success__icon {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  place-items: center;
+  border-radius: 50%;
+  background: #22b99f;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 900;
 }
 
 .auth-switch {
-  margin: 22px 0 0;
-  color: #777c87;
-  font-size: 13px;
-  text-align: center;
+  margin-top: 18px;
+}
 
-  a {
-    margin-inline-start: 5px;
-    color: #dc5f36;
-    font-weight: 700;
-    text-decoration: none;
+/*
+ * Register در نمایشگرهای کوتاه باید
+ * اسکرول داشته باشد.
+ */
 
-    &:hover {
-      text-decoration: underline;
-    }
+@media (max-height: 800px) and (min-width: 901px) {
+  .auth-panel {
+    align-items: start;
+    overflow-y: auto;
+  }
+
+  .auth-brand {
+    margin-bottom: 24px;
+  }
+
+  .auth-header {
+    margin-bottom: 18px;
+  }
+
+  .auth-header h1 {
+    font-size: 30px;
+  }
+
+  .auth-header p {
+    font-size: 12px;
+  }
+
+  .auth-form {
+    gap: 11px;
+  }
+
+  .form-control {
+    height: 45px;
+  }
+
+  .submit-button {
+    height: 47px;
+  }
+}
+
+/*
+ * رنگ Gradient داخل SVG ثبت‌نام باید
+ * از ID مخصوص خودش استفاده کند.
+ */
+
+.register-chart-area {
+  fill: url(#registerChartArea);
+}
+
+@media (max-width: 900px) {
+  .auth-panel {
+    min-height: 100vh;
+    padding-block: 26px;
+  }
+
+  .auth-brand {
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-panel {
+    padding:
+      22px
+      18px
+      28px;
+  }
+
+  .auth-header h1 {
+    font-size: 29px;
+  }
+
+  .form-control {
+    height: 49px;
+  }
+
+  .submit-button {
+    height: 50px;
   }
 }

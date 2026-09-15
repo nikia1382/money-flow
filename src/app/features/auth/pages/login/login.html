@@ -1,223 +1,517 @@
 <app-toast />
+
 <main class="auth-page">
-  <section class="auth-panel">
-    <!-- Brand -->
+  <div
+    class="auth-page__orb auth-page__orb--one"
+    aria-hidden="true"
+  ></div>
 
-    <div class="auth-brand">
-      <div class="auth-brand__icon">
-        <lucide-icon
-          [img]="Landmark"
-          [size]="24"
-        />
-      </div>
+  <div
+    class="auth-page__orb auth-page__orb--two"
+    aria-hidden="true"
+  ></div>
 
-      <div>
-        <strong>MoneyFlow</strong>
+  <div class="auth-shell">
 
-        <span>
-          {{ 'auth.brandSubtitle' | translate }}
-        </span>
-      </div>
-    </div>
+    <!-- =========================
+         Login Panel
+    ========================== -->
 
-    <!-- Header -->
+    <section class="auth-panel">
+      <div class="auth-panel__inner">
 
-    <div class="auth-header">
-      <span class="auth-header__eyebrow">
-        {{ 'auth.login.eyebrow' | translate }}
-      </span>
+        <!-- Brand -->
 
-      <h1>
-        {{ 'auth.login.title' | translate }}
-      </h1>
+        <div class="auth-brand">
+          <div class="auth-brand__icon">
+            <lucide-icon
+              [img]="Landmark"
+              [size]="23"
+              [strokeWidth]="2"
+            />
+          </div>
 
-      <p>
-        {{ 'auth.login.subtitle' | translate }}
-      </p>
-    </div>
+          <div class="auth-brand__content">
+            <strong>
+              MoneyFlow
+            </strong>
 
-    <!-- Error -->
-
-    @if (errorMessageKey()) {
-      <div
-        class="auth-error"
-        role="alert"
-      >
-        {{ errorMessageKey()! | translate }}
-      </div>
-    }
-
-    <!-- Form -->
-
-    <form
-      class="auth-form"
-      [formGroup]="loginForm"
-      (ngSubmit)="submit()"
-    >
-      <!-- Email -->
-
-      <div class="form-field">
-        <label for="login-email">
-          {{ 'auth.fields.email' | translate }}
-        </label>
-
-        <div
-          class="form-control"
-          [class.invalid]="
-            loginForm.controls.email.invalid &&
-            loginForm.controls.email.touched
-          "
-        >
-          <lucide-icon
-            [img]="Mail"
-            [size]="18"
-          />
-
-          <input
-            id="login-email"
-            type="email"
-            formControlName="email"
-            autocomplete="email"
-            [placeholder]="
-              'auth.placeholders.email'
-                | translate
-            "
-          />
+            <span>
+              {{
+                'auth.brandSubtitle'
+                  | translate
+              }}
+            </span>
+          </div>
         </div>
 
-        @if (
-          loginForm.controls.email.touched &&
-          loginForm.controls.email.hasError('required')
-        ) {
-          <small class="field-error">
-            {{ 'auth.validation.required' | translate }}
-          </small>
-        } @else if (
-          loginForm.controls.email.touched &&
-          loginForm.controls.email.hasError('email')
-        ) {
-          <small class="field-error">
-            {{ 'auth.validation.email' | translate }}
-          </small>
-        }
-      </div>
+        <!-- Header -->
 
-      <!-- Password -->
+        <div class="auth-header">
+          <span class="auth-header__eyebrow">
+            <span></span>
 
-      <div class="form-field">
-        <label for="login-password">
-          {{ 'auth.fields.password' | translate }}
-        </label>
-
-        <div
-          class="form-control"
-          [class.invalid]="
-            loginForm.controls.password.invalid &&
-            loginForm.controls.password.touched
-          "
-        >
-          <lucide-icon
-            [img]="LockKeyhole"
-            [size]="18"
-          />
-
-          <input
-            id="login-password"
-            [type]="showPassword() ? 'text' : 'password'"
-            formControlName="password"
-            autocomplete="current-password"
-            [placeholder]="
-              'auth.placeholders.password'
+            {{
+              'auth.login.eyebrow'
                 | translate
-            "
-          />
+            }}
+          </span>
+
+          <h1>
+            {{
+              'auth.login.title'
+                | translate
+            }}
+          </h1>
+
+          <p>
+            {{
+              'auth.login.subtitle'
+                | translate
+            }}
+          </p>
+        </div>
+
+        <!-- Error -->
+
+        @if (errorMessageKey()) {
+          <div
+            class="auth-error"
+            role="alert"
+          >
+            <span class="auth-error__icon">
+              !
+            </span>
+
+            <span>
+              {{
+                errorMessageKey()!
+                  | translate
+              }}
+            </span>
+          </div>
+        }
+
+        <!-- Form -->
+
+        <form
+          class="auth-form"
+          [formGroup]="loginForm"
+          (ngSubmit)="submit()"
+        >
+
+          <!-- Email -->
+
+          <div class="form-field">
+            <label for="login-email">
+              {{
+                'auth.fields.email'
+                  | translate
+              }}
+            </label>
+
+            <div
+              class="form-control"
+              [class.invalid]="
+                loginForm.controls.email.invalid &&
+                loginForm.controls.email.touched
+              "
+            >
+              <span class="form-control__icon">
+                <lucide-icon
+                  [img]="Mail"
+                  [size]="18"
+                />
+              </span>
+
+              <input
+                id="login-email"
+                type="email"
+                formControlName="email"
+                autocomplete="email"
+                [placeholder]="
+                  'auth.placeholders.email'
+                    | translate
+                "
+              />
+
+              @if (
+                loginForm.controls.email.valid &&
+                loginForm.controls.email.value
+              ) {
+                <span
+                  class="form-control__success"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+              }
+            </div>
+
+            @if (
+              loginForm.controls.email.touched &&
+              loginForm.controls.email.hasError(
+                'required'
+              )
+            ) {
+              <small class="field-error">
+                {{
+                  'auth.validation.required'
+                    | translate
+                }}
+              </small>
+            } @else if (
+              loginForm.controls.email.touched &&
+              loginForm.controls.email.hasError(
+                'email'
+              )
+            ) {
+              <small class="field-error">
+                {{
+                  'auth.validation.email'
+                    | translate
+                }}
+              </small>
+            }
+          </div>
+
+          <!-- Password -->
+
+          <div class="form-field">
+            <label for="login-password">
+              {{
+                'auth.fields.password'
+                  | translate
+              }}
+            </label>
+
+            <div
+              class="form-control"
+              [class.invalid]="
+                loginForm.controls.password.invalid &&
+                loginForm.controls.password.touched
+              "
+            >
+              <span class="form-control__icon">
+                <lucide-icon
+                  [img]="LockKeyhole"
+                  [size]="18"
+                />
+              </span>
+
+              <input
+                id="login-password"
+                [type]="
+                  showPassword()
+                    ? 'text'
+                    : 'password'
+                "
+                formControlName="password"
+                autocomplete="current-password"
+                [placeholder]="
+                  'auth.placeholders.password'
+                    | translate
+                "
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                [attr.aria-label]="
+                  'auth.login.togglePassword'
+                    | translate
+                "
+                (click)="
+                  togglePasswordVisibility()
+                "
+              >
+                <lucide-icon
+                  [img]="
+                    showPassword()
+                      ? EyeOff
+                      : Eye
+                  "
+                  [size]="18"
+                />
+              </button>
+            </div>
+
+            @if (
+              loginForm.controls.password.touched &&
+              loginForm.controls.password.hasError(
+                'required'
+              )
+            ) {
+              <small class="field-error">
+                {{
+                  'auth.validation.required'
+                    | translate
+                }}
+              </small>
+            } @else if (
+              loginForm.controls.password.touched &&
+              loginForm.controls.password.hasError(
+                'minlength'
+              )
+            ) {
+              <small class="field-error">
+                {{
+                  'auth.validation.passwordLength'
+                    | translate
+                }}
+              </small>
+            }
+          </div>
+
+          <!-- Submit -->
 
           <button
-            type="button"
-            class="password-toggle"
-            [attr.aria-label]="
-              'auth.login.togglePassword'
-                | translate
-            "
-            (click)="togglePasswordVisibility()"
+            type="submit"
+            class="submit-button"
+            [disabled]="isSubmitting()"
           >
-            <lucide-icon
-              [img]="showPassword() ? EyeOff : Eye"
-              [size]="18"
-            />
-          </button>
-        </div>
+            @if (isSubmitting()) {
+              <span
+                class="submit-button__spinner"
+                aria-hidden="true"
+              ></span>
 
-        @if (
-          loginForm.controls.password.touched &&
-          loginForm.controls.password.hasError('required')
-        ) {
-          <small class="field-error">
-            {{ 'auth.validation.required' | translate }}
+              {{
+                'auth.login.signingIn'
+                  | translate
+              }}
+            } @else {
+              <span>
+                {{
+                  'auth.login.submit'
+                    | translate
+                }}
+              </span>
+
+              <span
+                class="submit-button__arrow"
+                aria-hidden="true"
+              >
+                ←
+              </span>
+            }
+          </button>
+        </form>
+
+        <!-- Register -->
+
+        <p class="auth-switch">
+          {{
+            'auth.login.noAccount'
+              | translate
+          }}
+
+          <a routerLink="/register">
+            {{
+              'auth.login.createAccount'
+                | translate
+            }}
+          </a>
+        </p>
+
+        <!-- Security -->
+
+        <div class="auth-security-note">
+          <span
+            class="auth-security-note__dot"
+            aria-hidden="true"
+          ></span>
+
+          {{
+            'auth.login.securityNote'
+              | translate
+          }}
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         Product Showcase
+    ========================== -->
+
+<aside class="auth-showcase">
+  <div
+    class="auth-showcase__grid"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="auth-showcase__glow"
+    aria-hidden="true"
+  ></div>
+
+  <div class="auth-showcase__top">
+    <div class="showcase-brand">
+      <span class="showcase-brand__mark">
+        M
+      </span>
+
+      <strong>
+        MoneyFlow
+      </strong>
+    </div>
+
+    <div class="showcase-status">
+      <span></span>
+
+      Secure
+    </div>
+  </div>
+
+  <div class="auth-showcase__content">
+    <span class="auth-showcase__eyebrow">
+      {{
+        'auth.showcase.eyebrow'
+          | translate
+      }}
+    </span>
+
+    <h2>
+      {{
+        'auth.showcase.title'
+          | translate
+      }}
+    </h2>
+
+    <p>
+      {{
+        'auth.showcase.description'
+          | translate
+      }}
+    </p>
+  </div>
+
+  <!-- Compact Dashboard Preview -->
+
+  <div class="finance-preview">
+    <div class="finance-preview__header">
+      <div>
+        <span>
+          {{
+            'auth.showcase.balance'
+              | translate
+          }}
+        </span>
+
+        <div class="finance-preview__balance">
+          <strong>
+            ۱۲٬۴۵۰٬۰۰۰
+          </strong>
+
+          <small>
+            {{
+              'common.currency'
+                | translate
+            }}
           </small>
-        } @else if (
-          loginForm.controls.password.touched &&
-          loginForm.controls.password.hasError('minlength')
-        ) {
-          <small class="field-error">
-            {{ 'auth.validation.passwordLength' | translate }}
-          </small>
-        }
+        </div>
       </div>
 
-      <!-- Submit -->
+      <span class="finance-preview__growth">
+        +12.4%
+      </span>
+    </div>
 
-      <button
-        type="submit"
-        class="submit-button"
-        [disabled]="isSubmitting()"
+    <div
+      class="preview-chart"
+      aria-hidden="true"
+    >
+      <svg
+        viewBox="0 0 560 100"
+        preserveAspectRatio="none"
       >
-        @if (isSubmitting()) {
-          {{ 'auth.login.signingIn' | translate }}
-        } @else {
-          {{ 'auth.login.submit' | translate }}
-        }
-      </button>
-    </form>
-<p class="auth-switch">
-  {{ 'auth.login.noAccount' | translate }}
+        <defs>
+          <linearGradient
+            id="compactChartArea"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
+            <stop
+              offset="0%"
+              stop-color="#9b8cff"
+              stop-opacity="0.34"
+            />
 
-  <a routerLink="/register">
-    {{ 'auth.login.createAccount' | translate }}
-  </a>
-</p>
-    <p class="auth-security-note">
-      {{ 'auth.login.securityNote' | translate }}
-    </p>
-  </section>
+            <stop
+              offset="100%"
+              stop-color="#9b8cff"
+              stop-opacity="0"
+            />
+          </linearGradient>
+        </defs>
 
-  <!-- Decorative Side -->
+        <path
+          class="chart-area"
+          d="
+            M0 85
+            C55 75, 85 80, 125 62
+            S190 70, 230 48
+            S300 58, 345 37
+            S415 49, 460 24
+            S525 32, 560 12
+            L560 100
+            L0 100
+            Z
+          "
+        ></path>
 
-  <aside class="auth-showcase">
-    <div class="auth-showcase__content">
-      <span>
-        {{ 'auth.showcase.eyebrow' | translate }}
-      </span>
-
-      <h2>
-        {{ 'auth.showcase.title' | translate }}
-      </h2>
-
-      <p>
-        {{ 'auth.showcase.description' | translate }}
-      </p>
+        <path
+          class="chart-line"
+          d="
+            M0 85
+            C55 75, 85 80, 125 62
+            S190 70, 230 48
+            S300 58, 345 37
+            S415 49, 460 24
+            S525 32, 560 12
+          "
+        ></path>
+      </svg>
     </div>
 
-    <div class="showcase-card">
-      <small>
-        {{ 'auth.showcase.balance' | translate }}
-      </small>
+    <div class="finance-preview__footer">
+      <div class="finance-indicator">
+        <span class="income-dot"></span>
 
-      <strong>12,450,000</strong>
+        <div>
+          <small>
+            {{
+              'dashboard.chart.income'
+                | translate
+            }}
+          </small>
 
-      <span>
-        {{ 'common.currency' | translate }}
-      </span>
+          <strong>
+            ۸٬۳۲۰٬۰۰۰
+          </strong>
+        </div>
+      </div>
+
+      <div class="finance-indicator">
+        <span class="expense-dot"></span>
+
+        <div>
+          <small>
+            {{
+              'dashboard.chart.expenses'
+                | translate
+            }}
+          </small>
+
+          <strong>
+            ۳٬۱۲۰٬۰۰۰
+          </strong>
+        </div>
+      </div>
     </div>
-  </aside>
+  </div>
+</aside>
+  </div>
 </main>

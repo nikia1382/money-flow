@@ -517,3 +517,71 @@
     transform: translateY(1px);
   }
 }
+.goal-card__icon,
+.summary-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-radius: 14px;
+}
+
+.goal-card__icon[data-theme='violet'],
+.summary-icon--violet {
+  background: #f0edff;
+  border: 1px solid #e3ddff;
+}
+
+.goal-card__icon[data-theme='blue'],
+.summary-icon--blue {
+  background: #eaf5ff;
+  border: 1px solid #d6ebff;
+}
+
+.goal-card__icon[data-theme='orange'],
+.summary-icon--orange {
+  background: #fff2e8;
+  border: 1px solid #ffe0ca;
+}
+
+.goal-card__icon[data-theme='emerald'],
+.summary-icon--emerald {
+  background: #e7f9f3;
+  border: 1px solid #cff2e6;
+}
+
+.goal-card__icon[data-theme='rose'],
+.summary-icon--rose {
+  background: #fff0f4;
+  border: 1px solid #ffdae4;
+}
+
+.goal-card__icon[data-theme='cyan'],
+.summary-icon--cyan {
+  background: #e7f8fb;
+  border: 1px solid #d1f0f5;
+}
+
+.goal-card__icon[data-theme='amber'],
+.summary-icon--amber {
+  background: #fff7e2;
+  border: 1px solid #ffebba;
+}
+
+.goal-card__icon[data-theme='slate'],
+.summary-icon--slate {
+  background: #eef2f7;
+  border: 1px solid #dfe6ef;
+}
+
+/*
+ * جلوگیری از تحمیل رنگ مشکی توسط
+ * استایل‌های عمومی پروژه
+ */
+
+.goal-card__icon lucide-icon,
+.summary-icon lucide-icon {
+  display: grid;
+  place-items: center;
+}
