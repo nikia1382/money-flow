@@ -11,6 +11,7 @@ import {
 import {
   Transaction,
 } from '../models/transaction.model';
+import { environment } from '../../../../environments/environment';
 
 /* =========================
    API Models
@@ -64,13 +65,13 @@ export class TransactionsService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/transactions';
+    `${environment.apiUrl}/transactions`;
 
   private readonly categoriesApiUrl =
-    'http://localhost:8080/api/categories';
+    `${environment.apiUrl}/categories`;
 
   private readonly accountsApiUrl =
-    'http://localhost:8080/api/accounts';
+    `${environment.apiUrl}/accounts`;
 
   /* =========================
      State

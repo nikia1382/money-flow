@@ -12,6 +12,7 @@ import {
 import {
   RecurringPayment,
 } from '../models/recurring-payment.model';
+import { environment } from '../../../../environments/environment';
 
 /* =========================
    API Models
@@ -77,13 +78,13 @@ export class RecurringPaymentsService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/recurring-payments';
+    `${environment.apiUrl}/recurring-payments`;
 
   private readonly categoriesApiUrl =
-    'http://localhost:8080/api/categories';
+    `${environment.apiUrl}/categories`;
 
   private readonly accountsApiUrl =
-    'http://localhost:8080/api/accounts';
+    `${environment.apiUrl}/accounts`;
 
   /* =========================
      State

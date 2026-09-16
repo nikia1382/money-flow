@@ -10,10 +10,6 @@ import {
 } from '@angular/forms';
 
 import {
-  TranslatePipe,
-} from '@ngx-translate/core';
-
-import {
   LucideAngularModule,
   X,
 } from 'lucide-angular';
@@ -24,7 +20,6 @@ import {
 
   imports: [
     FormsModule,
-    TranslatePipe,
     LucideAngularModule,
   ],
 

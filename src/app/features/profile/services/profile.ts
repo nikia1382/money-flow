@@ -16,6 +16,7 @@ import {
   UpdateProfileRequest,
   UserProfile,
 } from '../models/profile.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class ProfileService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/users/me';
+    `${environment.apiUrl}/users/me`;
 
   getProfile():
     Observable<UserProfile> {

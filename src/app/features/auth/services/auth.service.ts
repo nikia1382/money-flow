@@ -23,6 +23,7 @@ import {
   RefreshTokenRequest,
   RegisterRequest,
 } from '../models/auth.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,7 @@ export class AuthService {
   ========================= */
 
   private readonly apiUrl =
-    'http://localhost:8080/api/auth';
+    `${environment.apiUrl}/auth`;
 
   /* =========================
      Storage Keys

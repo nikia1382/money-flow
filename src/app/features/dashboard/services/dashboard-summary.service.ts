@@ -7,6 +7,7 @@ import {
 import {
   HttpClient,
 } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 export interface DashboardSummary {
   totalBalance: number;
@@ -23,7 +24,7 @@ export class DashboardSummaryService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/dashboard/summary';
+    `${environment.apiUrl}/dashboard/summary`;
 
   readonly summary =
     signal<DashboardSummary>({

@@ -7,6 +7,7 @@ import {
 import {
   HttpClient,
 } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 export interface UpcomingPayment {
   id: number;
@@ -24,7 +25,7 @@ export class UpcomingPaymentsService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/upcoming-payments';
+    `${environment.apiUrl}/upcoming-payments`;
 
   readonly payments =
     signal<UpcomingPayment[]>([]);
