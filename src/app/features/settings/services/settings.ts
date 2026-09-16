@@ -15,6 +15,7 @@ import {
 import {
   ToastService,
 } from '../../../shared/services/toast';
+import { environment } from '../../../../environments/environment';
 
 export type AppLanguage =
   | 'en'
@@ -57,7 +58,7 @@ export class SettingsService {
   ========================= */
 
   private readonly apiUrl =
-    'http://localhost:8080/api/settings';
+    `${environment.apiUrl}/settings`;
 
   /* =========================
      State

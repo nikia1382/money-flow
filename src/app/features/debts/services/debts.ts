@@ -20,6 +20,7 @@ import {
 import {
   ToastService,
 } from '../../../shared/services/toast';
+import { environment } from '../../../../environments/environment';
 
 /* =========================
    API Payloads
@@ -60,7 +61,7 @@ export class DebtsService {
   ========================= */
 
   private readonly apiUrl =
-    'http://localhost:8080/api/debts';
+    `${environment.apiUrl}/debts`;
 
   /* =========================
      State

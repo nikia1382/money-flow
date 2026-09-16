@@ -11,6 +11,7 @@ import {
 import {
   Budget,
 } from '../models/budget.model';
+import { environment } from '../../../../environments/environment';
 
 /* =========================
    API Models
@@ -48,10 +49,10 @@ export class BudgetsService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/budgets';
+    `${environment.apiUrl}/budgets`;
 
   private readonly categoriesApiUrl =
-    'http://localhost:8080/api/categories';
+    `${environment.apiUrl}/categories`;
 
   /* =========================
      State

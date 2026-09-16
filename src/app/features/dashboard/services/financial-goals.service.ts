@@ -7,6 +7,7 @@ import {
 import {
   HttpClient,
 } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 /* =========================
    API Models
@@ -53,7 +54,7 @@ export class FinancialGoalsService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/financial-goals';
+    `${environment.apiUrl}/financial-goals`;
 
   /* =========================
      State

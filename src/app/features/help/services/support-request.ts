@@ -15,6 +15,7 @@ import {
   CreateSupportRequest,
   SupportRequestResponse,
 } from '../models/support-request.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class SupportRequestService {
     inject(HttpClient);
 
   private readonly apiUrl =
-    'http://localhost:8080/api/support-requests';
+    `${environment.apiUrl}/support-requests`;
 
   createRequest(
     request: CreateSupportRequest,

@@ -16,6 +16,7 @@ import {
 import {
   ToastService,
 } from '../../../shared/services/toast';
+import { environment } from '../../../../environments/environment';
 
 export type NotificationType =
   | 'payment'
@@ -54,7 +55,7 @@ export class NotificationsService {
   ========================= */
 
   private readonly apiUrl =
-    'http://localhost:8080/api/notifications';
+    `${environment.apiUrl}/notifications`;
 
   /* =========================
      State

@@ -18,6 +18,7 @@ import {
 } from '../components/add-account-modal/add-account-modal';
 import { ToastService } from '../../../shared/services/toast';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ private readonly toastService =
 private readonly translate =
   inject(TranslateService);
   private readonly apiUrl =
-    'http://localhost:8080/api/accounts';
+    `${environment.apiUrl}/accounts`;
 
   readonly accounts =
     signal<Account[]>([]);

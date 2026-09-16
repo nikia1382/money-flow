@@ -7,6 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "e2e": "playwright test",
+    "e2e:functional": "playwright test app.functional.spec.ts --project=app-desktop",
+    "e2e:accessibility": "playwright test app.accessibility.spec.ts --project=app-desktop --project=app-mobile",
     "serve:ssr:money-flow": "node dist/money-flow/server/server.mjs"
   },
   "prettier": {

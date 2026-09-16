@@ -1,59 +1,66 @@
-# MoneyFlow
+# MoneyFlow Web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+Angular frontend for MoneyFlow, a bilingual personal-finance application for managing accounts, transactions, budgets, recurring payments, debts, goals, notifications, and user settings.
 
-## Development server
+## Stack
 
-To start a local development server, run:
+- Angular 20 with standalone components and signals
+- Angular SSR
+- ngx-translate (English and Persian/RTL)
+- Chart.js and ng2-charts
+- Playwright and axe-core for end-to-end, visual, quality, and accessibility checks
 
-```bash
-ng serve
-```
+## Requirements
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js 20 or newer
+- npm
+- The [MoneyFlow API](https://github.com/nikia1382/money-flow-api) running locally for authenticated features
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Local development
 
 ```bash
-ng generate --help
+npm ci
+npm start
 ```
 
-## Building
+The app is available at `http://localhost:4200`. Development requests use `http://localhost:8080/api`.
 
-To build the project run:
+## Production configuration
+
+Production builds use `/api` as the API base URL so the frontend and backend can be served behind the same domain or reverse proxy. Update `src/environments/environment.production.ts` if the API is hosted on another origin, and add that origin to the backend `CORS_ALLOWED_ORIGINS` variable.
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The production output is written to `dist/money-flow`.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Tests
 
 ```bash
-ng test
+# Unit tests
+npm run test:ci
+
+# All Playwright tests
+npm run e2e
+
+# Functional checks
+npm run e2e:functional
+
+# Desktop and mobile accessibility checks
+npm run e2e:accessibility
 ```
 
-## Running end-to-end tests
+Authenticated Playwright tests require a running API and test credentials:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```powershell
+$env:MONEYFLOW_E2E_EMAIL="your-test-user@example.com"
+$env:MONEYFLOW_E2E_PASSWORD="your-test-password"
+npm run e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Never commit real credentials or generated Playwright authentication state.
 
-## Additional Resources
+## CI
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+GitHub Actions installs dependencies and verifies the production build on pushes and pull requests. Full authenticated Playwright tests should run in an environment where the API, PostgreSQL, and dedicated E2E credentials are available.
