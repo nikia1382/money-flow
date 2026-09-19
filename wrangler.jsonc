@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "money-flow",
+  "compatibility_date": "2026-09-19",
+  "assets": {
+    "directory": "./dist/money-flow/browser",
+    "not_found_handling": "single-page-application"
+  }
+}
